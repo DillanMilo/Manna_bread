@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand Colors */
+  --color-brand-warm-white: #FAF9F6;
+  --color-brand-soft-cream: #F5F2ED;
+  --color-brand-sage: #8A9A8E;
+  --color-brand-sage-light: #B8C4B8;
+  --color-brand-walnut: #3E2723;
+  --color-brand-walnut-medium: #5D4037;
+  --color-brand-cognac: #C4956A;
+  --color-brand-cognac-light: #D4A574;
+  --color-brand-fern: #4A7C59;
+  --color-brand-olive: #6B705C;
+  --color-brand-charcoal: #2D2A26;
+
+  /* Font Families - will be set by next/font CSS variables */
+  --font-family-display: var(--font-display), 'Playfair Display', serif;
+  --font-family-accent: var(--font-accent), 'Cormorant Garamond', serif;
+  --font-family-body: var(--font-body), 'Libre Franklin', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-brand-warm-white);
+  color: var(--color-brand-charcoal);
+}
+
+::selection {
+  background-color: color-mix(in srgb, var(--color-brand-cognac) 30%, transparent);
+  color: var(--color-brand-walnut);
+}
