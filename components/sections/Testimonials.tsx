@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { FadeIn } from '@/components/ui/Motion';
+
 
 const TESTIMONIALS = [
   {
@@ -54,12 +54,16 @@ export function Testimonials() {
 
   return (
     <section ref={sectionRef} className="py-20 md:py-28 bg-brand-warm-white">
-      <div className="max-w-3xl mx-auto px-6 md:px-10 text-center">
-        <FadeIn>
-          <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-cognac mb-8">
-            What People Are Saying
-          </p>
-        </FadeIn>
+      <motion.div
+        className="max-w-3xl mx-auto px-6 md:px-10 text-center"
+        initial={{ opacity: 0, filter: 'blur(12px)' }}
+        whileInView={{ opacity: 1, filter: 'blur(0px)' }}
+        transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-cognac mb-8">
+          What People Are Saying
+        </p>
 
         <div className="relative min-h-[180px] md:min-h-[160px] flex items-center justify-center">
           <AnimatePresence mode="wait" custom={direction}>
@@ -112,7 +116,7 @@ export function Testimonials() {
             </button>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
