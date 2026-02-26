@@ -32,6 +32,8 @@ export const TOAST = {
   menu: 'https://order.toasttab.com/mannabakery/menu',
   giftCards: 'https://order.toasttab.com/mannabakery/giftcards',
   rewards: 'https://order.toasttab.com/mannabakery/rewards',
+  signIn: 'https://www.toasttab.com/mannabakery/findme',
+  cart: 'https://order.toasttab.com/mannabakery/cart',
 };
 
 export const NAV_LINKS = [
