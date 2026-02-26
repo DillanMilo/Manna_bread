@@ -8,7 +8,21 @@
       "Bash(git add:*)",
       "Bash(ls:*)",
       "Bash(sips:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "WebFetch(domain:mannabread.com)",
+      "Bash(curl:*)",
+      "WebSearch",
+      "WebFetch(domain:www.toasttab.com)",
+      "WebFetch(domain:www.restaurantji.com)",
+      "WebFetch(domain:order.toasttab.com)",
+      "WebFetch(domain:places.singleplatform.com)",
+      "WebFetch(domain:restaurantguru.com)",
+      "WebFetch(domain:sagemenu.com)",
+      "WebFetch(domain:communityimpact.com)",
+      "WebFetch(domain:www.yelp.com)",
+      "WebFetch(domain:www.tripadvisor.com)",
+      "WebFetch(domain:wnam-cdn.menuweb.menu)",
+      "WebFetch(domain:maps.roadtrippers.com)"
     ]
   }
 }

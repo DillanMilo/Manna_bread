@@ -18,13 +18,17 @@ const STORY_IMAGES = {
     src: '/images/IMG_6873.PNG',
     alt: 'Christin and her husband in a loving embrace',
   },
+  journey: {
+    src: '/images/IMG_2383.jpg',
+    alt: 'Christin gazing toward the horizon at golden hour',
+  },
   community: {
     src: '/images/IMG_9181.jpeg',
     alt: 'Christin surrounded by the Manna Bakery community',
   },
 };
 
-/* ─── floating story image component ─── */
+/* ─── floating story image with parallax ─── */
 function StoryImage({
   src,
   alt,
@@ -40,6 +44,11 @@ function StoryImage({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+  const imageY = useTransform(scrollYProgress, [0, 1], [80, -80]);
 
   return (
     <motion.div
@@ -55,13 +64,18 @@ function StoryImage({
           side === 'left' ? '-right-3 -bottom-3' : '-left-3 -bottom-3'
         } w-full h-full rounded-2xl border border-brand-cognac/20 -z-10`}
       />
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        className="object-cover"
-        sizes="(max-width: 768px) 100vw, 45vw"
-      />
+      <motion.div
+        style={{ y: imageY }}
+        className="absolute -top-[80px] -bottom-[80px] left-0 right-0 will-change-transform"
+      >
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 45vw"
+        />
+      </motion.div>
     </motion.div>
   );
 }
@@ -129,13 +143,13 @@ function ClosingImage() {
     target: ref,
     offset: ['start end', 'end start'],
   });
-  const imageY = useTransform(scrollYProgress, [0, 1], [60, -60]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [120, -120]);
 
   return (
     <section ref={ref} className="relative h-[50vh] md:h-[65vh] overflow-hidden">
       <motion.div
         style={{ y: imageY }}
-        className="absolute -top-[60px] -bottom-[60px] left-0 right-0 will-change-transform"
+        className="absolute -top-[120px] -bottom-[120px] left-0 right-0 will-change-transform"
       >
         <Image
           src={STORY_IMAGES.community.src}
@@ -249,11 +263,7 @@ export default function OurStoryPage() {
       {/* ─── CHAPTER 2: THE BREAKING ─── */}
       <section className="py-10 md:py-16 px-6 md:px-10">
         <div className="max-w-6xl mx-auto">
-          <Chapter
-            image={STORY_IMAGES.couple}
-            imagePosition="left"
-            imageAspect="aspect-[3/4]"
-          >
+          <div className="max-w-3xl mx-auto">
             <FadeIn>
               <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-cognac mb-4">
                 Chapter Two
@@ -290,7 +300,7 @@ export default function OurStoryPage() {
                 variant="bordered"
               />
             </FadeIn>
-          </Chapter>
+          </div>
         </div>
       </section>
 
@@ -310,7 +320,11 @@ export default function OurStoryPage() {
       {/* ─── CHAPTER 3: ACROSS THE WORLD ─── */}
       <section className="py-16 md:py-20 px-6 md:px-10">
         <div className="max-w-6xl mx-auto">
-          <div className="max-w-3xl mx-auto">
+          <Chapter
+            image={STORY_IMAGES.journey}
+            imagePosition="left"
+            imageAspect="aspect-[4/5]"
+          >
             <FadeIn>
               <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-cognac mb-4">
                 Chapter Three
@@ -346,7 +360,7 @@ export default function OurStoryPage() {
                 constructed walls of a lifetime of certainty.
               </p>
             </FadeIn>
-          </div>
+          </Chapter>
         </div>
       </section>
 
@@ -405,59 +419,74 @@ export default function OurStoryPage() {
       </section>
 
       {/* ─── CHAPTER 5: FINDING HOME ─── */}
-      <section className="py-16 md:py-24 bg-brand-walnut">
-        <div className="max-w-3xl mx-auto px-6 md:px-10">
-          <FadeIn>
-            <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-cognac-light mb-4">
-              Chapter Five
-            </p>
-            <h2 className="font-display text-3xl md:text-4xl font-medium text-white leading-tight mb-6">
-              Finding home
-            </h2>
-          </FadeIn>
+      <section className="py-16 md:py-24 bg-brand-walnut overflow-hidden">
+        <div className="max-w-6xl mx-auto px-6 md:px-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+            {/* Image — couple B&W on dark background */}
+            <div className="lg:col-span-5 lg:order-1">
+              <StoryImage
+                src={STORY_IMAGES.couple.src}
+                alt={STORY_IMAGES.couple.alt}
+                side="left"
+                aspectRatio="aspect-[3/4]"
+              />
+            </div>
 
-          <FadeIn delay={0.15}>
-            <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-5">
-              Through months of studying the Bible on her own and deep conversations
-              with a Christian friend, Christin came to a realization that changed
-              everything: the teachings she had followed her whole life didn&apos;t
-              align with the message of grace she was discovering in Scripture. Salvation
-              wasn&apos;t a checklist. It wasn&apos;t earned. It was already finished.
-            </p>
-          </FadeIn>
+            {/* Text */}
+            <div className="lg:col-span-6 lg:order-2 lg:col-start-7">
+              <FadeIn>
+                <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-cognac-light mb-4">
+                  Chapter Five
+                </p>
+                <h2 className="font-display text-3xl md:text-4xl font-medium text-white leading-tight mb-6">
+                  Finding home
+                </h2>
+              </FadeIn>
 
-          <FadeIn delay={0.25}>
-            <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-5">
-              Leaving the Mormon church was one of the hardest decisions of her
-              life&mdash;it meant leaving a community, a culture, and an identity
-              she&apos;d known since birth. But on the other side of that door,
-              she found something she never expected: a church that met her with
-              open arms and no conditions. A community that showed her what grace
-              looked like in practice, not just in theory.
-            </p>
-          </FadeIn>
+              <FadeIn delay={0.15}>
+                <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-5">
+                  Through months of studying the Bible on her own and deep conversations
+                  with a Christian friend, Christin came to a realization that changed
+                  everything: the teachings she had followed her whole life didn&apos;t
+                  align with the message of grace she was discovering in Scripture. Salvation
+                  wasn&apos;t a checklist. It wasn&apos;t earned. It was already finished.
+                </p>
+              </FadeIn>
 
-          <FadeIn delay={0.35}>
-            <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-6">
-              Her children each responded to the transition in their own way, but
-              together they navigated the unfamiliar terrain of a new faith with
-              honesty and courage. And in this new church home, Christin found
-              a beautiful calling: baking bread for the sacrament&mdash;a living
-              symbol of daily provision, of broken things made whole.
-            </p>
-          </FadeIn>
+              <FadeIn delay={0.25}>
+                <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-5">
+                  Leaving the Mormon church was one of the hardest decisions of her
+                  life&mdash;it meant leaving a community, a culture, and an identity
+                  she&apos;d known since birth. But on the other side of that door,
+                  she found something she never expected: a church that met her with
+                  open arms and no conditions. A community that showed her what grace
+                  looked like in practice, not just in theory.
+                </p>
+              </FadeIn>
 
-          <FadeIn delay={0.45}>
-            <LineDraw className="h-px w-16 bg-white/20 mb-8" />
-          </FadeIn>
+              <FadeIn delay={0.35}>
+                <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-6">
+                  Her children each responded to the transition in their own way, but
+                  together they navigated the unfamiliar terrain of a new faith with
+                  honesty and courage. And in this new church home, Christin found
+                  a beautiful calling: baking bread for the sacrament&mdash;a living
+                  symbol of daily provision, of broken things made whole.
+                </p>
+              </FadeIn>
 
-          <FadeIn delay={0.5}>
-            <p className="font-accent text-xl md:text-2xl italic text-brand-cognac-light leading-relaxed">
-              &ldquo;God&apos;s love isn&apos;t something you unlock with good behavior.
-              It was there all along&mdash;waiting for me to stop running
-              and just receive it.&rdquo;
-            </p>
-          </FadeIn>
+              <FadeIn delay={0.45}>
+                <LineDraw className="h-px w-16 bg-white/20 mb-8" />
+              </FadeIn>
+
+              <FadeIn delay={0.5}>
+                <p className="font-accent text-xl md:text-2xl italic text-brand-cognac-light leading-relaxed">
+                  &ldquo;God&apos;s love isn&apos;t something you unlock with good behavior.
+                  It was there all along&mdash;waiting for me to stop running
+                  and just receive it.&rdquo;
+                </p>
+              </FadeIn>
+            </div>
+          </div>
         </div>
       </section>
 

@@ -102,6 +102,47 @@ const INFO_WINDOW_CONTENT = `
   </div>
 `;
 
+// Module-level flag to prevent loading the script more than once
+let mapsScriptState: 'idle' | 'loading' | 'loaded' | 'error' = 'idle';
+const mapsLoadCallbacks: Array<(success: boolean) => void> = [];
+
+function loadMapsScript(apiKey: string): Promise<boolean> {
+  if (mapsScriptState === 'loaded' || (window as any).google?.maps) {
+    mapsScriptState = 'loaded';
+    return Promise.resolve(true);
+  }
+
+  if (mapsScriptState === 'error') {
+    return Promise.resolve(false);
+  }
+
+  return new Promise((resolve) => {
+    if (mapsScriptState === 'loading') {
+      mapsLoadCallbacks.push(resolve);
+      return;
+    }
+
+    mapsScriptState = 'loading';
+    mapsLoadCallbacks.push(resolve);
+
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=marker`;
+    script.async = true;
+    script.defer = true;
+    script.onload = () => {
+      mapsScriptState = 'loaded';
+      mapsLoadCallbacks.forEach((cb) => cb(true));
+      mapsLoadCallbacks.length = 0;
+    };
+    script.onerror = () => {
+      mapsScriptState = 'error';
+      mapsLoadCallbacks.forEach((cb) => cb(false));
+      mapsLoadCallbacks.length = 0;
+    };
+    document.head.appendChild(script);
+  });
+}
+
 export function MannaMap() {
   const mapRef = useRef<HTMLDivElement>(null);
   const [loaded, setLoaded] = useState(false);
@@ -115,25 +156,16 @@ export function MannaMap() {
       return;
     }
 
-    // Don't load the script if already present
-    if ((window as any).google?.maps) {
-      setLoaded(true);
-      return;
-    }
+    let cancelled = false;
 
-    const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=marker`;
-    script.async = true;
-    script.defer = true;
-    script.onload = () => setLoaded(true);
-    script.onerror = () => setError(true);
-    document.head.appendChild(script);
+    loadMapsScript(apiKey).then((success) => {
+      if (cancelled) return;
+      if (success) setLoaded(true);
+      else setError(true);
+    });
 
     return () => {
-      // Cleanup only if we added it
-      if (script.parentNode) {
-        script.parentNode.removeChild(script);
-      }
+      cancelled = true;
     };
   }, []);
 
