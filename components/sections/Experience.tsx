@@ -1,10 +1,16 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { FadeIn, StaggerContainer, StaggerItem } from '@/components/ui/Motion';
+
+const CAROUSEL_IMAGES = [
+  '/images/IMG_4684.jpeg',
+  '/images/IMG_4194.jpeg',
+  '/images/E6996286-81AF-47BA-B193-7083C573C618.PNG',
+];
 
 const FEATURES = [
   {
@@ -57,16 +63,39 @@ function FeatureCard({ icon, title, description, index }: { icon: string; title:
 }
 
 export function Experience() {
+  const [currentImage, setCurrentImage] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % CAROUSEL_IMAGES.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <section className="py-20 md:py-28 bg-brand-walnut text-white relative overflow-hidden">
-      <motion.div
-        className="absolute inset-0 opacity-10 bg-cover bg-center"
-        style={{ backgroundImage: 'url(/images/placeholder/interior-texture.jpg)' }}
-        initial={{ scale: 1.1 }}
-        whileInView={{ scale: 1 }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
-        viewport={{ once: true }}
-      />
+    <section className="py-20 md:py-28 text-white relative overflow-hidden">
+      {/* Smooth crossfade carousel background */}
+      <AnimatePresence mode="popLayout">
+        <motion.div
+          key={currentImage}
+          className="absolute inset-0"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.5, ease: 'easeInOut' }}
+        >
+          <Image
+            src={CAROUSEL_IMAGES[currentImage]}
+            alt=""
+            fill
+            className="object-cover"
+            priority={currentImage === 0}
+          />
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Dark overlay for text readability */}
+      <div className="absolute inset-0 z-[1] bg-brand-charcoal/60" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-10">
         <FadeIn>

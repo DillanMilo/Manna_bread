@@ -7,11 +7,12 @@ export const BRAND = {
 
 export const CONTACT = {
   address: {
-    street: '123 Main Street',
+    street: '306 Commerce St',
     city: 'Tomball',
     state: 'TX',
     zip: '77375',
   },
+  mapQuery: 'Manna+Bread+from+Heaven,+306+Commerce+St,+Tomball,+TX+77375',
   phone: '(281) 555-1234',
   email: 'hello@mannabakery.com',
   hours: {

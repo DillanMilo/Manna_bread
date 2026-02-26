@@ -2,6 +2,7 @@
 
 import { CONTACT } from '@/lib/constants';
 import { FadeIn, StaggerContainer, StaggerItem } from '@/components/ui/Motion';
+import { MannaMap } from '@/components/ui/MannaMap';
 
 export function Contact() {
   return (
@@ -61,12 +62,20 @@ export function Contact() {
             </StaggerContainer>
           </div>
 
-          {/* Map */}
+          {/* Map — arched alcove frame */}
           <FadeIn direction="right" distance={50} delay={0.3}>
-            <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-brand-sage-light to-brand-sage relative">
-              <div className="absolute inset-0 flex items-center justify-center text-white/70 text-sm font-body border-2 border-dashed border-white/30 m-4 rounded-xl">
-                [ Embedded Google Map ]
+            <div className="relative">
+              {/* Outer arch frame */}
+              <div
+                className="rounded-t-[9999px] rounded-b-2xl overflow-hidden shadow-lg ring-1 ring-brand-sage/20"
+                style={{ aspectRatio: '4 / 4.5' }}
+              >
+                <MannaMap />
               </div>
+              {/* Subtle caption beneath */}
+              <p className="text-center font-accent text-sm italic text-brand-olive mt-4">
+                306 Commerce St, Tomball TX 77375
+              </p>
             </div>
           </FadeIn>
         </div>

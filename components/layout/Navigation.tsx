@@ -1,9 +1,10 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { NAV_LINKS, TOAST, BRAND } from '@/lib/constants';
+import { NAV_LINKS, TOAST } from '@/lib/constants';
 import { Button } from '@/components/ui/Button';
 
 export function Navigation() {
@@ -31,8 +32,15 @@ export function Navigation() {
     >
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         <div className="flex items-center justify-between h-20">
-          <Link href="/" className="font-display text-2xl text-brand-walnut">
-            {BRAND.name.split(' ')[0]}
+          <Link href="/" className="relative block h-12 w-auto shrink-0">
+            <Image
+              src="/images/Bread from Heaven.PNG"
+              alt="Manna — Cafe and Bakery, Bread from Heaven"
+              height={48}
+              width={86}
+              className="h-full w-auto object-contain rounded-sm"
+              priority
+            />
           </Link>
 
           <div className="hidden md:flex items-center gap-8">

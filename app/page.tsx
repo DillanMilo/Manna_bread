@@ -4,6 +4,7 @@ import { FeaturedMenu } from '@/components/sections/FeaturedMenu';
 import { KeywordCarousel } from '@/components/sections/KeywordCarousel';
 import { Experience } from '@/components/sections/Experience';
 import { Testimonials } from '@/components/sections/Testimonials';
+import { FounderInterlude } from '@/components/sections/FounderInterlude';
 import { Services } from '@/components/sections/Services';
 import { Contact } from '@/components/sections/Contact';
 
@@ -16,6 +17,7 @@ export default function HomePage() {
       <KeywordCarousel />
       <Experience />
       <Testimonials />
+      <FounderInterlude />
       <Services />
       <Contact />
     </main>

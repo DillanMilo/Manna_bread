@@ -20,19 +20,24 @@ export function Hero() {
 
   return (
     <section ref={sectionRef} className="relative min-h-[85vh] md:min-h-[90vh] flex items-center justify-center overflow-hidden">
-      {/* Background — soft reveal like eyes adjusting to the space */}
+      {/* Background video — soft reveal like eyes adjusting to the space */}
       <motion.div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: 'url(/images/placeholder/hero-bakery-interior.jpg)',
-          backgroundColor: '#8A9A8E',
-          y: bgY,
-        }}
+        className="absolute inset-0 z-0"
+        style={{ y: bgY }}
         initial={{ scale: 1.06, filter: 'blur(6px)' }}
         animate={{ scale: 1, filter: 'blur(0px)' }}
         transition={{ duration: 2.0, ease: [0.25, 0.4, 0.25, 1] }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-brand-charcoal/40 via-brand-charcoal/30 to-brand-charcoal/60" />
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          src="/images/1SE - Manna Evenings (20251221-223245).mov"
+        />
+        {/* Overlay gradient so content stays readable */}
+        <div className="absolute inset-0 z-[1] bg-gradient-to-b from-brand-charcoal/40 via-brand-charcoal/30 to-brand-charcoal/60" />
       </motion.div>
 
       {/* Content — gentle unified reveal, like stepping into the space */}
