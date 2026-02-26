@@ -30,7 +30,7 @@ const CARDS = [
   {
     label: 'Our Space',
     title: 'Rooted',
-    body: 'A Jerusalem-inspired sanctuary where timber, greenery, and warm light set the table for real connection.',
+    body: 'A warm sanctuary where timber, greenery, and natural light set the table for real connection.',
   },
   {
     label: 'Our Why',

@@ -20,7 +20,7 @@ export function Hero() {
 
   return (
     <section ref={sectionRef} className="relative min-h-[85vh] md:min-h-[90vh] flex items-center justify-center overflow-hidden">
-      {/* Background with Ken Burns + Parallax */}
+      {/* Background — soft reveal like eyes adjusting to the space */}
       <motion.div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
@@ -28,14 +28,14 @@ export function Hero() {
           backgroundColor: '#8A9A8E',
           y: bgY,
         }}
-        initial={{ scale: 1.05 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 15, ease: "linear" }}
+        initial={{ scale: 1.06, filter: 'blur(6px)' }}
+        animate={{ scale: 1, filter: 'blur(0px)' }}
+        transition={{ duration: 2.0, ease: [0.25, 0.4, 0.25, 1] }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-brand-charcoal/40 via-brand-charcoal/30 to-brand-charcoal/60" />
       </motion.div>
 
-      {/* Content with scroll fade */}
+      {/* Content — gentle unified reveal, like stepping into the space */}
       <motion.div
         className="relative z-10 max-w-3xl mx-auto px-6 text-center"
         style={{ opacity: contentOpacity, y: contentY }}
@@ -43,60 +43,30 @@ export function Hero() {
         {/* Tagline */}
         <motion.p
           className="font-accent text-lg md:text-xl italic text-brand-cognac-light mb-4 tracking-wide"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.4, 0.25, 1] }}
+          initial={{ opacity: 0, filter: 'blur(8px)' }}
+          animate={{ opacity: 1, filter: 'blur(0px)' }}
+          transition={{ duration: 1.2, delay: 0.4, ease: [0.25, 0.4, 0.25, 1] }}
         >
           {BRAND.tagline}
         </motion.p>
 
-        {/* Headline - word by word */}
+        {/* Headline — emerges as one calm moment */}
         <motion.h1
           className="font-display text-4xl md:text-5xl lg:text-6xl font-medium text-white leading-[1.1] mb-6"
-          initial="hidden"
-          animate="visible"
-          variants={{
-            hidden: {},
-            visible: { transition: { staggerChildren: 0.08, delayChildren: 0.6 } },
-          }}
+          initial={{ opacity: 0, y: 16, filter: 'blur(10px)' }}
+          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          transition={{ duration: 1.4, delay: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
         >
-          {['A', 'place', 'to', 'gather,'].map((word, i) => (
-            <span key={i} className="inline-block overflow-hidden">
-              <motion.span
-                className="inline-block"
-                variants={{
-                  hidden: { y: '100%', opacity: 0 },
-                  visible: { y: 0, opacity: 1, transition: { duration: 0.6, ease: [0.25, 0.4, 0.25, 1] } },
-                }}
-              >
-                {word}
-              </motion.span>
-              {i < 3 && <span>&nbsp;</span>}
-            </span>
-          ))}
-          <br />
-          {['a', 'reason', 'to', 'stay'].map((word, i) => (
-            <span key={i} className="inline-block overflow-hidden">
-              <motion.span
-                className="inline-block"
-                variants={{
-                  hidden: { y: '100%', opacity: 0 },
-                  visible: { y: 0, opacity: 1, transition: { duration: 0.6, ease: [0.25, 0.4, 0.25, 1] } },
-                }}
-              >
-                {word}
-              </motion.span>
-              {i < 3 && <span>&nbsp;</span>}
-            </span>
-          ))}
+          A place to gather,<br />
+          a reason to stay
         </motion.h1>
 
         {/* Description */}
         <motion.p
           className="font-body text-base md:text-lg text-white/90 leading-relaxed mb-10 max-w-xl mx-auto"
-          initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.0, ease: [0.25, 0.4, 0.25, 1] }}
+          initial={{ opacity: 0, filter: 'blur(6px)' }}
+          animate={{ opacity: 1, filter: 'blur(0px)' }}
+          transition={{ duration: 1.2, delay: 1.4, ease: [0.25, 0.4, 0.25, 1] }}
         >
           {BRAND.description} Welcome to Manna.
         </motion.p>
@@ -104,23 +74,16 @@ export function Hero() {
         {/* Buttons */}
         <motion.div
           className="flex flex-col sm:flex-row gap-4 justify-center"
-          initial="hidden"
-          animate="visible"
-          variants={{
-            hidden: {},
-            visible: { transition: { staggerChildren: 0.15, delayChildren: 1.3 } },
-          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.0, delay: 2.0, ease: [0.25, 0.4, 0.25, 1] }}
         >
-          <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}>
-            <Button href={TOAST.orderOnline} external variant="accent" size="lg">
-              Order Online
-            </Button>
-          </motion.div>
-          <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}>
-            <Button href="/menu" variant="ghost" size="lg">
-              Explore Menu
-            </Button>
-          </motion.div>
+          <Button href={TOAST.orderOnline} external variant="accent" size="lg">
+            Order Online
+          </Button>
+          <Button href="/menu" variant="ghost" size="lg">
+            Explore Menu
+          </Button>
         </motion.div>
       </motion.div>
     </section>

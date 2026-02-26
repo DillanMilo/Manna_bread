@@ -39,9 +39,9 @@ export function Navigation() {
             {NAV_LINKS.map((link, i) => (
               <motion.div
                 key={link.href}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * i + 0.3, duration: 0.4 }}
+                initial={{ opacity: 0, filter: 'blur(4px)' }}
+                animate={{ opacity: 1, filter: 'blur(0px)' }}
+                transition={{ delay: 0.4 * i + 0.6, duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
               >
                 <Link
                   href={link.href}
@@ -56,11 +56,11 @@ export function Navigation() {
 
           <motion.div
             className="hidden md:block"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.8, duration: 0.4 }}
+            initial={{ opacity: 0, filter: 'blur(4px)' }}
+            animate={{ opacity: 1, filter: 'blur(0px)' }}
+            transition={{ delay: 0.4 * NAV_LINKS.length + 0.6, duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
           >
-            <Button href={TOAST.orderOnline} external variant="primary" size="sm">
+            <Button href={TOAST.orderOnline} external variant="primary" size="sm" className="shadow-[0_0_16px_rgba(196,149,106,0.4)]">
               Order Online
             </Button>
           </motion.div>
