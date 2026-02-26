@@ -28,6 +28,24 @@ const libre = Libre_Franklin({
 export const metadata: Metadata = {
   title: `${BRAND.name} | ${BRAND.tagline}`,
   description: BRAND.description,
+  openGraph: {
+    title: `${BRAND.name} | ${BRAND.tagline}`,
+    description: BRAND.description,
+    images: [
+      {
+        url: '/images/Bread from Heaven.PNG',
+        width: 1050,
+        height: 600,
+        alt: 'Manna — Cafe and Bakery, Bread from Heaven',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${BRAND.name} | ${BRAND.tagline}`,
+    description: BRAND.description,
+    images: ['/images/Bread from Heaven.PNG'],
+  },
 };
 
 export default function RootLayout({

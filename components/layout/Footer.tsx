@@ -77,7 +77,7 @@ export function Footer() {
             &copy; {new Date().getFullYear()} {BRAND.name}. All rights reserved.
           </p>
           <p className="font-body text-xs opacity-50">
-            Website by <a href="https://creativecurrents.dev" target="_blank" rel="noopener noreferrer" className="hover:opacity-80">Creative Currents</a>
+            Website by <a href="https://www.dillanmilo.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-80">dillanmilo.com</a>
           </p>
         </div>
       </div>
