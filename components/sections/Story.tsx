@@ -26,6 +26,8 @@ export function Story() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.2 });
   const [frontIndex, setFrontIndex] = useState(0);
+  const [zFrontIndex, setZFrontIndex] = useState(0);
+  const shufflingRef = useRef(false);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -35,8 +37,25 @@ export function Story() {
   const imageY = useTransform(scrollYProgress, [0, 1], [60, -60]);
 
   const shuffle = useCallback(() => {
-    setFrontIndex((prev) => (prev + 1) % STORY_IMAGES.length);
-  }, []);
+    if (shufflingRef.current) return;
+    shufflingRef.current = true;
+
+    const next = (frontIndex + 1) % STORY_IMAGES.length;
+
+    // Start position animation — departing card arcs away
+    setFrontIndex(next);
+
+    // Delay z-index swap so departing card passes OVER the incoming card
+    // before dropping behind it midway through the spring
+    setTimeout(() => {
+      setZFrontIndex(next);
+    }, 300);
+
+    // Cooldown so shuffles don't overlap
+    setTimeout(() => {
+      shufflingRef.current = false;
+    }, 700);
+  }, [frontIndex]);
 
   // Auto-shuffle on a timer
   useEffect(() => {
@@ -68,24 +87,25 @@ export function Story() {
             >
               {STORY_IMAGES.map((img, i) => {
                 const isFront = i === frontIndex;
+                const isOnTop = i === zFrontIndex;
                 return (
                   <motion.div
                     key={img.src}
-                    style={{ zIndex: isFront ? 2 : 1 }}
+                    style={{ zIndex: isOnTop ? 2 : 1 }}
                     animate={{
-                      x: isFront ? 0 : 16,
-                      y: isFront ? 0 : 12,
-                      rotate: isFront ? 0 : 2.5,
-                      scale: isFront ? 1 : 0.96,
+                      x: isFront ? 0 : 18,
+                      y: isFront ? 0 : 14,
+                      rotate: isFront ? 0 : 3,
+                      scale: isFront ? 1 : 0.95,
                       boxShadow: isFront
-                        ? '0 20px 40px -8px rgba(62,39,35,0.25)'
-                        : '0 8px 20px -4px rgba(62,39,35,0.12)',
+                        ? '0 25px 50px -10px rgba(62,39,35,0.3)'
+                        : '0 8px 24px -6px rgba(62,39,35,0.1)',
                     }}
                     transition={{
                       type: 'spring',
-                      stiffness: 100,
-                      damping: 18,
-                      mass: 1,
+                      stiffness: 70,
+                      damping: 16,
+                      mass: 1.2,
                     }}
                     className="absolute inset-0 rounded-2xl overflow-hidden"
                   >

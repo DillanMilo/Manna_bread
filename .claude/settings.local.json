@@ -7,7 +7,8 @@
       "Bash(npx next:*)",
       "Bash(git add:*)",
       "Bash(ls:*)",
-      "Bash(sips:*)"
+      "Bash(sips:*)",
+      "Bash(npx tsc:*)"
     ]
   }
 }
