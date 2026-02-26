@@ -2,10 +2,13 @@
 
 import { useEffect, useRef, useState } from 'react';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+declare const google: any;
+
 const MANNA_LOCATION = { lat: 30.0972, lng: -95.6161 };
 
 // Warm, desaturated map style that matches the brand palette
-const MAP_STYLES: google.maps.MapTypeStyle[] = [
+const MAP_STYLES = [
   {
     featureType: 'all',
     elementType: 'geometry',
@@ -113,7 +116,7 @@ export function MannaMap() {
     }
 
     // Don't load the script if already present
-    if (window.google?.maps) {
+    if ((window as any).google?.maps) {
       setLoaded(true);
       return;
     }
