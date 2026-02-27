@@ -1,12 +1,20 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/Button';
 import { BRAND, TOAST } from '@/lib/constants';
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 0.5;
+    }
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
@@ -29,6 +37,7 @@ export function Hero() {
         transition={{ duration: 2.0, ease: [0.25, 0.4, 0.25, 1] }}
       >
         <video
+          ref={videoRef}
           autoPlay
           muted
           loop
