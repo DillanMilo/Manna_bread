@@ -17,7 +17,7 @@
   /* Font Families - will be set by next/font CSS variables */
   --font-family-display: var(--font-display), 'Playfair Display', serif;
   --font-family-accent: var(--font-accent), 'Cormorant Garamond', serif;
-  --font-family-body: var(--font-body), 'Libre Franklin', sans-serif;
+  --font-family-body: var(--font-body), 'DM Sans', sans-serif;
 }
 
 html {
