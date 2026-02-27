@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import { SectionHeader } from '@/components/ui/SectionHeader';
@@ -74,25 +74,23 @@ export function Experience() {
 
   return (
     <section className="py-20 md:py-28 text-white relative overflow-hidden">
-      {/* Smooth crossfade carousel background */}
-      <AnimatePresence mode="popLayout">
+      {/* Smooth crossfade carousel background — all images rendered, opacity toggled */}
+      {CAROUSEL_IMAGES.map((src, index) => (
         <motion.div
-          key={currentImage}
+          key={src}
           className="absolute inset-0"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          animate={{ opacity: index === currentImage ? 1 : 0 }}
           transition={{ duration: 1.5, ease: 'easeInOut' }}
         >
           <Image
-            src={CAROUSEL_IMAGES[currentImage]}
+            src={src}
             alt=""
             fill
             className="object-cover"
-            priority={currentImage === 0}
+            priority
           />
         </motion.div>
-      </AnimatePresence>
+      ))}
 
       {/* Dark overlay for text readability */}
       <div className="absolute inset-0 z-[1] bg-brand-charcoal/60" />
