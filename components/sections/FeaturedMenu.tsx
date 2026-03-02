@@ -7,19 +7,19 @@ import { FadeIn, StaggerContainer, StaggerItem, ScaleIn } from '@/components/ui/
 
 const FEATURED_ITEMS = [
   {
-    title: 'Artisan Sourdough',
-    description: '24-hour ferment, crusty exterior, soft tangy interior.',
-    price: '$8.50',
+    title: 'Chai Tea',
+    description: 'House-made spiced black tea blended with steamed milk for a warm, aromatic drink.',
+    price: '$5.75+',
   },
   {
-    title: 'Honey Lavender Latte',
-    description: 'Local honey, house-made lavender syrup, oat milk.',
+    title: 'Butter Croissant',
+    description: 'Flaky, golden layers of hand-folded buttery dough, baked fresh daily.',
     price: '$6.00',
   },
   {
-    title: 'Almond Croissant',
-    description: 'Twice-baked, filled with frangipane, dusted with powdered sugar.',
-    price: '$5.50',
+    title: 'Cinnamon Roll',
+    description: 'Soft, warm dough swirled with cinnamon and finished with cream cheese icing.',
+    price: '$7.00',
   },
 ];
 

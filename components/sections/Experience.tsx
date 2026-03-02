@@ -7,9 +7,9 @@ import { SectionHeader } from '@/components/ui/SectionHeader';
 import { FadeIn, StaggerContainer, StaggerItem } from '@/components/ui/Motion';
 
 const CAROUSEL_IMAGES = [
-  '/images/IMG_4684.jpeg',
-  '/images/IMG_4194.jpeg',
   '/images/E6996286-81AF-47BA-B193-7083C573C618.PNG',
+  '/images/RentalShot20241125at111409AM.webp',
+  '/images/manainside.webp',
 ];
 
 const FEATURES = [

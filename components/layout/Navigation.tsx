@@ -23,8 +23,8 @@ export function Navigation() {
     <motion.nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-brand-warm-white/90 backdrop-blur-md shadow-sm border-b border-black/5'
-          : 'bg-brand-warm-white border-b border-black/5'
+          ? 'bg-brand-soft-cream/90 backdrop-blur-md shadow-sm border-b border-black/5'
+          : 'bg-brand-soft-cream border-b border-black/5'
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
