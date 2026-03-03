@@ -54,7 +54,7 @@ function FeatureCard({ icon, title, description, index }: { icon: string; title:
           damping: 12
         }}
       >
-        <Image src={icon} alt={title} width={80} height={80} />
+        <Image src={icon} alt={title} width={80} height={80} className="w-16 h-16 sm:w-20 sm:h-20" />
       </motion.div>
       <h3 className="font-display text-xl font-medium mb-3">{title}</h3>
       <p className="font-body text-sm text-white/70 leading-relaxed">{description}</p>
@@ -73,7 +73,7 @@ export function Experience() {
   }, []);
 
   return (
-    <section className="py-20 md:py-28 text-white relative overflow-hidden">
+    <section className="py-14 sm:py-20 md:py-28 text-white relative overflow-hidden">
       {/* Smooth crossfade carousel background — all images rendered, opacity toggled */}
       {CAROUSEL_IMAGES.map((src, index) => (
         <motion.div
@@ -95,7 +95,7 @@ export function Experience() {
       {/* Dark overlay for text readability */}
       <div className="absolute inset-0 z-[1] bg-brand-charcoal/60" />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-10">
+      <div className="relative z-10 max-w-6xl mx-auto px-5 sm:px-6 md:px-10">
         <FadeIn>
           <SectionHeader
             label="More Than a Bakery"
@@ -105,7 +105,7 @@ export function Experience() {
           />
         </FadeIn>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mt-12">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 md:gap-12 mt-8 sm:mt-12">
           {FEATURES.map((feature, index) => (
             <FeatureCard key={feature.title} {...feature} index={index} />
           ))}

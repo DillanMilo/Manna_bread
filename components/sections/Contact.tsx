@@ -6,13 +6,13 @@ import { MannaMap } from '@/components/ui/MannaMap';
 
 export function Contact() {
   return (
-    <section className="py-20 md:py-28 bg-brand-warm-white overflow-hidden">
-      <div className="max-w-6xl mx-auto px-6 md:px-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+    <section className="py-14 sm:py-20 md:py-28 bg-brand-warm-white overflow-hidden">
+      <div className="max-w-6xl mx-auto px-5 sm:px-6 md:px-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
           {/* Contact Info */}
           <div>
             <FadeIn>
-              <h2 className="font-display text-3xl md:text-4xl font-medium text-brand-walnut mb-8">
+              <h2 className="font-display text-[26px] sm:text-3xl md:text-4xl font-medium text-brand-walnut mb-6 sm:mb-8">
                 Visit Us
               </h2>
             </FadeIn>
@@ -67,8 +67,7 @@ export function Contact() {
             <div className="relative">
               {/* Outer arch frame */}
               <div
-                className="rounded-t-[9999px] rounded-b-2xl overflow-hidden shadow-lg ring-1 ring-brand-sage/20"
-                style={{ aspectRatio: '4 / 4.5' }}
+                className="rounded-t-[9999px] rounded-b-2xl overflow-hidden shadow-lg ring-1 ring-brand-sage/20 aspect-[4/3] sm:aspect-[4/4] md:aspect-[4/4.5]"
               >
                 <MannaMap />
               </div>

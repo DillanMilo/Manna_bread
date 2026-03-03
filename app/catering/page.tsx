@@ -331,7 +331,7 @@ export default function CateringPage() {
     <main className="bg-brand-warm-white min-h-screen">
 
       {/* ─── HERO ─── */}
-      <section className="pt-32 md:pt-44 pb-16 md:pb-20 px-6 md:px-10">
+      <section className="pt-24 sm:pt-32 md:pt-44 pb-12 sm:pb-16 md:pb-20 px-5 sm:px-6 md:px-10">
         <div className="max-w-4xl mx-auto text-center">
           <FadeIn>
             <p className="font-body text-[11px] font-semibold tracking-[3px] uppercase text-brand-cognac mb-5">
@@ -340,7 +340,7 @@ export default function CateringPage() {
           </FadeIn>
 
           <FadeIn delay={0.15}>
-            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-brand-walnut leading-[1.1] mb-8">
+            <h1 className="font-display text-[32px] sm:text-4xl md:text-5xl lg:text-7xl font-medium text-brand-walnut leading-[1.1] mb-6 sm:mb-8">
               Sweet & Savory
               <br />
               <span className="text-brand-cognac">In-House Catering</span>
@@ -362,7 +362,7 @@ export default function CateringPage() {
 
         {/* Hero image — catering spread / table setting */}
         <FadeIn delay={0.5}>
-          <div className="max-w-5xl mx-auto mt-12 md:mt-16 px-6 md:px-10">
+          <div className="max-w-5xl mx-auto mt-8 sm:mt-12 md:mt-16 px-5 sm:px-6 md:px-10">
             <ImagePlaceholder
               label="Catering spread photo"
               aspect="aspect-[21/9]"
@@ -372,7 +372,7 @@ export default function CateringPage() {
       </section>
 
       {/* ─── PASTRY TRAYS ─── */}
-      <section className="py-16 md:py-24 px-6 md:px-10 bg-brand-soft-cream">
+      <section className="py-16 md:py-24 px-5 sm:px-6 md:px-10 bg-brand-soft-cream">
         <div className="max-w-4xl mx-auto">
           <FadeIn>
             <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-cognac mb-4">
@@ -406,7 +406,7 @@ export default function CateringPage() {
       </section>
 
       {/* ─── IMAGE BREAK: Pastry close-up + quote ─── */}
-      <section className="py-16 md:py-24 px-6 md:px-10">
+      <section className="py-16 md:py-24 px-5 sm:px-6 md:px-10">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
           <FadeIn>
             <QuoteParallaxImage />
@@ -427,7 +427,7 @@ export default function CateringPage() {
       </section>
 
       {/* ─── SANDWICH PLATTERS ─── */}
-      <section className="py-16 md:py-24 px-6 md:px-10">
+      <section className="py-16 md:py-24 px-5 sm:px-6 md:px-10">
         <div className="max-w-4xl mx-auto">
           <FadeIn>
             <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-cognac mb-4">
@@ -469,7 +469,7 @@ export default function CateringPage() {
       </section>
 
       {/* ─── COFFEE & DRINKS ─── */}
-      <section className="py-16 md:py-24 px-6 md:px-10 bg-brand-soft-cream">
+      <section className="py-16 md:py-24 px-5 sm:px-6 md:px-10 bg-brand-soft-cream">
         <div className="max-w-4xl mx-auto">
           <FadeIn>
             <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-cognac mb-4">
@@ -488,7 +488,7 @@ export default function CateringPage() {
               {COFFEE_DRINKS.map((drink, i) => (
                 <div
                   key={drink.name}
-                  className={`flex items-center justify-between px-6 py-4 ${
+                  className={`flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 ${
                     i < COFFEE_DRINKS.length - 1 ? 'border-b border-dashed border-brand-sage/20' : ''
                   }`}
                 >
@@ -513,7 +513,7 @@ export default function CateringPage() {
       </section>
 
       {/* ─── IMAGE BREAK: Two-up food photography ─── */}
-      <section className="py-12 md:py-16 px-6 md:px-10">
+      <section className="py-12 md:py-16 px-5 sm:px-6 md:px-10">
         <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
           <FadeIn>
             <ImagePlaceholder
@@ -531,7 +531,7 @@ export default function CateringPage() {
       </section>
 
       {/* ─── FRUIT & VEGETABLE TRAYS ─── */}
-      <section className="py-16 md:py-24 px-6 md:px-10">
+      <section className="py-16 md:py-24 px-5 sm:px-6 md:px-10">
         <div className="max-w-4xl mx-auto">
           <FadeIn>
             <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-cognac mb-4">
@@ -566,7 +566,7 @@ export default function CateringPage() {
       </section>
 
       {/* ─── SALAD BOWLS ─── */}
-      <section className="py-16 md:py-24 px-6 md:px-10 bg-brand-soft-cream">
+      <section className="py-16 md:py-24 px-5 sm:px-6 md:px-10 bg-brand-soft-cream">
         <div className="max-w-4xl mx-auto">
           <FadeIn>
             <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-cognac mb-4">
@@ -599,7 +599,7 @@ export default function CateringPage() {
       </section>
 
       {/* ─── IMAGE BREAK: Soup / kitchen scene ─── */}
-      <section className="py-12 md:py-16 px-6 md:px-10">
+      <section className="py-12 md:py-16 px-5 sm:px-6 md:px-10">
         <div className="max-w-3xl mx-auto">
           <FadeIn>
             <ImagePlaceholder
@@ -611,7 +611,7 @@ export default function CateringPage() {
       </section>
 
       {/* ─── SCRATCH SOUP ─── */}
-      <section className="py-16 md:py-24 px-6 md:px-10">
+      <section className="py-16 md:py-24 px-5 sm:px-6 md:px-10">
         <div className="max-w-4xl mx-auto">
           <FadeIn>
             <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-cognac mb-4">
@@ -642,8 +642,8 @@ export default function CateringPage() {
 
       {/* ─── CLOSING CTA ─── */}
       <section className="py-20 md:py-28 bg-brand-soft-cream">
-        <div className="max-w-5xl mx-auto px-6 md:px-10">
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-14 items-center">
+        <div className="max-w-5xl mx-auto px-5 sm:px-6 md:px-10">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 sm:gap-10 md:gap-14 items-center">
             {/* Image — gathering / event scene */}
             <FadeIn className="md:col-span-2">
               <CateringParallaxImage />

@@ -109,7 +109,7 @@ export default function RentalsPage() {
   return (
     <main className="bg-brand-warm-white min-h-screen">
       {/* ─── HERO ─── */}
-      <section className="pt-32 md:pt-44 pb-16 md:pb-20 px-6 md:px-10">
+      <section className="pt-24 sm:pt-32 md:pt-44 pb-12 sm:pb-16 md:pb-20 px-5 sm:px-6 md:px-10">
         <div className="max-w-4xl mx-auto text-center">
           <FadeIn>
             <p className="font-body text-[11px] font-semibold tracking-[3px] uppercase text-brand-cognac mb-5">
@@ -118,7 +118,7 @@ export default function RentalsPage() {
           </FadeIn>
 
           <FadeIn delay={0.15}>
-            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-brand-walnut leading-[1.1] mb-8">
+            <h1 className="font-display text-[32px] sm:text-4xl md:text-5xl lg:text-7xl font-medium text-brand-walnut leading-[1.1] mb-6 sm:mb-8">
               Host Your Event at Manna
             </h1>
           </FadeIn>
@@ -139,10 +139,10 @@ export default function RentalsPage() {
       </section>
 
       {/* ─── PHOTO GALLERY ─── */}
-      <section className="pb-16 md:pb-24 px-6 md:px-10">
+      <section className="pb-12 sm:pb-16 md:pb-24 px-5 sm:px-6 md:px-10">
         <div className="max-w-6xl mx-auto">
           <StaggerContainer
-            className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 md:gap-6"
             staggerDelay={0.15}
           >
             {[RENTAL_IMAGES.space, RENTAL_IMAGES.inside, RENTAL_IMAGES.interior].map(
@@ -164,7 +164,7 @@ export default function RentalsPage() {
       </section>
 
       {/* ─── CONFERENCE ROOM RESERVATION ─── */}
-      <section className="py-16 md:py-24 px-6 md:px-10 bg-brand-soft-cream">
+      <section className="py-16 md:py-24 px-5 sm:px-6 md:px-10 bg-brand-soft-cream">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
             {/* Text column */}
@@ -229,7 +229,7 @@ export default function RentalsPage() {
       <Divider />
 
       {/* ─── PRIVATE EVENTS ─── */}
-      <section className="py-16 md:py-24 px-6 md:px-10">
+      <section className="py-16 md:py-24 px-5 sm:px-6 md:px-10">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
             {/* Image column */}
@@ -289,7 +289,7 @@ export default function RentalsPage() {
       </section>
 
       {/* ─── DETAILS & POLICIES ─── */}
-      <section className="py-16 md:py-24 px-6 md:px-10 bg-brand-soft-cream">
+      <section className="py-16 md:py-24 px-5 sm:px-6 md:px-10 bg-brand-soft-cream">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12 md:mb-16">
             <FadeIn>
@@ -422,8 +422,8 @@ export default function RentalsPage() {
       </section>
 
       {/* ─── CLOSING CTA ─── */}
-      <section className="py-20 md:py-28 bg-brand-walnut">
-        <div className="max-w-3xl mx-auto px-6 md:px-10 text-center">
+      <section className="py-14 sm:py-20 md:py-28 bg-brand-walnut">
+        <div className="max-w-3xl mx-auto px-5 sm:px-6 md:px-10 text-center">
           <FadeIn>
             <p className="font-accent text-xl md:text-2xl italic text-white/80 leading-relaxed mb-8">
               &ldquo;Every gathering is an opportunity to break bread together.&rdquo;

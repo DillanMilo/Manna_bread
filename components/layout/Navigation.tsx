@@ -30,8 +30,8 @@ export function Navigation() {
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
-        <div className="flex items-center justify-between h-20">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-10">
+        <div className="flex items-center justify-between h-16 lg:h-20">
           <Link href="/" className="relative block h-12 w-auto shrink-0">
             <Image
               src="/images/Bread from Heaven.PNG"
@@ -43,7 +43,7 @@ export function Navigation() {
             />
           </Link>
 
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-6 xl:gap-8">
             {NAV_LINKS.map((link, i) => (
               <motion.div
                 key={link.href}
@@ -63,7 +63,7 @@ export function Navigation() {
           </div>
 
           <motion.div
-            className="hidden md:flex items-center gap-3"
+            className="hidden lg:flex items-center gap-3"
             initial={{ opacity: 0, filter: 'blur(4px)' }}
             animate={{ opacity: 1, filter: 'blur(0px)' }}
             transition={{ delay: 0.4 * NAV_LINKS.length + 0.6, duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
@@ -98,7 +98,7 @@ export function Navigation() {
           </motion.div>
 
           <button
-            className="md:hidden p-2 text-brand-walnut"
+            className="lg:hidden p-2.5 text-brand-walnut"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -116,7 +116,7 @@ export function Navigation() {
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
-              className="md:hidden overflow-hidden border-t border-black/5"
+              className="lg:hidden overflow-hidden border-t border-black/5"
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}

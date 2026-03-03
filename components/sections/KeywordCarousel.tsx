@@ -69,7 +69,7 @@ function MarqueeRow({
         {repeated.map((word, i) => (
           <span
             key={`${word}-${i}`}
-            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold uppercase tracking-wide select-none"
+            className="font-display text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-wide select-none"
             style={{
               WebkitTextStroke: '1.5px var(--color-brand-walnut-medium)',
               WebkitTextFillColor: 'transparent',
@@ -108,7 +108,7 @@ function ValueCard({
         delay: 0.15 + index * 0.15,
         ease: [0.25, 0.4, 0.25, 1],
       }}
-      className="relative bg-brand-warm-white/90 backdrop-blur-md rounded-2xl p-7 md:p-9 shadow-lg shadow-brand-walnut/5 border border-brand-sage-light/20 hover:-translate-y-1 hover:shadow-xl transition-all duration-500"
+      className="relative bg-brand-warm-white/90 backdrop-blur-md rounded-2xl p-6 sm:p-7 md:p-9 shadow-lg shadow-brand-walnut/5 border border-brand-sage-light/20 hover:-translate-y-1 hover:shadow-xl transition-all duration-500"
     >
       <span className="font-body text-xs uppercase tracking-[0.2em] text-brand-cognac font-medium">
         {label}
@@ -130,7 +130,7 @@ export function KeywordCarousel() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-24 md:py-32 bg-brand-soft-cream overflow-hidden"
+      className="relative py-16 sm:py-24 md:py-32 bg-brand-soft-cream overflow-hidden"
     >
       {/* Row 1 — above the cards */}
       <motion.div
@@ -155,8 +155,8 @@ export function KeywordCarousel() {
         </motion.div>
 
         {/* Cards — elevated above row 2 */}
-        <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-10">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <div className="relative z-10 max-w-6xl mx-auto px-5 sm:px-6 md:px-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-6 md:gap-8">
             {CARDS.map((card, i) => (
               <ValueCard key={card.title} {...card} index={i} />
             ))}

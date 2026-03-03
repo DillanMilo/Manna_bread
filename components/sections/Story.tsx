@@ -64,11 +64,11 @@ export function Story() {
   }, [shuffle]);
 
   return (
-    <section className="py-20 md:py-28 bg-brand-warm-white overflow-hidden">
-      <div className="max-w-6xl mx-auto px-6 md:px-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+    <section className="py-14 sm:py-20 md:py-28 bg-brand-warm-white overflow-hidden">
+      <div className="max-w-6xl mx-auto px-5 sm:px-6 md:px-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
           {/* Image card stack with disconnected frame + parallax */}
-          <div ref={containerRef} className="relative">
+          <div ref={containerRef} className="relative max-w-sm mx-auto md:max-w-none">
             {/* Frame fades in first */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -137,7 +137,7 @@ export function Story() {
             </FadeIn>
 
             <FadeIn delay={0.2}>
-              <h2 className="font-display text-3xl md:text-4xl font-medium text-brand-walnut leading-tight mb-6">
+              <h2 className="font-display text-[26px] sm:text-3xl md:text-4xl font-medium text-brand-walnut leading-tight mb-5 sm:mb-6">
                 Built on faith,<br />baked with love
               </h2>
             </FadeIn>

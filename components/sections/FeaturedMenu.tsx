@@ -25,8 +25,8 @@ const FEATURED_ITEMS = [
 
 export function FeaturedMenu() {
   return (
-    <section className="py-20 md:py-28 bg-brand-soft-cream">
-      <div className="max-w-6xl mx-auto px-6 md:px-10">
+    <section className="py-14 sm:py-20 md:py-28 bg-brand-soft-cream">
+      <div className="max-w-6xl mx-auto px-5 sm:px-6 md:px-10">
         <FadeIn>
           <SectionHeader
             label="From Our Kitchen"

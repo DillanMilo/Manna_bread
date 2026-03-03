@@ -146,7 +146,7 @@ function ClosingImage() {
   const imageY = useTransform(scrollYProgress, [0, 1], [120, -120]);
 
   return (
-    <section ref={ref} className="relative h-[50vh] md:h-[65vh] overflow-hidden">
+    <section ref={ref} className="relative h-[40vh] sm:h-[50vh] md:h-[65vh] overflow-hidden">
       <motion.div
         style={{ y: imageY }}
         className="absolute -top-[120px] -bottom-[120px] left-0 right-0 will-change-transform"
@@ -190,7 +190,7 @@ export default function OurStoryPage() {
   return (
     <main className="bg-brand-warm-white min-h-screen">
       {/* ─── HERO ─── */}
-      <section className="pt-32 md:pt-44 pb-16 md:pb-20 px-6 md:px-10">
+      <section className="pt-24 sm:pt-32 md:pt-44 pb-12 sm:pb-16 md:pb-20 px-5 sm:px-6 md:px-10">
         <div className="max-w-4xl mx-auto text-center">
           <FadeIn>
             <p className="font-body text-[11px] font-semibold tracking-[3px] uppercase text-brand-cognac mb-5">
@@ -199,7 +199,7 @@ export default function OurStoryPage() {
           </FadeIn>
 
           <FadeIn delay={0.15}>
-            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-brand-walnut leading-[1.1] mb-8">
+            <h1 className="font-display text-[32px] sm:text-4xl md:text-5xl lg:text-7xl font-medium text-brand-walnut leading-[1.1] mb-6 sm:mb-8">
               A journey of faith,
               <br />
               <span className="text-brand-cognac">flour, & finding home</span>
@@ -223,7 +223,7 @@ export default function OurStoryPage() {
       </section>
 
       {/* ─── CHAPTER 1: ROOTS ─── */}
-      <section className="py-10 md:py-16 px-6 md:px-10">
+      <section className="py-10 md:py-16 px-5 sm:px-6 md:px-10">
         <div className="max-w-6xl mx-auto">
           <Chapter
             image={STORY_IMAGES.christin}
@@ -261,7 +261,7 @@ export default function OurStoryPage() {
       <Divider />
 
       {/* ─── CHAPTER 2: THE BREAKING ─── */}
-      <section className="py-10 md:py-16 px-6 md:px-10">
+      <section className="py-10 md:py-16 px-5 sm:px-6 md:px-10">
         <div className="max-w-6xl mx-auto">
           <div className="max-w-3xl mx-auto">
             <FadeIn>
@@ -306,7 +306,7 @@ export default function OurStoryPage() {
 
       {/* ─── INTERLUDE QUOTE ─── */}
       <section className="py-16 md:py-24 bg-brand-soft-cream">
-        <div className="max-w-3xl mx-auto px-6 md:px-10 text-center">
+        <div className="max-w-3xl mx-auto px-5 sm:px-6 md:px-10 text-center">
           <FadeIn>
             <p className="font-accent text-2xl md:text-3xl lg:text-[34px] italic text-brand-walnut leading-relaxed">
               &ldquo;When the world felt like it was falling apart, God whispered:
@@ -318,7 +318,7 @@ export default function OurStoryPage() {
       </section>
 
       {/* ─── CHAPTER 3: ACROSS THE WORLD ─── */}
-      <section className="py-16 md:py-20 px-6 md:px-10">
+      <section className="py-16 md:py-20 px-5 sm:px-6 md:px-10">
         <div className="max-w-6xl mx-auto">
           <Chapter
             image={STORY_IMAGES.journey}
@@ -367,7 +367,7 @@ export default function OurStoryPage() {
       <Divider />
 
       {/* ─── CHAPTER 4: THROUGH THE VALLEY ─── */}
-      <section className="py-10 md:py-16 px-6 md:px-10">
+      <section className="py-10 md:py-16 px-5 sm:px-6 md:px-10">
         <div className="max-w-6xl mx-auto">
           <div className="max-w-3xl mx-auto">
             <FadeIn>
@@ -420,7 +420,7 @@ export default function OurStoryPage() {
 
       {/* ─── CHAPTER 5: FINDING HOME ─── */}
       <section className="py-16 md:py-24 bg-brand-walnut overflow-hidden">
-        <div className="max-w-6xl mx-auto px-6 md:px-10">
+        <div className="max-w-6xl mx-auto px-5 sm:px-6 md:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
             {/* Image — couple B&W on dark background */}
             <div className="lg:col-span-5 lg:order-1">
@@ -491,7 +491,7 @@ export default function OurStoryPage() {
       </section>
 
       {/* ─── CHAPTER 6: MANNA ─── */}
-      <section className="py-16 md:py-24 px-6 md:px-10">
+      <section className="py-16 md:py-24 px-5 sm:px-6 md:px-10">
         <div className="max-w-6xl mx-auto">
           <div className="max-w-3xl mx-auto text-center">
             <FadeIn>
@@ -540,8 +540,8 @@ export default function OurStoryPage() {
       <ClosingImage />
 
       {/* ─── CTA FOOTER ─── */}
-      <section className="py-20 md:py-28 bg-brand-soft-cream">
-        <div className="max-w-2xl mx-auto px-6 md:px-10 text-center">
+      <section className="py-14 sm:py-20 md:py-28 bg-brand-soft-cream">
+        <div className="max-w-2xl mx-auto px-5 sm:px-6 md:px-10 text-center">
           <FadeIn>
             <p className="font-accent text-lg md:text-xl italic text-brand-olive mb-3">
               Come as you are

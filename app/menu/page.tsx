@@ -59,8 +59,8 @@ export default function MenuPage() {
   return (
     <main className="bg-brand-warm-white min-h-screen">
       {/* Header */}
-      <div className="pt-32 md:pt-40 pb-6 md:pb-10">
-        <div className="max-w-6xl mx-auto px-6 md:px-10">
+      <div className="pt-24 sm:pt-32 md:pt-40 pb-6 md:pb-10">
+        <div className="max-w-6xl mx-auto px-5 sm:px-6 md:px-10">
           <FadeIn>
             <SectionHeader
               label="Our Menu"
@@ -74,9 +74,9 @@ export default function MenuPage() {
       {/* Category Tabs */}
       <div
         ref={tabsRef}
-        className="sticky top-20 z-40 bg-brand-warm-white/95 backdrop-blur-sm border-b border-brand-sage/15"
+        className="sticky top-16 lg:top-20 z-40 bg-brand-warm-white/95 backdrop-blur-sm border-b border-brand-sage/15"
       >
-        <div className="max-w-6xl mx-auto px-6 md:px-10">
+        <div className="max-w-6xl mx-auto px-5 sm:px-6 md:px-10">
           <nav
             className="flex gap-0 overflow-x-auto -mb-px"
             style={{ scrollbarWidth: 'none' }}
@@ -106,7 +106,7 @@ export default function MenuPage() {
       </div>
 
       {/* Menu Content */}
-      <div className="max-w-6xl mx-auto px-6 md:px-10 py-10 md:py-14 min-h-[50vh]">
+      <div className="max-w-6xl mx-auto px-5 sm:px-6 md:px-10 py-8 sm:py-10 md:py-14 min-h-[50vh]">
         <AnimatePresence mode="wait">
           <motion.div
             key={category.title}
@@ -144,7 +144,7 @@ export default function MenuPage() {
       {/* Order CTA */}
       <FadeIn>
         <div className="bg-brand-soft-cream">
-          <div className="max-w-2xl mx-auto text-center px-6 py-16 md:py-20">
+          <div className="max-w-2xl mx-auto text-center px-5 sm:px-6 py-12 sm:py-16 md:py-20">
             <p className="font-body text-[11px] font-semibold tracking-[0.2em] uppercase text-brand-cognac mb-3">
               Ready to Order?
             </p>

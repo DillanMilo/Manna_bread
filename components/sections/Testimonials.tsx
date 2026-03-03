@@ -53,9 +53,9 @@ export function Testimonials() {
   };
 
   return (
-    <section ref={sectionRef} className="py-20 md:py-28 bg-brand-warm-white">
+    <section ref={sectionRef} className="py-14 sm:py-20 md:py-28 bg-brand-warm-white">
       <motion.div
-        className="max-w-3xl mx-auto px-6 md:px-10 text-center"
+        className="max-w-3xl mx-auto px-5 sm:px-6 md:px-10 text-center"
         initial={{ opacity: 0, filter: 'blur(12px)' }}
         whileInView={{ opacity: 1, filter: 'blur(0px)' }}
         transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
@@ -65,7 +65,7 @@ export function Testimonials() {
           What People Are Saying
         </p>
 
-        <div className="relative min-h-[180px] md:min-h-[160px] flex items-center justify-center">
+        <div className="relative min-h-[200px] sm:min-h-[180px] md:min-h-[160px] flex items-center justify-center">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.blockquote
               key={activeIndex}
@@ -77,7 +77,7 @@ export function Testimonials() {
               transition={{ duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
               className="absolute inset-0 flex flex-col items-center justify-center"
             >
-              <p className="font-accent text-2xl md:text-3xl italic text-brand-walnut leading-relaxed mb-8">
+              <p className="font-accent text-xl sm:text-2xl md:text-3xl italic text-brand-walnut leading-relaxed mb-6 sm:mb-8">
                 &ldquo;{TESTIMONIALS[activeIndex].quote}&rdquo;
               </p>
               <p className="font-body text-sm font-medium text-brand-olive">
