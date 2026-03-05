@@ -22,7 +22,8 @@
       "WebFetch(domain:www.yelp.com)",
       "WebFetch(domain:www.tripadvisor.com)",
       "WebFetch(domain:wnam-cdn.menuweb.menu)",
-      "WebFetch(domain:maps.roadtrippers.com)"
+      "WebFetch(domain:maps.roadtrippers.com)",
+      "Bash(file:*)"
     ]
   }
 }
