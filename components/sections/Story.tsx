@@ -68,7 +68,7 @@ export function Story() {
           {/* Image card stack with disconnected frame + parallax */}
           <motion.div
             ref={containerRef}
-            className="relative max-w-sm mx-auto md:max-w-none cursor-pointer"
+            className="relative w-full max-w-sm mx-auto md:max-w-none cursor-pointer"
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
@@ -79,7 +79,7 @@ export function Story() {
             <div className="absolute top-5 left-5 w-full h-full rounded-2xl border border-brand-cognac/25" />
 
             {/* Card stack */}
-            <div className="relative z-10 aspect-[4/5]">
+            <div className="relative z-10 w-full aspect-[4/5]">
               {STORY_IMAGES.map((img, i) => {
                 const isFront = i === frontIndex;
                 const isOnTop = i === zFrontIndex;
