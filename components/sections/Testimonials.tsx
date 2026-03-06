@@ -53,7 +53,7 @@ export function Testimonials() {
   };
 
   return (
-    <section ref={sectionRef} className="py-14 sm:py-20 md:py-28 bg-brand-warm-white">
+    <section ref={sectionRef} className="py-14 sm:py-20 md:py-28 bg-brand-forest-mid">
       <motion.div
         className="max-w-3xl mx-auto px-5 sm:px-6 md:px-10 text-center"
         initial={{ opacity: 0, filter: 'blur(12px)' }}
@@ -61,7 +61,7 @@ export function Testimonials() {
         transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
         viewport={{ once: true, amount: 0.2 }}
       >
-        <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-cognac mb-8">
+        <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-8">
           What People Are Saying
         </p>
 
@@ -77,10 +77,10 @@ export function Testimonials() {
               transition={{ duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
               className="absolute inset-0 flex flex-col items-center justify-center"
             >
-              <p className="font-accent text-xl sm:text-2xl md:text-3xl italic text-brand-walnut leading-relaxed mb-6 sm:mb-8">
+              <p className="font-accent text-xl sm:text-2xl md:text-3xl italic text-white leading-relaxed mb-6 sm:mb-8">
                 &ldquo;{TESTIMONIALS[activeIndex].quote}&rdquo;
               </p>
-              <p className="font-body text-sm font-medium text-brand-olive">
+              <p className="font-body text-sm font-medium text-white/60">
                 — {TESTIMONIALS[activeIndex].author}, {TESTIMONIALS[activeIndex].location}
               </p>
             </motion.blockquote>
@@ -98,7 +98,7 @@ export function Testimonials() {
             >
               <motion.div
                 className={`w-2.5 h-2.5 rounded-full transition-colors ${
-                  index === activeIndex ? 'bg-brand-cognac' : 'bg-brand-sage-light hover:bg-brand-sage'
+                  index === activeIndex ? 'bg-brand-gold' : 'bg-white/30 hover:bg-white/50'
                 }`}
                 animate={index === activeIndex ? { scale: [1, 1.3, 1] } : { scale: 1 }}
                 transition={{ duration: 0.3 }}
@@ -106,7 +106,7 @@ export function Testimonials() {
               {/* Progress ring for active dot */}
               {index === activeIndex && isInView && (
                 <motion.div
-                  className="absolute inset-0 rounded-full border-2 border-brand-cognac"
+                  className="absolute inset-0 rounded-full border-2 border-brand-gold"
                   initial={{ scale: 0.5, opacity: 0 }}
                   animate={{ scale: 1.8, opacity: [0.5, 0] }}
                   transition={{ duration: AUTO_ADVANCE_MS / 1000, ease: "linear" }}

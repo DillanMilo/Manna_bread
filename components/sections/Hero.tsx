@@ -46,7 +46,7 @@ export function Hero() {
           src="/images/1SE - Manna Evenings (20251221-223245).mov"
         />
         {/* Overlay gradient so content stays readable */}
-        <div className="absolute inset-0 z-[1] bg-gradient-to-b from-brand-charcoal/40 via-brand-charcoal/30 to-brand-charcoal/60" />
+        <div className="absolute inset-0 z-[1] bg-gradient-to-b from-brand-forest/50 via-brand-forest/35 to-brand-forest/70" />
       </motion.div>
 
       {/* Content — gentle unified reveal, like stepping into the space */}

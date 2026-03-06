@@ -10,14 +10,17 @@
   --color-brand-walnut-medium: #5D4037;
   --color-brand-cognac: #C4956A;
   --color-brand-cognac-light: #D4A574;
+  --color-brand-forest: #2F3E36;
+  --color-brand-forest-mid: #3D5247;
+  --color-brand-gold: #C9A84C;
   --color-brand-fern: #4A7C59;
   --color-brand-olive: #6B705C;
   --color-brand-charcoal: #2D2A26;
 
   /* Font Families - will be set by next/font CSS variables */
   --font-family-display: var(--font-display), 'Playfair Display', serif;
-  --font-family-accent: var(--font-accent), 'Cormorant Garamond', serif;
-  --font-family-body: var(--font-body), 'DM Sans', sans-serif;
+  --font-family-accent: var(--font-accent), 'Lora', serif;
+  --font-family-body: var(--font-body), 'Libre Franklin', sans-serif;
 }
 
 html {
@@ -26,8 +29,8 @@ html {
 }
 
 body {
-  background-color: var(--color-brand-warm-white);
-  color: var(--color-brand-charcoal);
+  background-color: var(--color-brand-forest);
+  color: var(--color-brand-warm-white);
   -webkit-tap-highlight-color: transparent;
   overflow-x: hidden;
 }

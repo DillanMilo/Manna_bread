@@ -71,9 +71,9 @@ function MarqueeRow({
             key={`${word}-${i}`}
             className="font-display text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-wide select-none"
             style={{
-              WebkitTextStroke: '1.5px var(--color-brand-walnut-medium)',
+              WebkitTextStroke: '1.5px var(--color-brand-gold)',
               WebkitTextFillColor: 'transparent',
-              opacity: 0.5,
+              opacity: 0.3,
             }}
           >
             {word}
@@ -108,15 +108,15 @@ function ValueCard({
         delay: 0.15 + index * 0.15,
         ease: [0.25, 0.4, 0.25, 1],
       }}
-      className="relative bg-brand-warm-white/90 backdrop-blur-md rounded-2xl p-6 sm:p-7 md:p-9 shadow-lg shadow-brand-walnut/5 border border-brand-sage-light/20 hover:-translate-y-1 hover:shadow-xl transition-all duration-500"
+      className="relative bg-brand-forest-mid/80 backdrop-blur-md rounded-2xl p-6 sm:p-7 md:p-9 shadow-lg shadow-black/10 border border-white/10 hover:-translate-y-1 hover:shadow-xl transition-all duration-500"
     >
-      <span className="font-body text-xs uppercase tracking-[0.2em] text-brand-cognac font-medium">
+      <span className="font-body text-xs uppercase tracking-[0.2em] text-brand-gold font-medium">
         {label}
       </span>
-      <h3 className="font-display text-2xl md:text-3xl font-semibold text-brand-walnut mt-2 mb-3">
+      <h3 className="font-display text-2xl md:text-3xl font-semibold text-white mt-2 mb-3">
         {title}
       </h3>
-      <p className="font-body text-sm md:text-base text-brand-olive leading-relaxed">
+      <p className="font-body text-sm md:text-base text-white/70 leading-relaxed">
         {body}
       </p>
     </motion.div>
@@ -130,7 +130,7 @@ export function KeywordCarousel() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-16 sm:py-24 md:py-32 bg-brand-soft-cream overflow-hidden"
+      className="relative py-16 sm:py-24 md:py-32 bg-brand-forest overflow-hidden"
     >
       {/* Row 1 — above the cards */}
       <motion.div
@@ -175,8 +175,8 @@ export function KeywordCarousel() {
       </motion.div>
 
       {/* Soft gradient edges to fade marquee text out */}
-      <div className="absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-brand-soft-cream to-transparent z-[5] pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-16 md:w-32 bg-gradient-to-l from-brand-soft-cream to-transparent z-[5] pointer-events-none" />
+      <div className="absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-brand-forest to-transparent z-[5] pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-16 md:w-32 bg-gradient-to-l from-brand-forest to-transparent z-[5] pointer-events-none" />
     </section>
   );
 }

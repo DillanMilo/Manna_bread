@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Playfair_Display, Cormorant_Garamond, DM_Sans } from 'next/font/google';
+import { Playfair_Display, Lora, Libre_Franklin } from 'next/font/google';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { BRAND } from '@/lib/constants';
@@ -11,7 +11,7 @@ const playfair = Playfair_Display({
   display: 'swap',
 });
 
-const cormorant = Cormorant_Garamond({
+const lora = Lora({
   subsets: ['latin'],
   variable: '--font-accent',
   weight: ['400', '500', '600'],
@@ -19,9 +19,10 @@ const cormorant = Cormorant_Garamond({
   display: 'swap',
 });
 
-const dmSans = DM_Sans({
+const libreFranklin = Libre_Franklin({
   subsets: ['latin'],
   variable: '--font-body',
+  weight: ['300', '400', '500', '600'],
   display: 'swap',
 });
 
@@ -54,8 +55,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${cormorant.variable} ${dmSans.variable}`}>
-      <body className="font-body bg-brand-warm-white text-brand-charcoal antialiased">
+    <html lang="en" className={`${playfair.variable} ${lora.variable} ${libreFranklin.variable}`}>
+      <body className="font-body bg-brand-forest text-brand-warm-white antialiased">
         <Navigation />
         {children}
         <Footer />

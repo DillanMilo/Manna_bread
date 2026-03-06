@@ -93,7 +93,7 @@ export function Experience() {
       ))}
 
       {/* Dark overlay for text readability */}
-      <div className="absolute inset-0 z-[1] bg-brand-charcoal/60" />
+      <div className="absolute inset-0 z-[1] bg-brand-forest/65" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-5 sm:px-6 md:px-10">
         <FadeIn>

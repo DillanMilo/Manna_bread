@@ -25,13 +25,14 @@ const FEATURED_ITEMS = [
 
 export function FeaturedMenu() {
   return (
-    <section className="py-14 sm:py-20 md:py-28 bg-brand-soft-cream">
+    <section className="py-14 sm:py-20 md:py-28 bg-brand-forest-mid">
       <div className="max-w-6xl mx-auto px-5 sm:px-6 md:px-10">
         <FadeIn>
           <SectionHeader
             label="From Our Kitchen"
             title="Crafted with intention"
-            description="Every item on our menu is made from scratch, using the finest ingredients and time-honored techniques."
+            description="Everything here is baked with intention&mdash;real ingredients, unhurried process, and a lot of love in every batch."
+            light
           />
         </FadeIn>
 

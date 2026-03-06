@@ -5,7 +5,7 @@ import { StaggerContainer, StaggerItem } from '@/components/ui/Motion';
 
 export function Services() {
   return (
-    <section className="py-14 sm:py-20 md:py-28 bg-brand-soft-cream overflow-hidden">
+    <section className="py-14 sm:py-20 md:py-28 bg-brand-forest overflow-hidden">
       <div className="max-w-5xl mx-auto px-5 sm:px-6 md:px-10">
         <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-8" staggerDelay={0.25}>
           <StaggerItem>

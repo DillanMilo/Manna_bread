@@ -1,7 +1,7 @@
 export const BRAND = {
   name: 'Manna Bakery',
   tagline: 'Bread from Heaven',
-  description: 'Artisan breads, curated pastries, and a space designed for connection.',
+  description: 'Handcrafted breads, pastries with character, and a space that feels like home.',
   founder: 'Christin',
 };
 

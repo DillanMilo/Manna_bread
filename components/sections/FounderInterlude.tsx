@@ -37,7 +37,7 @@ export function FounderInterlude() {
       </motion.div>
 
       {/* Gradient overlay — soft dark from bottom for legible text */}
-      <div className="absolute inset-0 bg-gradient-to-t from-brand-walnut/75 via-brand-walnut/20 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-brand-forest/80 via-brand-forest/25 to-transparent" />
 
       {/* Quote content — anchored to bottom */}
       <div className="absolute inset-0 flex items-end justify-center pb-8 sm:pb-10 md:pb-14 px-5 sm:px-6">
