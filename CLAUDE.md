@@ -65,7 +65,7 @@ Christin is **font-sensitive** and believes free fonts signal cheap quality. We'
 | Role | Font | Weight | Usage |
 |------|------|--------|-------|
 | **Display / Headlines** | Playfair Display | 400, 500, 600 | Hero headlines, section titles, page titles |
-| **Accent / Quotes** | Cormorant Garamond | 400 italic, 500, 600 | Scripture quotes, testimonials, taglines, elegant accents |
+| **Accent / Quotes** | Lora | 400 italic, 500, 600 | Scripture quotes, testimonials, taglines, elegant accents |
 | **Body / UI** | Libre Franklin | 300, 400, 500, 600 | Body text, navition, buttons, labels, form elements |
 
 ### Typography Rules
@@ -78,7 +78,7 @@ Christin is **font-sensitive** and believes free fonts signal cheap quality. We'
 ### Tailwind Font Classes
 ```
 font-display  → Playfair Display (headlines)
-font-accent   → Cormorant Garamond (quotes)
+font-accent   → Lora (quotes)
 font-body     → Libre Franklin (everything else)
 ```
 
@@ -93,11 +93,14 @@ Extracted directly from the Manna Bakery storefront photos:
 | **Warm White** | `#FAF9F6` | `brand-warm-white` | Primary backgrounds |
 | **Soft Cream** | `#F5F2ED` | `brand-soft-cream` | Section backgrounds, cards |
 | **Muted Sage** | `#8A9A8E` | `brand-sage` | Accents, borders, secondary elements |
-| **Sage Light** | `#B8C4B8` | `brand-sage-light` | Hover statetle backgrounds |
+| **Sage Light** | `#B8C4B8` | `brand-sage-light` | Hover states, subtle backgrounds |
+| **Deep Forest** | `#3D5247` | `brand-forest` | Dark section backgrounds, velvet-feel hero areas |
+| **Forest Mid** | `#4F6B5A` | `brand-forest-mid` | Hover states for forest, gradient pairs |
 | **Deep Walnut** | `#3E2723` | `brand-walnut` | Primary text, buttons, headers |
 | **Walnut Medium** | `#5D4037` | `brand-walnut-medium` | Hover states for walnut |
 | **Cognac** | `#C4956A` | `brand-cognac` | CTAs, highlights, accents |
 | **Cognac Light** | `#D4A574` | `brand-cognac-light` | Hover states for cognac |
+| **Brush Gold** | `#C9A84C` | `brand-gold` | Decorative accents, arch glows, heading underlines, logo-matched gold touches |
 | **Fern Green** | `#4A7C59` | `brand-fern` | Life, growth, botanical accents |
 | **Soft Olive** | `#6B705C` | `brand-olive` | Secondary text, captions |
 | **Warm Charcoal** | `#2D2A26` | `brand-charcoal` | Primary body text |
@@ -119,6 +122,7 @@ These architectural elements from the physical space should inform the digital d
 - Soft, rounded shapes inspired by Jerusalem architecture
 - Use for: hero containers, image frames, card treatments
 - CSS: `border-radius: 9999px 9999px 0 0` for arch tops
+- **Glow effect:** Add a soft radial glow behind arch elements using brush gold (`#C9A84C` at 12–18% opacity) with blur. Implement via pseudo-element or wrapper div.
 
 ### Timber Beams
 - Reclaimed wood structures that define space
@@ -254,5 +258,53 @@ Always consider:
 
 ---
 
-*Last updated: February 2026*
+## Post-Meeting Updates (March 2026 — First Draft Review)
+
+The following decisions were made and confirmed during the first draft review meeting with Christin and Chad (her husband):
+
+### Design Decisions Confirmed
+- **Business card reference:** The physical Manna business card (dark forest green background, brush gold lettering, Manna script, "Bread from Heaven" tagline, arched logo) is the definitive color and feel reference. Match this energy.
+- **Deep Forest Green** (`#3D5247`) confirmed as the richer, darker background tone Christin wants — replaces any washed-out sage/olive tones in hero and dark sections
+- **Brush Gold** (`#C9A84C`) confirmed for decorative accents, glow effects, and heading touches
+- **Arch glow effect** approved — soft radial gold glow behind arched elements
+- **Accent font confirmed as Lora** (was previously Cormorant Garamond — updated)
+
+### Copy Direction Confirmed
+- Remove all instances of "whether" phrasing
+- No salesy, pitchy, or generic bakery language anywhere
+- Tone: handcrafted, warm, character-driven, surprising — written by someone who genuinely loves this place
+- Clichés are strictly off-brand
+
+### Features Being Added
+- **"Watch the Video" CTA** — prominent near top of homepage
+- **2-minute story video** — autoplay on scroll, embedded lower on homepage (video to be supplied by Christin)
+- **Testimonials** — section to be expanded
+- **Rentals/Events page** — email policy content to be styled as a proper page section
+- **Catering page** — awaiting additional photos from Christin
+- **Footer** — Instagram + Facebook social links to be added
+- **Menu prices** — to be updated to reflect current Toast pricing
+
+### Ambient Music (Exploring)
+- Christin expressed interest in subtle ambient/instrumental background music
+- Must feel warm, atmospheric, handcrafted — absolutely not cheesy
+- Implementation: user-triggered (play button), never forced autoplay
+- Christin will supply audio files for review and testing
+- This is exploratory — not confirmed scope yet
+
+### Assets Still Pending from Christin
+- [ ] 2-minute brand story video
+- [ ] Additional catering photography
+- [ ] Full photographer shoot images (expected early week of March 9)
+- [ ] Ambient audio file(s) for music exploration
+- [ ] Finalized logo (high-res transparent PNG or SVG)
+- [ ] Confirmation of primary canonical domain
+
+### Payment Status
+- Invoice #1 (commencement): PAID — $633
+- Invoice #2 (first draft delivery): DUE — $633 (sending Monday March 9)
+- Invoice #3 (launch): Pending — $634
+
+---
+
+*Last updated: March 2026 — Post first draft review meeting*
 *Project by Creative Currents LLC*
