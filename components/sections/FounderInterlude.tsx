@@ -20,7 +20,7 @@ export function FounderInterlude() {
   return (
     <section
       ref={containerRef}
-      className="relative h-[45vh] sm:h-[55vh] md:h-[65vh] overflow-hidden"
+      className="relative h-[50vh] sm:h-[55vh] md:h-[65vh] overflow-hidden"
     >
       {/* Parallax image */}
       <motion.div
@@ -40,17 +40,17 @@ export function FounderInterlude() {
       <div className="absolute inset-0 bg-gradient-to-t from-brand-forest/80 via-brand-forest/25 to-transparent" />
 
       {/* Quote content — anchored to bottom */}
-      <div className="absolute inset-0 flex items-end justify-center pb-8 sm:pb-10 md:pb-14 px-5 sm:px-6">
+      <div className="absolute inset-0 flex items-end justify-center pb-10 sm:pb-12 md:pb-14 px-4 sm:px-6 md:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.3, ease: organic }}
-          className="text-center max-w-2xl"
+          className="text-center max-w-2xl mx-auto"
         >
           <p className="font-accent text-xl sm:text-2xl md:text-3xl lg:text-4xl italic text-white leading-relaxed mb-3 sm:mb-4">
-            &ldquo;We didn&apos;t just open a bakery&mdash;we opened our hearts.&rdquo;
+            &ldquo;I love how people pause when they&apos;re eating bread. It&apos;s a time where they just rest.&rdquo;
           </p>
-          <p className="font-body text-sm text-white/60 tracking-[2px] uppercase">
+          <p className="font-body text-xs sm:text-sm text-white/60 tracking-[2px] uppercase">
             &mdash; Christin, Founder
           </p>
         </motion.div>

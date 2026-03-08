@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Playfair_Display, Lora, Libre_Franklin } from 'next/font/google';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
@@ -25,6 +25,13 @@ const libreFranklin = Libre_Franklin({
   weight: ['300', '400', '500', '600'],
   display: 'swap',
 });
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: '#1E2A23',
+};
 
 export const metadata: Metadata = {
   title: `${BRAND.name} | ${BRAND.tagline}`,

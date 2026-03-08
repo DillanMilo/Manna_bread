@@ -6,13 +6,13 @@ import { MannaMap } from '@/components/ui/MannaMap';
 
 export function Contact() {
   return (
-    <section className="py-14 sm:py-20 md:py-28 bg-brand-forest-mid overflow-hidden">
-      <div className="max-w-6xl mx-auto px-5 sm:px-6 md:px-10">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-28 bg-brand-forest-mid overflow-hidden">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
           {/* Contact Info */}
           <div>
             <FadeIn>
-              <h2 className="font-display text-[26px] sm:text-3xl md:text-4xl font-medium text-white mb-6 sm:mb-8">
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-medium text-white mb-6 sm:mb-8">
                 Visit Us
               </h2>
             </FadeIn>
@@ -49,11 +49,11 @@ export function Contact() {
                     Contact
                   </p>
                   <p className="font-body text-base text-white/85 leading-relaxed">
-                    <a href={`tel:${CONTACT.phone.replace(/[^0-9]/g, '')}`} className="hover:text-brand-gold transition-colors">
+                    <a href={`tel:${CONTACT.phone.replace(/[^0-9]/g, '')}`} className="hover:text-brand-gold transition-colors inline-block py-1">
                       {CONTACT.phone}
                     </a>
                     <br />
-                    <a href={`mailto:${CONTACT.email}`} className="hover:text-brand-gold transition-colors">
+                    <a href={`mailto:${CONTACT.email}`} className="hover:text-brand-gold transition-colors inline-block py-1">
                       {CONTACT.email}
                     </a>
                   </p>
@@ -67,10 +67,10 @@ export function Contact() {
             <div className="relative">
               {/* Soft radial gold glow behind arch */}
               <div
-                className="absolute -inset-6 rounded-t-[9999px] rounded-b-3xl"
+                className="absolute -inset-5 sm:-inset-8 rounded-t-[9999px] rounded-b-3xl"
                 style={{
-                  background: 'radial-gradient(ellipse at center, rgba(201, 168, 76, 0.15) 0%, transparent 70%)',
-                  filter: 'blur(20px)',
+                  background: 'radial-gradient(ellipse at center, rgba(201, 168, 76, 0.22) 0%, rgba(201, 168, 76, 0.08) 50%, transparent 75%)',
+                  filter: 'blur(28px)',
                 }}
               />
               {/* Outer arch frame */}

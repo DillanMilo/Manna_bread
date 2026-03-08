@@ -48,7 +48,7 @@ function StoryImage({
     target: ref,
     offset: ['start end', 'end start'],
   });
-  const imageY = useTransform(scrollYProgress, [0, 1], [80, -80]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [40, -40]);
 
   return (
     <motion.div
@@ -60,13 +60,13 @@ function StoryImage({
     >
       {/* Decorative offset border */}
       <div
-        className={`absolute ${
+        className={`hidden sm:block absolute ${
           side === 'left' ? '-right-3 -bottom-3' : '-left-3 -bottom-3'
         } w-full h-full rounded-2xl border border-brand-gold/20 -z-10`}
       />
       <motion.div
         style={{ y: imageY }}
-        className="absolute -top-[80px] -bottom-[80px] left-0 right-0 will-change-transform"
+        className="absolute -top-[40px] sm:-top-[80px] -bottom-[40px] sm:-bottom-[80px] left-0 right-0 will-change-transform"
       >
         <Image
           src={src}
@@ -172,7 +172,7 @@ function ClosingImage() {
           className="text-center max-w-2xl"
         >
           <p className="font-accent text-2xl md:text-3xl lg:text-4xl italic text-white leading-relaxed mb-4">
-            &ldquo;Jesus is worth it. He is worth every hard thing, every question, every goodbye. He is worth it all.&rdquo;
+            &ldquo;I felt like I had stepped from a dark long winter. And on this day I felt like the spring was coming and some hope was coming back into my heart.&rdquo;
           </p>
           <p className="font-body text-sm text-white/60 tracking-[2px] uppercase">
             &mdash; Christin, Founder
@@ -199,7 +199,7 @@ export default function OurStoryPage() {
           </FadeIn>
 
           <FadeIn delay={0.15}>
-            <h1 className="font-display text-[32px] sm:text-4xl md:text-5xl lg:text-7xl font-medium text-white leading-[1.1] mb-6 sm:mb-8">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-medium text-white leading-[1.15] mb-6 sm:mb-8">
               A journey of faith,
               <br />
               <span className="text-brand-gold">flour, & finding home</span>
@@ -295,7 +295,7 @@ export default function OurStoryPage() {
 
             <FadeIn delay={0.35}>
               <QuoteBlock
-                quote="I spent my whole life trying to be good enough. And then I realized&mdash;I was never meant to be. That was the whole point of grace."
+                quote="It actually &mdash; I wouldn&apos;t describe it as courage. I would describe it more as surrender. It was more of a letting go."
                 attribution="Christin"
                 variant="bordered"
               />
@@ -309,9 +309,9 @@ export default function OurStoryPage() {
         <div className="max-w-3xl mx-auto px-5 sm:px-6 md:px-10 text-center">
           <FadeIn>
             <p className="font-accent text-2xl md:text-3xl lg:text-[34px] italic text-white leading-relaxed">
-              &ldquo;When the world felt like it was falling apart, God whispered:
-              <span className="text-brand-gold"> I am still here. I am still providing.
-              One day at a time.</span>&rdquo;
+              &ldquo;One day at a time we can just trust God with what we need for today
+              and not worry about tomorrow because he&apos;s enough for us day by day by day.
+              <span className="text-brand-gold"> Just trust me today. I&apos;m enough. I&apos;m enough for today. I&apos;m enough for you.</span>&rdquo;
             </p>
           </FadeIn>
         </div>
@@ -401,13 +401,12 @@ export default function OurStoryPage() {
             </FadeIn>
 
             <FadeIn delay={0.35}>
-              <div className="bg-brand-forest-mid/50 rounded-2xl p-8 md:p-10 border-l-4 border-brand-gold relative">
-                <span className="font-display text-7xl text-brand-gold/20 absolute top-3 left-6 leading-none">
+              <div className="bg-brand-forest-mid/50 rounded-2xl p-5 sm:p-8 md:p-10 border-l-4 border-brand-gold relative">
+                <span className="font-display text-5xl sm:text-7xl text-brand-gold/20 absolute top-2 left-4 sm:top-3 sm:left-6 leading-none">
                   &ldquo;
                 </span>
                 <p className="font-accent text-xl md:text-2xl italic text-white leading-relaxed relative z-10">
-                  Manna was never about abundance. It was about faithfulness&mdash;God&apos;s
-                  and ours. Just enough bread for just this day.
+                  The Mana from Heaven, just one day at a time, one piece of bread at a time.
                 </p>
                 <cite className="block mt-5 font-body text-sm font-medium text-white/60 not-italic">
                   &mdash; Christin
@@ -480,9 +479,9 @@ export default function OurStoryPage() {
 
               <FadeIn delay={0.5}>
                 <p className="font-accent text-xl md:text-2xl italic text-brand-cognac-light leading-relaxed">
-                  &ldquo;God&apos;s love isn&apos;t something you unlock with good behavior.
-                  It was there all along&mdash;waiting for me to stop running
-                  and just receive it.&rdquo;
+                  &ldquo;It&apos;s been really humbling as I realize how much he&apos;s gone out of his way&mdash;just
+                  for me to know him and to know his love. The whole point is just Jesus.
+                  And him reaching me, rather than me having to strive for him&mdash;that was what the gospel is all about. So simple.&rdquo;
                 </p>
               </FadeIn>
             </div>
@@ -550,21 +549,20 @@ export default function OurStoryPage() {
               Your table is waiting
             </h2>
             <p className="font-body text-base text-white/70 leading-relaxed mb-8">
-              First visit or hundredth&mdash;there&apos;s always a seat for
-              you at Manna. Come taste the bread that was born from a prayer.
+              There&apos;s always a seat for you at Manna. Come taste the bread that was born from a prayer.
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="/menu"
-                className="inline-flex items-center justify-center px-7 py-3.5 bg-brand-gold text-brand-forest font-body text-sm font-medium rounded-lg hover:bg-brand-cognac-light transition-colors duration-300"
+                className="inline-flex items-center justify-center px-7 py-3.5 min-h-[44px] w-full sm:w-auto bg-brand-gold text-brand-forest font-body text-sm font-medium rounded-lg hover:bg-brand-cognac-light transition-colors duration-300"
               >
                 View our menu
               </a>
               <a
                 href="/contact"
-                className="inline-flex items-center justify-center px-7 py-3.5 border border-white/30 text-white font-body text-sm font-medium rounded-lg hover:bg-white/10 transition-colors duration-300"
+                className="inline-flex items-center justify-center px-7 py-3.5 min-h-[44px] w-full sm:w-auto border border-white/30 text-white font-body text-sm font-medium rounded-lg hover:bg-white/10 transition-colors duration-300"
               >
                 Visit us
               </a>

@@ -36,7 +36,7 @@ export function FeaturedMenu() {
           />
         </FadeIn>
 
-        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8" staggerDelay={0.2}>
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8" staggerDelay={0.2}>
           {FEATURED_ITEMS.map((item) => (
             <StaggerItem key={item.title}>
               <MenuCard {...item} />
@@ -46,7 +46,7 @@ export function FeaturedMenu() {
 
         <FadeIn delay={0.3}>
           <div className="text-center mt-12">
-            <Button href="/menu" variant="primary">
+            <Button href="/menu" variant="primary" className="w-full sm:w-auto">
               View Full Menu
             </Button>
           </div>

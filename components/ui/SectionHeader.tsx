@@ -14,7 +14,7 @@ export function SectionHeader({ label, title, description, centered = true, ligh
           {label}
         </p>
       )}
-      <h2 className={`font-display text-[28px] sm:text-4xl md:text-[42px] font-medium leading-tight mb-4 ${light ? 'text-white' : 'text-brand-walnut'}`}>
+      <h2 className={`font-display text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-medium leading-tight mb-4 ${light ? 'text-white' : 'text-brand-walnut'}`}>
         {title}
       </h2>
       <div className={`flex ${centered ? 'justify-center' : ''} mb-4`}>

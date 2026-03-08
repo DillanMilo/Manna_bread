@@ -69,9 +69,9 @@ function MarqueeRow({
         {repeated.map((word, i) => (
           <span
             key={`${word}-${i}`}
-            className="font-display text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-wide select-none"
+            className="font-display text-2xl sm:text-3xl md:text-6xl lg:text-7xl font-bold uppercase tracking-wide select-none"
             style={{
-              WebkitTextStroke: '1.5px var(--color-brand-gold)',
+              WebkitTextStroke: '1px var(--color-brand-gold)',
               WebkitTextFillColor: 'transparent',
               opacity: 0.3,
             }}
@@ -156,7 +156,7 @@ export function KeywordCarousel() {
 
         {/* Cards — elevated above row 2 */}
         <div className="relative z-10 max-w-6xl mx-auto px-5 sm:px-6 md:px-10">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 md:gap-8">
             {CARDS.map((card, i) => (
               <ValueCard key={card.title} {...card} index={i} />
             ))}

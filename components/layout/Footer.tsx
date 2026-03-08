@@ -4,9 +4,9 @@ import { BRAND, CONTACT, SOCIAL, NAV_LINKS, TOAST } from '@/lib/constants';
 export function Footer() {
   return (
     <footer className="bg-brand-walnut text-white">
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-10 py-12 sm:py-16 md:py-20">
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-8 mb-12">
-          <div className="col-span-2 md:col-span-1">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-12 sm:py-16 md:py-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+          <div className="col-span-1 sm:col-span-2 md:col-span-1 text-center sm:text-left">
             <h4 className="font-display text-3xl font-medium mb-2">{BRAND.name.split(' ')[0]}</h4>
             <p className="font-accent text-lg italic opacity-80 mb-5">{BRAND.tagline}</p>
             <p className="font-accent text-sm italic opacity-60 leading-relaxed border-l-2 border-brand-cognac pl-4">
@@ -23,7 +23,7 @@ export function Footer() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="font-body text-sm text-white/80 hover:text-white transition-colors"
+                  className="font-body text-sm text-white/80 hover:text-white transition-colors py-1.5 inline-block"
                 >
                   {link.label}
                 </Link>
@@ -36,16 +36,16 @@ export function Footer() {
               Quick Links
             </h5>
             <div className="flex flex-col gap-3">
-              <a href={TOAST.orderOnline} target="_blank" rel="noopener noreferrer" className="font-body text-sm text-white/80 hover:text-white transition-colors">
+              <a href={TOAST.orderOnline} target="_blank" rel="noopener noreferrer" className="font-body text-sm text-white/80 hover:text-white transition-colors py-1.5 inline-block">
                 Order Online
               </a>
-              <a href={TOAST.giftCards} target="_blank" rel="noopener noreferrer" className="font-body text-sm text-white/80 hover:text-white transition-colors">
+              <a href={TOAST.giftCards} target="_blank" rel="noopener noreferrer" className="font-body text-sm text-white/80 hover:text-white transition-colors py-1.5 inline-block">
                 Gift Cards
               </a>
-              <a href={TOAST.rewards} target="_blank" rel="noopener noreferrer" className="font-body text-sm text-white/80 hover:text-white transition-colors">
+              <a href={TOAST.rewards} target="_blank" rel="noopener noreferrer" className="font-body text-sm text-white/80 hover:text-white transition-colors py-1.5 inline-block">
                 Rewards
               </a>
-              <Link href="/contact" className="font-body text-sm text-white/80 hover:text-white transition-colors">
+              <Link href="/contact" className="font-body text-sm text-white/80 hover:text-white transition-colors py-1.5 inline-block">
                 Contact
               </Link>
             </div>
@@ -56,10 +56,10 @@ export function Footer() {
               Connect
             </h5>
             <div className="flex flex-col gap-3">
-              <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" className="font-body text-sm text-white/80 hover:text-white transition-colors">
+              <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" className="font-body text-sm text-white/80 hover:text-white transition-colors py-1.5 inline-block">
                 Instagram
               </a>
-              <a href={SOCIAL.facebook} target="_blank" rel="noopener noreferrer" className="font-body text-sm text-white/80 hover:text-white transition-colors">
+              <a href={SOCIAL.facebook} target="_blank" rel="noopener noreferrer" className="font-body text-sm text-white/80 hover:text-white transition-colors py-1.5 inline-block">
                 Facebook
               </a>
             </div>

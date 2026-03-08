@@ -68,7 +68,7 @@ export function Story() {
           {/* Image card stack with disconnected frame + parallax */}
           <motion.div
             ref={containerRef}
-            className="relative w-full max-w-sm mx-auto md:max-w-none cursor-pointer"
+            className="relative w-full max-w-[280px] sm:max-w-sm mx-auto md:max-w-none cursor-pointer"
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
@@ -76,7 +76,7 @@ export function Story() {
             onClick={shuffle}
           >
             {/* Decorative offset frame */}
-            <div className="absolute top-5 left-5 w-full h-full rounded-2xl border border-brand-gold/25" />
+            <div className="absolute top-3 left-3 sm:top-5 sm:left-5 w-full h-full rounded-2xl border border-brand-gold/25" />
 
             {/* Card stack */}
             <div className="relative z-10 w-full aspect-[4/5]">
@@ -152,7 +152,7 @@ export function Story() {
 
             <FadeIn delay={0.5}>
               <QuoteBlock
-                quote="Come, let us break bread together."
+                quote="I have a resilient sense of hope &mdash; like a beach ball in a swimming pool. I felt like everything was somehow going to be okay, over and over again."
                 variant="bordered"
               />
             </FadeIn>

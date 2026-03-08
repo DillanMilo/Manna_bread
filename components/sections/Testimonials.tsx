@@ -53,9 +53,9 @@ export function Testimonials() {
   };
 
   return (
-    <section ref={sectionRef} className="py-14 sm:py-20 md:py-28 bg-brand-forest-mid">
+    <section ref={sectionRef} className="py-12 sm:py-16 md:py-20 lg:py-28 bg-brand-forest-mid">
       <motion.div
-        className="max-w-3xl mx-auto px-5 sm:px-6 md:px-10 text-center"
+        className="max-w-3xl mx-auto px-4 sm:px-6 md:px-8 text-center"
         initial={{ opacity: 0, filter: 'blur(12px)' }}
         whileInView={{ opacity: 1, filter: 'blur(0px)' }}
         transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
@@ -65,7 +65,7 @@ export function Testimonials() {
           What People Are Saying
         </p>
 
-        <div className="relative min-h-[200px] sm:min-h-[180px] md:min-h-[160px] flex items-center justify-center">
+        <div className="relative min-h-[240px] sm:min-h-[200px] md:min-h-[180px] flex items-center justify-center">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.blockquote
               key={activeIndex}
@@ -77,7 +77,7 @@ export function Testimonials() {
               transition={{ duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
               className="absolute inset-0 flex flex-col items-center justify-center"
             >
-              <p className="font-accent text-xl sm:text-2xl md:text-3xl italic text-white leading-relaxed mb-6 sm:mb-8">
+              <p className="font-accent text-lg sm:text-xl md:text-2xl lg:text-3xl italic text-white leading-relaxed mb-5 sm:mb-6 md:mb-8">
                 &ldquo;{TESTIMONIALS[activeIndex].quote}&rdquo;
               </p>
               <p className="font-body text-sm font-medium text-white/60">
@@ -88,16 +88,16 @@ export function Testimonials() {
         </div>
 
         {/* Dots with progress */}
-        <div className="flex gap-3 justify-center mt-10">
+        <div className="flex gap-4 justify-center mt-8 sm:mt-10">
           {TESTIMONIALS.map((_, index) => (
             <button
               key={index}
               onClick={() => goTo(index)}
-              className="relative p-1"
+              className="relative p-3"
               aria-label={`View testimonial ${index + 1}`}
             >
               <motion.div
-                className={`w-2.5 h-2.5 rounded-full transition-colors ${
+                className={`w-3 h-3 rounded-full transition-colors ${
                   index === activeIndex ? 'bg-brand-gold' : 'bg-white/30 hover:bg-white/50'
                 }`}
                 animate={index === activeIndex ? { scale: [1, 1.3, 1] } : { scale: 1 }}
