@@ -231,7 +231,7 @@ function ImagePlaceholder({
 }) {
   return (
     <div
-      className={`relative overflow-hidden bg-brand-soft-cream border-2 border-dashed border-brand-sage/30 flex flex-col items-center justify-center ${aspect} ${
+      className={`relative overflow-hidden bg-brand-forest-mid/40 border-2 border-dashed border-white/20 flex flex-col items-center justify-center ${aspect} ${
         arch ? 'rounded-t-full rounded-b-2xl' : 'rounded-2xl'
       } ${className}`}
     >
@@ -242,7 +242,7 @@ function ImagePlaceholder({
       }} />
 
       <svg
-        className="w-10 h-10 text-brand-sage/40 mb-3"
+        className="w-10 h-10 text-white/30 mb-3"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -254,7 +254,7 @@ function ImagePlaceholder({
           d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"
         />
       </svg>
-      <p className="font-body text-xs font-medium tracking-[1.5px] uppercase text-brand-sage/60">
+      <p className="font-body text-xs font-medium tracking-[1.5px] uppercase text-white/40">
         {label}
       </p>
     </div>
@@ -266,9 +266,9 @@ function ImagePlaceholder({
 function Divider() {
   return (
     <div className="flex items-center justify-center gap-4 py-12 md:py-16">
-      <LineDraw className="h-px w-16 bg-brand-sage/40" />
-      <div className="w-1.5 h-1.5 rounded-full bg-brand-cognac/50" />
-      <LineDraw className="h-px w-16 bg-brand-sage/40" delay={0.2} />
+      <LineDraw className="h-px w-16 bg-white/20" />
+      <div className="w-1.5 h-1.5 rounded-full bg-brand-gold/50" />
+      <LineDraw className="h-px w-16 bg-white/20" delay={0.2} />
     </div>
   );
 }
@@ -280,16 +280,16 @@ function PricingCards({ sizes }: { sizes: TraySize[] }) {
     <StaggerContainer className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 mb-10">
       {sizes.map((size) => (
         <StaggerItem key={size.name}>
-          <div className="bg-white rounded-2xl p-6 shadow-sm border border-brand-sage/10 text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-            <p className="font-body text-sm font-semibold text-brand-walnut mb-1">
+          <div className="bg-brand-forest-mid/60 rounded-2xl p-6 shadow-sm border border-white/10 text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+            <p className="font-body text-sm font-semibold text-white mb-1">
               {size.name}
             </p>
             {size.detail && (
-              <p className="font-body text-sm text-brand-olive mb-3">
+              <p className="font-body text-sm text-white/60 mb-3">
                 {size.detail}
               </p>
             )}
-            <p className="font-display text-2xl text-brand-cognac">
+            <p className="font-display text-2xl text-brand-gold">
               {size.price}
             </p>
           </div>
@@ -303,15 +303,15 @@ function PricingCards({ sizes }: { sizes: TraySize[] }) {
 
 function ItemGrid({ items }: { items: CateringItem[] }) {
   return (
-    <StaggerContainer className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-3">
+    <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-3">
       {items.map((item) => (
         <StaggerItem key={item.name}>
           <div className="py-2">
-            <p className="font-body text-[15px] font-medium text-brand-charcoal">
+            <p className="font-body text-[15px] font-medium text-white/85">
               {item.name}
             </p>
             {item.note && (
-              <p className="font-body text-sm text-brand-olive mt-0.5">
+              <p className="font-body text-sm text-white/60 mt-0.5">
                 {item.note}
               </p>
             )}
@@ -328,27 +328,27 @@ function ItemGrid({ items }: { items: CateringItem[] }) {
 
 export default function CateringPage() {
   return (
-    <main className="bg-brand-warm-white min-h-screen">
+    <main className="bg-brand-forest min-h-screen">
 
       {/* ─── HERO ─── */}
       <section className="pt-24 sm:pt-32 md:pt-44 pb-12 sm:pb-16 md:pb-20 px-5 sm:px-6 md:px-10">
         <div className="max-w-4xl mx-auto text-center">
           <FadeIn>
-            <p className="font-body text-[11px] font-semibold tracking-[3px] uppercase text-brand-cognac mb-5">
+            <p className="font-body text-[11px] font-semibold tracking-[3px] uppercase text-brand-gold mb-5">
               Catering
             </p>
           </FadeIn>
 
           <FadeIn delay={0.15}>
-            <h1 className="font-display text-[32px] sm:text-4xl md:text-5xl lg:text-7xl font-medium text-brand-walnut leading-[1.1] mb-6 sm:mb-8">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-medium text-white leading-[1.15] mb-6 sm:mb-8">
               Sweet & Savory
               <br />
-              <span className="text-brand-cognac">In-House Catering</span>
+              <span className="text-brand-gold">In-House Catering</span>
             </h1>
           </FadeIn>
 
           <FadeIn delay={0.3}>
-            <p className="font-body text-lg md:text-xl text-brand-olive leading-relaxed max-w-2xl mx-auto">
+            <p className="font-body text-lg md:text-xl text-white/70 leading-relaxed max-w-2xl mx-auto">
               Select from an assortment of our catering trays to satisfy your
               craving for pastries, sandwiches, soup, salads, and more for your
               in-house events.
@@ -356,7 +356,7 @@ export default function CateringPage() {
           </FadeIn>
 
           <FadeIn delay={0.4}>
-            <LineDraw className="h-px w-24 bg-brand-cognac/40 mx-auto mt-12" />
+            <LineDraw className="h-px w-24 bg-brand-gold/40 mx-auto mt-12" />
           </FadeIn>
         </div>
 
@@ -365,23 +365,23 @@ export default function CateringPage() {
           <div className="max-w-5xl mx-auto mt-8 sm:mt-12 md:mt-16 px-5 sm:px-6 md:px-10">
             <ImagePlaceholder
               label="Catering spread photo"
-              aspect="aspect-[21/9]"
+              aspect="aspect-[16/9] sm:aspect-[21/9]"
             />
           </div>
         </FadeIn>
       </section>
 
       {/* ─── PASTRY TRAYS ─── */}
-      <section className="py-16 md:py-24 px-5 sm:px-6 md:px-10 bg-brand-soft-cream">
+      <section className="py-16 md:py-24 px-5 sm:px-6 md:px-10 bg-brand-forest-mid">
         <div className="max-w-4xl mx-auto">
           <FadeIn>
-            <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-cognac mb-4">
+            <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-4">
               Tray Service
             </p>
-            <h2 className="font-display text-3xl md:text-4xl font-medium text-brand-walnut leading-tight mb-4">
+            <h2 className="font-display text-3xl md:text-4xl font-medium text-white leading-tight mb-4">
               {PASTRY_TRAYS.title}
             </h2>
-            <p className="font-body text-base text-brand-olive leading-relaxed mb-8">
+            <p className="font-body text-base text-white/70 leading-relaxed mb-8">
               {PASTRY_TRAYS.description}
             </p>
           </FadeIn>
@@ -393,7 +393,7 @@ export default function CateringPage() {
           {PASTRY_TRAYS.subsections?.map((sub) => (
             <div key={sub.label} className="mb-8 last:mb-0">
               <FadeIn>
-                <h3 className="font-body text-sm font-semibold tracking-[1.5px] uppercase text-brand-walnut mb-4">
+                <h3 className="font-body text-sm font-semibold tracking-[1.5px] uppercase text-white mb-4">
                   {sub.label}
                 </h3>
               </FadeIn>
@@ -413,12 +413,12 @@ export default function CateringPage() {
           </FadeIn>
           <FadeIn delay={0.2}>
             <div>
-              <p className="font-accent text-2xl md:text-3xl italic text-brand-walnut leading-snug mb-6">
+              <p className="font-accent text-2xl md:text-3xl italic text-white leading-snug mb-6">
                 &ldquo;Every tray is made with the same care as if we were
                 setting our own family&apos;s table.&rdquo;
               </p>
-              <div className="h-px w-12 bg-brand-cognac/40 mb-4" />
-              <p className="font-body text-sm font-medium text-brand-olive tracking-wide uppercase">
+              <div className="h-px w-12 bg-brand-gold/40 mb-4" />
+              <p className="font-body text-sm font-medium text-white/60 tracking-wide uppercase">
                 — Christin, Founder
               </p>
             </div>
@@ -430,13 +430,13 @@ export default function CateringPage() {
       <section className="py-16 md:py-24 px-5 sm:px-6 md:px-10">
         <div className="max-w-4xl mx-auto">
           <FadeIn>
-            <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-cognac mb-4">
+            <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-4">
               Tray Service
             </p>
-            <h2 className="font-display text-3xl md:text-4xl font-medium text-brand-walnut leading-tight mb-4">
+            <h2 className="font-display text-3xl md:text-4xl font-medium text-white leading-tight mb-4">
               {SANDWICH_PLATTERS.title}
             </h2>
-            <p className="font-body text-base text-brand-olive leading-relaxed mb-8">
+            <p className="font-body text-base text-white/70 leading-relaxed mb-8">
               {SANDWICH_PLATTERS.description}
             </p>
           </FadeIn>
@@ -456,7 +456,7 @@ export default function CateringPage() {
           {SANDWICH_PLATTERS.subsections?.map((sub) => (
             <div key={sub.label} className="mt-8">
               <FadeIn>
-                <h3 className="font-body text-sm font-semibold tracking-[1.5px] uppercase text-brand-walnut mb-4">
+                <h3 className="font-body text-sm font-semibold tracking-[1.5px] uppercase text-white mb-4">
                   {sub.label}
                 </h3>
               </FadeIn>
@@ -469,40 +469,40 @@ export default function CateringPage() {
       </section>
 
       {/* ─── COFFEE & DRINKS ─── */}
-      <section className="py-16 md:py-24 px-5 sm:px-6 md:px-10 bg-brand-soft-cream">
+      <section className="py-16 md:py-24 px-5 sm:px-6 md:px-10 bg-brand-forest-mid">
         <div className="max-w-4xl mx-auto">
           <FadeIn>
-            <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-cognac mb-4">
+            <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-4">
               Beverages
             </p>
-            <h2 className="font-display text-3xl md:text-4xl font-medium text-brand-walnut leading-tight mb-4">
+            <h2 className="font-display text-3xl md:text-4xl font-medium text-white leading-tight mb-4">
               Coffee & Drinks
             </h2>
-            <p className="font-body text-base text-brand-olive leading-relaxed mb-10">
+            <p className="font-body text-base text-white/70 leading-relaxed mb-10">
               $50 minimum for beverage catering orders.
             </p>
           </FadeIn>
 
           <FadeIn delay={0.15}>
-            <div className="bg-white rounded-2xl border border-brand-sage/10 shadow-sm overflow-hidden">
+            <div className="bg-brand-forest-mid/60 rounded-2xl border border-white/10 shadow-sm overflow-hidden">
               {COFFEE_DRINKS.map((drink, i) => (
                 <div
                   key={drink.name}
                   className={`flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 ${
-                    i < COFFEE_DRINKS.length - 1 ? 'border-b border-dashed border-brand-sage/20' : ''
+                    i < COFFEE_DRINKS.length - 1 ? 'border-b border-dashed border-white/10' : ''
                   }`}
                 >
                   <div>
-                    <p className="font-body text-[15px] font-medium text-brand-charcoal">
+                    <p className="font-body text-[15px] font-medium text-white/85">
                       {drink.name}
                     </p>
                     {drink.note && (
-                      <p className="font-body text-sm text-brand-olive mt-0.5">
+                      <p className="font-body text-sm text-white/60 mt-0.5">
                         {drink.note}
                       </p>
                     )}
                   </div>
-                  <p className="font-body text-[15px] font-medium text-brand-cognac whitespace-nowrap ml-4">
+                  <p className="font-body text-[15px] font-medium text-brand-gold whitespace-nowrap ml-4">
                     {drink.price}
                   </p>
                 </div>
@@ -534,10 +534,10 @@ export default function CateringPage() {
       <section className="py-16 md:py-24 px-5 sm:px-6 md:px-10">
         <div className="max-w-4xl mx-auto">
           <FadeIn>
-            <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-cognac mb-4">
+            <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-4">
               Fresh Selections
             </p>
-            <h2 className="font-display text-3xl md:text-4xl font-medium text-brand-walnut leading-tight mb-4">
+            <h2 className="font-display text-3xl md:text-4xl font-medium text-white leading-tight mb-4">
               Fruit & Vegetable Trays
             </h2>
           </FadeIn>
@@ -549,12 +549,12 @@ export default function CateringPage() {
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {FRUIT_VEG_ITEMS.map((item) => (
               <StaggerItem key={item.name}>
-                <div className="bg-brand-soft-cream rounded-2xl p-6 border border-brand-sage/10">
-                  <p className="font-body text-[15px] font-semibold text-brand-walnut mb-2">
+                <div className="bg-brand-forest-mid rounded-2xl p-6 border border-white/10">
+                  <p className="font-body text-[15px] font-semibold text-white mb-2">
                     {item.name}
                   </p>
                   {item.note && (
-                    <p className="font-body text-sm text-brand-olive leading-relaxed">
+                    <p className="font-body text-sm text-white/70 leading-relaxed">
                       {item.note}
                     </p>
                   )}
@@ -566,13 +566,13 @@ export default function CateringPage() {
       </section>
 
       {/* ─── SALAD BOWLS ─── */}
-      <section className="py-16 md:py-24 px-5 sm:px-6 md:px-10 bg-brand-soft-cream">
+      <section className="py-16 md:py-24 px-5 sm:px-6 md:px-10 bg-brand-forest-mid">
         <div className="max-w-4xl mx-auto">
           <FadeIn>
-            <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-cognac mb-4">
+            <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-4">
               Fresh Selections
             </p>
-            <h2 className="font-display text-3xl md:text-4xl font-medium text-brand-walnut leading-tight mb-4">
+            <h2 className="font-display text-3xl md:text-4xl font-medium text-white leading-tight mb-4">
               Salad Bowls
             </h2>
           </FadeIn>
@@ -584,11 +584,11 @@ export default function CateringPage() {
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {SALAD_ITEMS.map((salad) => (
               <StaggerItem key={salad.name}>
-                <div className="bg-white rounded-2xl p-6 shadow-sm border border-brand-sage/10">
-                  <p className="font-body text-[15px] font-semibold text-brand-walnut mb-2">
+                <div className="bg-brand-forest-mid/60 rounded-2xl p-6 shadow-sm border border-white/10">
+                  <p className="font-body text-[15px] font-semibold text-white mb-2">
                     {salad.name}
                   </p>
-                  <p className="font-body text-sm text-brand-olive leading-relaxed">
+                  <p className="font-body text-sm text-white/70 leading-relaxed">
                     {salad.description}
                   </p>
                 </div>
@@ -614,23 +614,23 @@ export default function CateringPage() {
       <section className="py-16 md:py-24 px-5 sm:px-6 md:px-10">
         <div className="max-w-4xl mx-auto">
           <FadeIn>
-            <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-cognac mb-4">
+            <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-4">
               Made from Scratch
             </p>
-            <h2 className="font-display text-3xl md:text-4xl font-medium text-brand-walnut leading-tight mb-4">
+            <h2 className="font-display text-3xl md:text-4xl font-medium text-white leading-tight mb-4">
               Scratch Soup
             </h2>
-            <p className="font-body text-base text-brand-olive leading-relaxed mb-10">
+            <p className="font-body text-base text-white/70 leading-relaxed mb-10">
               Ten servings per flavor&ensp;|&ensp;
-              <span className="font-display text-xl text-brand-cognac">$40</span>
+              <span className="font-display text-xl text-brand-gold">$40</span>
             </p>
           </FadeIn>
 
-          <StaggerContainer className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {SOUP_FLAVORS.map((flavor) => (
               <StaggerItem key={flavor}>
-                <div className="bg-brand-soft-cream rounded-2xl px-6 py-4 border border-brand-sage/10 text-center">
-                  <p className="font-body text-[15px] font-medium text-brand-charcoal">
+                <div className="bg-brand-forest-mid rounded-2xl px-6 py-4 border border-white/10 text-center">
+                  <p className="font-body text-[15px] font-medium text-white/85">
                     {flavor}
                   </p>
                 </div>
@@ -641,7 +641,7 @@ export default function CateringPage() {
       </section>
 
       {/* ─── CLOSING CTA ─── */}
-      <section className="py-20 md:py-28 bg-brand-soft-cream">
+      <section className="py-20 md:py-28 bg-brand-forest-mid">
         <div className="max-w-5xl mx-auto px-5 sm:px-6 md:px-10">
           <div className="grid grid-cols-1 md:grid-cols-5 gap-8 sm:gap-10 md:gap-14 items-center">
             {/* Image — gathering / event scene */}
@@ -652,13 +652,13 @@ export default function CateringPage() {
             {/* Text */}
             <div className="md:col-span-3 text-center md:text-left">
               <FadeIn>
-                <p className="font-accent text-lg md:text-xl italic text-brand-olive mb-3">
+                <p className="font-accent text-lg md:text-xl italic text-white/60 mb-3">
                   Let us bring the warmth to your table
                 </p>
-                <h2 className="font-display text-3xl md:text-4xl font-medium text-brand-walnut leading-tight mb-6">
+                <h2 className="font-display text-3xl md:text-4xl font-medium text-white leading-tight mb-6">
                   Ready to place your order?
                 </h2>
-                <p className="font-body text-base text-brand-olive leading-relaxed mb-8">
+                <p className="font-body text-base text-white/70 leading-relaxed mb-8">
                   Whether it&apos;s a corporate breakfast, a family celebration, or an
                   intimate gathering with friends, we&apos;d love to help you curate
                   the perfect spread. Reach out and let&apos;s start planning.
@@ -666,10 +666,10 @@ export default function CateringPage() {
               </FadeIn>
               <FadeIn delay={0.2}>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                  <Button href="/contact" variant="primary">
+                  <Button href="/contact" variant="primary" className="w-full sm:w-auto">
                     Contact us
                   </Button>
-                  <Button href={`tel:${CONTACT.phone.replace(/[^0-9+]/g, '')}`} variant="secondary">
+                  <Button href={`tel:${CONTACT.phone.replace(/[^0-9+]/g, '')}`} variant="secondary" className="w-full sm:w-auto">
                     Call {CONTACT.phone}
                   </Button>
                 </div>

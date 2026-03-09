@@ -231,8 +231,7 @@ export function MannaMap() {
   return (
     <div
       ref={mapRef}
-      className="w-full h-full"
-      style={{ minHeight: '100%' }}
+      className="w-full h-full min-h-[300px] sm:min-h-[400px]"
     />
   );
 }

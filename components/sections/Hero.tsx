@@ -27,7 +27,7 @@ export function Hero() {
   const contentY = useTransform(scrollYProgress, [0, 0.5], [0, -50]);
 
   return (
-    <section ref={sectionRef} className="relative min-h-[80vh] sm:min-h-[85vh] md:min-h-[90vh] flex items-center justify-center overflow-hidden">
+    <section ref={sectionRef} className="relative min-h-[70vh] sm:min-h-[80vh] md:min-h-[90vh] flex items-center justify-center overflow-hidden">
       {/* Background video — soft reveal like eyes adjusting to the space */}
       <motion.div
         className="absolute inset-0 z-0"
@@ -46,12 +46,12 @@ export function Hero() {
           src="/images/1SE - Manna Evenings (20251221-223245).mov"
         />
         {/* Overlay gradient so content stays readable */}
-        <div className="absolute inset-0 z-[1] bg-gradient-to-b from-brand-charcoal/40 via-brand-charcoal/30 to-brand-charcoal/60" />
+        <div className="absolute inset-0 z-[1] bg-gradient-to-b from-brand-forest/50 via-brand-forest/35 to-brand-forest/70" />
       </motion.div>
 
       {/* Content — gentle unified reveal, like stepping into the space */}
       <motion.div
-        className="relative z-10 max-w-3xl mx-auto px-5 sm:px-6 text-center pt-16 lg:pt-20"
+        className="relative z-10 w-full max-w-3xl mx-auto px-4 sm:px-6 text-center pt-16 lg:pt-20"
         style={{ opacity: contentOpacity, y: contentY }}
       >
         {/* Tagline */}
@@ -66,7 +66,7 @@ export function Hero() {
 
         {/* Headline — emerges as one calm moment */}
         <motion.h1
-          className="font-display text-[32px] sm:text-4xl md:text-5xl lg:text-6xl font-medium text-white leading-[1.1] mb-5 sm:mb-6"
+          className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-white leading-[1.15] mb-5 sm:mb-6"
           initial={{ opacity: 0, y: 16, filter: 'blur(10px)' }}
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           transition={{ duration: 1.4, delay: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
@@ -87,15 +87,15 @@ export function Hero() {
 
         {/* Buttons */}
         <motion.div
-          className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center"
+          className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.0, delay: 2.0, ease: [0.25, 0.4, 0.25, 1] }}
         >
-          <Button href={TOAST.orderOnline} external variant="accent" size="lg">
+          <Button href={TOAST.orderOnline} external variant="accent" size="lg" className="w-full sm:w-auto">
             Order Online
           </Button>
-          <Button href="/menu" variant="ghost" size="lg">
+          <Button href="/menu" variant="ghost" size="lg" className="w-full sm:w-auto">
             Explore Menu
           </Button>
         </motion.div>

@@ -6,13 +6,13 @@ import { MannaMap } from '@/components/ui/MannaMap';
 
 export function Contact() {
   return (
-    <section className="py-14 sm:py-20 md:py-28 bg-brand-warm-white overflow-hidden">
-      <div className="max-w-6xl mx-auto px-5 sm:px-6 md:px-10">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-28 bg-brand-forest-mid overflow-hidden">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
           {/* Contact Info */}
           <div>
             <FadeIn>
-              <h2 className="font-display text-[26px] sm:text-3xl md:text-4xl font-medium text-brand-walnut mb-6 sm:mb-8">
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-medium text-white mb-6 sm:mb-8">
                 Visit Us
               </h2>
             </FadeIn>
@@ -20,10 +20,10 @@ export function Contact() {
             <StaggerContainer className="space-y-6" staggerDelay={0.15} delayStart={0.2}>
               <StaggerItem direction="left" distance={30}>
                 <div>
-                  <p className="font-body text-[11px] font-semibold tracking-[1.5px] uppercase text-brand-sage mb-2">
+                  <p className="font-body text-[11px] font-semibold tracking-[1.5px] uppercase text-brand-gold mb-2">
                     Address
                   </p>
-                  <p className="font-body text-base text-brand-charcoal leading-relaxed">
+                  <p className="font-body text-base text-white/85 leading-relaxed">
                     {CONTACT.address.street}<br />
                     {CONTACT.address.city}, {CONTACT.address.state} {CONTACT.address.zip}
                   </p>
@@ -32,10 +32,10 @@ export function Contact() {
 
               <StaggerItem direction="left" distance={30}>
                 <div>
-                  <p className="font-body text-[11px] font-semibold tracking-[1.5px] uppercase text-brand-sage mb-2">
+                  <p className="font-body text-[11px] font-semibold tracking-[1.5px] uppercase text-brand-gold mb-2">
                     Hours
                   </p>
-                  <p className="font-body text-base text-brand-charcoal leading-relaxed">
+                  <p className="font-body text-base text-white/85 leading-relaxed">
                     Monday – Friday: {CONTACT.hours.weekdays}<br />
                     Saturday: {CONTACT.hours.saturday}<br />
                     Sunday: {CONTACT.hours.sunday}
@@ -45,15 +45,15 @@ export function Contact() {
 
               <StaggerItem direction="left" distance={30}>
                 <div>
-                  <p className="font-body text-[11px] font-semibold tracking-[1.5px] uppercase text-brand-sage mb-2">
+                  <p className="font-body text-[11px] font-semibold tracking-[1.5px] uppercase text-brand-gold mb-2">
                     Contact
                   </p>
-                  <p className="font-body text-base text-brand-charcoal leading-relaxed">
-                    <a href={`tel:${CONTACT.phone.replace(/[^0-9]/g, '')}`} className="hover:text-brand-cognac transition-colors">
+                  <p className="font-body text-base text-white/85 leading-relaxed">
+                    <a href={`tel:${CONTACT.phone.replace(/[^0-9]/g, '')}`} className="hover:text-brand-gold transition-colors inline-block py-1">
                       {CONTACT.phone}
                     </a>
                     <br />
-                    <a href={`mailto:${CONTACT.email}`} className="hover:text-brand-cognac transition-colors">
+                    <a href={`mailto:${CONTACT.email}`} className="hover:text-brand-gold transition-colors inline-block py-1">
                       {CONTACT.email}
                     </a>
                   </p>
@@ -65,14 +65,22 @@ export function Contact() {
           {/* Map — arched alcove frame */}
           <FadeIn direction="right" distance={50} delay={0.3}>
             <div className="relative">
+              {/* Soft radial gold glow behind arch */}
+              <div
+                className="absolute -inset-5 sm:-inset-8 rounded-t-[9999px] rounded-b-3xl"
+                style={{
+                  background: 'radial-gradient(ellipse at center, rgba(201, 168, 76, 0.22) 0%, rgba(201, 168, 76, 0.08) 50%, transparent 75%)',
+                  filter: 'blur(28px)',
+                }}
+              />
               {/* Outer arch frame */}
               <div
-                className="rounded-t-[9999px] rounded-b-2xl overflow-hidden shadow-lg ring-1 ring-brand-sage/20 aspect-[4/3] sm:aspect-[4/4] md:aspect-[4/4.5]"
+                className="relative rounded-t-[9999px] rounded-b-2xl overflow-hidden shadow-lg ring-1 ring-brand-sage/20 aspect-[4/3] sm:aspect-[4/4] md:aspect-[4/4.5]"
               >
                 <MannaMap />
               </div>
               {/* Subtle caption beneath */}
-              <p className="text-center font-accent text-sm italic text-brand-olive mt-4">
+              <p className="text-center font-accent text-sm italic text-white/60 mt-4">
                 306 Commerce St, Tomball TX 77375
               </p>
             </div>

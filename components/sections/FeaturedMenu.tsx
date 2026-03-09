@@ -25,17 +25,18 @@ const FEATURED_ITEMS = [
 
 export function FeaturedMenu() {
   return (
-    <section className="py-14 sm:py-20 md:py-28 bg-brand-soft-cream">
+    <section className="py-14 sm:py-20 md:py-28 bg-brand-forest-mid">
       <div className="max-w-6xl mx-auto px-5 sm:px-6 md:px-10">
         <FadeIn>
           <SectionHeader
             label="From Our Kitchen"
             title="Crafted with intention"
-            description="Every item on our menu is made from scratch, using the finest ingredients and time-honored techniques."
+            description="Everything here is baked with intention&mdash;real ingredients, unhurried process, and a lot of love in every batch."
+            light
           />
         </FadeIn>
 
-        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8" staggerDelay={0.2}>
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8" staggerDelay={0.2}>
           {FEATURED_ITEMS.map((item) => (
             <StaggerItem key={item.title}>
               <MenuCard {...item} />
@@ -45,7 +46,7 @@ export function FeaturedMenu() {
 
         <FadeIn delay={0.3}>
           <div className="text-center mt-12">
-            <Button href="/menu" variant="primary">
+            <Button href="/menu" variant="primary" className="w-full sm:w-auto">
               View Full Menu
             </Button>
           </div>

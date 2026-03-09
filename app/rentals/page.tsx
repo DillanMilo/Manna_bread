@@ -64,9 +64,9 @@ function ParallaxImage({
 function Divider() {
   return (
     <div className="flex items-center justify-center gap-4 py-12 md:py-16">
-      <LineDraw className="h-px w-16 bg-brand-sage/40" />
-      <div className="w-1.5 h-1.5 rounded-full bg-brand-cognac/50" />
-      <LineDraw className="h-px w-16 bg-brand-sage/40" delay={0.2} />
+      <LineDraw className="h-px w-16 bg-brand-gold/40" />
+      <div className="w-1.5 h-1.5 rounded-full bg-brand-gold/50" />
+      <LineDraw className="h-px w-16 bg-brand-gold/40" delay={0.2} />
     </div>
   );
 }
@@ -82,11 +82,11 @@ function PriceCard({
   extra?: string;
 }) {
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-sm border border-brand-sage/10 inline-block">
-      <p className="font-display text-3xl text-brand-cognac">{price}</p>
-      <p className="font-body text-sm text-brand-olive mt-1">{unit}</p>
+    <div className="bg-brand-forest-mid/60 rounded-2xl p-6 shadow-sm border border-white/10 w-full sm:inline-block sm:w-auto">
+      <p className="font-display text-3xl text-brand-gold">{price}</p>
+      <p className="font-body text-sm text-white/60 mt-1">{unit}</p>
       {extra && (
-        <p className="font-body text-sm text-brand-cognac/80 mt-1">{extra}</p>
+        <p className="font-body text-sm text-brand-gold/80 mt-1">{extra}</p>
       )}
     </div>
   );
@@ -96,8 +96,8 @@ function PriceCard({
 function DetailItem({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-baseline gap-2">
-      <span className="font-body text-sm font-semibold text-brand-walnut">{label}:</span>
-      <span className="font-body text-sm text-brand-charcoal">{value}</span>
+      <span className="font-body text-sm font-semibold text-white">{label}:</span>
+      <span className="font-body text-sm text-white/85">{value}</span>
     </div>
   );
 }
@@ -107,24 +107,24 @@ function DetailItem({ label, value }: { label: string; value: string }) {
    ═══════════════════════════════════════════ */
 export default function RentalsPage() {
   return (
-    <main className="bg-brand-warm-white min-h-screen">
+    <main className="bg-brand-forest min-h-screen">
       {/* ─── HERO ─── */}
       <section className="pt-24 sm:pt-32 md:pt-44 pb-12 sm:pb-16 md:pb-20 px-5 sm:px-6 md:px-10">
         <div className="max-w-4xl mx-auto text-center">
           <FadeIn>
-            <p className="font-body text-[11px] font-semibold tracking-[3px] uppercase text-brand-cognac mb-5">
+            <p className="font-body text-[11px] font-semibold tracking-[3px] uppercase text-brand-gold mb-5">
               Private Rentals
             </p>
           </FadeIn>
 
           <FadeIn delay={0.15}>
-            <h1 className="font-display text-[32px] sm:text-4xl md:text-5xl lg:text-7xl font-medium text-brand-walnut leading-[1.1] mb-6 sm:mb-8">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-medium text-white leading-[1.15] mb-6 sm:mb-8">
               Host Your Event at Manna
             </h1>
           </FadeIn>
 
           <FadeIn delay={0.3}>
-            <p className="font-body text-lg md:text-xl text-brand-olive leading-relaxed max-w-2xl mx-auto">
+            <p className="font-body text-lg md:text-xl text-white/70 leading-relaxed max-w-2xl mx-auto">
               Whether you are looking for a small place to gather for your meeting,
               bible study, or intimate celebration or wanting to reserve the whole
               building for a reception or party, Manna offers reservations and
@@ -133,7 +133,7 @@ export default function RentalsPage() {
           </FadeIn>
 
           <FadeIn delay={0.4}>
-            <LineDraw className="h-px w-24 bg-brand-cognac/40 mx-auto mt-12" />
+            <LineDraw className="h-px w-24 bg-brand-gold/40 mx-auto mt-12" />
           </FadeIn>
         </div>
       </section>
@@ -164,22 +164,22 @@ export default function RentalsPage() {
       </section>
 
       {/* ─── CONFERENCE ROOM RESERVATION ─── */}
-      <section className="py-16 md:py-24 px-5 sm:px-6 md:px-10 bg-brand-soft-cream">
+      <section className="py-16 md:py-24 px-5 sm:px-6 md:px-10 bg-brand-forest-mid">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
             {/* Text column */}
             <div className="lg:col-span-6 lg:order-1">
               <FadeIn>
-                <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-cognac mb-4">
+                <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-4">
                   Small Gatherings
                 </p>
-                <h2 className="font-display text-3xl md:text-4xl font-medium text-brand-walnut leading-tight mb-6">
+                <h2 className="font-display text-3xl md:text-4xl font-medium text-white leading-tight mb-6">
                   Conference Room Reservation
                 </h2>
               </FadeIn>
 
               <FadeIn delay={0.15}>
-                <p className="font-body text-base md:text-[17px] text-brand-charcoal leading-[1.8] mb-5">
+                <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-5">
                   Perfect for small gatherings, our conference room seats up to 14
                   guests at our 9.5ft community table. Nestled between beautiful
                   wood panel walls and modern sliding glass doors, your party will
@@ -188,7 +188,7 @@ export default function RentalsPage() {
               </FadeIn>
 
               <FadeIn delay={0.2}>
-                <p className="font-body text-sm text-brand-olive leading-[1.7] mb-6">
+                <p className="font-body text-sm text-white/70 leading-[1.7] mb-6">
                   Outside food, promotional materials, and solicitation to our
                   customers is not permitted during conference room rentals unless
                   authorized by Manna Staff. We ask that all activities align with
@@ -249,16 +249,16 @@ export default function RentalsPage() {
             {/* Text column */}
             <div className="lg:col-span-6 lg:order-2 lg:col-start-7">
               <FadeIn>
-                <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-cognac mb-4">
+                <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-4">
                   Full Building
                 </p>
-                <h2 className="font-display text-3xl md:text-4xl font-medium text-brand-walnut leading-tight mb-6">
+                <h2 className="font-display text-3xl md:text-4xl font-medium text-white leading-tight mb-6">
                   Private Events
                 </h2>
               </FadeIn>
 
               <FadeIn delay={0.15}>
-                <p className="font-body text-base md:text-[17px] text-brand-charcoal leading-[1.8] mb-6">
+                <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-6">
                   Celebrating a special occasion? Manna would love to host! We offer
                   flexible dining room layouts and catering options to accommodate
                   your needs.
@@ -279,7 +279,7 @@ export default function RentalsPage() {
               </FadeIn>
 
               <FadeIn delay={0.45}>
-                <Button href="/contact" variant="accent">
+                <Button href="/contact" variant="accent" className="w-full sm:w-auto">
                   Inquire About Booking
                 </Button>
               </FadeIn>
@@ -289,29 +289,29 @@ export default function RentalsPage() {
       </section>
 
       {/* ─── DETAILS & POLICIES ─── */}
-      <section className="py-16 md:py-24 px-5 sm:px-6 md:px-10 bg-brand-soft-cream">
+      <section className="py-16 md:py-24 px-5 sm:px-6 md:px-10 bg-brand-forest-mid">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12 md:mb-16">
             <FadeIn>
-              <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-cognac mb-4">
+              <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-4">
                 Good to Know
               </p>
-              <h2 className="font-display text-3xl md:text-4xl font-medium text-brand-walnut leading-tight">
+              <h2 className="font-display text-3xl md:text-4xl font-medium text-white leading-tight">
                 Details &amp; Information
               </h2>
             </FadeIn>
           </div>
 
           <StaggerContainer
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6"
             staggerDelay={0.12}
           >
             {/* Capacity */}
             <StaggerItem>
-              <div className="bg-white rounded-2xl p-7 shadow-sm border border-brand-sage/10 h-full">
-                <div className="w-10 h-10 rounded-full bg-brand-cognac/10 flex items-center justify-center mb-4">
+              <div className="bg-brand-forest-mid/60 rounded-2xl p-7 shadow-sm border border-white/10 h-full">
+                <div className="w-10 h-10 rounded-full bg-brand-gold/10 flex items-center justify-center mb-4">
                   <svg
-                    className="w-5 h-5 text-brand-cognac"
+                    className="w-5 h-5 text-brand-gold"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -324,10 +324,10 @@ export default function RentalsPage() {
                     />
                   </svg>
                 </div>
-                <h3 className="font-display text-lg font-medium text-brand-walnut mb-2">
+                <h3 className="font-display text-lg font-medium text-white mb-2">
                   Capacity
                 </h3>
-                <p className="font-body text-sm text-brand-olive leading-relaxed">
+                <p className="font-body text-sm text-white/70 leading-relaxed">
                   Conference room seats up to 14 guests at the community table.
                   Full building accommodates larger parties and events.
                 </p>
@@ -336,10 +336,10 @@ export default function RentalsPage() {
 
             {/* Hours */}
             <StaggerItem>
-              <div className="bg-white rounded-2xl p-7 shadow-sm border border-brand-sage/10 h-full">
-                <div className="w-10 h-10 rounded-full bg-brand-cognac/10 flex items-center justify-center mb-4">
+              <div className="bg-brand-forest-mid/60 rounded-2xl p-7 shadow-sm border border-white/10 h-full">
+                <div className="w-10 h-10 rounded-full bg-brand-gold/10 flex items-center justify-center mb-4">
                   <svg
-                    className="w-5 h-5 text-brand-cognac"
+                    className="w-5 h-5 text-brand-gold"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -352,10 +352,10 @@ export default function RentalsPage() {
                     />
                   </svg>
                 </div>
-                <h3 className="font-display text-lg font-medium text-brand-walnut mb-2">
+                <h3 className="font-display text-lg font-medium text-white mb-2">
                   Hours
                 </h3>
-                <p className="font-body text-sm text-brand-olive leading-relaxed">
+                <p className="font-body text-sm text-white/70 leading-relaxed">
                   Conference room available 6am&ndash;2pm. Private event rentals
                   may begin as early as 1:30pm, Monday&ndash;Saturday.
                 </p>
@@ -364,10 +364,10 @@ export default function RentalsPage() {
 
             {/* What&apos;s Included */}
             <StaggerItem>
-              <div className="bg-white rounded-2xl p-7 shadow-sm border border-brand-sage/10 h-full">
-                <div className="w-10 h-10 rounded-full bg-brand-cognac/10 flex items-center justify-center mb-4">
+              <div className="bg-brand-forest-mid/60 rounded-2xl p-7 shadow-sm border border-white/10 h-full">
+                <div className="w-10 h-10 rounded-full bg-brand-gold/10 flex items-center justify-center mb-4">
                   <svg
-                    className="w-5 h-5 text-brand-cognac"
+                    className="w-5 h-5 text-brand-gold"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -380,10 +380,10 @@ export default function RentalsPage() {
                     />
                   </svg>
                 </div>
-                <h3 className="font-display text-lg font-medium text-brand-walnut mb-2">
+                <h3 className="font-display text-lg font-medium text-white mb-2">
                   What&apos;s Included
                 </h3>
-                <p className="font-body text-sm text-brand-olive leading-relaxed">
+                <p className="font-body text-sm text-white/70 leading-relaxed">
                   Tables, seating, and access to the beautiful Manna space.
                   Flexible dining room layouts and catering options available.
                 </p>
@@ -392,10 +392,10 @@ export default function RentalsPage() {
 
             {/* How to Book */}
             <StaggerItem>
-              <div className="bg-white rounded-2xl p-7 shadow-sm border border-brand-sage/10 h-full">
-                <div className="w-10 h-10 rounded-full bg-brand-cognac/10 flex items-center justify-center mb-4">
+              <div className="bg-brand-forest-mid/60 rounded-2xl p-7 shadow-sm border border-white/10 h-full">
+                <div className="w-10 h-10 rounded-full bg-brand-gold/10 flex items-center justify-center mb-4">
                   <svg
-                    className="w-5 h-5 text-brand-cognac"
+                    className="w-5 h-5 text-brand-gold"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -408,10 +408,10 @@ export default function RentalsPage() {
                     />
                   </svg>
                 </div>
-                <h3 className="font-display text-lg font-medium text-brand-walnut mb-2">
+                <h3 className="font-display text-lg font-medium text-white mb-2">
                   How to Book
                 </h3>
-                <p className="font-body text-sm text-brand-olive leading-relaxed">
+                <p className="font-body text-sm text-white/70 leading-relaxed">
                   Reach out by phone or email to check availability and reserve
                   your date. We are happy to help plan your gathering.
                 </p>
@@ -422,7 +422,7 @@ export default function RentalsPage() {
       </section>
 
       {/* ─── CLOSING CTA ─── */}
-      <section className="py-14 sm:py-20 md:py-28 bg-brand-walnut">
+      <section className="py-14 sm:py-20 md:py-28 bg-brand-forest-mid">
         <div className="max-w-3xl mx-auto px-5 sm:px-6 md:px-10 text-center">
           <FadeIn>
             <p className="font-accent text-xl md:text-2xl italic text-white/80 leading-relaxed mb-8">
@@ -454,10 +454,10 @@ export default function RentalsPage() {
 
           <FadeIn delay={0.45}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button href={`tel:${CONTACT.phone.replace(/[^+\d]/g, '')}`} variant="ghost">
+              <Button href={`tel:${CONTACT.phone.replace(/[^+\d]/g, '')}`} variant="ghost" className="w-full sm:w-auto">
                 Call Us
               </Button>
-              <Button href={`mailto:${CONTACT.email}`} variant="ghost">
+              <Button href={`mailto:${CONTACT.email}`} variant="ghost" className="w-full sm:w-auto">
                 Email Us
               </Button>
             </div>

@@ -19,20 +19,30 @@ export function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileMenuOpen]);
+
   return (
     <motion.nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-brand-soft-cream/90 backdrop-blur-md shadow-sm border-b border-black/5'
-          : 'bg-brand-soft-cream border-b border-black/5'
+          ? 'bg-brand-forest/95 backdrop-blur-md shadow-sm border-b border-white/10'
+          : 'bg-brand-forest border-b border-white/10'
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
     >
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
         <div className="flex items-center justify-between h-16 lg:h-20">
-          <Link href="/" className="relative block h-12 w-auto shrink-0">
+          <Link href="/" className="relative block h-10 sm:h-12 w-auto shrink-0">
             <Image
               src="/images/Bread from Heaven.PNG"
               alt="Manna — Cafe and Bakery, Bread from Heaven"
@@ -53,10 +63,10 @@ export function Navigation() {
               >
                 <Link
                   href={link.href}
-                  className="font-body text-[13px] font-medium text-brand-olive hover:text-brand-walnut transition-colors tracking-wide relative group"
+                  className="font-body text-[13px] font-medium text-white/80 hover:text-white transition-colors tracking-wide relative group"
                 >
                   {link.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-brand-cognac transition-all duration-300 group-hover:w-full" />
+                  <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-brand-gold transition-all duration-300 group-hover:w-full" />
                 </Link>
               </motion.div>
             ))}
@@ -72,7 +82,7 @@ export function Navigation() {
               href={TOAST.signIn}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-brand-olive hover:text-brand-walnut transition-colors"
+              className="p-2 text-white/70 hover:text-brand-gold transition-colors"
               aria-label="Sign In"
               title="Sign In"
             >
@@ -84,7 +94,7 @@ export function Navigation() {
               href={TOAST.cart}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-brand-olive hover:text-brand-walnut transition-colors"
+              className="p-2 text-white/70 hover:text-brand-gold transition-colors"
               aria-label="Cart"
               title="Cart"
             >
@@ -98,9 +108,10 @@ export function Navigation() {
           </motion.div>
 
           <button
-            className="lg:hidden p-2.5 text-brand-walnut"
+            className="lg:hidden flex items-center justify-center w-11 h-11 text-white touch-manipulation"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
+            aria-expanded={mobileMenuOpen}
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {mobileMenuOpen ? (
@@ -116,7 +127,7 @@ export function Navigation() {
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
-              className="lg:hidden overflow-hidden border-t border-black/5"
+              className="lg:hidden overflow-hidden border-t border-white/10"
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
@@ -133,7 +144,7 @@ export function Navigation() {
                     >
                       <Link
                         href={link.href}
-                        className="font-body text-base text-brand-olive hover:text-brand-walnut transition-colors py-3 block"
+                        className="font-body text-lg text-brand-gold hover:text-brand-gold/80 transition-colors py-3 block min-h-[44px] flex items-center"
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         {link.label}
@@ -151,7 +162,7 @@ export function Navigation() {
                         href={TOAST.signIn}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-body font-medium text-brand-walnut border-[1.5px] border-brand-walnut rounded-lg hover:bg-brand-walnut hover:text-brand-warm-white transition-all duration-300"
+                        className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 text-base font-body font-medium text-brand-gold border-[1.5px] border-brand-gold/40 rounded-lg hover:bg-brand-gold/10 hover:text-brand-gold transition-all duration-300 min-h-[44px]"
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
@@ -163,7 +174,7 @@ export function Navigation() {
                         href={TOAST.cart}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-body font-medium text-brand-walnut border-[1.5px] border-brand-walnut rounded-lg hover:bg-brand-walnut hover:text-brand-warm-white transition-all duration-300"
+                        className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 text-base font-body font-medium text-brand-gold border-[1.5px] border-brand-gold/40 rounded-lg hover:bg-brand-gold/10 hover:text-brand-gold transition-all duration-300 min-h-[44px]"
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
@@ -172,7 +183,7 @@ export function Navigation() {
                         Cart
                       </a>
                     </div>
-                    <Button href={TOAST.orderOnline} external variant="primary" className="w-full">
+                    <Button href={TOAST.orderOnline} external variant="accent" className="w-full bg-brand-gold text-brand-forest hover:bg-brand-gold/90">
                       Order Online
                     </Button>
                   </motion.div>

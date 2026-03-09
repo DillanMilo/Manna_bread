@@ -48,7 +48,7 @@ function StoryImage({
     target: ref,
     offset: ['start end', 'end start'],
   });
-  const imageY = useTransform(scrollYProgress, [0, 1], [80, -80]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [40, -40]);
 
   return (
     <motion.div
@@ -60,13 +60,13 @@ function StoryImage({
     >
       {/* Decorative offset border */}
       <div
-        className={`absolute ${
+        className={`hidden sm:block absolute ${
           side === 'left' ? '-right-3 -bottom-3' : '-left-3 -bottom-3'
-        } w-full h-full rounded-2xl border border-brand-cognac/20 -z-10`}
+        } w-full h-full rounded-2xl border border-brand-gold/20 -z-10`}
       />
       <motion.div
         style={{ y: imageY }}
-        className="absolute -top-[80px] -bottom-[80px] left-0 right-0 will-change-transform"
+        className="absolute -top-[40px] sm:-top-[80px] -bottom-[40px] sm:-bottom-[80px] left-0 right-0 will-change-transform"
       >
         <Image
           src={src}
@@ -128,9 +128,9 @@ function Chapter({
 function Divider() {
   return (
     <div className="flex items-center justify-center gap-4 py-16 md:py-20">
-      <LineDraw className="h-px w-16 bg-brand-sage/40" />
-      <div className="w-1.5 h-1.5 rounded-full bg-brand-cognac/50" />
-      <LineDraw className="h-px w-16 bg-brand-sage/40" delay={0.2} />
+      <LineDraw className="h-px w-16 bg-brand-gold/40" />
+      <div className="w-1.5 h-1.5 rounded-full bg-brand-gold/50" />
+      <LineDraw className="h-px w-16 bg-brand-gold/40" delay={0.2} />
     </div>
   );
 }
@@ -161,7 +161,7 @@ function ClosingImage() {
       </motion.div>
 
       {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-brand-walnut/80 via-brand-walnut/30 to-brand-walnut/10" />
+      <div className="absolute inset-0 bg-gradient-to-t from-brand-forest/85 via-brand-forest/35 to-brand-forest/10" />
 
       {/* Quote anchored to bottom */}
       <div className="absolute inset-0 flex items-end justify-center pb-10 md:pb-16 px-6">
@@ -172,7 +172,7 @@ function ClosingImage() {
           className="text-center max-w-2xl"
         >
           <p className="font-accent text-2xl md:text-3xl lg:text-4xl italic text-white leading-relaxed mb-4">
-            &ldquo;Jesus is worth it. He is worth every hard thing, every question, every goodbye. He is worth it all.&rdquo;
+            &ldquo;I felt like I had stepped from a dark long winter. And on this day I felt like the spring was coming and some hope was coming back into my heart.&rdquo;
           </p>
           <p className="font-body text-sm text-white/60 tracking-[2px] uppercase">
             &mdash; Christin, Founder
@@ -188,26 +188,26 @@ function ClosingImage() {
    ═══════════════════════════════════════════ */
 export default function OurStoryPage() {
   return (
-    <main className="bg-brand-warm-white min-h-screen">
+    <main className="bg-brand-forest min-h-screen">
       {/* ─── HERO ─── */}
       <section className="pt-24 sm:pt-32 md:pt-44 pb-12 sm:pb-16 md:pb-20 px-5 sm:px-6 md:px-10">
         <div className="max-w-4xl mx-auto text-center">
           <FadeIn>
-            <p className="font-body text-[11px] font-semibold tracking-[3px] uppercase text-brand-cognac mb-5">
+            <p className="font-body text-[11px] font-semibold tracking-[3px] uppercase text-brand-gold mb-5">
               Our Story
             </p>
           </FadeIn>
 
           <FadeIn delay={0.15}>
-            <h1 className="font-display text-[32px] sm:text-4xl md:text-5xl lg:text-7xl font-medium text-brand-walnut leading-[1.1] mb-6 sm:mb-8">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-medium text-white leading-[1.15] mb-6 sm:mb-8">
               A journey of faith,
               <br />
-              <span className="text-brand-cognac">flour, & finding home</span>
+              <span className="text-brand-gold">flour, & finding home</span>
             </h1>
           </FadeIn>
 
           <FadeIn delay={0.3}>
-            <p className="font-body text-lg md:text-xl text-brand-olive leading-relaxed max-w-2xl mx-auto">
+            <p className="font-body text-lg md:text-xl text-white/70 leading-relaxed max-w-2xl mx-auto">
               Before Manna was a bakery, it was a prayer. Before it was a business,
               it was a lifeline. This is the story of how broken bread became
               a bridge to something beautiful.
@@ -216,7 +216,7 @@ export default function OurStoryPage() {
 
           <FadeIn delay={0.4}>
             <LineDraw
-              className="h-px w-24 bg-brand-cognac/40 mx-auto mt-12"
+              className="h-px w-24 bg-brand-gold/40 mx-auto mt-12"
             />
           </FadeIn>
         </div>
@@ -230,16 +230,16 @@ export default function OurStoryPage() {
             imagePosition="right"
           >
             <FadeIn>
-              <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-cognac mb-4">
+              <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-4">
                 Chapter One
               </p>
-              <h2 className="font-display text-3xl md:text-4xl font-medium text-brand-walnut leading-tight mb-6">
+              <h2 className="font-display text-3xl md:text-4xl font-medium text-white leading-tight mb-6">
                 Roots in Utah
               </h2>
             </FadeIn>
 
             <FadeIn delay={0.15}>
-              <p className="font-body text-base md:text-[17px] text-brand-charcoal leading-[1.8] mb-5">
+              <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-5">
                 Christin grew up in a devout Mormon household in Utah, where faith wasn&apos;t
                 just a Sunday morning practice&mdash;it was the air she breathed. She strived
                 to be the very best version of what her community expected: faithful,
@@ -248,7 +248,7 @@ export default function OurStoryPage() {
             </FadeIn>
 
             <FadeIn delay={0.25}>
-              <p className="font-body text-base md:text-[17px] text-brand-charcoal leading-[1.8]">
+              <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8]">
                 Life had a clear map. Marriage, family, temple&mdash;each step was a
                 rung on an eternal ladder. But as she would come to learn,
                 God&apos;s plans don&apos;t always follow the maps we draw for ourselves.
@@ -265,16 +265,16 @@ export default function OurStoryPage() {
         <div className="max-w-6xl mx-auto">
           <div className="max-w-3xl mx-auto">
             <FadeIn>
-              <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-cognac mb-4">
+              <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-4">
                 Chapter Two
               </p>
-              <h2 className="font-display text-3xl md:text-4xl font-medium text-brand-walnut leading-tight mb-6">
+              <h2 className="font-display text-3xl md:text-4xl font-medium text-white leading-tight mb-6">
                 The breaking & the becoming
               </h2>
             </FadeIn>
 
             <FadeIn delay={0.15}>
-              <p className="font-body text-base md:text-[17px] text-brand-charcoal leading-[1.8] mb-5">
+              <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-5">
                 Christin&apos;s marriage was tested by her husband&apos;s battle with
                 addiction&mdash;a struggle that brought their family to the edge of
                 hopelessness. The teachings she had built her life upon began to crack
@@ -284,7 +284,7 @@ export default function OurStoryPage() {
             </FadeIn>
 
             <FadeIn delay={0.25}>
-              <p className="font-body text-base md:text-[17px] text-brand-charcoal leading-[1.8] mb-6">
+              <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-6">
                 At her absolute breaking point, grace arrived in the most unexpected
                 form&mdash;through the story of Narnia. Listening to C.S. Lewis&apos;s
                 beloved tale, something shifted deep within her. For the first time,
@@ -295,7 +295,7 @@ export default function OurStoryPage() {
 
             <FadeIn delay={0.35}>
               <QuoteBlock
-                quote="I spent my whole life trying to be good enough. And then I realized&mdash;I was never meant to be. That was the whole point of grace."
+                quote="It actually &mdash; I wouldn&apos;t describe it as courage. I would describe it more as surrender. It was more of a letting go."
                 attribution="Christin"
                 variant="bordered"
               />
@@ -305,13 +305,13 @@ export default function OurStoryPage() {
       </section>
 
       {/* ─── INTERLUDE QUOTE ─── */}
-      <section className="py-16 md:py-24 bg-brand-soft-cream">
+      <section className="py-16 md:py-24 bg-brand-forest-mid">
         <div className="max-w-3xl mx-auto px-5 sm:px-6 md:px-10 text-center">
           <FadeIn>
-            <p className="font-accent text-2xl md:text-3xl lg:text-[34px] italic text-brand-walnut leading-relaxed">
-              &ldquo;When the world felt like it was falling apart, God whispered:
-              <span className="text-brand-cognac"> I am still here. I am still providing.
-              One day at a time.</span>&rdquo;
+            <p className="font-accent text-2xl md:text-3xl lg:text-[34px] italic text-white leading-relaxed">
+              &ldquo;One day at a time we can just trust God with what we need for today
+              and not worry about tomorrow because he&apos;s enough for us day by day by day.
+              <span className="text-brand-gold"> Just trust me today. I&apos;m enough. I&apos;m enough for today. I&apos;m enough for you.</span>&rdquo;
             </p>
           </FadeIn>
         </div>
@@ -326,16 +326,16 @@ export default function OurStoryPage() {
             imageAspect="aspect-[4/5]"
           >
             <FadeIn>
-              <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-cognac mb-4">
+              <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-4">
                 Chapter Three
               </p>
-              <h2 className="font-display text-3xl md:text-4xl font-medium text-brand-walnut leading-tight mb-6">
+              <h2 className="font-display text-3xl md:text-4xl font-medium text-white leading-tight mb-6">
                 Across the world, a new understanding
               </h2>
             </FadeIn>
 
             <FadeIn delay={0.15}>
-              <p className="font-body text-base md:text-[17px] text-brand-charcoal leading-[1.8] mb-5">
+              <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-5">
                 After moving to Texas with her family, Christin launched a baking
                 business that quickly became something more than a livelihood&mdash;it became
                 a language for love. But God wasn&apos;t done reshaping her story.
@@ -343,7 +343,7 @@ export default function OurStoryPage() {
             </FadeIn>
 
             <FadeIn delay={0.25}>
-              <p className="font-body text-base md:text-[17px] text-brand-charcoal leading-[1.8] mb-5">
+              <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-5">
                 Inspired by an unexpected connection on social media, Christin and
                 her son traveled to Kenya on a mission trip that would change everything.
                 There, among Kenyan Christians whose faith was raw and unfiltered, she
@@ -354,7 +354,7 @@ export default function OurStoryPage() {
             </FadeIn>
 
             <FadeIn delay={0.35}>
-              <p className="font-body text-base md:text-[17px] text-brand-charcoal leading-[1.8]">
+              <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8]">
                 The trip to Kenya planted a seed. The questions those believers asked
                 didn&apos;t leave her&mdash;they grew roots, pushing through the carefully
                 constructed walls of a lifetime of certainty.
@@ -371,16 +371,16 @@ export default function OurStoryPage() {
         <div className="max-w-6xl mx-auto">
           <div className="max-w-3xl mx-auto">
             <FadeIn>
-              <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-cognac mb-4">
+              <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-4">
                 Chapter Four
               </p>
-              <h2 className="font-display text-3xl md:text-4xl font-medium text-brand-walnut leading-tight mb-6">
+              <h2 className="font-display text-3xl md:text-4xl font-medium text-white leading-tight mb-6">
                 Through the valley
               </h2>
             </FadeIn>
 
             <FadeIn delay={0.15}>
-              <p className="font-body text-base md:text-[17px] text-brand-charcoal leading-[1.8] mb-5">
+              <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-5">
                 When Christin returned home from Kenya, life didn&apos;t offer a
                 soft landing. Her husband was arrested and imprisoned due to his
                 long-standing battle with addiction. The life she knew crumbled
@@ -390,7 +390,7 @@ export default function OurStoryPage() {
             </FadeIn>
 
             <FadeIn delay={0.25}>
-              <p className="font-body text-base md:text-[17px] text-brand-charcoal leading-[1.8] mb-6">
+              <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-6">
                 It was during this devastating season that Christin clung to a
                 biblical image that would eventually name her life&apos;s work:
                 <em> manna</em>&mdash;the bread God provided daily to wanderers in
@@ -401,15 +401,14 @@ export default function OurStoryPage() {
             </FadeIn>
 
             <FadeIn delay={0.35}>
-              <div className="bg-brand-soft-cream rounded-2xl p-8 md:p-10 border-l-4 border-brand-cognac relative">
-                <span className="font-display text-7xl text-brand-cognac/20 absolute top-3 left-6 leading-none">
+              <div className="bg-brand-forest-mid/50 rounded-2xl p-5 sm:p-8 md:p-10 border-l-4 border-brand-gold relative">
+                <span className="font-display text-5xl sm:text-7xl text-brand-gold/20 absolute top-2 left-4 sm:top-3 sm:left-6 leading-none">
                   &ldquo;
                 </span>
-                <p className="font-accent text-xl md:text-2xl italic text-brand-walnut leading-relaxed relative z-10">
-                  Manna was never about abundance. It was about faithfulness&mdash;God&apos;s
-                  and ours. Just enough bread for just this day.
+                <p className="font-accent text-xl md:text-2xl italic text-white leading-relaxed relative z-10">
+                  The Mana from Heaven, just one day at a time, one piece of bread at a time.
                 </p>
-                <cite className="block mt-5 font-body text-sm font-medium text-brand-olive not-italic">
+                <cite className="block mt-5 font-body text-sm font-medium text-white/60 not-italic">
                   &mdash; Christin
                 </cite>
               </div>
@@ -419,7 +418,7 @@ export default function OurStoryPage() {
       </section>
 
       {/* ─── CHAPTER 5: FINDING HOME ─── */}
-      <section className="py-16 md:py-24 bg-brand-walnut overflow-hidden">
+      <section className="py-16 md:py-24 bg-brand-forest-mid overflow-hidden">
         <div className="max-w-6xl mx-auto px-5 sm:px-6 md:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
             {/* Image — couple B&W on dark background */}
@@ -475,14 +474,14 @@ export default function OurStoryPage() {
               </FadeIn>
 
               <FadeIn delay={0.45}>
-                <LineDraw className="h-px w-16 bg-white/20 mb-8" />
+                <LineDraw className="h-px w-16 bg-brand-gold/30 mb-8" />
               </FadeIn>
 
               <FadeIn delay={0.5}>
                 <p className="font-accent text-xl md:text-2xl italic text-brand-cognac-light leading-relaxed">
-                  &ldquo;God&apos;s love isn&apos;t something you unlock with good behavior.
-                  It was there all along&mdash;waiting for me to stop running
-                  and just receive it.&rdquo;
+                  &ldquo;It&apos;s been really humbling as I realize how much he&apos;s gone out of his way&mdash;just
+                  for me to know him and to know his love. The whole point is just Jesus.
+                  And him reaching me, rather than me having to strive for him&mdash;that was what the gospel is all about. So simple.&rdquo;
                 </p>
               </FadeIn>
             </div>
@@ -495,16 +494,16 @@ export default function OurStoryPage() {
         <div className="max-w-6xl mx-auto">
           <div className="max-w-3xl mx-auto text-center">
             <FadeIn>
-              <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-cognac mb-4">
+              <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-4">
                 Today
               </p>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium text-brand-walnut leading-tight mb-8">
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium text-white leading-tight mb-8">
                 Bread from Heaven
               </h2>
             </FadeIn>
 
             <FadeIn delay={0.15}>
-              <p className="font-body text-base md:text-[17px] text-brand-charcoal leading-[1.8] mb-5">
+              <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-5">
                 Manna Bakery was born from every broken road, every tear-stained
                 prayer, and every morning where provision arrived just in time.
                 When Christin kneads dough today, she&apos;s not just making bread.
@@ -515,7 +514,7 @@ export default function OurStoryPage() {
             </FadeIn>
 
             <FadeIn delay={0.25}>
-              <p className="font-body text-base md:text-[17px] text-brand-charcoal leading-[1.8] mb-5">
+              <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-5">
                 Every loaf, every pastry, every cup of coffee at Manna is an
                 invitation. An invitation to slow down. To gather. To break
                 bread with the people who matter. The bakery is a sanctuary&mdash;not
@@ -525,7 +524,7 @@ export default function OurStoryPage() {
             </FadeIn>
 
             <FadeIn delay={0.35}>
-              <p className="font-body text-base md:text-[17px] text-brand-charcoal leading-[1.8]">
+              <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8]">
                 Christin marvels at God&apos;s unconditional love. She marvels at
                 grace. And every single day, she shows up to do the only thing
                 she knows to do&mdash;break bread and share it with whoever walks
@@ -540,32 +539,30 @@ export default function OurStoryPage() {
       <ClosingImage />
 
       {/* ─── CTA FOOTER ─── */}
-      <section className="py-14 sm:py-20 md:py-28 bg-brand-soft-cream">
+      <section className="py-14 sm:py-20 md:py-28 bg-brand-forest-mid">
         <div className="max-w-2xl mx-auto px-5 sm:px-6 md:px-10 text-center">
           <FadeIn>
-            <p className="font-accent text-lg md:text-xl italic text-brand-olive mb-3">
+            <p className="font-accent text-lg md:text-xl italic text-brand-gold mb-3">
               Come as you are
             </p>
-            <h2 className="font-display text-3xl md:text-4xl font-medium text-brand-walnut leading-tight mb-6">
+            <h2 className="font-display text-3xl md:text-4xl font-medium text-white leading-tight mb-6">
               Your table is waiting
             </h2>
-            <p className="font-body text-base text-brand-olive leading-relaxed mb-8">
-              Whether it&apos;s your first visit or your hundredth, there&apos;s
-              always a seat for you at Manna. Come taste the bread that was born
-              from a prayer.
+            <p className="font-body text-base text-white/70 leading-relaxed mb-8">
+              There&apos;s always a seat for you at Manna. Come taste the bread that was born from a prayer.
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="/menu"
-                className="inline-flex items-center justify-center px-7 py-3.5 bg-brand-walnut text-white font-body text-sm font-medium rounded-lg hover:bg-brand-walnut-medium transition-colors duration-300"
+                className="inline-flex items-center justify-center px-7 py-3.5 min-h-[44px] w-full sm:w-auto bg-brand-gold text-brand-forest font-body text-sm font-medium rounded-lg hover:bg-brand-cognac-light transition-colors duration-300"
               >
                 View our menu
               </a>
               <a
                 href="/contact"
-                className="inline-flex items-center justify-center px-7 py-3.5 border border-brand-walnut text-brand-walnut font-body text-sm font-medium rounded-lg hover:bg-brand-walnut hover:text-white transition-colors duration-300"
+                className="inline-flex items-center justify-center px-7 py-3.5 min-h-[44px] w-full sm:w-auto border border-white/30 text-white font-body text-sm font-medium rounded-lg hover:bg-white/10 transition-colors duration-300"
               >
                 Visit us
               </a>

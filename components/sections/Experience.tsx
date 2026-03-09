@@ -43,7 +43,7 @@ function FeatureCard({ icon, title, description, index }: { icon: string; title:
       transition={{ duration: 0.6, delay: index * 0.2, ease: [0.25, 0.4, 0.25, 1] }}
     >
       <motion.div
-        className="mb-5 flex justify-center"
+        className="mb-4 sm:mb-5 flex justify-center"
         initial={{ scale: 0, rotate: -20 }}
         animate={isInView ? { scale: 1, rotate: 0 } : {}}
         transition={{
@@ -54,10 +54,10 @@ function FeatureCard({ icon, title, description, index }: { icon: string; title:
           damping: 12
         }}
       >
-        <Image src={icon} alt={title} width={80} height={80} className="w-16 h-16 sm:w-20 sm:h-20" />
+        <Image src={icon} alt={title} width={80} height={80} className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20" />
       </motion.div>
-      <h3 className="font-display text-xl font-medium mb-3">{title}</h3>
-      <p className="font-body text-sm text-white/70 leading-relaxed">{description}</p>
+      <h3 className="font-display text-lg sm:text-xl font-medium mb-2 sm:mb-3">{title}</h3>
+      <p className="font-body text-base sm:text-sm md:text-base text-white/70 leading-relaxed max-w-xs mx-auto">{description}</p>
     </motion.div>
   );
 }
@@ -73,7 +73,7 @@ export function Experience() {
   }, []);
 
   return (
-    <section className="py-14 sm:py-20 md:py-28 text-white relative overflow-hidden">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-28 text-white relative overflow-hidden">
       {/* Smooth crossfade carousel background — all images rendered, opacity toggled */}
       {CAROUSEL_IMAGES.map((src, index) => (
         <motion.div
@@ -93,9 +93,9 @@ export function Experience() {
       ))}
 
       {/* Dark overlay for text readability */}
-      <div className="absolute inset-0 z-[1] bg-brand-charcoal/60" />
+      <div className="absolute inset-0 z-[1] bg-brand-forest/65" />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-5 sm:px-6 md:px-10">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
         <FadeIn>
           <SectionHeader
             label="More Than a Bakery"
@@ -105,7 +105,7 @@ export function Experience() {
           />
         </FadeIn>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 md:gap-12 mt-8 sm:mt-12">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-6 md:gap-8 lg:gap-12 mt-8 sm:mt-10 md:mt-12">
           {FEATURES.map((feature, index) => (
             <FeatureCard key={feature.title} {...feature} index={index} />
           ))}

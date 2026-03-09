@@ -62,13 +62,13 @@ export function Story() {
   }, [shuffle]);
 
   return (
-    <section className="py-14 sm:py-20 md:py-28 bg-brand-warm-white overflow-hidden">
+    <section className="py-14 sm:py-20 md:py-28 bg-brand-forest overflow-hidden">
       <div className="max-w-6xl mx-auto px-5 sm:px-6 md:px-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
           {/* Image card stack with disconnected frame + parallax */}
           <motion.div
             ref={containerRef}
-            className="relative w-full max-w-sm mx-auto md:max-w-none cursor-pointer"
+            className="relative w-full max-w-[280px] sm:max-w-sm mx-auto md:max-w-none cursor-pointer"
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
@@ -76,7 +76,7 @@ export function Story() {
             onClick={shuffle}
           >
             {/* Decorative offset frame */}
-            <div className="absolute top-5 left-5 w-full h-full rounded-2xl border border-brand-cognac/25" />
+            <div className="absolute top-3 left-3 sm:top-5 sm:left-5 w-full h-full rounded-2xl border border-brand-gold/25" />
 
             {/* Card stack */}
             <div className="relative z-10 w-full aspect-[4/5]">
@@ -127,32 +127,32 @@ export function Story() {
           {/* Content - staggered fade-ins */}
           <div className="py-4">
             <FadeIn delay={0.1}>
-              <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-cognac mb-4">
+              <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-4">
                 Our Story
               </p>
             </FadeIn>
 
             <FadeIn delay={0.2}>
-              <h2 className="font-display text-[26px] sm:text-3xl md:text-4xl font-medium text-brand-walnut leading-tight mb-5 sm:mb-6">
+              <h2 className="font-display text-[26px] sm:text-3xl md:text-4xl font-medium text-white leading-tight mb-5 sm:mb-6">
                 Built on faith,<br />baked with love
               </h2>
             </FadeIn>
 
             <FadeIn delay={0.3}>
-              <p className="font-body text-base text-brand-olive leading-relaxed mb-4">
+              <p className="font-body text-base text-white/80 leading-relaxed mb-4">
                 Seven years ago, we opened our doors with a simple belief: that bread is more than food—it&apos;s an invitation to gather, to slow down, and to share life together.
               </p>
             </FadeIn>
 
             <FadeIn delay={0.4}>
-              <p className="font-body text-base text-brand-olive leading-relaxed mb-6">
+              <p className="font-body text-base text-white/80 leading-relaxed mb-6">
                 What started as a dream became a sanctuary—a place where every loaf tells a story and every cup is poured with intention.
               </p>
             </FadeIn>
 
             <FadeIn delay={0.5}>
               <QuoteBlock
-                quote="Come, let us break bread together."
+                quote="I have a resilient sense of hope &mdash; like a beach ball in a swimming pool. I felt like everything was somehow going to be okay, over and over again."
                 variant="bordered"
               />
             </FadeIn>
@@ -160,7 +160,7 @@ export function Story() {
             <FadeIn delay={0.6}>
               <Link
                 href="/our-story"
-                className="inline-flex items-center gap-2 font-body text-sm font-medium text-brand-cognac hover:text-brand-walnut transition-colors mt-6 group"
+                className="inline-flex items-center gap-2 font-body text-sm font-medium text-brand-gold hover:text-brand-cognac-light transition-colors mt-6 group"
               >
                 Read our full story <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">→</span>
               </Link>

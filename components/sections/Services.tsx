@@ -5,9 +5,9 @@ import { StaggerContainer, StaggerItem } from '@/components/ui/Motion';
 
 export function Services() {
   return (
-    <section className="py-14 sm:py-20 md:py-28 bg-brand-soft-cream overflow-hidden">
-      <div className="max-w-5xl mx-auto px-5 sm:px-6 md:px-10">
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-8" staggerDelay={0.25}>
+    <section className="py-12 sm:py-16 md:py-20 lg:py-28 bg-brand-forest overflow-hidden">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-8">
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8" staggerDelay={0.25}>
           <StaggerItem>
             <ServiceCard
               title="Catering"
