@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useEffect } from 'react';
+import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
 import { BRAND, TOAST } from '@/lib/constants';
 
@@ -54,15 +55,22 @@ export function Hero() {
         className="relative z-10 w-full max-w-3xl mx-auto px-4 sm:px-6 text-center pt-16 lg:pt-20"
         style={{ opacity: contentOpacity, y: contentY }}
       >
-        {/* Tagline */}
-        <motion.p
-          className="font-accent text-base sm:text-lg md:text-xl italic text-brand-cognac-light mb-3 sm:mb-4 tracking-wide"
+        {/* Logo */}
+        <motion.div
+          className="flex justify-center mb-4 sm:mb-5"
           initial={{ opacity: 0, filter: 'blur(8px)' }}
           animate={{ opacity: 1, filter: 'blur(0px)' }}
           transition={{ duration: 1.2, delay: 0.4, ease: [0.25, 0.4, 0.25, 1] }}
         >
-          {BRAND.tagline}
-        </motion.p>
+          <Image
+            src="/images/Bread from Heaven.PNG"
+            alt="Manna — Bread from Heaven"
+            width={200}
+            height={112}
+            className="h-20 sm:h-24 md:h-28 w-auto object-contain"
+            priority
+          />
+        </motion.div>
 
         {/* Headline — emerges as one calm moment */}
         <motion.h1

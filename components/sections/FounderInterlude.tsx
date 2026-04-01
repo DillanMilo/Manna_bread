@@ -2,7 +2,7 @@
 
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import Image from 'next/image';
+
 
 const organic = [0.25, 0.4, 0.25, 1] as const;
 
@@ -27,12 +27,11 @@ export function FounderInterlude() {
         style={{ y: imageY }}
         className="absolute -top-[60px] -bottom-[60px] left-0 right-0 will-change-transform"
       >
-        <Image
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src="/images/5094151F-9BC2-4D50-87F7-E1751B7D59BA.jpeg"
           alt="Christin enjoying coffee and pastries at Manna Bakery"
-          fill
-          className="object-cover object-[center_35%]"
-          sizes="100vw"
+          className="w-full h-full object-cover object-[center_35%]"
         />
       </motion.div>
 

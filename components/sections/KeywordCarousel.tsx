@@ -7,17 +7,17 @@ const CARDS = [
   {
     label: 'Our Craft',
     title: 'Handcrafted',
-    body: 'Every loaf shaped by hand. Every recipe earned through patience. We believe the best things can\'t be rushed.',
+    body: 'Every loaf shaped by hand. Every recipe earned through patience. We believe the best things are made with care — the way God intended.',
   },
   {
     label: 'Our Space',
     title: 'Rooted',
-    body: 'A warm sanctuary where timber, greenery, and natural light set the table for real connection.',
+    body: 'Timber, greenery, and warm light — a place that feels set apart. Step in and let the rest of the world quiet down.',
   },
   {
     label: 'Our Why',
     title: 'Community',
-    body: 'We didn\'t open a bakery — we opened a gathering place. Come for the bread, stay for the people.',
+    body: 'God put it on our hearts to build a gathering place. Come for the bread, stay for the people.',
   },
 ];
 
