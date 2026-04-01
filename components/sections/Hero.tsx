@@ -65,7 +65,7 @@ export function Hero() {
           <motion.div
             initial={{ opacity: 1 }}
             animate={{ opacity: 0.6 }}
-            transition={{ duration: 8, delay: 2, ease: 'easeOut' }}
+            transition={{ duration: 5, delay: 2, ease: 'easeOut' }}
           >
             <Image
               src="/images/Bread from Heaven.PNG"
