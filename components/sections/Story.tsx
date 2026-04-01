@@ -76,7 +76,7 @@ export function Story() {
             onClick={shuffle}
           >
             {/* Decorative offset frame */}
-            <div className="absolute top-3 left-3 sm:top-5 sm:left-5 w-full h-full rounded-2xl border border-brand-gold/25" />
+            <div className="absolute inset-0 top-3 left-3 sm:top-5 sm:left-5 -right-3 -bottom-3 sm:-right-5 sm:-bottom-5 rounded-2xl border border-brand-gold/25" />
 
             {/* Card stack */}
             <div className="relative z-10 w-full aspect-[4/5]">

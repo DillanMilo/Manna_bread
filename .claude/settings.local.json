@@ -25,7 +25,12 @@
       "WebFetch(domain:maps.roadtrippers.com)",
       "Bash(file:*)",
       "Bash(grep:*)",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(/tmp/story_analysis.txt:*)",
+      "Read(//tmp/**)",
+      "Bash(/tmp/cards_analysis.txt:*)"
     ]
   }
 }

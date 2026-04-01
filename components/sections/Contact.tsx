@@ -67,7 +67,7 @@ export function Contact() {
             <div className="relative">
               {/* Soft radial gold glow behind arch */}
               <div
-                className="absolute -inset-5 sm:-inset-8 rounded-t-[9999px] rounded-b-3xl"
+                className="absolute -inset-5 sm:-inset-8 rounded-t-[9999px] rounded-b-2xl"
                 style={{
                   background: 'radial-gradient(ellipse at center, rgba(201, 168, 76, 0.22) 0%, rgba(201, 168, 76, 0.08) 50%, transparent 75%)',
                   filter: 'blur(28px)',
@@ -75,9 +75,11 @@ export function Contact() {
               />
               {/* Outer arch frame */}
               <div
-                className="relative rounded-t-[9999px] rounded-b-2xl overflow-hidden shadow-lg ring-1 ring-brand-sage/20 aspect-[4/3] sm:aspect-[4/4] md:aspect-[4/4.5]"
+                className="relative rounded-t-[9999px] rounded-b-[1.75rem] bg-brand-soft-cream/6 p-3 sm:p-4 md:p-5 shadow-lg ring-1 ring-brand-sage/20 aspect-[4/3] sm:aspect-[4/4] md:aspect-[4/4.5]"
               >
-                <MannaMap />
+                <div className="h-full w-full overflow-hidden rounded-t-[9999px] rounded-b-[1.25rem] bg-brand-warm-white/95 shadow-[inset_0_0_0_1px_rgba(138,154,142,0.18)]">
+                  <MannaMap />
+                </div>
               </div>
               {/* Subtle caption beneath */}
               <p className="text-center font-accent text-sm italic text-white/60 mt-4">

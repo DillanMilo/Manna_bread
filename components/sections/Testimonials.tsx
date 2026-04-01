@@ -7,11 +7,6 @@ import { useRef } from 'react';
 
 const TESTIMONIALS = [
   {
-    quote: "Manna isn't just a bakery—it's become our family's Sunday morning tradition. The space, the people, the bread... it all feels like home.",
-    author: 'Sarah M.',
-    location: 'Tomball',
-  },
-  {
     quote: "Walking into Manna feels like stepping into a sanctuary. The attention to detail in everything they do is extraordinary.",
     author: 'Michael R.',
     location: 'The Woodlands',
@@ -106,9 +101,9 @@ export function Testimonials() {
               {/* Progress ring for active dot */}
               {index === activeIndex && isInView && (
                 <motion.div
-                  className="absolute inset-0 rounded-full border-2 border-brand-gold"
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full border-2 border-brand-gold"
                   initial={{ scale: 0.5, opacity: 0 }}
-                  animate={{ scale: 1.8, opacity: [0.5, 0] }}
+                  animate={{ scale: 2.5, opacity: [0.5, 0] }}
                   transition={{ duration: AUTO_ADVANCE_MS / 1000, ease: "linear" }}
                   key={`progress-${activeIndex}`}
                 />
