@@ -62,14 +62,20 @@ export function Hero() {
           animate={{ opacity: 1, filter: 'blur(0px)' }}
           transition={{ duration: 1.2, delay: 0.4, ease: [0.25, 0.4, 0.25, 1] }}
         >
-          <Image
-            src="/images/Bread from Heaven.PNG"
-            alt="Manna — Bread from Heaven"
-            width={200}
-            height={112}
-            className="h-20 sm:h-24 md:h-28 w-auto object-contain"
-            priority
-          />
+          <motion.div
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 0.6 }}
+            transition={{ duration: 8, delay: 2, ease: 'easeOut' }}
+          >
+            <Image
+              src="/images/Bread from Heaven.PNG"
+              alt="Manna — Bread from Heaven"
+              width={200}
+              height={112}
+              className="h-20 sm:h-24 md:h-28 w-auto object-contain rounded-xl"
+              priority
+            />
+          </motion.div>
         </motion.div>
 
         {/* Headline — emerges as one calm moment */}
