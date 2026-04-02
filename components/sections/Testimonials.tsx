@@ -62,9 +62,9 @@ export function Testimonials() {
   }, [isInView, activeIndex]);
 
   const variants = {
-    enter: (dir: number) => ({ opacity: 0, x: dir * 40 }),
+    enter: (dir: number) => ({ opacity: 0, x: dir * 24 }),
     center: { opacity: 1, x: 0 },
-    exit: (dir: number) => ({ opacity: 0, x: dir * -40 }),
+    exit: (dir: number) => ({ opacity: 0, x: dir * -24 }),
   };
 
   return (
@@ -80,7 +80,7 @@ export function Testimonials() {
           What People Are Saying
         </p>
 
-        <div className="relative min-h-[320px] sm:min-h-[280px] md:min-h-[260px] flex items-center justify-center">
+        <div className="relative min-h-[200px] sm:min-h-[240px] md:min-h-[260px] flex items-center justify-center">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.blockquote
               key={activeIndex}
@@ -90,7 +90,7 @@ export function Testimonials() {
               animate="center"
               exit="exit"
               transition={{ duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
-              className="absolute inset-0 flex flex-col items-center justify-center"
+              className="flex flex-col items-center justify-center"
             >
               <p className={`font-accent ${quoteTextClass(TESTIMONIALS[activeIndex].quote.length)} italic text-white leading-relaxed mb-5 sm:mb-6 md:mb-8`}>
                 &ldquo;{TESTIMONIALS[activeIndex].quote}&rdquo;
