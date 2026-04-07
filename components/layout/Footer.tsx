@@ -11,6 +11,7 @@ export function Footer() {
             <p className="font-accent text-lg italic opacity-80 mb-5">{BRAND.tagline}</p>
             <p className="font-accent text-sm italic opacity-60 leading-relaxed border-l-2 border-brand-cognac pl-4">
               &ldquo;Give us this day our daily bread.&rdquo;
+              <span className="block mt-1 not-italic text-xs opacity-50">— Matthew 6:11</span>
             </p>
           </div>
 
@@ -74,7 +75,7 @@ export function Footer() {
 
         <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="font-body text-xs opacity-50">
-            &copy; {new Date().getFullYear()} {BRAND.name}. All rights reserved.
+            &copy; {new Date().getFullYear()} Manna Bread From Heaven. All rights reserved.
           </p>
           <p className="font-body text-xs opacity-50">
             Website by <a href="https://www.dillanmilo.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-80">dillanmilo.com</a>

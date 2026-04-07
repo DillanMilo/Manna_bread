@@ -16,8 +16,8 @@ export const CONTACT = {
   phone: '(281) 555-1234',
   email: 'hello@mannabakery.com',
   hours: {
-    weekdays: '7am – 5pm',
-    saturday: '8am – 4pm',
+    weekdays: '6:00 AM – 4:00 PM',
+    saturday: '7:00 AM – 4:00 PM',
     sunday: 'Closed',
   },
 };

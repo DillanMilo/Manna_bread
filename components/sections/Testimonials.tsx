@@ -7,23 +7,38 @@ import { useRef } from 'react';
 
 const TESTIMONIALS = [
   {
-    quote: "Manna isn't just a bakery—it's become our family's Sunday morning tradition. The space, the people, the bread... it all feels like home.",
-    author: 'Sarah M.',
-    location: 'Tomball',
+    quote: "This place is beautiful, plays calming Christian music, has great service, AND HAS AN AMAZING GLUTEN FREE SELECTION! For once, I felt like I got to pick from the 'good' things on the menu, just like everyone else. I haven't gotten to feel that way in a long, long time. For that alone, I'm grateful and will be a repeat customer.",
+    author: 'Sarah Rock',
+    detail: 'Food: 5/5 · Service: 5/5 · Atmosphere: 5/5',
   },
   {
-    quote: "Walking into Manna feels like stepping into a sanctuary. The attention to detail in everything they do is extraordinary.",
-    author: 'Michael R.',
-    location: 'The Woodlands',
+    quote: "This place has such a positive and calming vibe. The bread and pastries is a 10/10. Christian owned and operated. The perfect spot to grab lunch, catch up with friends or work from your laptop.",
+    author: 'MC S',
+    detail: 'Food: 5/5 · Service: 5/5 · Atmosphere: 5/5',
   },
   {
-    quote: "Best sourdough in Texas, hands down. But honestly, I come for the atmosphere just as much as the bread.",
-    author: 'Jennifer L.',
-    location: 'Spring',
+    quote: "Very acquainted, beautifully set up environment. Calm Christian music. Very welcoming immediately and exquisite breakfast menu. Absolutely love all the plants and vibe. Customer service was also nice and patient… our choice of stuffed French toast and coffee was delicious. Last, immaculate restrooms! Thank you Manna for making my breakfast date so sweet.",
+    author: 'Vivian Torres',
+    detail: 'Food: 5/5 · Service: 5/5 · Atmosphere: 5/5',
+  },
+  {
+    quote: "Visited this spot around 8 AM on a weekday and was pleased! The staff was friendly, and they had good breakfast and lunch options. The food came out fast and coffee was good. Definitely planning my next visit soon.",
+    author: 'Cecily Coe',
+    detail: 'Food: 4/5 · Service: 5/5 · Atmosphere: 5/5',
+  },
+  {
+    quote: "I lost my wallet about a month ago and assumed it was gone for good. The owner of this coffee shop found it and went out of their way to return it to me. They kept it safe and made sure it got back into my hands. That level of honesty and care says everything about how this business operates. Great coffee. Even better people. I will keep coming back.",
+    author: 'Christian Ceser',
+    detail: '',
   },
 ];
 
 const AUTO_ADVANCE_MS = 6000;
+
+function quoteTextClass(length: number): string {
+  if (length > 250) return 'text-base sm:text-lg md:text-xl lg:text-2xl';
+  return 'text-lg sm:text-xl md:text-2xl lg:text-3xl';
+}
 
 export function Testimonials() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -47,9 +62,9 @@ export function Testimonials() {
   }, [isInView, activeIndex]);
 
   const variants = {
-    enter: (dir: number) => ({ opacity: 0, x: dir * 40 }),
+    enter: (dir: number) => ({ opacity: 0, x: dir * 24 }),
     center: { opacity: 1, x: 0 },
-    exit: (dir: number) => ({ opacity: 0, x: dir * -40 }),
+    exit: (dir: number) => ({ opacity: 0, x: dir * -24 }),
   };
 
   return (
@@ -65,7 +80,7 @@ export function Testimonials() {
           What People Are Saying
         </p>
 
-        <div className="relative min-h-[240px] sm:min-h-[200px] md:min-h-[180px] flex items-center justify-center">
+        <div className="relative min-h-[200px] sm:min-h-[240px] md:min-h-[260px] flex items-center justify-center">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.blockquote
               key={activeIndex}
@@ -75,14 +90,19 @@ export function Testimonials() {
               animate="center"
               exit="exit"
               transition={{ duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
-              className="absolute inset-0 flex flex-col items-center justify-center"
+              className="flex flex-col items-center justify-center"
             >
-              <p className="font-accent text-lg sm:text-xl md:text-2xl lg:text-3xl italic text-white leading-relaxed mb-5 sm:mb-6 md:mb-8">
+              <p className={`font-accent ${quoteTextClass(TESTIMONIALS[activeIndex].quote.length)} italic text-white leading-relaxed mb-5 sm:mb-6 md:mb-8`}>
                 &ldquo;{TESTIMONIALS[activeIndex].quote}&rdquo;
               </p>
               <p className="font-body text-sm font-medium text-white/60">
-                — {TESTIMONIALS[activeIndex].author}, {TESTIMONIALS[activeIndex].location}
+                — {TESTIMONIALS[activeIndex].author}
               </p>
+              {TESTIMONIALS[activeIndex].detail && (
+                <p className="font-body text-xs text-white/40 mt-2">
+                  {TESTIMONIALS[activeIndex].detail}
+                </p>
+              )}
             </motion.blockquote>
           </AnimatePresence>
         </div>
@@ -106,9 +126,9 @@ export function Testimonials() {
               {/* Progress ring for active dot */}
               {index === activeIndex && isInView && (
                 <motion.div
-                  className="absolute inset-0 rounded-full border-2 border-brand-gold"
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full border-2 border-brand-gold"
                   initial={{ scale: 0.5, opacity: 0 }}
-                  animate={{ scale: 1.8, opacity: [0.5, 0] }}
+                  animate={{ scale: 2.5, opacity: [0.5, 0] }}
                   transition={{ duration: AUTO_ADVANCE_MS / 1000, ease: "linear" }}
                   key={`progress-${activeIndex}`}
                 />
