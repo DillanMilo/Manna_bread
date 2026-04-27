@@ -22,6 +22,18 @@ const STORY_IMAGES = [
     width: 1206,
     height: 1313,
   },
+  {
+    src: "/images/manna-recipe-books.webp",
+    alt: "Manna Bakery's leather-bound recipe books — Bread, Gluten Free, Pastries",
+    width: 1067,
+    height: 1600,
+  },
+  {
+    src: "/images/manna-danish-prep.webp",
+    alt: "A baker's hand spooning chocolate filling into fresh danish pastries",
+    width: 1067,
+    height: 1600,
+  },
 ];
 
 const SHUFFLE_MS = 5000;

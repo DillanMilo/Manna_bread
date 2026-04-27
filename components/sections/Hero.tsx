@@ -43,6 +43,7 @@ export function Hero() {
           muted
           loop
           playsInline
+          poster="/images/manna-arched-alcove.webp"
           className="absolute inset-0 w-full h-full object-cover"
           src="/images/1SE - Manna Evenings (20251221-223245).mov"
         />

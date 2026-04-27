@@ -30,7 +30,10 @@
       "Bash(git push:*)",
       "Bash(/tmp/story_analysis.txt:*)",
       "Read(//tmp/**)",
-      "Bash(/tmp/cards_analysis.txt:*)"
+      "Bash(/tmp/cards_analysis.txt:*)",
+      "Bash(awk '{sum+=$5} END {print \"Total bytes:\", sum, \"\\(~\"sum/1024/1024\" MB\\)\"}')",
+      "Bash(node *)",
+      "Bash(awk '{ if \\($9 ~ /\\\\.webp$/ && $9 ~ /manna-/\\) { sum+=$5; n++ } } END { printf \"New webp files: %d, total %.2f MB, avg %d KB\\\\n\", n, sum/1024/1024, sum/n/1024 }')"
     ]
   }
 }

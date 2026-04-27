@@ -177,8 +177,8 @@ function CateringParallaxImage() {
         className="absolute -top-[15%] -bottom-[15%] left-0 right-0 will-change-transform"
       >
         <Image
-          src="/images/IMG_0902.jpg"
-          alt="Manna Bakery gathering and event space"
+          src="/images/manna-strawberry-waffle.webp"
+          alt="Strawberry waffle plated on marble with gold flatware and baby's breath"
           fill
           className="object-cover"
           sizes="(max-width: 768px) 100vw, 40vw"
@@ -205,8 +205,8 @@ function QuoteParallaxImage() {
         className="absolute -top-[12%] -bottom-[12%] left-0 right-0 will-change-transform"
       >
         <Image
-          src="/images/IMG_0903.jpg"
-          alt="Manna Bakery pastry tray prepared with care"
+          src="/images/manna-quiche-fruit.webp"
+          alt="House-made quiche with side fruit cup, plated on marble with gold flatware"
           fill
           className="object-cover"
           sizes="(max-width: 768px) 100vw, 40vw"
@@ -216,47 +216,45 @@ function QuoteParallaxImage() {
   );
 }
 
-/* ─── image placeholder ─── */
+/* ─── generic parallax image (for static frames) ─── */
 
-function ImagePlaceholder({
-  label,
-  aspect = 'aspect-[16/9]',
+function ParallaxImage({
+  src,
+  alt,
   className = '',
-  arch = false,
+  sizes,
+  speed = 30,
+  objectPosition = 'center',
 }: {
-  label: string;
-  aspect?: string;
+  src: string;
+  alt: string;
   className?: string;
-  arch?: boolean;
+  sizes?: string;
+  speed?: number;
+  objectPosition?: string;
 }) {
-  return (
-    <div
-      className={`relative overflow-hidden bg-brand-forest-mid/40 border-2 border-dashed border-white/20 flex flex-col items-center justify-center ${aspect} ${
-        arch ? 'rounded-t-full rounded-b-2xl' : 'rounded-2xl'
-      } ${className}`}
-    >
-      {/* subtle cross-hatch pattern */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 10px, #8A9A8E 10px, #8A9A8E 11px),
-          repeating-linear-gradient(-45deg, transparent, transparent 10px, #8A9A8E 10px, #8A9A8E 11px)`,
-      }} />
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], [speed, -speed]);
 
-      <svg
-        className="w-10 h-10 text-white/30 mb-3"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth={1.2}
+  return (
+    <div ref={ref} className={`relative overflow-hidden ${className}`}>
+      <motion.div
+        style={{ y }}
+        className="absolute -top-[15%] -bottom-[15%] left-0 right-0 will-change-transform"
       >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          sizes={sizes}
+          className="object-cover"
+          style={{ objectPosition }}
         />
-      </svg>
-      <p className="font-body text-xs font-medium tracking-[1.5px] uppercase text-white/40">
-        {label}
-      </p>
+      </motion.div>
     </div>
   );
 }
@@ -363,9 +361,12 @@ export default function CateringPage() {
         {/* Hero image — catering spread / table setting */}
         <FadeIn delay={0.5}>
           <div className="max-w-5xl mx-auto mt-8 sm:mt-12 md:mt-16 px-5 sm:px-6 md:px-10">
-            <ImagePlaceholder
-              label="Catering spread photo"
-              aspect="aspect-[16/9] sm:aspect-[21/9]"
+            <ParallaxImage
+              src="/images/manna-breakfast-spread.webp"
+              alt="A breakfast spread of croissant sandwich and grilled cheese with fresh fruit"
+              className="aspect-[16/9] sm:aspect-[21/9] rounded-2xl shadow-xl"
+              sizes="(max-width: 1024px) 100vw, 1024px"
+              speed={40}
             />
           </div>
         </FadeIn>
@@ -516,15 +517,21 @@ export default function CateringPage() {
       <section className="py-12 md:py-16 px-5 sm:px-6 md:px-10">
         <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
           <FadeIn>
-            <ImagePlaceholder
-              label="Drinks / coffee service"
-              aspect="aspect-[4/3]"
+            <ParallaxImage
+              src="/images/manna-latte-art.webp"
+              alt="A flat white with rosetta latte art on a marble counter"
+              className="aspect-[4/3] rounded-2xl shadow-lg"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              speed={25}
             />
           </FadeIn>
           <FadeIn delay={0.15}>
-            <ImagePlaceholder
-              label="Fresh fruit arrangement"
-              aspect="aspect-[4/3]"
+            <ParallaxImage
+              src="/images/manna-grilled-panini.webp"
+              alt="Grilled panini with kettle chips on marble, gold flatware and baby's breath"
+              className="aspect-[4/3] rounded-2xl shadow-lg"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              speed={25}
             />
           </FadeIn>
         </div>
@@ -602,9 +609,13 @@ export default function CateringPage() {
       <section className="py-12 md:py-16 px-5 sm:px-6 md:px-10">
         <div className="max-w-3xl mx-auto">
           <FadeIn>
-            <ImagePlaceholder
-              label="Kitchen / soup preparation"
-              aspect="aspect-[16/7]"
+            <ParallaxImage
+              src="/images/manna-tomato-soup.webp"
+              alt="Tomato basil soup with bread on marble, baby's breath in a clear vase"
+              className="aspect-[3/2] rounded-2xl shadow-xl"
+              sizes="(max-width: 768px) 100vw, 768px"
+              speed={25}
+              objectPosition="center 60%"
             />
           </FadeIn>
         </div>
@@ -669,7 +680,7 @@ export default function CateringPage() {
                   <Button href="/contact" variant="primary" className="w-full sm:w-auto">
                     Contact us
                   </Button>
-                  <Button href={`tel:${CONTACT.phone.replace(/[^0-9+]/g, '')}`} variant="secondary" className="w-full sm:w-auto">
+                  <Button href={`tel:${CONTACT.phone.replace(/[^0-9+]/g, '')}`} variant="ghost" className="w-full sm:w-auto">
                     Call {CONTACT.phone}
                   </Button>
                 </div>

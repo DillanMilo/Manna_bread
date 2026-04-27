@@ -14,6 +14,7 @@ export function Services() {
               description="From corporate breakfasts to wedding brunches, we bring the Manna experience to your gathering."
               href="/catering"
               linkText="Learn more"
+              image="/images/manna-strawberry-waffle.webp"
             />
           </StaggerItem>
           <StaggerItem>
@@ -22,6 +23,7 @@ export function Services() {
               description="Host your next event in our beautiful space. Intimate gatherings, showers, and celebrations welcome."
               href="/rentals"
               linkText="Inquire now"
+              image="/images/manna-cognac-lounge.webp"
             />
           </StaggerItem>
         </StaggerContainer>

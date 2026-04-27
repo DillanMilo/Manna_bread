@@ -26,6 +26,18 @@ const STORY_IMAGES = {
     src: '/images/IMG_9181.jpeg',
     alt: 'Christin surrounded by the Manna Bakery community',
   },
+  cookbook: {
+    src: '/images/manna-cookbook-detail.webp',
+    alt: 'A weathered brown leather cookbook held in a Manna Bakery prep area',
+  },
+  recipeBooks: {
+    src: '/images/manna-recipe-books.webp',
+    alt: 'Manna Bakery’s leather-bound recipe books — Bread, Gluten Free, Pastries',
+  },
+  danishPrep: {
+    src: '/images/manna-danish-prep.webp',
+    alt: 'A baker’s hand spooning chocolate filling into fresh danish pastries',
+  },
 };
 
 /* ─── floating story image with parallax ─── */
@@ -260,6 +272,20 @@ export default function OurStoryPage() {
 
       <Divider />
 
+      {/* ─── SUPPORTING VISUAL: cookbook ─── */}
+      <section className="py-6 md:py-10 px-5 sm:px-6 md:px-10">
+        <FadeIn>
+          <div className="max-w-md mx-auto">
+            <StoryImage
+              src={STORY_IMAGES.cookbook.src}
+              alt={STORY_IMAGES.cookbook.alt}
+              side="right"
+              aspectRatio="aspect-[4/5]"
+            />
+          </div>
+        </FadeIn>
+      </section>
+
       {/* ─── CHAPTER 2: THE BREAKING ─── */}
       <section className="py-10 md:py-16 px-5 sm:px-6 md:px-10">
         <div className="max-w-6xl mx-auto">
@@ -400,6 +426,17 @@ export default function OurStoryPage() {
               </p>
             </FadeIn>
 
+            <FadeIn delay={0.3}>
+              <div className="my-10 max-w-md mx-auto">
+                <StoryImage
+                  src={STORY_IMAGES.recipeBooks.src}
+                  alt={STORY_IMAGES.recipeBooks.alt}
+                  side="left"
+                  aspectRatio="aspect-[4/5]"
+                />
+              </div>
+            </FadeIn>
+
             <FadeIn delay={0.35}>
               <div className="bg-brand-forest-mid/50 rounded-2xl p-5 sm:p-8 md:p-10 border-l-4 border-brand-gold relative">
                 <span className="font-display text-5xl sm:text-7xl text-brand-gold/20 absolute top-2 left-4 sm:top-3 sm:left-6 leading-none">
@@ -521,6 +558,17 @@ export default function OurStoryPage() {
                 just because of the Jerusalem-inspired arches or the warm timber
                 beams, but because of the spirit of welcome that fills the space.
               </p>
+            </FadeIn>
+
+            <FadeIn delay={0.3}>
+              <div className="my-10 max-w-md mx-auto">
+                <StoryImage
+                  src={STORY_IMAGES.danishPrep.src}
+                  alt={STORY_IMAGES.danishPrep.alt}
+                  side="right"
+                  aspectRatio="aspect-[4/5]"
+                />
+              </div>
             </FadeIn>
 
             <FadeIn delay={0.35}>

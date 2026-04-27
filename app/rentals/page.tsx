@@ -16,16 +16,16 @@ import { useRef } from 'react';
 /* ─── rental images ─── */
 const RENTAL_IMAGES = {
   space: {
-    src: '/images/manainside.webp',
-    alt: 'Manna Bakery private event space with warm timber beams and greenery',
+    src: '/images/manna-pergola-lounge.webp',
+    alt: 'Manna Bakery lounge under a reclaimed timber pergola with cognac leather seating',
   },
   inside: {
-    src: '/images/ScreenShot20241125at111415AM.webp',
+    src: '/images/manna-conference-room.webp',
     alt: 'Manna Bakery conference room with wood panel walls and community table',
   },
   interior: {
-    src: '/images/TR5_3320edit.webp',
-    alt: 'Manna Bakery interior featuring arched alcoves and warm lighting',
+    src: '/images/manna-cognac-lounge.webp',
+    alt: 'Manna Bakery interior with cognac leather chairs and abundant greenery beneath tall windows',
   },
 };
 
@@ -654,9 +654,24 @@ export default function RentalsPage() {
 
       {/* ─── ADD-ONS / BARISTA ─── */}
       <section className="py-16 md:py-24 px-5 sm:px-6 md:px-10">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            <div className="lg:col-span-7">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+            {/* Image column */}
+            <div className="lg:col-span-6 lg:order-1">
+              <FadeIn direction="left">
+                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-xl">
+                  <ParallaxImage
+                    src="/images/manna-espresso-pour.webp"
+                    alt="A barista's hands steaming milk at the espresso machine"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    speed={-0.25}
+                  />
+                </div>
+              </FadeIn>
+            </div>
+
+            {/* Text + price card column */}
+            <div className="lg:col-span-6 lg:order-2 lg:col-start-7">
               <FadeIn>
                 <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-4">
                   Add-On
@@ -675,14 +690,12 @@ export default function RentalsPage() {
               </FadeIn>
 
               <FadeIn delay={0.25}>
-                <p className="font-body text-sm text-white/65 leading-[1.7]">
+                <p className="font-body text-sm text-white/65 leading-[1.7] mb-6">
                   Discounted flat rate for the night: <span className="text-white">$5 small</span> &middot; <span className="text-white">$6 large</span>.
                 </p>
               </FadeIn>
-            </div>
 
-            <div className="lg:col-span-5">
-              <FadeIn delay={0.2} direction="right">
+              <FadeIn delay={0.3}>
                 <div className="bg-brand-gold/10 rounded-2xl p-7 sm:p-8 border border-brand-gold/40 text-center">
                   <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-3">
                     Barista Service
