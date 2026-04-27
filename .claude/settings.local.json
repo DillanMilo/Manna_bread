@@ -30,7 +30,10 @@
       "Bash(git push:*)",
       "Bash(/tmp/story_analysis.txt:*)",
       "Read(//tmp/**)",
-      "Bash(/tmp/cards_analysis.txt:*)"
+      "Bash(/tmp/cards_analysis.txt:*)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(pkill -f \"next-server\")",
+      "Bash(rm -rf node_modules package-lock.json)"
     ]
   }
 }
