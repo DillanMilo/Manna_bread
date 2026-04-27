@@ -168,13 +168,13 @@ function CateringParallaxImage() {
     target: ref,
     offset: ['start end', 'end start'],
   });
-  const y = useTransform(scrollYProgress, [0, 1], [30, -30]);
+  const y = useTransform(scrollYProgress, [0, 1], [80, -80]);
 
   return (
     <div ref={ref} className="relative aspect-[3/4] rounded-t-full rounded-b-2xl overflow-hidden shadow-xl">
       <motion.div
         style={{ y }}
-        className="absolute -top-[15%] -bottom-[15%] left-0 right-0 will-change-transform"
+        className="absolute -top-[28%] -bottom-[28%] left-0 right-0 will-change-transform"
       >
         <Image
           src="/images/manna-strawberry-waffle.webp"
@@ -196,13 +196,13 @@ function QuoteParallaxImage() {
     target: ref,
     offset: ['start end', 'end start'],
   });
-  const y = useTransform(scrollYProgress, [0, 1], [25, -25]);
+  const y = useTransform(scrollYProgress, [0, 1], [70, -70]);
 
   return (
     <div ref={ref} className="relative aspect-[4/5] rounded-t-full rounded-b-2xl overflow-hidden shadow-xl">
       <motion.div
         style={{ y }}
-        className="absolute -top-[12%] -bottom-[12%] left-0 right-0 will-change-transform"
+        className="absolute -top-[25%] -bottom-[25%] left-0 right-0 will-change-transform"
       >
         <Image
           src="/images/manna-quiche-fruit.webp"
@@ -223,7 +223,7 @@ function ParallaxImage({
   alt,
   className = '',
   sizes,
-  speed = 30,
+  speed = 70,
   objectPosition = 'center',
 }: {
   src: string;
@@ -244,7 +244,7 @@ function ParallaxImage({
     <div ref={ref} className={`relative overflow-hidden ${className}`}>
       <motion.div
         style={{ y }}
-        className="absolute -top-[15%] -bottom-[15%] left-0 right-0 will-change-transform"
+        className="absolute -top-[28%] -bottom-[28%] left-0 right-0 will-change-transform"
       >
         <Image
           src={src}
@@ -366,7 +366,7 @@ export default function CateringPage() {
               alt="A breakfast spread of croissant sandwich and grilled cheese with fresh fruit"
               className="aspect-[16/9] sm:aspect-[21/9] rounded-2xl shadow-xl"
               sizes="(max-width: 1024px) 100vw, 1024px"
-              speed={40}
+              speed={90}
             />
           </div>
         </FadeIn>
@@ -522,7 +522,7 @@ export default function CateringPage() {
               alt="A flat white with rosetta latte art on a marble counter"
               className="aspect-[4/3] rounded-2xl shadow-lg"
               sizes="(max-width: 768px) 100vw, 50vw"
-              speed={25}
+              speed={65}
             />
           </FadeIn>
           <FadeIn delay={0.15}>
@@ -531,7 +531,7 @@ export default function CateringPage() {
               alt="Grilled panini with kettle chips on marble, gold flatware and baby's breath"
               className="aspect-[4/3] rounded-2xl shadow-lg"
               sizes="(max-width: 768px) 100vw, 50vw"
-              speed={25}
+              speed={65}
             />
           </FadeIn>
         </div>
@@ -614,7 +614,7 @@ export default function CateringPage() {
               alt="Tomato basil soup with bread on marble, baby's breath in a clear vase"
               className="aspect-[3/2] rounded-2xl shadow-xl"
               sizes="(max-width: 768px) 100vw, 768px"
-              speed={25}
+              speed={70}
               objectPosition="center 60%"
             />
           </FadeIn>
