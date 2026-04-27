@@ -160,34 +160,6 @@ const SOUP_FLAVORS: string[] = [
   'Zuppa Toscano',
 ];
 
-/* ─── parallax image for CTA ─── */
-
-function CateringParallaxImage() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], [80, -80]);
-
-  return (
-    <div ref={ref} className="relative aspect-[3/4] rounded-t-full rounded-b-2xl overflow-hidden shadow-xl">
-      <motion.div
-        style={{ y }}
-        className="absolute -top-[28%] -bottom-[28%] left-0 right-0 will-change-transform"
-      >
-        <Image
-          src="/images/manna-strawberry-waffle.webp"
-          alt="Strawberry waffle plated on marble with gold flatware and baby's breath"
-          fill
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, 40vw"
-        />
-      </motion.div>
-    </div>
-  );
-}
-
 /* ─── parallax image for quote section ─── */
 
 function QuoteParallaxImage() {
@@ -532,6 +504,7 @@ export default function CateringPage() {
               className="aspect-[4/3] rounded-2xl shadow-lg"
               sizes="(max-width: 768px) 100vw, 50vw"
               speed={65}
+              objectPosition="center 75%"
             />
           </FadeIn>
         </div>
@@ -654,14 +627,21 @@ export default function CateringPage() {
       {/* ─── CLOSING CTA ─── */}
       <section className="py-20 md:py-28 bg-brand-forest-mid">
         <div className="max-w-5xl mx-auto px-5 sm:px-6 md:px-10">
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 sm:gap-10 md:gap-14 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-10 md:gap-14 items-center">
             {/* Image — gathering / event scene */}
-            <FadeIn className="md:col-span-2">
-              <CateringParallaxImage />
+            <FadeIn className="md:col-span-6">
+              <ParallaxImage
+                src="/images/manna-strawberry-waffle.webp"
+                alt="Strawberry waffle plated on marble with gold flatware and baby's breath"
+                className="aspect-[3/4] rounded-t-full rounded-b-2xl shadow-xl"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                speed={70}
+                objectPosition="center 70%"
+              />
             </FadeIn>
 
             {/* Text */}
-            <div className="md:col-span-3 text-center md:text-left">
+            <div className="md:col-span-6 text-center md:text-left">
               <FadeIn>
                 <p className="font-accent text-lg md:text-xl italic text-white/60 mb-3">
                   Let us bring the warmth to your table
