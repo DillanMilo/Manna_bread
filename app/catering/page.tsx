@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { FadeIn, LineDraw, StaggerContainer, StaggerItem } from '@/components/ui/Motion';
 import { Button } from '@/components/ui/Button';
 import { CONTACT } from '@/lib/constants';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 /* ─── types ─── */
@@ -164,6 +164,8 @@ const SOUP_FLAVORS: string[] = [
 
 function QuoteParallaxImage() {
   const ref = useRef<HTMLDivElement>(null);
+  const inViewRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(inViewRef, { once: true, amount: 0.25 });
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
@@ -171,20 +173,30 @@ function QuoteParallaxImage() {
   const y = useTransform(scrollYProgress, [0, 1], [70, -70]);
 
   return (
-    <div ref={ref} className="relative aspect-[4/5] rounded-t-full rounded-b-2xl overflow-hidden shadow-xl">
-      <motion.div
-        style={{ y }}
-        className="absolute -top-[25%] -bottom-[25%] left-0 right-0 will-change-transform"
-      >
-        <Image
-          src="/images/manna-quiche-fruit.webp"
-          alt="House-made quiche with side fruit cup, plated on marble with gold flatware"
-          fill
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, 40vw"
-        />
-      </motion.div>
-    </div>
+    <motion.div
+      ref={inViewRef}
+      initial={{ opacity: 0, scale: 1.06, filter: 'blur(14px)', clipPath: 'inset(8% 0% 8% 0% round 9999px 9999px 16px 16px)' }}
+      animate={isInView
+        ? { opacity: 1, scale: 1, filter: 'blur(0px)', clipPath: 'inset(0% 0% 0% 0% round 9999px 9999px 16px 16px)' }
+        : {}}
+      transition={{ duration: 1.1, ease: [0.22, 0.61, 0.36, 1] }}
+      className="relative aspect-[4/5] rounded-t-full rounded-b-2xl overflow-hidden shadow-xl"
+    >
+      <div ref={ref} className="absolute inset-0">
+        <motion.div
+          style={{ y }}
+          className="absolute -top-[25%] -bottom-[25%] left-0 right-0 will-change-transform"
+        >
+          <Image
+            src="/images/manna-quiche-fruit.webp"
+            alt="House-made quiche with side fruit cup, plated on marble with gold flatware"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 40vw"
+          />
+        </motion.div>
+      </div>
+    </motion.div>
   );
 }
 
@@ -197,6 +209,7 @@ function ParallaxImage({
   sizes,
   speed = 70,
   objectPosition = 'center',
+  reveal = 'wipe-up',
 }: {
   src: string;
   alt: string;
@@ -204,30 +217,50 @@ function ParallaxImage({
   sizes?: string;
   speed?: number;
   objectPosition?: string;
+  reveal?: 'wipe-up' | 'wipe-down' | 'wipe-left' | 'wipe-right' | 'zoom';
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  const inViewRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(inViewRef, { once: true, amount: 0.2 });
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
   });
   const y = useTransform(scrollYProgress, [0, 1], [speed, -speed]);
 
+  const initialClip =
+    reveal === 'wipe-up'    ? 'inset(15% 0% 0% 0%)'
+    : reveal === 'wipe-down'? 'inset(0% 0% 15% 0%)'
+    : reveal === 'wipe-left'? 'inset(0% 0% 0% 15%)'
+    : reveal === 'wipe-right'?'inset(0% 15% 0% 0%)'
+    : 'inset(0% 0% 0% 0%)';
+
   return (
-    <div ref={ref} className={`relative overflow-hidden ${className}`}>
-      <motion.div
-        style={{ y }}
-        className="absolute -top-[28%] -bottom-[28%] left-0 right-0 will-change-transform"
-      >
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          sizes={sizes}
-          className="object-cover"
-          style={{ objectPosition }}
-        />
-      </motion.div>
-    </div>
+    <motion.div
+      ref={inViewRef}
+      initial={{ opacity: 0, scale: 1.08, filter: 'blur(12px)', clipPath: initialClip }}
+      animate={isInView
+        ? { opacity: 1, scale: 1, filter: 'blur(0px)', clipPath: 'inset(0% 0% 0% 0%)' }
+        : {}}
+      transition={{ duration: 1.1, ease: [0.22, 0.61, 0.36, 1] }}
+      className={`relative overflow-hidden ${className}`}
+    >
+      <div ref={ref} className="absolute inset-0">
+        <motion.div
+          style={{ y }}
+          className="absolute -top-[28%] -bottom-[28%] left-0 right-0 will-change-transform"
+        >
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            sizes={sizes}
+            className="object-cover"
+            style={{ objectPosition }}
+          />
+        </motion.div>
+      </div>
+    </motion.div>
   );
 }
 
@@ -331,17 +364,16 @@ export default function CateringPage() {
         </div>
 
         {/* Hero image — catering spread / table setting */}
-        <FadeIn delay={0.5}>
-          <div className="max-w-5xl mx-auto mt-8 sm:mt-12 md:mt-16 px-5 sm:px-6 md:px-10">
-            <ParallaxImage
-              src="/images/manna-breakfast-spread.webp"
-              alt="A breakfast spread of croissant sandwich and grilled cheese with fresh fruit"
-              className="aspect-[16/9] sm:aspect-[21/9] rounded-2xl shadow-xl"
-              sizes="(max-width: 1024px) 100vw, 1024px"
-              speed={90}
-            />
-          </div>
-        </FadeIn>
+        <div className="max-w-5xl mx-auto mt-8 sm:mt-12 md:mt-16 px-5 sm:px-6 md:px-10">
+          <ParallaxImage
+            src="/images/manna-breakfast-spread.webp"
+            alt="A breakfast spread of croissant sandwich and grilled cheese with fresh fruit"
+            className="aspect-[16/9] sm:aspect-[21/9] rounded-2xl shadow-xl"
+            sizes="(max-width: 1024px) 100vw, 1024px"
+            speed={90}
+            reveal="zoom"
+          />
+        </div>
       </section>
 
       {/* ─── PASTRY TRAYS ─── */}
@@ -488,25 +520,23 @@ export default function CateringPage() {
       {/* ─── IMAGE BREAK: Two-up food photography ─── */}
       <section className="py-12 md:py-16 px-5 sm:px-6 md:px-10">
         <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-          <FadeIn>
-            <ParallaxImage
-              src="/images/manna-latte-art.webp"
-              alt="A flat white with rosetta latte art on a marble counter"
-              className="aspect-[4/3] rounded-2xl shadow-lg"
-              sizes="(max-width: 768px) 100vw, 50vw"
-              speed={65}
-            />
-          </FadeIn>
-          <FadeIn delay={0.15}>
-            <ParallaxImage
-              src="/images/manna-grilled-panini.webp"
-              alt="Grilled panini with kettle chips on marble, gold flatware and baby's breath"
-              className="aspect-[4/3] rounded-2xl shadow-lg"
-              sizes="(max-width: 768px) 100vw, 50vw"
-              speed={65}
-              objectPosition="center 75%"
-            />
-          </FadeIn>
+          <ParallaxImage
+            src="/images/manna-latte-art.webp"
+            alt="A flat white with rosetta latte art on a marble counter"
+            className="aspect-[4/3] rounded-2xl shadow-lg"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            speed={65}
+            reveal="wipe-right"
+          />
+          <ParallaxImage
+            src="/images/manna-grilled-panini.webp"
+            alt="Grilled panini with kettle chips on marble, gold flatware and baby's breath"
+            className="aspect-[4/3] rounded-2xl shadow-lg"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            speed={65}
+            objectPosition="center 75%"
+            reveal="wipe-left"
+          />
         </div>
       </section>
 
@@ -581,16 +611,15 @@ export default function CateringPage() {
       {/* ─── IMAGE BREAK: Soup / kitchen scene ─── */}
       <section className="py-12 md:py-16 px-5 sm:px-6 md:px-10">
         <div className="max-w-3xl mx-auto">
-          <FadeIn>
-            <ParallaxImage
-              src="/images/manna-tomato-soup.webp"
-              alt="Tomato basil soup with bread on marble, baby's breath in a clear vase"
-              className="aspect-[3/2] rounded-2xl shadow-xl"
-              sizes="(max-width: 768px) 100vw, 768px"
-              speed={70}
-              objectPosition="center 60%"
-            />
-          </FadeIn>
+          <ParallaxImage
+            src="/images/manna-tomato-soup.webp"
+            alt="Tomato basil soup with bread on marble, baby's breath in a clear vase"
+            className="aspect-[3/2] rounded-2xl shadow-xl"
+            sizes="(max-width: 768px) 100vw, 768px"
+            speed={70}
+            objectPosition="center 60%"
+            reveal="zoom"
+          />
         </div>
       </section>
 
