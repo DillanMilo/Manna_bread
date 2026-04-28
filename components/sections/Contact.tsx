@@ -4,11 +4,14 @@ import Image from "next/image";
 import { CONTACT } from "@/lib/constants";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import { MannaMap, MapInfoCard } from "@/components/ui/MannaMap";
+import { VineAccent } from "@/components/ui/ScrollVine";
 
 export function Contact() {
   return (
-    <section className="relative py-12 sm:py-16 md:py-20 lg:py-28 bg-brand-forest-mid overflow-hidden">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
+    <section className="relative isolate py-12 sm:py-16 md:py-20 lg:py-28 bg-brand-forest-mid overflow-hidden">
+      <VineAccent variant="left" className="z-0 opacity-55" />
+
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
           {/* Contact Info */}
           <div>

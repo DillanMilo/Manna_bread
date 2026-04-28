@@ -4,6 +4,7 @@ import { SectionHeader } from '@/components/ui/SectionHeader';
 import { MenuCard } from '@/components/ui/MenuCard';
 import { Button } from '@/components/ui/Button';
 import { FadeIn, StaggerContainer, StaggerItem, ScaleIn } from '@/components/ui/Motion';
+import { VineAccent } from '@/components/ui/ScrollVine';
 
 const FEATURED_ITEMS = [
   {
@@ -28,8 +29,10 @@ const FEATURED_ITEMS = [
 
 export function FeaturedMenu() {
   return (
-    <section className="py-14 sm:py-20 md:py-28 bg-brand-forest-mid">
-      <div className="max-w-6xl mx-auto px-5 sm:px-6 md:px-10">
+    <section className="relative isolate overflow-hidden py-14 sm:py-20 md:py-28 bg-brand-forest-mid">
+      <VineAccent variant="right" className="z-0 opacity-75" />
+
+      <div className="relative z-10 max-w-6xl mx-auto px-5 sm:px-6 md:px-10">
         <FadeIn>
           <SectionHeader
             label="From Our Kitchen"

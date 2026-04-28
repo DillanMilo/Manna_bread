@@ -1,10 +1,11 @@
 'use client';
 
 import Image from 'next/image';
-import { FadeIn, LineDraw, Parallax } from '@/components/ui/Motion';
+import { FadeIn, LineDraw } from '@/components/ui/Motion';
 import { QuoteBlock } from '@/components/ui/QuoteBlock';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { PageVine } from '@/components/ui/ScrollVine';
 
 const organic = [0.25, 0.4, 0.25, 1] as const;
 
@@ -199,8 +200,16 @@ function ClosingImage() {
    OUR STORY PAGE
    ═══════════════════════════════════════════ */
 export default function OurStoryPage() {
+  const pageRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: pageRef,
+    offset: ['start 72%', 'end 24%'],
+  });
+
   return (
-    <main className="bg-brand-forest min-h-screen">
+    <main ref={pageRef} className="relative isolate bg-brand-forest min-h-screen overflow-hidden">
+      <PageVine variant="story" progress={scrollYProgress} className="z-0 opacity-85" />
+      <div className="relative z-10">
       {/* ─── HERO ─── */}
       <section className="pt-24 sm:pt-32 md:pt-44 pb-12 sm:pb-16 md:pb-20 px-5 sm:px-6 md:px-10">
         <div className="max-w-4xl mx-auto text-center">
@@ -618,6 +627,7 @@ export default function OurStoryPage() {
           </FadeIn>
         </div>
       </section>
+      </div>
     </main>
   );
 }
