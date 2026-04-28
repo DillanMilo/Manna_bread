@@ -30,13 +30,9 @@ export function ScrollVine({ progress, className = "" }: ScrollVineProps) {
   const draw = useTransform(progress, [0.08, 0.86], [0, 1]);
   const branchDraw = useTransform(progress, [0.2, 0.82], [0, 1]);
   const leafOpacity = useTransform(progress, [0.18, 0.32, 0.78, 0.9], [0, 0.55, 0.55, 0]);
-  const flowOffset = useTransform(progress, [0, 1], [-0.12, 0.96]);
   const drift = useTransform(progress, [0, 1], prefersReducedMotion ? [0, 0] : [18, -18]);
 
   const pathStyle = prefersReducedMotion ? { pathLength: 1 } : { pathLength: draw };
-  const flowStyle = prefersReducedMotion
-    ? { pathLength: 0 }
-    : { pathLength: 0.18, pathOffset: flowOffset, pathSpacing: 1 };
   const branchStyle = prefersReducedMotion ? { pathLength: 1 } : { pathLength: branchDraw };
   const leafStyle = prefersReducedMotion ? { opacity: 0.45 } : { opacity: leafOpacity };
 
@@ -66,17 +62,6 @@ export function ScrollVine({ progress, className = "" }: ScrollVineProps) {
           style={pathStyle}
           className="stroke-brand-gold/35"
           strokeWidth="2"
-          fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
-          filter="url(#pencil)"
-        />
-        <motion.path
-          d="M255 22 C178 128 216 225 145 315 C80 398 126 490 205 545 C286 602 278 696 186 755 C101 810 120 914 202 980 C256 1024 252 1084 190 1156"
-          style={flowStyle}
-          className="stroke-brand-gold/55"
-          strokeWidth="2.35"
           fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -148,17 +133,6 @@ export function ScrollVine({ progress, className = "" }: ScrollVineProps) {
           vectorEffect="non-scaling-stroke"
           filter="url(#pencil)"
         />
-        <motion.path
-          d="M1095 34 C870 118 850 270 1018 336 C1185 402 1174 520 944 572 C711 625 555 714 650 824 C744 934 960 874 1018 1004 C1038 1050 1009 1081 950 1102"
-          style={flowStyle}
-          className="stroke-brand-gold/52"
-          strokeWidth="2.35"
-          fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
-          filter="url(#pencil)"
-        />
         <motion.g style={branchStyle} className="stroke-brand-sage-light/24">
           <path
             d="M952 222 C898 190 850 148 806 95"
@@ -217,7 +191,6 @@ export function VineAccent({ variant = "right", className = "" }: VineAccentProp
   });
 
   const draw = useTransform(scrollYProgress, [0.04, 0.74], [0, 1]);
-  const flowOffset = useTransform(scrollYProgress, [0, 1], [-0.14, 0.96]);
   const leafOpacity = useTransform(
     scrollYProgress,
     [0.1, 0.26, 0.68, 0.86],
@@ -230,9 +203,6 @@ export function VineAccent({ variant = "right", className = "" }: VineAccentProp
   );
 
   const pathStyle = prefersReducedMotion ? { pathLength: 1 } : { pathLength: draw };
-  const flowStyle = prefersReducedMotion
-    ? { pathLength: 0 }
-    : { pathLength: 0.18, pathOffset: flowOffset, pathSpacing: 1 };
   const leafStyle = prefersReducedMotion ? { opacity: 0.3 } : { opacity: leafOpacity };
   const isLeft = variant === "left";
   const isLow = variant === "low";
@@ -259,23 +229,8 @@ export function VineAccent({ variant = "right", className = "" }: VineAccentProp
               : "M298 20 C212 112 248 202 164 284 C86 360 132 450 216 510 C278 554 268 636 176 700"
           }
           style={pathStyle}
-          className="stroke-brand-gold/20"
+          className="stroke-brand-gold/28"
           strokeWidth="1.8"
-          fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
-          filter="url(#pencil)"
-        />
-        <motion.path
-          d={
-            isLeft
-              ? "M92 20 C178 112 142 202 226 284 C304 360 258 450 174 510 C112 554 122 636 214 700"
-              : "M298 20 C212 112 248 202 164 284 C86 360 132 450 216 510 C278 554 268 636 176 700"
-          }
-          style={flowStyle}
-          className="stroke-brand-gold/40"
-          strokeWidth="2.15"
           fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -304,23 +259,8 @@ export function VineAccent({ variant = "right", className = "" }: VineAccentProp
               : "M780 34 C622 86 584 198 686 270 C782 338 724 446 562 482 C430 512 388 560 426 604"
           }
           style={pathStyle}
-          className="stroke-brand-gold/18"
+          className="stroke-brand-gold/26"
           strokeWidth="1.8"
-          fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
-          filter="url(#pencil)"
-        />
-        <motion.path
-          d={
-            isLeft
-              ? "M120 34 C278 86 316 198 214 270 C118 338 176 446 338 482 C470 512 512 560 474 604"
-              : "M780 34 C622 86 584 198 686 270 C782 338 724 446 562 482 C430 512 388 560 426 604"
-          }
-          style={flowStyle}
-          className="stroke-brand-gold/38"
-          strokeWidth="2.15"
           fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -345,14 +285,13 @@ export function PageVine({ variant, progress, className = "" }: PageVineProps) {
   });
   const pageProgress = progress ?? scrollYProgress;
 
-  const draw = useTransform(pageProgress, [0.02, 0.9], [0, 1]);
-  const branchDraw = useTransform(pageProgress, [0.12, 0.84], [0, 1]);
+  const draw = useTransform(pageProgress, [0, 0.68], [0, 1]);
+  const branchDraw = useTransform(pageProgress, [0.06, 0.62], [0, 1]);
   const leafOpacity = useTransform(
     pageProgress,
-    [0.08, 0.2, 0.78, 0.92],
+    [0.04, 0.16, 0.68, 0.82],
     [0, 0.32, 0.32, 0],
   );
-  const flowOffset = useTransform(pageProgress, [0, 1], [-0.14, 0.96]);
   const drift = useTransform(
     pageProgress,
     [0, 1],
@@ -360,9 +299,6 @@ export function PageVine({ variant, progress, className = "" }: PageVineProps) {
   );
 
   const pathStyle = prefersReducedMotion ? { pathLength: 1 } : { pathLength: draw };
-  const flowStyle = prefersReducedMotion
-    ? { pathLength: 0 }
-    : { pathLength: 0.2, pathOffset: flowOffset, pathSpacing: 1 };
   const branchStyle = prefersReducedMotion ? { pathLength: 1 } : { pathLength: branchDraw };
   const leafStyle = prefersReducedMotion ? { opacity: 0.24 } : { opacity: leafOpacity };
   const isStory = variant === "story";
@@ -382,22 +318,20 @@ export function PageVine({ variant, progress, className = "" }: PageVineProps) {
         style={{ y: drift }}
       >
         <VineTexture />
-        <motion.path
+        <path
           d="M274 34 C160 205 218 386 118 548 C42 672 86 804 204 914 C304 1008 306 1148 178 1242 C62 1328 96 1498 228 1612 C332 1702 316 1858 162 1958 C54 2028 78 2198 204 2328 C318 2446 304 2606 176 2710 C86 2784 96 2922 214 3068"
-          style={pathStyle}
-          className="stroke-brand-gold/20"
-          strokeWidth="1.9"
+          className="stroke-brand-sage/12"
+          strokeWidth="2"
           fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"
           vectorEffect="non-scaling-stroke"
-          filter="url(#pencil)"
         />
         <motion.path
           d="M274 34 C160 205 218 386 118 548 C42 672 86 804 204 914 C304 1008 306 1148 178 1242 C62 1328 96 1498 228 1612 C332 1702 316 1858 162 1958 C54 2028 78 2198 204 2328 C318 2446 304 2606 176 2710 C86 2784 96 2922 214 3068"
-          style={flowStyle}
-          className="stroke-brand-gold/55"
-          strokeWidth="2.6"
+          style={pathStyle}
+          className="stroke-brand-gold/44"
+          strokeWidth="2.1"
           fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -429,22 +363,20 @@ export function PageVine({ variant, progress, className = "" }: PageVineProps) {
         style={{ y: drift }}
       >
         <VineTexture />
-        <motion.path
+        <path
           d="M1190 40 C890 196 836 402 1050 560 C1280 730 1120 922 780 1008 C430 1096 340 1302 604 1460 C888 1630 1088 1784 836 1970 C606 2140 344 2268 560 2460 C736 2616 1014 2598 1068 2800 C1092 2890 1036 2948 920 2980"
-          style={pathStyle}
-          className="stroke-brand-gold/18"
-          strokeWidth="1.9"
+          className="stroke-brand-sage/12"
+          strokeWidth="2"
           fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"
           vectorEffect="non-scaling-stroke"
-          filter="url(#pencil)"
         />
         <motion.path
           d="M1190 40 C890 196 836 402 1050 560 C1280 730 1120 922 780 1008 C430 1096 340 1302 604 1460 C888 1630 1088 1784 836 1970 C606 2140 344 2268 560 2460 C736 2616 1014 2598 1068 2800 C1092 2890 1036 2948 920 2980"
-          style={flowStyle}
-          className="stroke-brand-gold/52"
-          strokeWidth="2.6"
+          style={pathStyle}
+          className="stroke-brand-gold/42"
+          strokeWidth="2.1"
           fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"

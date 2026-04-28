@@ -203,7 +203,7 @@ export default function OurStoryPage() {
   const pageRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: pageRef,
-    offset: ['start 72%', 'end 24%'],
+    offset: ['start start', 'end end'],
   });
 
   return (
