@@ -25,6 +25,10 @@ type PageVineProps = {
   className?: string;
 };
 
+type GiftCardVineProps = {
+  className?: string;
+};
+
 export function ScrollVine({ progress, className = "" }: ScrollVineProps) {
   const prefersReducedMotion = useReducedMotion();
   const draw = useTransform(progress, [0.02, 0.58], [0, 1]);
@@ -673,6 +677,123 @@ export function PageVine({ variant, progress, className = "" }: PageVineProps) {
           <Leaf d="M958 1900 C928 1892 914 1870 922 1844 C952 1852 966 1874 958 1900Z" />
         </motion.g>
       </motion.svg>
+    </div>
+  );
+}
+
+export function GiftCardVine({ className = "" }: GiftCardVineProps) {
+  const prefersReducedMotion = useReducedMotion();
+  const giftEase = [0.25, 0.4, 0.25, 1] as const;
+  const lineTransition = prefersReducedMotion
+    ? { duration: 0 }
+    : { duration: 2.2, ease: giftEase };
+  const branchTransition = prefersReducedMotion
+    ? { duration: 0 }
+    : { duration: 1.4, delay: 0.65, ease: giftEase };
+  const leafTransition = prefersReducedMotion
+    ? { duration: 0 }
+    : { duration: 0.8, delay: 1.1, ease: giftEase };
+
+  return (
+    <div
+      aria-hidden="true"
+      className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}
+    >
+      <svg
+        viewBox="0 0 390 760"
+        preserveAspectRatio="none"
+        className="absolute inset-0 h-full w-full md:hidden"
+      >
+        <VineTexture />
+        <path
+          d="M300 26 C210 120 248 226 150 318 C54 408 98 520 222 590 C298 634 288 694 196 738"
+          className="stroke-brand-sage/12"
+          strokeWidth="2.2"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
+        />
+        <motion.path
+          d="M300 26 C210 120 248 226 150 318 C54 408 98 520 222 590 C298 634 288 694 196 738"
+          initial={{ pathLength: prefersReducedMotion ? 1 : 0 }}
+          animate={{ pathLength: 1 }}
+          transition={lineTransition}
+          className="stroke-brand-gold/42"
+          strokeWidth="2"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
+          filter="url(#pencil)"
+        />
+        <motion.g
+          initial={{ pathLength: prefersReducedMotion ? 1 : 0 }}
+          animate={{ pathLength: 1 }}
+          transition={branchTransition}
+          className="stroke-brand-sage-light/24"
+        >
+          <path d="M154 316 C124 286 100 250 82 204" strokeWidth="1.25" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+          <path d="M222 590 C258 562 286 524 306 474" strokeWidth="1.25" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+        </motion.g>
+        <motion.g
+          initial={{ opacity: prefersReducedMotion ? 0.3 : 0 }}
+          animate={{ opacity: 0.3 }}
+          transition={leafTransition}
+          className="fill-none stroke-brand-sage-light/30"
+        >
+          <Leaf d="M82 204 C104 194 120 202 126 224 C104 230 90 224 82 204Z" />
+          <Leaf d="M306 474 C284 466 274 448 282 428 C304 436 314 454 306 474Z" />
+        </motion.g>
+      </svg>
+
+      <svg
+        viewBox="0 0 1440 760"
+        preserveAspectRatio="none"
+        className="absolute inset-0 hidden h-full w-full md:block"
+      >
+        <VineTexture />
+        <path
+          d="M1110 28 C880 96 824 230 982 328 C1150 432 1068 560 800 616 C606 656 544 704 586 744"
+          className="stroke-brand-sage/12"
+          strokeWidth="2.2"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
+        />
+        <motion.path
+          d="M1110 28 C880 96 824 230 982 328 C1150 432 1068 560 800 616 C606 656 544 704 586 744"
+          initial={{ pathLength: prefersReducedMotion ? 1 : 0 }}
+          animate={{ pathLength: 1 }}
+          transition={lineTransition}
+          className="stroke-brand-gold/40"
+          strokeWidth="2"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
+          filter="url(#pencil)"
+        />
+        <motion.g
+          initial={{ pathLength: prefersReducedMotion ? 1 : 0 }}
+          animate={{ pathLength: 1 }}
+          transition={branchTransition}
+          className="stroke-brand-sage-light/22"
+        >
+          <path d="M966 320 C910 282 864 232 828 166" strokeWidth="1.25" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+          <path d="M810 614 C884 578 940 520 978 444" strokeWidth="1.25" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+        </motion.g>
+        <motion.g
+          initial={{ opacity: prefersReducedMotion ? 0.28 : 0 }}
+          animate={{ opacity: 0.28 }}
+          transition={leafTransition}
+          className="fill-none stroke-brand-sage-light/28"
+        >
+          <Leaf d="M828 166 C858 156 878 170 884 198 C854 204 834 192 828 166Z" />
+          <Leaf d="M978 444 C948 436 934 414 942 388 C972 396 986 418 978 444Z" />
+        </motion.g>
+      </svg>
     </div>
   );
 }
