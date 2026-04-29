@@ -216,8 +216,8 @@ export default function RentalsPage() {
 
   return (
     <main ref={pageRef} className="relative isolate bg-brand-forest min-h-screen overflow-hidden">
-      <PageVine variant="rentals" progress={scrollYProgress} className="z-0 opacity-85" />
-      <div className="relative z-10">
+      <PageVine variant="rentals" progress={scrollYProgress} className="z-20 opacity-85" />
+      <div className="relative z-30">
       {/* ─── HERO ─── */}
       <section className="pt-24 sm:pt-32 md:pt-44 pb-12 sm:pb-16 md:pb-20 px-5 sm:px-6 md:px-10">
         <div className="max-w-4xl mx-auto text-center">
