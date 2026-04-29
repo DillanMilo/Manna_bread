@@ -11,9 +11,17 @@ interface ServiceCardProps {
   href: string;
   linkText?: string;
   image: string;
+  imagePosition?: string;
 }
 
-export function ServiceCard({ title, description, href, linkText = 'Learn more', image }: ServiceCardProps) {
+export function ServiceCard({
+  title,
+  description,
+  href,
+  linkText = 'Learn more',
+  image,
+  imagePosition = 'center',
+}: ServiceCardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -33,6 +41,7 @@ export function ServiceCard({ title, description, href, linkText = 'Learn more',
             alt={title}
             fill
             className="object-cover"
+            style={{ objectPosition: imagePosition }}
             sizes="(max-width: 768px) 100vw, 50vw"
           />
         </motion.div>

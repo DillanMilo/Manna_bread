@@ -18,6 +18,7 @@ export function Services() {
               href="/catering"
               linkText="Learn more"
               image="/images/manna-strawberry-waffle.webp"
+              imagePosition="center 68%"
             />
           </StaggerItem>
           <StaggerItem>
