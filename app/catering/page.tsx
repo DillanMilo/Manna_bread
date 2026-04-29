@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { FadeIn, LineDraw, StaggerContainer, StaggerItem } from '@/components/ui/Motion';
 import { Button } from '@/components/ui/Button';
+import { PageVine } from '@/components/ui/ScrollVine';
 import { CONTACT } from '@/lib/constants';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { useRef } from 'react';
@@ -330,8 +331,16 @@ function ItemGrid({ items }: { items: CateringItem[] }) {
    ═══════════════════════════════════════════ */
 
 export default function CateringPage() {
+  const pageRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: pageRef,
+    offset: ['start start', 'end end'],
+  });
+
   return (
-    <main className="bg-brand-forest min-h-screen">
+    <main ref={pageRef} className="relative isolate bg-brand-forest min-h-screen overflow-hidden">
+      <PageVine variant="catering" progress={scrollYProgress} className="z-0 opacity-85" />
+      <div className="relative z-10">
 
       {/* ─── HERO ─── */}
       <section className="pt-24 sm:pt-32 md:pt-44 pb-12 sm:pb-16 md:pb-20 px-5 sm:px-6 md:px-10">
@@ -699,6 +708,7 @@ export default function CateringPage() {
         </div>
       </section>
 
+      </div>
     </main>
   );
 }

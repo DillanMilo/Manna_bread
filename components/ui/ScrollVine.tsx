@@ -20,7 +20,7 @@ type VineAccentProps = {
 };
 
 type PageVineProps = {
-  variant: "story" | "menu";
+  variant: "story" | "menu" | "catering" | "rentals";
   progress?: MotionValue<number>;
   className?: string;
 };
@@ -285,11 +285,11 @@ export function PageVine({ variant, progress, className = "" }: PageVineProps) {
   });
   const pageProgress = progress ?? scrollYProgress;
 
-  const draw = useTransform(pageProgress, [0, 0.46], [0, 1]);
-  const branchDraw = useTransform(pageProgress, [0.04, 0.42], [0, 1]);
+  const draw = useTransform(pageProgress, [0, 0.42], [0, 1]);
+  const branchDraw = useTransform(pageProgress, [0.03, 0.38], [0, 1]);
   const leafOpacity = useTransform(
     pageProgress,
-    [0.02, 0.12, 0.48, 0.62],
+    [0.02, 0.1, 0.44, 0.58],
     [0, 0.32, 0.32, 0],
   );
   const drift = useTransform(
@@ -303,13 +303,15 @@ export function PageVine({ variant, progress, className = "" }: PageVineProps) {
   const leafStyle = prefersReducedMotion ? { opacity: 0.24 } : { opacity: leafOpacity };
   const isStory = variant === "story";
   const isMenu = variant === "menu";
+  const isCatering = variant === "catering";
+  const isRentals = variant === "rentals";
 
   return (
     <div
       ref={ref}
       aria-hidden="true"
       className={`pointer-events-none absolute inset-0 overflow-hidden ${
-        isStory || isMenu ? "" : "hidden"
+        isStory || isMenu || isCatering || isRentals ? "" : "hidden"
       } ${className}`}
     >
       <motion.svg
@@ -489,6 +491,186 @@ export function PageVine({ variant, progress, className = "" }: PageVineProps) {
           <Leaf d="M1294 544 C1266 536 1252 514 1260 488 C1288 496 1302 518 1294 544Z" />
           <Leaf d="M546 918 C576 908 596 922 602 950 C572 956 552 944 546 918Z" />
           <Leaf d="M1104 1272 C1076 1264 1062 1242 1070 1216 C1098 1224 1112 1246 1104 1272Z" />
+        </motion.g>
+      </motion.svg>
+
+      <motion.svg
+        viewBox="0 0 390 2200"
+        preserveAspectRatio="none"
+        className={`absolute inset-0 h-full w-full md:hidden ${
+          isCatering ? "" : "hidden"
+        }`}
+        style={{ y: drift }}
+      >
+        <VineTexture />
+        <path
+          d="M82 40 C178 146 140 278 260 386 C354 470 314 606 172 702 C62 778 92 930 250 1028 C348 1088 324 1230 170 1328 C58 1400 90 1550 232 1652 C334 1726 314 1900 150 2150"
+          className="stroke-brand-sage/12"
+          strokeWidth="2"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
+        />
+        <motion.path
+          d="M82 40 C178 146 140 278 260 386 C354 470 314 606 172 702 C62 778 92 930 250 1028 C348 1088 324 1230 170 1328 C58 1400 90 1550 232 1652 C334 1726 314 1900 150 2150"
+          style={pathStyle}
+          className="stroke-brand-gold/38"
+          strokeWidth="2"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
+          filter="url(#pencil)"
+        />
+        <motion.g style={branchStyle} className="stroke-brand-sage-light/20">
+          <path d="M250 378 C288 344 316 300 334 244" strokeWidth="1.2" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+          <path d="M172 702 C130 674 98 632 76 574" strokeWidth="1.2" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+          <path d="M250 1028 C288 1000 318 956 338 900" strokeWidth="1.2" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+          <path d="M170 1328 C130 1298 98 1254 76 1198" strokeWidth="1.2" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+          <path d="M232 1652 C270 1624 300 1580 320 1524" strokeWidth="1.2" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+        </motion.g>
+        <motion.g style={leafStyle} className="fill-none stroke-brand-sage-light/28">
+          <Leaf d="M334 244 C312 236 302 218 310 198 C332 206 342 224 334 244Z" />
+          <Leaf d="M76 574 C98 564 114 572 120 594 C98 600 84 594 76 574Z" />
+          <Leaf d="M338 900 C316 892 306 874 314 854 C336 862 346 880 338 900Z" />
+          <Leaf d="M76 1198 C98 1188 114 1196 120 1218 C98 1224 84 1218 76 1198Z" />
+          <Leaf d="M320 1524 C298 1516 288 1498 296 1478 C318 1486 328 1504 320 1524Z" />
+        </motion.g>
+      </motion.svg>
+
+      <motion.svg
+        viewBox="0 0 1440 2200"
+        preserveAspectRatio="none"
+        className={`absolute inset-0 hidden h-full w-full md:block ${
+          isCatering ? "md:block" : "md:hidden"
+        }`}
+        style={{ y: drift }}
+      >
+        <VineTexture />
+        <path
+          d="M180 40 C486 140 528 354 330 500 C132 646 260 850 620 914 C1000 982 1130 1160 864 1318 C608 1470 436 1640 680 1810 C880 1950 1110 1968 1230 2150"
+          className="stroke-brand-sage/12"
+          strokeWidth="2"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
+        />
+        <motion.path
+          d="M180 40 C486 140 528 354 330 500 C132 646 260 850 620 914 C1000 982 1130 1160 864 1318 C608 1470 436 1640 680 1810 C880 1950 1110 1968 1230 2150"
+          style={pathStyle}
+          className="stroke-brand-gold/36"
+          strokeWidth="2"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
+          filter="url(#pencil)"
+        />
+        <motion.g style={branchStyle} className="stroke-brand-sage-light/18">
+          <path d="M342 492 C270 448 214 388 174 306" strokeWidth="1.2" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+          <path d="M618 912 C700 862 764 794 810 706" strokeWidth="1.2" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+          <path d="M870 1310 C950 1264 1014 1198 1060 1110" strokeWidth="1.2" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+          <path d="M674 1806 C594 1772 526 1714 470 1628" strokeWidth="1.2" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+          <path d="M1230 2150 C1164 2118 1110 2062 1068 1982" strokeWidth="1.2" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+        </motion.g>
+        <motion.g style={leafStyle} className="fill-none stroke-brand-sage-light/26">
+          <Leaf d="M174 306 C204 296 224 310 230 338 C200 344 180 332 174 306Z" />
+          <Leaf d="M810 706 C780 698 766 676 774 650 C804 658 818 680 810 706Z" />
+          <Leaf d="M1060 1110 C1030 1102 1016 1080 1024 1054 C1054 1062 1068 1084 1060 1110Z" />
+          <Leaf d="M470 1628 C500 1618 520 1632 526 1660 C496 1666 476 1654 470 1628Z" />
+          <Leaf d="M1068 1982 C1098 1972 1118 1986 1124 2014 C1094 2020 1074 2008 1068 1982Z" />
+        </motion.g>
+      </motion.svg>
+
+      <motion.svg
+        viewBox="0 0 390 2100"
+        preserveAspectRatio="none"
+        className={`absolute inset-0 h-full w-full md:hidden ${
+          isRentals ? "" : "hidden"
+        }`}
+        style={{ y: drift }}
+      >
+        <VineTexture />
+        <path
+          d="M304 32 C200 146 240 294 126 410 C38 500 78 640 224 744 C344 830 332 984 184 1080 C62 1160 86 1318 238 1428 C340 1502 316 1664 166 1772 C72 1840 90 1986 250 2060"
+          className="stroke-brand-sage/12"
+          strokeWidth="2"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
+        />
+        <motion.path
+          d="M304 32 C200 146 240 294 126 410 C38 500 78 640 224 744 C344 830 332 984 184 1080 C62 1160 86 1318 238 1428 C340 1502 316 1664 166 1772 C72 1840 90 1986 250 2060"
+          style={pathStyle}
+          className="stroke-brand-gold/38"
+          strokeWidth="2"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
+          filter="url(#pencil)"
+        />
+        <motion.g style={branchStyle} className="stroke-brand-sage-light/20">
+          <path d="M128 408 C96 366 72 318 56 260" strokeWidth="1.2" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+          <path d="M224 744 C266 714 300 668 324 608" strokeWidth="1.2" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+          <path d="M184 1080 C144 1050 112 1004 90 944" strokeWidth="1.2" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+          <path d="M238 1428 C278 1396 310 1350 332 1290" strokeWidth="1.2" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+          <path d="M166 1772 C128 1744 98 1700 78 1642" strokeWidth="1.2" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+        </motion.g>
+        <motion.g style={leafStyle} className="fill-none stroke-brand-sage-light/28">
+          <Leaf d="M56 260 C78 250 94 258 100 280 C78 286 64 280 56 260Z" />
+          <Leaf d="M324 608 C302 600 292 582 300 562 C322 570 332 588 324 608Z" />
+          <Leaf d="M90 944 C112 934 128 942 134 964 C112 970 98 964 90 944Z" />
+          <Leaf d="M332 1290 C310 1282 300 1264 308 1244 C330 1252 340 1270 332 1290Z" />
+          <Leaf d="M78 1642 C100 1632 116 1640 122 1662 C100 1668 86 1662 78 1642Z" />
+        </motion.g>
+      </motion.svg>
+
+      <motion.svg
+        viewBox="0 0 1440 2100"
+        preserveAspectRatio="none"
+        className={`absolute inset-0 hidden h-full w-full md:block ${
+          isRentals ? "md:block" : "md:hidden"
+        }`}
+        style={{ y: drift }}
+      >
+        <VineTexture />
+        <path
+          d="M1180 32 C930 124 862 300 1050 450 C1260 618 1128 810 820 900 C522 988 380 1166 596 1326 C814 1488 1070 1490 1112 1680 C1148 1844 1000 1978 748 2068"
+          className="stroke-brand-sage/12"
+          strokeWidth="2"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
+        />
+        <motion.path
+          d="M1180 32 C930 124 862 300 1050 450 C1260 618 1128 810 820 900 C522 988 380 1166 596 1326 C814 1488 1070 1490 1112 1680 C1148 1844 1000 1978 748 2068"
+          style={pathStyle}
+          className="stroke-brand-gold/36"
+          strokeWidth="2"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
+          filter="url(#pencil)"
+        />
+        <motion.g style={branchStyle} className="stroke-brand-sage-light/18">
+          <path d="M1038 440 C958 392 896 326 852 236" strokeWidth="1.2" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+          <path d="M828 898 C910 848 974 778 1020 686" strokeWidth="1.2" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+          <path d="M598 1326 C514 1290 444 1230 386 1138" strokeWidth="1.2" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+          <path d="M1112 1680 C1192 1642 1256 1578 1304 1488" strokeWidth="1.2" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+          <path d="M748 2068 C832 2038 902 1984 958 1900" strokeWidth="1.2" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+        </motion.g>
+        <motion.g style={leafStyle} className="fill-none stroke-brand-sage-light/26">
+          <Leaf d="M852 236 C882 226 902 240 908 268 C878 274 858 262 852 236Z" />
+          <Leaf d="M1020 686 C990 678 976 656 984 630 C1014 638 1028 660 1020 686Z" />
+          <Leaf d="M386 1138 C416 1128 436 1142 442 1170 C412 1176 392 1164 386 1138Z" />
+          <Leaf d="M1304 1488 C1274 1480 1260 1458 1268 1432 C1298 1440 1312 1462 1304 1488Z" />
+          <Leaf d="M958 1900 C928 1892 914 1870 922 1844 C952 1852 966 1874 958 1900Z" />
         </motion.g>
       </motion.svg>
     </div>

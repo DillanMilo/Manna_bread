@@ -9,6 +9,7 @@ import {
   CountUp,
 } from '@/components/ui/Motion';
 import { Button } from '@/components/ui/Button';
+import { PageVine } from '@/components/ui/ScrollVine';
 import { CONTACT } from '@/lib/constants';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
@@ -207,8 +208,16 @@ function PolicyCard({
    RENTALS PAGE
    ═══════════════════════════════════════════ */
 export default function RentalsPage() {
+  const pageRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: pageRef,
+    offset: ['start start', 'end end'],
+  });
+
   return (
-    <main className="bg-brand-forest min-h-screen">
+    <main ref={pageRef} className="relative isolate bg-brand-forest min-h-screen overflow-hidden">
+      <PageVine variant="rentals" progress={scrollYProgress} className="z-0 opacity-85" />
+      <div className="relative z-10">
       {/* ─── HERO ─── */}
       <section className="pt-24 sm:pt-32 md:pt-44 pb-12 sm:pb-16 md:pb-20 px-5 sm:px-6 md:px-10">
         <div className="max-w-4xl mx-auto text-center">
@@ -916,6 +925,7 @@ export default function RentalsPage() {
           </FadeIn>
         </div>
       </section>
+      </div>
     </main>
   );
 }
