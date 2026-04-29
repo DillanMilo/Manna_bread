@@ -181,7 +181,7 @@ function QuoteParallaxImage() {
         ? { opacity: 1, scale: 1, filter: 'blur(0px)', clipPath: 'inset(0% 0% 0% 0% round 9999px 9999px 16px 16px)' }
         : {}}
       transition={{ duration: 1.1, ease: [0.22, 0.61, 0.36, 1] }}
-      className="relative aspect-[4/5] rounded-t-full rounded-b-2xl overflow-hidden shadow-xl"
+      className="relative aspect-[4/5] max-w-[320px] sm:max-w-none mx-auto rounded-t-full rounded-b-2xl overflow-hidden shadow-xl"
     >
       <div ref={ref} className="absolute inset-0">
         <motion.div
@@ -281,19 +281,19 @@ function Divider() {
 
 function PricingCards({ sizes }: { sizes: TraySize[] }) {
   return (
-    <StaggerContainer className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 mb-10">
+    <StaggerContainer className="grid grid-cols-3 gap-2.5 sm:gap-4 md:gap-6 mb-8 sm:mb-10">
       {sizes.map((size) => (
         <StaggerItem key={size.name}>
-          <div className="bg-brand-forest-mid/60 rounded-2xl p-6 shadow-sm border border-white/10 text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-            <p className="font-body text-sm font-semibold text-white mb-1">
+          <div className="bg-brand-forest-mid/60 rounded-xl sm:rounded-2xl px-2 py-4 sm:p-6 shadow-sm border border-white/10 text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+            <p className="font-body text-xs sm:text-sm font-semibold text-white mb-1 leading-tight">
               {size.name}
             </p>
             {size.detail && (
-              <p className="font-body text-sm text-white/60 mb-3">
+              <p className="font-body text-[11px] sm:text-sm text-white/60 mb-2 sm:mb-3 leading-tight">
                 {size.detail}
               </p>
             )}
-            <p className="font-display text-2xl text-brand-gold">
+            <p className="font-display text-xl sm:text-2xl text-brand-gold">
               {size.price}
             </p>
           </div>
@@ -307,15 +307,15 @@ function PricingCards({ sizes }: { sizes: TraySize[] }) {
 
 function ItemGrid({ items }: { items: CateringItem[] }) {
   return (
-    <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-3">
+    <StaggerContainer className="grid grid-cols-2 md:grid-cols-3 gap-x-4 sm:gap-x-6 gap-y-2 sm:gap-y-3">
       {items.map((item) => (
         <StaggerItem key={item.name}>
-          <div className="py-2">
-            <p className="font-body text-[15px] font-medium text-white/85">
+          <div className="py-1.5 sm:py-2">
+            <p className="font-body text-sm sm:text-[15px] font-medium text-white/85 leading-snug">
               {item.name}
             </p>
             {item.note && (
-              <p className="font-body text-sm text-white/60 mt-0.5">
+              <p className="font-body text-xs sm:text-sm text-white/60 mt-0.5 leading-snug">
                 {item.note}
               </p>
             )}
@@ -532,7 +532,7 @@ export default function CateringPage() {
           <ParallaxImage
             src="/images/manna-latte-art.webp"
             alt="A flat white with rosetta latte art on a marble counter"
-            className="aspect-[4/3] rounded-2xl shadow-lg"
+            className="aspect-[4/3] max-w-[340px] sm:max-w-none mx-auto rounded-2xl shadow-lg"
             sizes="(max-width: 768px) 100vw, 50vw"
             speed={65}
             reveal="wipe-right"
@@ -540,7 +540,7 @@ export default function CateringPage() {
           <ParallaxImage
             src="/images/manna-grilled-panini.webp"
             alt="Grilled panini with kettle chips on marble, gold flatware and baby's breath"
-            className="aspect-[4/3] rounded-2xl shadow-lg"
+            className="aspect-[4/3] max-w-[340px] sm:max-w-none mx-auto rounded-2xl shadow-lg"
             sizes="(max-width: 768px) 100vw, 50vw"
             speed={65}
             objectPosition="center 75%"
@@ -671,7 +671,7 @@ export default function CateringPage() {
               <ParallaxImage
                 src="/images/manna-strawberry-waffle.webp"
                 alt="Strawberry waffle plated on marble with gold flatware and baby's breath"
-                className="aspect-[3/4] rounded-t-full rounded-b-2xl shadow-xl"
+                className="aspect-[3/4] max-w-[320px] sm:max-w-none mx-auto rounded-t-full rounded-b-2xl shadow-xl"
                 sizes="(max-width: 768px) 100vw, 50vw"
                 speed={70}
                 objectPosition="center 70%"

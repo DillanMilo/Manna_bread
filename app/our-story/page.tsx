@@ -69,7 +69,7 @@ function StoryImage({
       initial={{ opacity: 0, x: side === 'left' ? -50 : 50, scale: 0.95 }}
       animate={isInView ? { opacity: 1, x: 0, scale: 1 } : {}}
       transition={{ duration: 0.9, ease: organic }}
-      className={`relative ${aspectRatio} rounded-2xl overflow-hidden shadow-xl ${className}`}
+      className={`relative ${aspectRatio} w-full max-w-[320px] sm:max-w-none mx-auto rounded-2xl overflow-hidden shadow-xl ${className}`}
     >
       {/* Decorative offset border */}
       <div

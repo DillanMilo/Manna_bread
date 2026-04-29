@@ -1,7 +1,16 @@
 'use client';
 
-import { motion, useScroll, useTransform, useInView, AnimatePresence } from 'framer-motion';
-import { useRef, type ReactNode } from 'react';
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useInView,
+  AnimatePresence,
+  animate,
+  useMotionValue,
+  useMotionValueEvent,
+} from 'framer-motion';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 
 // Fade up on scroll into view - the workhorse animation
 interface FadeInProps {
@@ -274,11 +283,26 @@ interface CountUpProps {
 export function CountUp({ target, duration = 2, prefix = '', suffix = '', className = '' }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.5 });
-  const count = useTransform(
-    useScroll({ target: ref, offset: ["start end", "end start"] }).scrollYProgress,
-    [0, 0.5],
-    [0, target]
-  );
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, (latest) => Math.round(latest));
+  const [displayValue, setDisplayValue] = useState(0);
+
+  useMotionValueEvent(rounded, 'change', (latest) => {
+    setDisplayValue(latest);
+  });
+
+  useEffect(() => {
+    if (!isInView) {
+      return;
+    }
+
+    const controls = animate(count, target, {
+      duration,
+      ease: [0.25, 0.4, 0.25, 1],
+    });
+
+    return () => controls.stop();
+  }, [count, duration, isInView, target]);
 
   return (
     <motion.span
@@ -289,7 +313,7 @@ export function CountUp({ target, duration = 2, prefix = '', suffix = '', classN
     >
       {prefix}
       <motion.span>
-        {isInView ? target : 0}
+        {displayValue}
       </motion.span>
       {suffix}
     </motion.span>

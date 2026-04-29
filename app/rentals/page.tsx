@@ -92,7 +92,7 @@ function PriceCard({
 }) {
   return (
     <div
-      className={`rounded-2xl p-6 sm:p-7 shadow-sm border w-full ${
+      className={`rounded-2xl p-5 sm:p-7 shadow-sm border w-full ${
         highlight
           ? 'bg-brand-gold/10 border-brand-gold/40'
           : 'bg-brand-forest-mid/60 border-white/10'
@@ -192,15 +192,36 @@ function PolicyCard({
   children: React.ReactNode;
 }) {
   return (
-    <div className="bg-brand-forest-mid/50 rounded-2xl p-7 sm:p-8 border border-white/10 h-full">
-      <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-3">
-        {eyebrow}
-      </p>
-      <h3 className="font-display text-2xl font-medium text-white mb-5">
-        {title}
-      </h3>
-      {children}
-    </div>
+    <>
+      <details className="group md:hidden bg-brand-forest-mid/50 rounded-2xl border border-white/10 overflow-hidden">
+        <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5 [&::-webkit-details-marker]:hidden">
+          <span>
+            <span className="block font-body text-[10px] font-semibold tracking-[2px] uppercase text-brand-gold mb-2">
+              {eyebrow}
+            </span>
+            <span className="block font-display text-xl font-medium text-white">
+              {title}
+            </span>
+          </span>
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-brand-gold/30 text-brand-gold transition-transform duration-300 group-open:rotate-45">
+            +
+          </span>
+        </summary>
+        <div className="px-5 pb-5">
+          {children}
+        </div>
+      </details>
+
+      <div className="hidden md:block bg-brand-forest-mid/50 rounded-2xl p-7 sm:p-8 border border-white/10 h-full">
+        <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-3">
+          {eyebrow}
+        </p>
+        <h3 className="font-display text-2xl font-medium text-white mb-5">
+          {title}
+        </h3>
+        {children}
+      </div>
+    </>
   );
 }
 
@@ -251,17 +272,17 @@ export default function RentalsPage() {
       <section className="pb-12 sm:pb-16 md:pb-24 px-5 sm:px-6 md:px-10">
         <div className="max-w-6xl mx-auto">
           <StaggerContainer
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 md:gap-6"
+            className="flex snap-x snap-mandatory gap-4 overflow-x-auto -mx-5 px-5 pb-3 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 md:grid-cols-3 sm:gap-5 md:gap-6"
             staggerDelay={0.15}
           >
             {[RENTAL_IMAGES.space, RENTAL_IMAGES.inside, RENTAL_IMAGES.interior].map(
               (img) => (
-                <StaggerItem key={img.src}>
+                <StaggerItem key={img.src} className="w-[78vw] shrink-0 snap-center sm:w-auto">
                   <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg">
                     <ParallaxImage
                       src={img.src}
                       alt={img.alt}
-                      sizes="(max-width: 768px) 100vw, 33vw"
+                      sizes="(max-width: 640px) 78vw, (max-width: 768px) 50vw, 33vw"
                       speed={-0.35}
                     />
                   </div>
@@ -392,15 +413,15 @@ export default function RentalsPage() {
 
           {/* Rate cards */}
           <StaggerContainer
-            className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 max-w-4xl mx-auto"
+            className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-4xl mx-auto"
             staggerDelay={0.12}
           >
             <StaggerItem>
-              <div className="bg-brand-forest-mid/60 rounded-2xl p-7 sm:p-8 border border-brand-gold/30 shadow-sm h-full">
+              <div className="bg-brand-forest-mid/60 rounded-2xl p-5 sm:p-8 border border-brand-gold/30 shadow-sm h-full">
                 <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-3">
                   Friday &amp; Saturday
                 </p>
-                <p className="font-display text-5xl sm:text-6xl text-brand-gold leading-none mb-2">
+                <p className="font-display text-4xl sm:text-6xl text-brand-gold leading-none mb-2">
                   $295
                 </p>
                 <p className="font-body text-sm text-white/70 mb-4">
@@ -414,11 +435,11 @@ export default function RentalsPage() {
             </StaggerItem>
 
             <StaggerItem>
-              <div className="bg-brand-forest-mid/60 rounded-2xl p-7 sm:p-8 border border-white/10 shadow-sm h-full">
+              <div className="bg-brand-forest-mid/60 rounded-2xl p-5 sm:p-8 border border-white/10 shadow-sm h-full">
                 <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-3">
                   Monday &ndash; Thursday
                 </p>
-                <p className="font-display text-5xl sm:text-6xl text-brand-gold leading-none mb-2">
+                <p className="font-display text-4xl sm:text-6xl text-brand-gold leading-none mb-2">
                   $195
                 </p>
                 <p className="font-body text-sm text-white/70 mb-4">
