@@ -27,9 +27,9 @@ type PageVineProps = {
 
 export function ScrollVine({ progress, className = "" }: ScrollVineProps) {
   const prefersReducedMotion = useReducedMotion();
-  const draw = useTransform(progress, [0.08, 0.86], [0, 1]);
-  const branchDraw = useTransform(progress, [0.2, 0.82], [0, 1]);
-  const leafOpacity = useTransform(progress, [0.18, 0.32, 0.78, 0.9], [0, 0.55, 0.55, 0]);
+  const draw = useTransform(progress, [0.02, 0.58], [0, 1]);
+  const branchDraw = useTransform(progress, [0.08, 0.54], [0, 1]);
+  const leafOpacity = useTransform(progress, [0.06, 0.2, 0.62, 0.74], [0, 0.55, 0.55, 0]);
   const drift = useTransform(progress, [0, 1], prefersReducedMotion ? [0, 0] : [18, -18]);
 
   const pathStyle = prefersReducedMotion ? { pathLength: 1 } : { pathLength: draw };
@@ -190,10 +190,10 @@ export function VineAccent({ variant = "right", className = "" }: VineAccentProp
     offset: ["start 82%", "end 30%"],
   });
 
-  const draw = useTransform(scrollYProgress, [0.04, 0.74], [0, 1]);
+  const draw = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
   const leafOpacity = useTransform(
     scrollYProgress,
-    [0.1, 0.26, 0.68, 0.86],
+    [0.04, 0.16, 0.56, 0.72],
     [0, 0.38, 0.38, 0],
   );
   const drift = useTransform(
@@ -285,11 +285,11 @@ export function PageVine({ variant, progress, className = "" }: PageVineProps) {
   });
   const pageProgress = progress ?? scrollYProgress;
 
-  const draw = useTransform(pageProgress, [0, 0.68], [0, 1]);
-  const branchDraw = useTransform(pageProgress, [0.06, 0.62], [0, 1]);
+  const draw = useTransform(pageProgress, [0, 0.46], [0, 1]);
+  const branchDraw = useTransform(pageProgress, [0.04, 0.42], [0, 1]);
   const leafOpacity = useTransform(
     pageProgress,
-    [0.04, 0.16, 0.68, 0.82],
+    [0.02, 0.12, 0.48, 0.62],
     [0, 0.32, 0.32, 0],
   );
   const drift = useTransform(
