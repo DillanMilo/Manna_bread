@@ -27,18 +27,6 @@ const STORY_IMAGES = {
     src: '/images/IMG_9181.jpeg',
     alt: 'Christin surrounded by the Manna Bakery community',
   },
-  cookbook: {
-    src: '/images/manna-cookbook-detail.webp',
-    alt: 'A weathered brown leather cookbook held in a Manna Bakery prep area',
-  },
-  recipeBooks: {
-    src: '/images/manna-recipe-books.webp',
-    alt: 'Manna Bakery’s leather-bound recipe books — Bread, Gluten Free, Pastries',
-  },
-  danishPrep: {
-    src: '/images/manna-danish-prep.webp',
-    alt: 'A baker’s hand spooning chocolate filling into fresh danish pastries',
-  },
 };
 
 /* ─── floating story image with parallax ─── */
@@ -47,12 +35,14 @@ function StoryImage({
   alt,
   side,
   aspectRatio = 'aspect-[3/4]',
+  parallaxStrength = 40,
   className = '',
 }: {
   src: string;
   alt: string;
   side: 'left' | 'right';
   aspectRatio?: string;
+  parallaxStrength?: number;
   className?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -61,7 +51,7 @@ function StoryImage({
     target: ref,
     offset: ['start end', 'end start'],
   });
-  const imageY = useTransform(scrollYProgress, [0, 1], [40, -40]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [parallaxStrength, -parallaxStrength]);
 
   return (
     <motion.div
@@ -79,7 +69,7 @@ function StoryImage({
       />
       <motion.div
         style={{ y: imageY }}
-        className="absolute -top-[40px] sm:-top-[80px] -bottom-[40px] sm:-bottom-[80px] left-0 right-0 will-change-transform"
+        className="absolute -top-[90px] sm:-top-[120px] -bottom-[90px] sm:-bottom-[120px] left-0 right-0 will-change-transform"
       >
         <Image
           src={src}
@@ -99,11 +89,13 @@ function Chapter({
   image,
   imagePosition = 'right',
   imageAspect = 'aspect-[3/4]',
+  imageParallaxStrength = 40,
 }: {
   children: React.ReactNode;
   image?: { src: string; alt: string };
   imagePosition?: 'left' | 'right';
   imageAspect?: string;
+  imageParallaxStrength?: number;
 }) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
@@ -130,6 +122,7 @@ function Chapter({
             alt={image.alt}
             side={imagePosition === 'left' ? 'left' : 'right'}
             aspectRatio={imageAspect}
+            parallaxStrength={imageParallaxStrength}
           />
         </div>
       )}
@@ -249,6 +242,7 @@ export default function OurStoryPage() {
           <Chapter
             image={STORY_IMAGES.christin}
             imagePosition="right"
+            imageParallaxStrength={72}
           >
             <FadeIn>
               <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-4">
@@ -280,20 +274,6 @@ export default function OurStoryPage() {
       </section>
 
       <Divider />
-
-      {/* ─── SUPPORTING VISUAL: cookbook ─── */}
-      <section className="py-6 md:py-10 px-5 sm:px-6 md:px-10">
-        <FadeIn>
-          <div className="max-w-md mx-auto">
-            <StoryImage
-              src={STORY_IMAGES.cookbook.src}
-              alt={STORY_IMAGES.cookbook.alt}
-              side="right"
-              aspectRatio="aspect-[4/5]"
-            />
-          </div>
-        </FadeIn>
-      </section>
 
       {/* ─── CHAPTER 2: THE BREAKING ─── */}
       <section className="py-10 md:py-16 px-5 sm:px-6 md:px-10">
@@ -359,6 +339,7 @@ export default function OurStoryPage() {
             image={STORY_IMAGES.journey}
             imagePosition="left"
             imageAspect="aspect-[4/5]"
+            imageParallaxStrength={72}
           >
             <FadeIn>
               <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-4">
@@ -435,17 +416,6 @@ export default function OurStoryPage() {
               </p>
             </FadeIn>
 
-            <FadeIn delay={0.3}>
-              <div className="my-10 max-w-md mx-auto">
-                <StoryImage
-                  src={STORY_IMAGES.recipeBooks.src}
-                  alt={STORY_IMAGES.recipeBooks.alt}
-                  side="left"
-                  aspectRatio="aspect-[4/5]"
-                />
-              </div>
-            </FadeIn>
-
             <FadeIn delay={0.35}>
               <div className="bg-brand-forest-mid/50 rounded-2xl p-5 sm:p-8 md:p-10 border-l-4 border-brand-gold relative">
                 <span className="font-display text-5xl sm:text-7xl text-brand-gold/20 absolute top-2 left-4 sm:top-3 sm:left-6 leading-none">
@@ -474,6 +444,7 @@ export default function OurStoryPage() {
                 alt={STORY_IMAGES.couple.alt}
                 side="left"
                 aspectRatio="aspect-[3/4]"
+                parallaxStrength={72}
               />
             </div>
 
@@ -567,17 +538,6 @@ export default function OurStoryPage() {
                 just because of the Jerusalem-inspired arches or the warm timber
                 beams, but because of the spirit of welcome that fills the space.
               </p>
-            </FadeIn>
-
-            <FadeIn delay={0.3}>
-              <div className="my-10 max-w-md mx-auto">
-                <StoryImage
-                  src={STORY_IMAGES.danishPrep.src}
-                  alt={STORY_IMAGES.danishPrep.alt}
-                  side="right"
-                  aspectRatio="aspect-[4/5]"
-                />
-              </div>
             </FadeIn>
 
             <FadeIn delay={0.35}>

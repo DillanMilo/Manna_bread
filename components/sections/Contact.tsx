@@ -103,7 +103,6 @@ export function Contact() {
                 fill
                 className="relative z-10 object-contain pointer-events-none scale-[1.15]"
                 sizes="(max-width: 640px) 340px, (max-width: 768px) 420px, 520px"
-                priority
               />
               {/* Info card — behind the arch, inside the opening */}
               <div className="absolute z-[5] top-[16%] sm:top-[18%] inset-x-0 flex justify-center">

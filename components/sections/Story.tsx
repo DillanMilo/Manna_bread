@@ -201,7 +201,6 @@ export function Story() {
                           height={img.height}
                           className="w-full h-full object-cover"
                           sizes="(max-width: 768px) 100vw, 50vw"
-                          priority
                         />
                       </motion.div>
                     </motion.div>

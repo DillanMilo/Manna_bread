@@ -87,7 +87,7 @@ export function Experience() {
             alt=""
             fill
             className="object-cover"
-            priority
+            sizes="100vw"
           />
         </motion.div>
       ))}

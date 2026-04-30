@@ -24,6 +24,10 @@ const RENTAL_IMAGES = {
     src: '/images/manna-conference-room.webp',
     alt: 'Manna Bakery conference room with wood panel walls and community table',
   },
+  diningRoom: {
+    src: '/images/manna-interior-timber-beams.webp',
+    alt: 'Bright Manna Bakery dining room with timber beams, white tables, and abundant greenery',
+  },
   interior: {
     src: '/images/manna-cognac-lounge.webp',
     alt: 'Manna Bakery interior with cognac leather chairs and abundant greenery beneath tall windows',
@@ -275,7 +279,7 @@ export default function RentalsPage() {
             className="flex snap-x snap-mandatory gap-4 overflow-x-auto -mx-5 px-5 pb-3 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 md:grid-cols-3 sm:gap-5 md:gap-6"
             staggerDelay={0.15}
           >
-            {[RENTAL_IMAGES.space, RENTAL_IMAGES.inside, RENTAL_IMAGES.interior].map(
+            {[RENTAL_IMAGES.space, RENTAL_IMAGES.diningRoom, RENTAL_IMAGES.interior].map(
               (img) => (
                 <StaggerItem key={img.src} className="w-[78vw] shrink-0 snap-center sm:w-auto">
                   <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg">

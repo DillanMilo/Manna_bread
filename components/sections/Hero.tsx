@@ -44,8 +44,9 @@ export function Hero() {
           loop
           playsInline
           poster="/images/manna-arched-alcove.webp"
+          preload="metadata"
           className="absolute inset-0 w-full h-full object-cover"
-          src="/images/1SE - Manna Evenings (20251221-223245).mov"
+          src="/videos/manna-evenings-hero.mp4"
         />
         {/* Overlay gradient so content stays readable */}
         <div className="absolute inset-0 z-[1] bg-gradient-to-b from-brand-forest/50 via-brand-forest/35 to-brand-forest/70" />
