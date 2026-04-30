@@ -83,7 +83,7 @@ export default function MenuPage() {
       {/* Category Tabs */}
       <div
         ref={tabsRef}
-        className="sticky top-16 lg:top-20 z-40 bg-brand-forest/95 backdrop-blur-sm border-b border-white/10"
+        className="sticky top-16 lg:top-20 z-40 bg-brand-forest/95 sm:backdrop-blur-sm border-b border-white/10"
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
           <nav

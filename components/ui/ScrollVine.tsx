@@ -8,6 +8,7 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
+import { useMobilePerformanceMode } from "@/components/ui/useMobilePerformanceMode";
 
 type ScrollVineProps = {
   progress: MotionValue<number>;
@@ -31,14 +32,16 @@ type GiftCardVineProps = {
 
 export function ScrollVine({ progress, className = "" }: ScrollVineProps) {
   const prefersReducedMotion = useReducedMotion();
+  const mobilePerformanceMode = useMobilePerformanceMode();
   const draw = useTransform(progress, [0.02, 0.58], [0, 1]);
   const branchDraw = useTransform(progress, [0.08, 0.54], [0, 1]);
   const leafOpacity = useTransform(progress, [0.06, 0.2, 0.62, 0.74], [0, 0.55, 0.55, 0]);
-  const drift = useTransform(progress, [0, 1], prefersReducedMotion ? [0, 0] : [18, -18]);
+  const drift = useTransform(progress, [0, 1], prefersReducedMotion || mobilePerformanceMode ? [0, 0] : [18, -18]);
 
   const pathStyle = prefersReducedMotion ? { pathLength: 1 } : { pathLength: draw };
   const branchStyle = prefersReducedMotion ? { pathLength: 1 } : { pathLength: branchDraw };
   const leafStyle = prefersReducedMotion ? { opacity: 0.45 } : { opacity: leafOpacity };
+  const pencilFilter = mobilePerformanceMode ? undefined : "url(#pencil)";
 
   return (
     <div
@@ -70,7 +73,7 @@ export function ScrollVine({ progress, className = "" }: ScrollVineProps) {
           strokeLinecap="round"
           strokeLinejoin="round"
           vectorEffect="non-scaling-stroke"
-          filter="url(#pencil)"
+          filter={pencilFilter}
         />
         <motion.g style={branchStyle} className="stroke-brand-sage-light/25">
           <path
@@ -135,7 +138,7 @@ export function ScrollVine({ progress, className = "" }: ScrollVineProps) {
           strokeLinecap="round"
           strokeLinejoin="round"
           vectorEffect="non-scaling-stroke"
-          filter="url(#pencil)"
+          filter={pencilFilter}
         />
         <motion.g style={branchStyle} className="stroke-brand-sage-light/24">
           <path
@@ -189,6 +192,7 @@ export function ScrollVine({ progress, className = "" }: ScrollVineProps) {
 export function VineAccent({ variant = "right", className = "" }: VineAccentProps) {
   const ref = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
+  const mobilePerformanceMode = useMobilePerformanceMode();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start 82%", "end 30%"],
@@ -203,11 +207,12 @@ export function VineAccent({ variant = "right", className = "" }: VineAccentProp
   const drift = useTransform(
     scrollYProgress,
     [0, 1],
-    prefersReducedMotion ? [0, 0] : [14, -14],
+    prefersReducedMotion || mobilePerformanceMode ? [0, 0] : [14, -14],
   );
 
   const pathStyle = prefersReducedMotion ? { pathLength: 1 } : { pathLength: draw };
   const leafStyle = prefersReducedMotion ? { opacity: 0.3 } : { opacity: leafOpacity };
+  const pencilFilter = mobilePerformanceMode ? undefined : "url(#pencil)";
   const isLeft = variant === "left";
   const isLow = variant === "low";
 
@@ -239,7 +244,7 @@ export function VineAccent({ variant = "right", className = "" }: VineAccentProp
           strokeLinecap="round"
           strokeLinejoin="round"
           vectorEffect="non-scaling-stroke"
-          filter="url(#pencil)"
+          filter={pencilFilter}
         />
         <motion.g style={leafStyle} className="fill-none stroke-brand-sage-light/24">
           <Leaf d={isLeft ? "M220 280 C242 272 258 280 264 302 C241 308 226 300 220 280Z" : "M170 280 C148 272 132 280 126 302 C149 308 164 300 170 280Z"} />
@@ -269,7 +274,7 @@ export function VineAccent({ variant = "right", className = "" }: VineAccentProp
           strokeLinecap="round"
           strokeLinejoin="round"
           vectorEffect="non-scaling-stroke"
-          filter="url(#pencil)"
+          filter={pencilFilter}
         />
         <motion.g style={leafStyle} className="fill-none stroke-brand-sage-light/22">
           <Leaf d={isLeft ? "M224 266 C252 252 274 262 284 292 C254 302 234 292 224 266Z" : "M676 266 C648 252 626 262 616 292 C646 302 666 292 676 266Z"} />
@@ -283,6 +288,7 @@ export function VineAccent({ variant = "right", className = "" }: VineAccentProp
 export function PageVine({ variant, progress, className = "" }: PageVineProps) {
   const ref = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
+  const mobilePerformanceMode = useMobilePerformanceMode();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start 82%", "end 24%"],
@@ -299,12 +305,13 @@ export function PageVine({ variant, progress, className = "" }: PageVineProps) {
   const drift = useTransform(
     pageProgress,
     [0, 1],
-    prefersReducedMotion ? [0, 0] : [46, -46],
+    prefersReducedMotion || mobilePerformanceMode ? [0, 0] : [46, -46],
   );
 
   const pathStyle = prefersReducedMotion ? { pathLength: 1 } : { pathLength: draw };
   const branchStyle = prefersReducedMotion ? { pathLength: 1 } : { pathLength: branchDraw };
   const leafStyle = prefersReducedMotion ? { opacity: 0.24 } : { opacity: leafOpacity };
+  const pencilFilter = mobilePerformanceMode ? undefined : "url(#pencil)";
   const isStory = variant === "story";
   const isMenu = variant === "menu";
   const isCatering = variant === "catering";
@@ -345,7 +352,7 @@ export function PageVine({ variant, progress, className = "" }: PageVineProps) {
           strokeLinecap="round"
           strokeLinejoin="round"
           vectorEffect="non-scaling-stroke"
-          filter="url(#pencil)"
+          filter={pencilFilter}
         />
         <motion.g style={branchStyle} className="stroke-brand-sage-light/20">
           <path d="M138 512 C112 472 86 434 48 402" strokeWidth="1.2" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
@@ -392,7 +399,7 @@ export function PageVine({ variant, progress, className = "" }: PageVineProps) {
           strokeLinecap="round"
           strokeLinejoin="round"
           vectorEffect="non-scaling-stroke"
-          filter="url(#pencil)"
+          filter={pencilFilter}
         />
         <motion.g style={branchStyle} className="stroke-brand-sage-light/18">
           <path d="M994 510 C920 462 858 396 806 312" strokeWidth="1.25" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
@@ -439,7 +446,7 @@ export function PageVine({ variant, progress, className = "" }: PageVineProps) {
           strokeLinecap="round"
           strokeLinejoin="round"
           vectorEffect="non-scaling-stroke"
-          filter="url(#pencil)"
+          filter={pencilFilter}
         />
         <motion.g style={branchStyle} className="stroke-brand-sage-light/20">
           <path d="M184 376 C144 344 112 304 88 252" strokeWidth="1.2" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
@@ -482,7 +489,7 @@ export function PageVine({ variant, progress, className = "" }: PageVineProps) {
           strokeLinecap="round"
           strokeLinejoin="round"
           vectorEffect="non-scaling-stroke"
-          filter="url(#pencil)"
+          filter={pencilFilter}
         />
         <motion.g style={branchStyle} className="stroke-brand-sage-light/18">
           <path d="M1076 386 C1008 344 954 286 914 210" strokeWidth="1.2" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
@@ -525,7 +532,7 @@ export function PageVine({ variant, progress, className = "" }: PageVineProps) {
           strokeLinecap="round"
           strokeLinejoin="round"
           vectorEffect="non-scaling-stroke"
-          filter="url(#pencil)"
+          filter={pencilFilter}
         />
         <motion.g style={branchStyle} className="stroke-brand-sage-light/20">
           <path d="M250 378 C288 344 316 300 334 244" strokeWidth="1.2" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
@@ -570,7 +577,7 @@ export function PageVine({ variant, progress, className = "" }: PageVineProps) {
           strokeLinecap="round"
           strokeLinejoin="round"
           vectorEffect="non-scaling-stroke"
-          filter="url(#pencil)"
+          filter={pencilFilter}
         />
         <motion.g style={branchStyle} className="stroke-brand-sage-light/18">
           <path d="M342 492 C270 448 214 388 174 306" strokeWidth="1.2" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
@@ -615,7 +622,7 @@ export function PageVine({ variant, progress, className = "" }: PageVineProps) {
           strokeLinecap="round"
           strokeLinejoin="round"
           vectorEffect="non-scaling-stroke"
-          filter="url(#pencil)"
+          filter={pencilFilter}
         />
         <motion.g style={branchStyle} className="stroke-brand-sage-light/20">
           <path d="M128 408 C96 366 72 318 56 260" strokeWidth="1.2" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
@@ -660,7 +667,7 @@ export function PageVine({ variant, progress, className = "" }: PageVineProps) {
           strokeLinecap="round"
           strokeLinejoin="round"
           vectorEffect="non-scaling-stroke"
-          filter="url(#pencil)"
+          filter={pencilFilter}
         />
         <motion.g style={branchStyle} className="stroke-brand-sage-light/18">
           <path d="M1038 440 C958 392 896 326 852 236" strokeWidth="1.2" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
@@ -683,7 +690,9 @@ export function PageVine({ variant, progress, className = "" }: PageVineProps) {
 
 export function GiftCardVine({ className = "" }: GiftCardVineProps) {
   const prefersReducedMotion = useReducedMotion();
+  const mobilePerformanceMode = useMobilePerformanceMode();
   const giftEase = [0.25, 0.4, 0.25, 1] as const;
+  const pencilFilter = mobilePerformanceMode ? undefined : "url(#pencil)";
   const lineTransition = prefersReducedMotion
     ? { duration: 0 }
     : { duration: 2.2, ease: giftEase };
@@ -725,7 +734,7 @@ export function GiftCardVine({ className = "" }: GiftCardVineProps) {
           strokeLinecap="round"
           strokeLinejoin="round"
           vectorEffect="non-scaling-stroke"
-          filter="url(#pencil)"
+          filter={pencilFilter}
         />
         <motion.g
           initial={{ pathLength: prefersReducedMotion ? 1 : 0 }}
@@ -773,7 +782,7 @@ export function GiftCardVine({ className = "" }: GiftCardVineProps) {
           strokeLinecap="round"
           strokeLinejoin="round"
           vectorEffect="non-scaling-stroke"
-          filter="url(#pencil)"
+          filter={pencilFilter}
         />
         <motion.g
           initial={{ pathLength: prefersReducedMotion ? 1 : 0 }}

@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
+import { useMobilePerformanceMode } from '@/components/ui/useMobilePerformanceMode';
 
 interface MenuCardProps {
   title: string;
@@ -13,11 +14,16 @@ interface MenuCardProps {
 
 export function MenuCard({ title, description, price, image }: MenuCardProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const mobilePerformanceMode = useMobilePerformanceMode();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
   });
-  const y = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
+  const y = useTransform(
+    scrollYProgress,
+    [0, 1],
+    mobilePerformanceMode ? ['0%', '0%'] : ['-8%', '8%'],
+  );
 
   return (
     <div className="bg-brand-forest/80 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 border border-white/10 w-full max-w-[340px] sm:max-w-none mx-auto">

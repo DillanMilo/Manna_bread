@@ -85,7 +85,7 @@ export function Contact() {
             <div className="relative aspect-[3/4] max-w-[340px] sm:max-w-[420px] md:max-w-[520px] mx-auto">
               {/* Soft gold glow behind the arch */}
               <div
-                className="absolute -inset-4 sm:-inset-6 md:-inset-10"
+                className="absolute -inset-4 hidden sm:block sm:-inset-6 md:-inset-10"
                 style={{
                   background:
                     "radial-gradient(ellipse at center, rgba(201, 168, 76, 0.18) 0%, rgba(201, 168, 76, 0.06) 50%, transparent 75%)",

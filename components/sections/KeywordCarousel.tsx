@@ -46,7 +46,7 @@ function ValueCard({
         delay: 0.15 + index * 0.15,
         ease: [0.25, 0.4, 0.25, 1],
       }}
-      className="relative bg-brand-forest-mid/80 backdrop-blur-md rounded-2xl p-6 sm:p-7 md:p-9 shadow-lg shadow-black/10 border border-white/10 hover:-translate-y-1 hover:shadow-xl transition-all duration-500"
+      className="relative bg-brand-forest-mid/80 sm:backdrop-blur-md rounded-2xl p-6 sm:p-7 md:p-9 shadow-lg shadow-black/10 border border-white/10 hover:-translate-y-1 hover:shadow-xl transition-all duration-500"
     >
       <span className="font-body text-xs uppercase tracking-[0.2em] text-brand-gold font-medium">
         {label}
