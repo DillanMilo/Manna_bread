@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { CONTACT } from '@/lib/constants';
 import { InquiryForm } from '@/components/ui/InquiryForm';
+import { ModalVine } from '@/components/ui/ScrollVine';
 
 type FloatingInquiryButtonProps = {
   variant: 'catering' | 'rentals';
@@ -79,16 +80,17 @@ export function FloatingInquiryButton({ variant }: FloatingInquiryButtonProps) {
               transition={{ duration: 0.25, ease: [0.25, 0.4, 0.25, 1] }}
               className="relative max-h-[88vh] w-full max-w-xl overflow-y-auto rounded-2xl border border-white/10 bg-brand-forest-mid p-5 shadow-2xl shadow-black/30 sm:p-6"
             >
+              <ModalVine className="z-0 opacity-80" />
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:bg-white/10 hover:text-white"
+                className="absolute right-4 top-4 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:bg-white/10 hover:text-white"
                 aria-label="Close inquiry form"
               >
                 x
               </button>
 
-              <div className="pr-12">
+              <div className="relative z-10 pr-12">
                 <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-3">
                   Quick inquiry
                 </p>
@@ -100,12 +102,14 @@ export function FloatingInquiryButton({ variant }: FloatingInquiryButtonProps) {
                 </p>
               </div>
 
-              <InquiryForm
-                defaultType={variant}
-                source={`${variant}-floating-inquiry`}
-                compact
-                onSuccess={() => setTimeout(() => setOpen(false), 1400)}
-              />
+              <div className="relative z-10">
+                <InquiryForm
+                  defaultType={variant}
+                  source={`${variant}-floating-inquiry`}
+                  compact
+                  onSuccess={() => setTimeout(() => setOpen(false), 1400)}
+                />
+              </div>
             </motion.div>
           </motion.div>
         )}

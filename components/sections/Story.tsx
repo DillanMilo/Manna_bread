@@ -7,7 +7,6 @@ import Link from "next/link";
 import { QuoteBlock } from "@/components/ui/QuoteBlock";
 import { FadeIn } from "@/components/ui/Motion";
 import { ScrollVine } from "@/components/ui/ScrollVine";
-import { useMobilePerformanceMode } from "@/components/ui/useMobilePerformanceMode";
 
 const organic = [0.25, 0.4, 0.25, 1] as const;
 
@@ -36,7 +35,6 @@ export function Story() {
   const [frontIndex, setFrontIndex] = useState(0);
   const [zFrontIndex, setZFrontIndex] = useState(0);
   const shufflingRef = useRef(false);
-  const mobilePerformanceMode = useMobilePerformanceMode();
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -48,11 +46,7 @@ export function Story() {
     offset: ["start 72%", "end 35%"],
   });
 
-  const imageY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    mobilePerformanceMode ? [0, 0] : [30, -30],
-  );
+  const imageY = useTransform(scrollYProgress, [0, 1], [30, -30]);
 
   const shuffle = useCallback(() => {
     if (shufflingRef.current) return;

@@ -12,7 +12,6 @@ import { Button } from '@/components/ui/Button';
 import { PageVine } from '@/components/ui/ScrollVine';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
-import { useMobilePerformanceMode } from '@/components/ui/useMobilePerformanceMode';
 import { InquirySection } from '@/components/sections/InquirySection';
 import { FloatingInquiryButton } from '@/components/ui/FloatingInquiryButton';
 
@@ -49,16 +48,11 @@ function ParallaxImage({
   speed?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const mobilePerformanceMode = useMobilePerformanceMode();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
   });
-  const y = useTransform(
-    scrollYProgress,
-    [0, 1],
-    mobilePerformanceMode ? [0, 0] : [speed * 200, -speed * 200],
-  );
+  const y = useTransform(scrollYProgress, [0, 1], [speed * 200, -speed * 200]);
 
   return (
     <div ref={ref} className="relative w-full h-full overflow-hidden">

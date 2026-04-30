@@ -2,7 +2,6 @@
 
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { useMobilePerformanceMode } from '@/components/ui/useMobilePerformanceMode';
 
 
 const organic = [0.25, 0.4, 0.25, 1] as const;
@@ -10,18 +9,13 @@ const organic = [0.25, 0.4, 0.25, 1] as const;
 export function FounderInterlude() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.25 });
-  const mobilePerformanceMode = useMobilePerformanceMode();
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start end', 'end start'],
   });
 
-  const imageY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    mobilePerformanceMode ? [0, 0] : [60, -60],
-  );
+  const imageY = useTransform(scrollYProgress, [0, 1], [60, -60]);
 
   return (
     <section

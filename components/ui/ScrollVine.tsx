@@ -30,6 +30,10 @@ type GiftCardVineProps = {
   className?: string;
 };
 
+type ModalVineProps = {
+  className?: string;
+};
+
 export function ScrollVine({ progress, className = "" }: ScrollVineProps) {
   const prefersReducedMotion = useReducedMotion();
   const mobilePerformanceMode = useMobilePerformanceMode();
@@ -801,6 +805,77 @@ export function GiftCardVine({ className = "" }: GiftCardVineProps) {
         >
           <Leaf d="M828 166 C858 156 878 170 884 198 C854 204 834 192 828 166Z" />
           <Leaf d="M978 444 C948 436 934 414 942 388 C972 396 986 418 978 444Z" />
+        </motion.g>
+      </svg>
+    </div>
+  );
+}
+
+export function ModalVine({ className = "" }: ModalVineProps) {
+  const prefersReducedMotion = useReducedMotion();
+  const mobilePerformanceMode = useMobilePerformanceMode();
+  const pencilFilter = mobilePerformanceMode ? undefined : "url(#pencil)";
+  const modalEase = [0.25, 0.4, 0.25, 1] as const;
+  const lineTransition = prefersReducedMotion
+    ? { duration: 0 }
+    : { duration: 1.35, ease: modalEase };
+  const branchTransition = prefersReducedMotion
+    ? { duration: 0 }
+    : { duration: 0.9, delay: 0.32, ease: modalEase };
+  const leafTransition = prefersReducedMotion
+    ? { duration: 0 }
+    : { duration: 0.6, delay: 0.65, ease: modalEase };
+
+  return (
+    <div
+      aria-hidden="true"
+      className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}
+    >
+      <svg
+        viewBox="0 0 520 680"
+        preserveAspectRatio="none"
+        className="absolute -right-12 top-0 h-full w-[72%] opacity-90 sm:-right-16 sm:w-[62%]"
+      >
+        <VineTexture />
+        <path
+          d="M384 28 C270 108 312 210 214 284 C120 356 144 470 286 536 C372 576 354 626 260 660"
+          className="stroke-brand-sage/12"
+          strokeWidth="2"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
+        />
+        <motion.path
+          d="M384 28 C270 108 312 210 214 284 C120 356 144 470 286 536 C372 576 354 626 260 660"
+          initial={{ pathLength: prefersReducedMotion ? 1 : 0 }}
+          animate={{ pathLength: 1 }}
+          transition={lineTransition}
+          className="stroke-brand-gold/42"
+          strokeWidth="2"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
+          filter={pencilFilter}
+        />
+        <motion.g
+          initial={{ pathLength: prefersReducedMotion ? 1 : 0 }}
+          animate={{ pathLength: 1 }}
+          transition={branchTransition}
+          className="stroke-brand-sage-light/24"
+        >
+          <path d="M220 282 C182 254 152 220 130 172" strokeWidth="1.25" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+          <path d="M286 536 C324 510 354 474 376 426" strokeWidth="1.25" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+        </motion.g>
+        <motion.g
+          initial={{ opacity: prefersReducedMotion ? 0.28 : 0 }}
+          animate={{ opacity: 0.28 }}
+          transition={leafTransition}
+          className="fill-none stroke-brand-sage-light/30"
+        >
+          <Leaf d="M130 172 C152 162 168 170 174 192 C152 198 138 192 130 172Z" />
+          <Leaf d="M376 426 C354 418 344 400 352 380 C374 388 384 406 376 426Z" />
         </motion.g>
       </svg>
     </div>

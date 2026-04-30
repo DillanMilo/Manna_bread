@@ -4,7 +4,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
-import { useMobilePerformanceMode } from '@/components/ui/useMobilePerformanceMode';
 
 interface ServiceCardProps {
   title: string;
@@ -24,16 +23,11 @@ export function ServiceCard({
   imagePosition = 'center',
 }: ServiceCardProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const mobilePerformanceMode = useMobilePerformanceMode();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
   });
-  const y = useTransform(
-    scrollYProgress,
-    [0, 1],
-    mobilePerformanceMode ? ['0%', '0%'] : ['-8%', '8%'],
-  );
+  const y = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
 
   return (
     <div className="bg-brand-forest-mid/80 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-white/10 w-full max-w-[360px] sm:max-w-none mx-auto">

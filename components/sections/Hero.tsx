@@ -58,8 +58,8 @@ export function Hero() {
       <motion.div
         className="absolute inset-0 z-0"
         style={{ y: bgY }}
-        initial={mobilePerformanceMode ? { scale: 1 } : { scale: 1.06, filter: 'blur(6px)' }}
-        animate={mobilePerformanceMode ? { scale: 1 } : { scale: 1, filter: 'blur(0px)' }}
+        initial={mobilePerformanceMode ? { scale: 1, filter: 'blur(0px)' } : { scale: 1.06, filter: 'blur(6px)' }}
+        animate={mobilePerformanceMode ? { scale: 1, filter: 'blur(0px)' } : { scale: 1, filter: 'blur(0px)' }}
         transition={{ duration: 2.0, ease: [0.25, 0.4, 0.25, 1] }}
       >
         <video
@@ -85,8 +85,8 @@ export function Hero() {
         {/* Logo */}
         <motion.div
           className="flex justify-center mb-4 sm:mb-5"
-          initial={mobilePerformanceMode ? { opacity: 0 } : { opacity: 0, filter: 'blur(8px)' }}
-          animate={mobilePerformanceMode ? { opacity: 1 } : { opacity: 1, filter: 'blur(0px)' }}
+          initial={mobilePerformanceMode ? { opacity: 0, filter: 'blur(0px)' } : { opacity: 0, filter: 'blur(8px)' }}
+          animate={mobilePerformanceMode ? { opacity: 1, filter: 'blur(0px)' } : { opacity: 1, filter: 'blur(0px)' }}
           transition={{ duration: 1.2, delay: 0.4, ease: [0.25, 0.4, 0.25, 1] }}
         >
           <motion.div
@@ -108,8 +108,8 @@ export function Hero() {
         {/* Headline — emerges as one calm moment */}
         <motion.h1
           className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-white leading-[1.15] mb-5 sm:mb-6"
-          initial={mobilePerformanceMode ? { opacity: 0, y: 16 } : { opacity: 0, y: 16, filter: 'blur(10px)' }}
-          animate={mobilePerformanceMode ? { opacity: 1, y: 0 } : { opacity: 1, y: 0, filter: 'blur(0px)' }}
+          initial={mobilePerformanceMode ? { opacity: 0, y: 16, filter: 'blur(0px)' } : { opacity: 0, y: 16, filter: 'blur(10px)' }}
+          animate={mobilePerformanceMode ? { opacity: 1, y: 0, filter: 'blur(0px)' } : { opacity: 1, y: 0, filter: 'blur(0px)' }}
           transition={{ duration: 1.4, delay: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
         >
           A place to gather,<br />
@@ -119,8 +119,8 @@ export function Hero() {
         {/* Description */}
         <motion.p
           className="font-body text-[15px] sm:text-base md:text-lg text-white/90 leading-relaxed mb-8 sm:mb-10 max-w-xl mx-auto"
-          initial={mobilePerformanceMode ? { opacity: 0 } : { opacity: 0, filter: 'blur(6px)' }}
-          animate={mobilePerformanceMode ? { opacity: 1 } : { opacity: 1, filter: 'blur(0px)' }}
+          initial={mobilePerformanceMode ? { opacity: 0, filter: 'blur(0px)' } : { opacity: 0, filter: 'blur(6px)' }}
+          animate={mobilePerformanceMode ? { opacity: 1, filter: 'blur(0px)' } : { opacity: 1, filter: 'blur(0px)' }}
           transition={{ duration: 1.2, delay: 1.4, ease: [0.25, 0.4, 0.25, 1] }}
         >
           {BRAND.description} Welcome to Manna.

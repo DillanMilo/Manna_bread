@@ -5,7 +5,6 @@ import { FadeIn, LineDraw, StaggerContainer, StaggerItem } from '@/components/ui
 import { PageVine } from '@/components/ui/ScrollVine';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { useMobilePerformanceMode } from '@/components/ui/useMobilePerformanceMode';
 import { InquirySection } from '@/components/sections/InquirySection';
 import { FloatingInquiryButton } from '@/components/ui/FloatingInquiryButton';
 
@@ -168,29 +167,18 @@ function QuoteParallaxImage() {
   const ref = useRef<HTMLDivElement>(null);
   const inViewRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(inViewRef, { once: true, amount: 0.25 });
-  const mobilePerformanceMode = useMobilePerformanceMode();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
   });
-  const y = useTransform(
-    scrollYProgress,
-    [0, 1],
-    mobilePerformanceMode ? [0, 0] : [70, -70],
-  );
+  const y = useTransform(scrollYProgress, [0, 1], [70, -70]);
 
   return (
     <motion.div
       ref={inViewRef}
-      initial={
-        mobilePerformanceMode
-          ? { opacity: 0, scale: 1.03, clipPath: 'inset(8% 0% 8% 0% round 9999px 9999px 16px 16px)' }
-          : { opacity: 0, scale: 1.06, filter: 'blur(14px)', clipPath: 'inset(8% 0% 8% 0% round 9999px 9999px 16px 16px)' }
-      }
+      initial={{ opacity: 0, scale: 1.04, clipPath: 'inset(8% 0% 8% 0% round 9999px 9999px 16px 16px)' }}
       animate={isInView
-        ? mobilePerformanceMode
-          ? { opacity: 1, scale: 1, clipPath: 'inset(0% 0% 0% 0% round 9999px 9999px 16px 16px)' }
-          : { opacity: 1, scale: 1, filter: 'blur(0px)', clipPath: 'inset(0% 0% 0% 0% round 9999px 9999px 16px 16px)' }
+        ? { opacity: 1, scale: 1, clipPath: 'inset(0% 0% 0% 0% round 9999px 9999px 16px 16px)' }
         : {}}
       transition={{ duration: 1.1, ease: [0.22, 0.61, 0.36, 1] }}
       className="relative aspect-[4/5] max-w-[320px] sm:max-w-none mx-auto rounded-t-full rounded-b-2xl overflow-hidden shadow-xl"
@@ -198,7 +186,7 @@ function QuoteParallaxImage() {
       <div ref={ref} className="absolute inset-0">
         <motion.div
           style={{ y }}
-          className="absolute -top-[25%] -bottom-[25%] left-0 right-0 will-change-transform"
+          className="absolute left-0 right-0 top-[-25%] h-[150%] will-change-transform"
         >
           <Image
             src="/images/manna-quiche-fruit.webp"
@@ -235,16 +223,11 @@ function ParallaxImage({
   const ref = useRef<HTMLDivElement>(null);
   const inViewRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(inViewRef, { once: true, amount: 0.2 });
-  const mobilePerformanceMode = useMobilePerformanceMode();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
   });
-  const y = useTransform(
-    scrollYProgress,
-    [0, 1],
-    mobilePerformanceMode ? [0, 0] : [speed, -speed],
-  );
+  const y = useTransform(scrollYProgress, [0, 1], [speed, -speed]);
 
   const initialClip =
     reveal === 'wipe-up'    ? 'inset(15% 0% 0% 0%)'
@@ -256,15 +239,9 @@ function ParallaxImage({
   return (
     <motion.div
       ref={inViewRef}
-      initial={
-        mobilePerformanceMode
-          ? { opacity: 0, scale: 1.03, clipPath: initialClip }
-          : { opacity: 0, scale: 1.08, filter: 'blur(12px)', clipPath: initialClip }
-      }
+      initial={{ opacity: 0, scale: 1.04, clipPath: initialClip }}
       animate={isInView
-        ? mobilePerformanceMode
-          ? { opacity: 1, scale: 1, clipPath: 'inset(0% 0% 0% 0%)' }
-          : { opacity: 1, scale: 1, filter: 'blur(0px)', clipPath: 'inset(0% 0% 0% 0%)' }
+        ? { opacity: 1, scale: 1, clipPath: 'inset(0% 0% 0% 0%)' }
         : {}}
       transition={{ duration: 1.1, ease: [0.22, 0.61, 0.36, 1] }}
       className={`relative overflow-hidden ${className}`}
@@ -272,7 +249,7 @@ function ParallaxImage({
       <div ref={ref} className="absolute inset-0">
         <motion.div
           style={{ y }}
-          className="absolute -top-[28%] -bottom-[28%] left-0 right-0 will-change-transform"
+          className="absolute left-0 right-0 top-[-28%] h-[156%] will-change-transform"
         >
           <Image
             src={src}

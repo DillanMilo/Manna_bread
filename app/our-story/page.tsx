@@ -6,7 +6,6 @@ import { QuoteBlock } from '@/components/ui/QuoteBlock';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { PageVine } from '@/components/ui/ScrollVine';
-import { useMobilePerformanceMode } from '@/components/ui/useMobilePerformanceMode';
 
 const organic = [0.25, 0.4, 0.25, 1] as const;
 
@@ -48,16 +47,11 @@ function StoryImage({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
-  const mobilePerformanceMode = useMobilePerformanceMode();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
   });
-  const imageY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    mobilePerformanceMode ? [0, 0] : [parallaxStrength, -parallaxStrength],
-  );
+  const imageY = useTransform(scrollYProgress, [0, 1], [parallaxStrength, -parallaxStrength]);
 
   return (
     <motion.div
@@ -151,16 +145,11 @@ function Divider() {
 function ClosingImage() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.25 });
-  const mobilePerformanceMode = useMobilePerformanceMode();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
   });
-  const imageY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    mobilePerformanceMode ? [0, 0] : [120, -120],
-  );
+  const imageY = useTransform(scrollYProgress, [0, 1], [120, -120]);
 
   return (
     <section ref={ref} className="relative h-[40vh] sm:h-[50vh] md:h-[65vh] overflow-hidden">
