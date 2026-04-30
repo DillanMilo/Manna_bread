@@ -10,10 +10,11 @@ import {
 } from '@/components/ui/Motion';
 import { Button } from '@/components/ui/Button';
 import { PageVine } from '@/components/ui/ScrollVine';
-import { CONTACT } from '@/lib/constants';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { useMobilePerformanceMode } from '@/components/ui/useMobilePerformanceMode';
+import { InquirySection } from '@/components/sections/InquirySection';
+import { FloatingInquiryButton } from '@/components/ui/FloatingInquiryButton';
 
 /* ─── rental images ─── */
 const RENTAL_IMAGES = {
@@ -248,6 +249,7 @@ export default function RentalsPage() {
   return (
     <main ref={pageRef} className="relative isolate bg-brand-forest min-h-screen overflow-hidden">
       <PageVine variant="rentals" progress={scrollYProgress} className="z-20 opacity-85" />
+      <FloatingInquiryButton variant="rentals" />
       <div className="relative z-30">
       {/* ─── HERO ─── */}
       <section className="pt-24 sm:pt-32 md:pt-44 pb-12 sm:pb-16 md:pb-20 px-5 sm:px-6 md:px-10">
@@ -465,7 +467,7 @@ export default function RentalsPage() {
 
           <FadeIn delay={0.4}>
             <div className="text-center mt-10">
-              <Button href="/contact" variant="accent" className="w-full sm:w-auto">
+              <Button href="#rental-inquiry" variant="accent" className="w-full sm:w-auto">
                 Inquire About a Date
               </Button>
             </div>
@@ -912,50 +914,7 @@ export default function RentalsPage() {
         </div>
       </section>
 
-      {/* ─── CLOSING CTA ─── */}
-      <section className="py-14 sm:py-20 md:py-28 bg-brand-forest">
-        <div className="max-w-3xl mx-auto px-5 sm:px-6 md:px-10 text-center">
-          <FadeIn>
-            <p className="font-accent text-xl md:text-2xl italic text-white/80 leading-relaxed mb-8">
-              &ldquo;Every gathering is an opportunity to break bread together.&rdquo;
-            </p>
-          </FadeIn>
-
-          <FadeIn delay={0.15}>
-            <h2 className="font-display text-3xl md:text-4xl font-medium text-white leading-tight mb-5">
-              Let&apos;s start with a date.
-            </h2>
-          </FadeIn>
-
-          <FadeIn delay={0.25}>
-            <p className="font-body text-base text-white/70 leading-relaxed mb-8 max-w-xl mx-auto">
-              Send us your desired date and time and we&apos;ll check the
-              calendar. Once it&apos;s yours, we&apos;ll email an invoice link
-              for the deposit and start talking through menu, catering, and the
-              little touches that make the night feel like yours.
-            </p>
-          </FadeIn>
-
-          <FadeIn delay={0.35}>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 text-white/60 font-body text-sm mb-10">
-              <span>{CONTACT.phone}</span>
-              <span className="hidden sm:inline">&middot;</span>
-              <span>{CONTACT.email}</span>
-            </div>
-          </FadeIn>
-
-          <FadeIn delay={0.45}>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button href={`tel:${CONTACT.phone.replace(/[^+\d]/g, '')}`} variant="ghost" className="w-full sm:w-auto">
-                Call Us
-              </Button>
-              <Button href={`mailto:${CONTACT.email}`} variant="ghost" className="w-full sm:w-auto">
-                Email Us
-              </Button>
-            </div>
-          </FadeIn>
-        </div>
-      </section>
+      <InquirySection id="rental-inquiry" variant="rentals" />
       </div>
     </main>
   );

@@ -2,12 +2,12 @@
 
 import Image from 'next/image';
 import { FadeIn, LineDraw, StaggerContainer, StaggerItem } from '@/components/ui/Motion';
-import { Button } from '@/components/ui/Button';
 import { PageVine } from '@/components/ui/ScrollVine';
-import { CONTACT } from '@/lib/constants';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { useMobilePerformanceMode } from '@/components/ui/useMobilePerformanceMode';
+import { InquirySection } from '@/components/sections/InquirySection';
+import { FloatingInquiryButton } from '@/components/ui/FloatingInquiryButton';
 
 /* ─── types ─── */
 
@@ -363,6 +363,7 @@ export default function CateringPage() {
   return (
     <main ref={pageRef} className="relative isolate bg-brand-forest min-h-screen overflow-hidden">
       <PageVine variant="catering" progress={scrollYProgress} className="z-0 opacity-85" />
+      <FloatingInquiryButton variant="catering" />
       <div className="relative z-10">
 
       {/* ─── HERO ─── */}
@@ -685,51 +686,7 @@ export default function CateringPage() {
         </div>
       </section>
 
-      {/* ─── CLOSING CTA ─── */}
-      <section className="py-20 md:py-28 bg-brand-forest-mid">
-        <div className="max-w-5xl mx-auto px-5 sm:px-6 md:px-10">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-10 md:gap-14 items-center">
-            {/* Image — gathering / event scene */}
-            <FadeIn className="md:col-span-6">
-              <ParallaxImage
-                src="/images/manna-strawberry-waffle.webp"
-                alt="Strawberry waffle plated on marble with gold flatware and baby's breath"
-                className="aspect-[3/4] max-w-[320px] sm:max-w-none mx-auto rounded-t-full rounded-b-2xl shadow-xl"
-                sizes="(max-width: 768px) 100vw, 50vw"
-                speed={70}
-                objectPosition="center 70%"
-              />
-            </FadeIn>
-
-            {/* Text */}
-            <div className="md:col-span-6 text-center md:text-left">
-              <FadeIn>
-                <p className="font-accent text-lg md:text-xl italic text-white/60 mb-3">
-                  Let us bring the warmth to your table
-                </p>
-                <h2 className="font-display text-3xl md:text-4xl font-medium text-white leading-tight mb-6">
-                  Ready to place your order?
-                </h2>
-                <p className="font-body text-base text-white/70 leading-relaxed mb-8">
-                  Whether it&apos;s a corporate breakfast, a family celebration, or an
-                  intimate gathering with friends, we&apos;d love to help you curate
-                  the perfect spread. Reach out and let&apos;s start planning.
-                </p>
-              </FadeIn>
-              <FadeIn delay={0.2}>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                  <Button href="/contact" variant="primary" className="w-full sm:w-auto">
-                    Contact us
-                  </Button>
-                  <Button href={`tel:${CONTACT.phone.replace(/[^0-9+]/g, '')}`} variant="ghost" className="w-full sm:w-auto">
-                    Call {CONTACT.phone}
-                  </Button>
-                </div>
-              </FadeIn>
-            </div>
-          </div>
-        </div>
-      </section>
+      <InquirySection id="catering-inquiry" variant="catering" />
 
       </div>
     </main>
