@@ -211,6 +211,7 @@ function ParallaxImage({
   speed = 70,
   objectPosition = 'center',
   reveal = 'wipe-up',
+  priority = false,
 }: {
   src: string;
   alt: string;
@@ -219,6 +220,7 @@ function ParallaxImage({
   speed?: number;
   objectPosition?: string;
   reveal?: 'wipe-up' | 'wipe-down' | 'wipe-left' | 'wipe-right' | 'zoom';
+  priority?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const inViewRef = useRef<HTMLDivElement>(null);
@@ -256,24 +258,13 @@ function ParallaxImage({
             alt={alt}
             fill
             sizes={sizes}
+            priority={priority}
             className="object-cover"
             style={{ objectPosition }}
           />
         </motion.div>
       </div>
     </motion.div>
-  );
-}
-
-/* ─── section divider ─── */
-
-function Divider() {
-  return (
-    <div className="flex items-center justify-center gap-4 py-12 md:py-16">
-      <LineDraw className="h-px w-16 bg-white/20" />
-      <div className="w-1.5 h-1.5 rounded-full bg-brand-gold/50" />
-      <LineDraw className="h-px w-16 bg-white/20" delay={0.2} />
-    </div>
   );
 }
 
@@ -382,6 +373,7 @@ export default function CateringPage() {
             sizes="(max-width: 1024px) 100vw, 1024px"
             speed={90}
             reveal="zoom"
+            priority
           />
         </div>
       </section>

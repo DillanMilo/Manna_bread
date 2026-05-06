@@ -3,7 +3,7 @@
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { MenuCard } from '@/components/ui/MenuCard';
 import { Button } from '@/components/ui/Button';
-import { FadeIn, StaggerContainer, StaggerItem, ScaleIn } from '@/components/ui/Motion';
+import { FadeIn, StaggerContainer, StaggerItem } from '@/components/ui/Motion';
 import { VineAccent } from '@/components/ui/ScrollVine';
 
 const FEATURED_ITEMS = [

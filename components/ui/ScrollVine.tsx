@@ -45,7 +45,7 @@ export function ScrollVine({ progress, className = "" }: ScrollVineProps) {
   const pathStyle = prefersReducedMotion ? { pathLength: 1 } : { pathLength: draw };
   const branchStyle = prefersReducedMotion ? { pathLength: 1 } : { pathLength: branchDraw };
   const leafStyle = prefersReducedMotion ? { opacity: 0.45 } : { opacity: leafOpacity };
-  const pencilFilter = mobilePerformanceMode ? undefined : "url(#pencil)";
+  const pencilFilter = undefined;
 
   return (
     <div
@@ -136,7 +136,7 @@ export function ScrollVine({ progress, className = "" }: ScrollVineProps) {
         <motion.path
           d="M1095 34 C870 118 850 270 1018 336 C1185 402 1174 520 944 572 C711 625 555 714 650 824 C744 934 960 874 1018 1004 C1038 1050 1009 1081 950 1102"
           style={pathStyle}
-          className="stroke-brand-gold/32"
+          className="stroke-brand-gold/32 md:stroke-brand-gold/48"
           strokeWidth="2"
           fill="none"
           strokeLinecap="round"
@@ -216,7 +216,7 @@ export function VineAccent({ variant = "right", className = "" }: VineAccentProp
 
   const pathStyle = prefersReducedMotion ? { pathLength: 1 } : { pathLength: draw };
   const leafStyle = prefersReducedMotion ? { opacity: 0.3 } : { opacity: leafOpacity };
-  const pencilFilter = mobilePerformanceMode ? undefined : "url(#pencil)";
+  const pencilFilter = undefined;
   const isLeft = variant === "left";
   const isLow = variant === "low";
 
@@ -315,7 +315,7 @@ export function PageVine({ variant, progress, className = "" }: PageVineProps) {
   const pathStyle = prefersReducedMotion ? { pathLength: 1 } : { pathLength: draw };
   const branchStyle = prefersReducedMotion ? { pathLength: 1 } : { pathLength: branchDraw };
   const leafStyle = prefersReducedMotion ? { opacity: 0.24 } : { opacity: leafOpacity };
-  const pencilFilter = mobilePerformanceMode ? undefined : "url(#pencil)";
+  const pencilFilter = undefined;
   const isStory = variant === "story";
   const isMenu = variant === "menu";
   const isCatering = variant === "catering";
@@ -397,7 +397,7 @@ export function PageVine({ variant, progress, className = "" }: PageVineProps) {
         <motion.path
           d="M1190 40 C890 196 836 402 1050 560 C1280 730 1120 922 780 1008 C430 1096 340 1302 604 1460 C888 1630 1088 1784 836 1970 C606 2140 344 2268 560 2460 C736 2616 1014 2598 1068 2800 C1092 2890 1036 2948 920 2980"
           style={pathStyle}
-          className="stroke-brand-gold/42"
+          className="stroke-brand-gold/42 md:stroke-brand-gold/54"
           strokeWidth="2.1"
           fill="none"
           strokeLinecap="round"
@@ -487,7 +487,7 @@ export function PageVine({ variant, progress, className = "" }: PageVineProps) {
         <motion.path
           d="M1230 36 C976 126 920 296 1118 406 C1304 510 1214 688 900 752 C596 814 520 982 754 1092 C946 1182 1088 1298 950 1448"
           style={pathStyle}
-          className="stroke-brand-gold/34"
+          className="stroke-brand-gold/34 md:stroke-brand-gold/50"
           strokeWidth="2"
           fill="none"
           strokeLinecap="round"
@@ -575,7 +575,7 @@ export function PageVine({ variant, progress, className = "" }: PageVineProps) {
         <motion.path
           d="M180 40 C486 140 528 354 330 500 C132 646 260 850 620 914 C1000 982 1130 1160 864 1318 C608 1470 436 1640 680 1810 C880 1950 1110 1968 1230 2150"
           style={pathStyle}
-          className="stroke-brand-gold/36"
+          className="stroke-brand-gold/36 md:stroke-brand-gold/50"
           strokeWidth="2"
           fill="none"
           strokeLinecap="round"
@@ -665,7 +665,7 @@ export function PageVine({ variant, progress, className = "" }: PageVineProps) {
         <motion.path
           d="M1180 32 C930 124 862 300 1050 450 C1260 618 1128 810 820 900 C522 988 380 1166 596 1326 C814 1488 1070 1490 1112 1680 C1148 1844 1000 1978 748 2068"
           style={pathStyle}
-          className="stroke-brand-gold/36"
+          className="stroke-brand-gold/36 md:stroke-brand-gold/50"
           strokeWidth="2"
           fill="none"
           strokeLinecap="round"
@@ -694,9 +694,8 @@ export function PageVine({ variant, progress, className = "" }: PageVineProps) {
 
 export function GiftCardVine({ className = "" }: GiftCardVineProps) {
   const prefersReducedMotion = useReducedMotion();
-  const mobilePerformanceMode = useMobilePerformanceMode();
   const giftEase = [0.25, 0.4, 0.25, 1] as const;
-  const pencilFilter = mobilePerformanceMode ? undefined : "url(#pencil)";
+  const pencilFilter = undefined;
   const lineTransition = prefersReducedMotion
     ? { duration: 0 }
     : { duration: 2.2, ease: giftEase };
@@ -813,8 +812,7 @@ export function GiftCardVine({ className = "" }: GiftCardVineProps) {
 
 export function ModalVine({ className = "" }: ModalVineProps) {
   const prefersReducedMotion = useReducedMotion();
-  const mobilePerformanceMode = useMobilePerformanceMode();
-  const pencilFilter = mobilePerformanceMode ? undefined : "url(#pencil)";
+  const pencilFilter = undefined;
   const modalEase = [0.25, 0.4, 0.25, 1] as const;
   const lineTransition = prefersReducedMotion
     ? { duration: 0 }

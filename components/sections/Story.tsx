@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 import { useRef, useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -29,24 +29,16 @@ const SHUFFLE_MS = 5000;
 
 export function Story() {
   const storyRef = useRef<HTMLElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const videoContainerRef = useRef<HTMLDivElement>(null);
   const [frontIndex, setFrontIndex] = useState(0);
   const [zFrontIndex, setZFrontIndex] = useState(0);
   const shufflingRef = useRef(false);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
   const { scrollYProgress: storyScrollProgress } = useScroll({
     target: storyRef,
     offset: ["start 72%", "end 35%"],
   });
-
-  const imageY = useTransform(scrollYProgress, [0, 1], [30, -30]);
 
   const shuffle = useCallback(() => {
     if (shufflingRef.current) return;
@@ -153,7 +145,6 @@ export function Story() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
             {/* Image card stack with disconnected frame + parallax */}
             <motion.div
-              ref={containerRef}
               className="relative w-full max-w-[280px] sm:max-w-sm mx-auto md:max-w-none cursor-pointer"
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -190,10 +181,7 @@ export function Story() {
                       }}
                       className="absolute inset-0 rounded-2xl overflow-hidden"
                     >
-                      <motion.div
-                        style={{ y: imageY }}
-                        className="relative w-full h-[120%] -mt-[10%]"
-                      >
+                      <div className="relative w-full h-full">
                         <Image
                           src={img.src}
                           alt={img.alt}
@@ -202,7 +190,7 @@ export function Story() {
                           className="w-full h-full object-cover"
                           sizes="(max-width: 768px) 100vw, 50vw"
                         />
-                      </motion.div>
+                      </div>
                     </motion.div>
                   );
                 })}

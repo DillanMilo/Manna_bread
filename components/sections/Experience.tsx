@@ -4,7 +4,7 @@ import { motion, useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import { SectionHeader } from '@/components/ui/SectionHeader';
-import { FadeIn, StaggerContainer, StaggerItem } from '@/components/ui/Motion';
+import { FadeIn } from '@/components/ui/Motion';
 
 const CAROUSEL_IMAGES = [
   '/images/manna-interior-timber-beams.webp',
