@@ -8,9 +8,9 @@ import { VineAccent } from '@/components/ui/ScrollVine';
 
 const FEATURED_ITEMS = [
   {
-    title: 'Chai Tea',
-    description: 'House-made spiced black tea blended with steamed milk for a warm, aromatic drink.',
-    price: '$5.75+',
+    title: 'Cappuccino',
+    description: 'Rich espresso folded with velvety steamed milk and a cloud of foam, finished warm and beautifully balanced.',
+    price: '$6.00+',
     image: '/images/manna-latte-art.webp',
   },
   {
