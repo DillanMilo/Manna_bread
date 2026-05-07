@@ -4,11 +4,14 @@ import Image from "next/image";
 import { CONTACT } from "@/lib/constants";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import { MannaMap, MapInfoCard } from "@/components/ui/MannaMap";
+import { VineAccent } from "@/components/ui/ScrollVine";
 
 export function Contact() {
   return (
-    <section className="relative py-12 sm:py-16 md:py-20 lg:py-28 bg-brand-forest-mid overflow-hidden">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
+    <section className="relative isolate py-12 sm:py-16 md:py-20 lg:py-28 bg-brand-forest-mid overflow-hidden">
+      <VineAccent variant="left" className="z-0 opacity-55" />
+
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
           {/* Contact Info */}
           <div>
@@ -82,7 +85,7 @@ export function Contact() {
             <div className="relative aspect-[3/4] max-w-[340px] sm:max-w-[420px] md:max-w-[520px] mx-auto">
               {/* Soft gold glow behind the arch */}
               <div
-                className="absolute -inset-4 sm:-inset-6 md:-inset-10"
+                className="absolute -inset-4 hidden sm:block sm:-inset-6 md:-inset-10"
                 style={{
                   background:
                     "radial-gradient(ellipse at center, rgba(201, 168, 76, 0.18) 0%, rgba(201, 168, 76, 0.06) 50%, transparent 75%)",
@@ -100,7 +103,6 @@ export function Contact() {
                 fill
                 className="relative z-10 object-contain pointer-events-none scale-[1.15]"
                 sizes="(max-width: 640px) 340px, (max-width: 768px) 420px, 520px"
-                priority
               />
               {/* Info card — behind the arch, inside the opening */}
               <div className="absolute z-[5] top-[16%] sm:top-[18%] inset-x-0 flex justify-center">

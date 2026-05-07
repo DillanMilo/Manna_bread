@@ -1,10 +1,11 @@
 'use client';
 
 import Image from 'next/image';
-import { FadeIn, LineDraw, Parallax } from '@/components/ui/Motion';
+import { FadeIn, LineDraw } from '@/components/ui/Motion';
 import { QuoteBlock } from '@/components/ui/QuoteBlock';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { PageVine } from '@/components/ui/ScrollVine';
 
 const organic = [0.25, 0.4, 0.25, 1] as const;
 
@@ -34,12 +35,14 @@ function StoryImage({
   alt,
   side,
   aspectRatio = 'aspect-[3/4]',
+  parallaxStrength = 40,
   className = '',
 }: {
   src: string;
   alt: string;
   side: 'left' | 'right';
   aspectRatio?: string;
+  parallaxStrength?: number;
   className?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -48,7 +51,7 @@ function StoryImage({
     target: ref,
     offset: ['start end', 'end start'],
   });
-  const imageY = useTransform(scrollYProgress, [0, 1], [40, -40]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [parallaxStrength, -parallaxStrength]);
 
   return (
     <motion.div
@@ -56,7 +59,7 @@ function StoryImage({
       initial={{ opacity: 0, x: side === 'left' ? -50 : 50, scale: 0.95 }}
       animate={isInView ? { opacity: 1, x: 0, scale: 1 } : {}}
       transition={{ duration: 0.9, ease: organic }}
-      className={`relative ${aspectRatio} rounded-2xl overflow-hidden shadow-xl ${className}`}
+      className={`relative ${aspectRatio} w-full max-w-[320px] sm:max-w-none mx-auto rounded-2xl overflow-hidden shadow-xl ${className}`}
     >
       {/* Decorative offset border */}
       <div
@@ -66,7 +69,7 @@ function StoryImage({
       />
       <motion.div
         style={{ y: imageY }}
-        className="absolute -top-[40px] sm:-top-[80px] -bottom-[40px] sm:-bottom-[80px] left-0 right-0 will-change-transform"
+        className="absolute -top-[90px] sm:-top-[120px] -bottom-[90px] sm:-bottom-[120px] left-0 right-0 will-change-transform"
       >
         <Image
           src={src}
@@ -86,11 +89,13 @@ function Chapter({
   image,
   imagePosition = 'right',
   imageAspect = 'aspect-[3/4]',
+  imageParallaxStrength = 40,
 }: {
   children: React.ReactNode;
   image?: { src: string; alt: string };
   imagePosition?: 'left' | 'right';
   imageAspect?: string;
+  imageParallaxStrength?: number;
 }) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
@@ -117,6 +122,7 @@ function Chapter({
             alt={image.alt}
             side={imagePosition === 'left' ? 'left' : 'right'}
             aspectRatio={imageAspect}
+            parallaxStrength={imageParallaxStrength}
           />
         </div>
       )}
@@ -187,8 +193,16 @@ function ClosingImage() {
    OUR STORY PAGE
    ═══════════════════════════════════════════ */
 export default function OurStoryPage() {
+  const pageRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: pageRef,
+    offset: ['start start', 'end end'],
+  });
+
   return (
-    <main className="bg-brand-forest min-h-screen">
+    <main ref={pageRef} className="relative isolate bg-brand-forest min-h-screen overflow-hidden">
+      <PageVine variant="story" progress={scrollYProgress} className="z-0 opacity-85" />
+      <div className="relative z-10">
       {/* ─── HERO ─── */}
       <section className="pt-24 sm:pt-32 md:pt-44 pb-12 sm:pb-16 md:pb-20 px-5 sm:px-6 md:px-10">
         <div className="max-w-4xl mx-auto text-center">
@@ -228,6 +242,7 @@ export default function OurStoryPage() {
           <Chapter
             image={STORY_IMAGES.christin}
             imagePosition="right"
+            imageParallaxStrength={72}
           >
             <FadeIn>
               <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-4">
@@ -324,6 +339,7 @@ export default function OurStoryPage() {
             image={STORY_IMAGES.journey}
             imagePosition="left"
             imageAspect="aspect-[4/5]"
+            imageParallaxStrength={72}
           >
             <FadeIn>
               <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-4">
@@ -428,6 +444,7 @@ export default function OurStoryPage() {
                 alt={STORY_IMAGES.couple.alt}
                 side="left"
                 aspectRatio="aspect-[3/4]"
+                parallaxStrength={72}
               />
             </div>
 
@@ -570,6 +587,7 @@ export default function OurStoryPage() {
           </FadeIn>
         </div>
       </section>
+      </div>
     </main>
   );
 }

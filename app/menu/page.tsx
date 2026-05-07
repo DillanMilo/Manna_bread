@@ -1,11 +1,12 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll } from 'framer-motion';
 import { menuData, type MenuItem } from '@/lib/menuData';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { Button } from '@/components/ui/Button';
 import { FadeIn } from '@/components/ui/Motion';
+import { PageVine } from '@/components/ui/ScrollVine';
 import { TOAST } from '@/lib/constants';
 
 const EASE: [number, number, number, number] = [0.25, 0.4, 0.25, 1];
@@ -41,7 +42,12 @@ function MenuItemRow({ item }: { item: MenuItem }) {
 
 export default function MenuPage() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const pageRef = useRef<HTMLElement>(null);
   const tabsRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: pageRef,
+    offset: ['start start', 'end end'],
+  });
 
   const category = menuData[activeIndex];
 
@@ -57,7 +63,9 @@ export default function MenuPage() {
   };
 
   return (
-    <main className="bg-brand-forest min-h-screen">
+    <main ref={pageRef} className="relative isolate bg-brand-forest min-h-screen overflow-hidden">
+      <PageVine variant="menu" progress={scrollYProgress} className="z-0 opacity-85" />
+      <div className="relative z-10">
       {/* Header */}
       <div className="pt-24 sm:pt-32 md:pt-40 pb-6 md:pb-10">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
@@ -75,7 +83,7 @@ export default function MenuPage() {
       {/* Category Tabs */}
       <div
         ref={tabsRef}
-        className="sticky top-16 lg:top-20 z-40 bg-brand-forest/95 backdrop-blur-sm border-b border-white/10"
+        className="sticky top-16 lg:top-20 z-40 bg-brand-forest/95 sm:backdrop-blur-sm border-b border-white/10"
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
           <nav
@@ -162,6 +170,7 @@ export default function MenuPage() {
           </div>
         </div>
       </FadeIn>
+      </div>
     </main>
   );
 }

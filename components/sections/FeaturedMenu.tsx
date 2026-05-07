@@ -3,30 +3,36 @@
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { MenuCard } from '@/components/ui/MenuCard';
 import { Button } from '@/components/ui/Button';
-import { FadeIn, StaggerContainer, StaggerItem, ScaleIn } from '@/components/ui/Motion';
+import { FadeIn, StaggerContainer, StaggerItem } from '@/components/ui/Motion';
+import { VineAccent } from '@/components/ui/ScrollVine';
 
 const FEATURED_ITEMS = [
   {
-    title: 'Chai Tea',
-    description: 'House-made spiced black tea blended with steamed milk for a warm, aromatic drink.',
-    price: '$5.75+',
+    title: 'Cappuccino',
+    description: 'Rich espresso folded with velvety steamed milk and a cloud of foam, finished warm and beautifully balanced.',
+    price: '$6.00+',
+    image: '/images/manna-latte-art.webp',
   },
   {
     title: 'Butter Croissant',
     description: 'Flaky, golden layers of hand-folded buttery dough, baked fresh daily.',
     price: '$6.00',
+    image: '/images/manna-croissant-tray.webp',
   },
   {
-    title: 'Cinnamon Roll',
-    description: 'Soft, warm dough swirled with cinnamon and finished with cream cheese icing.',
+    title: 'Chocolate Danish',
+    description: 'Buttery puff pastry layered with rich chocolate filling, drizzled and finished by hand.',
     price: '$7.00',
+    image: '/images/manna-danish-prep.webp',
   },
 ];
 
 export function FeaturedMenu() {
   return (
-    <section className="py-14 sm:py-20 md:py-28 bg-brand-forest-mid">
-      <div className="max-w-6xl mx-auto px-5 sm:px-6 md:px-10">
+    <section className="relative isolate overflow-hidden py-14 sm:py-20 md:py-28 bg-brand-forest-mid">
+      <VineAccent variant="right" className="z-0 opacity-75" />
+
+      <div className="relative z-10 max-w-6xl mx-auto px-5 sm:px-6 md:px-10">
         <FadeIn>
           <SectionHeader
             label="From Our Kitchen"

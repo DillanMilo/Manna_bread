@@ -2,6 +2,7 @@
 
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { VineAccent } from '@/components/ui/ScrollVine';
 
 const CARDS = [
   {
@@ -45,7 +46,7 @@ function ValueCard({
         delay: 0.15 + index * 0.15,
         ease: [0.25, 0.4, 0.25, 1],
       }}
-      className="relative bg-brand-forest-mid/80 backdrop-blur-md rounded-2xl p-6 sm:p-7 md:p-9 shadow-lg shadow-black/10 border border-white/10 hover:-translate-y-1 hover:shadow-xl transition-all duration-500"
+      className="relative bg-brand-forest-mid/80 sm:backdrop-blur-md rounded-2xl p-6 sm:p-7 md:p-9 shadow-lg shadow-black/10 border border-white/10 hover:-translate-y-1 hover:shadow-xl transition-all duration-500"
     >
       <span className="font-body text-xs uppercase tracking-[0.2em] text-brand-gold font-medium">
         {label}
@@ -68,6 +69,8 @@ export function KeywordCarousel() {
       ref={sectionRef}
       className="relative py-16 sm:py-24 md:py-32 bg-brand-forest overflow-hidden"
     >
+      <VineAccent variant="left" className="z-0 opacity-60" />
+
       <div className="relative z-10 max-w-6xl mx-auto px-5 sm:px-6 md:px-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 md:gap-8">
           {CARDS.map((card, i) => (

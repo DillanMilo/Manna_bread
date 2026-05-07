@@ -4,12 +4,12 @@ import { motion, useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import { SectionHeader } from '@/components/ui/SectionHeader';
-import { FadeIn, StaggerContainer, StaggerItem } from '@/components/ui/Motion';
+import { FadeIn } from '@/components/ui/Motion';
 
 const CAROUSEL_IMAGES = [
-  '/images/E6996286-81AF-47BA-B193-7083C573C618.PNG',
-  '/images/RentalShot20241125at111409AM.webp',
-  '/images/manainside.webp',
+  '/images/manna-interior-timber-beams.webp',
+  '/images/manna-interior-marble-tables.webp',
+  '/images/manna-server-coffee.webp',
 ];
 
 const FEATURES = [
@@ -87,7 +87,7 @@ export function Experience() {
             alt=""
             fill
             className="object-cover"
-            priority
+            sizes="100vw"
           />
         </motion.div>
       ))}

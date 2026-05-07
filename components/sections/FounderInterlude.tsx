@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 
@@ -10,30 +10,20 @@ export function FounderInterlude() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.25 });
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start end', 'end start'],
-  });
-
-  const imageY = useTransform(scrollYProgress, [0, 1], [60, -60]);
-
   return (
     <section
       ref={containerRef}
       className="relative h-[50vh] sm:h-[55vh] md:h-[65vh] overflow-hidden"
     >
       {/* Parallax image */}
-      <motion.div
-        style={{ y: imageY }}
-        className="absolute -top-[60px] -bottom-[60px] left-0 right-0 will-change-transform"
-      >
+      <div className="absolute inset-0">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/5094151F-9BC2-4D50-87F7-E1751B7D59BA.jpeg"
           alt="Christin enjoying coffee and pastries at Manna Bakery"
           className="w-full h-full object-cover object-[center_35%]"
         />
-      </motion.div>
+      </div>
 
       {/* Gradient overlay — soft dark from bottom for legible text */}
       <div className="absolute inset-0 bg-gradient-to-t from-brand-forest/80 via-brand-forest/25 to-transparent" />

@@ -1,11 +1,12 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 import { useRef, useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { QuoteBlock } from "@/components/ui/QuoteBlock";
 import { FadeIn } from "@/components/ui/Motion";
+import { ScrollVine } from "@/components/ui/ScrollVine";
 
 const organic = [0.25, 0.4, 0.25, 1] as const;
 
@@ -27,19 +28,17 @@ const STORY_IMAGES = [
 const SHUFFLE_MS = 5000;
 
 export function Story() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const storyRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const videoContainerRef = useRef<HTMLDivElement>(null);
   const [frontIndex, setFrontIndex] = useState(0);
   const [zFrontIndex, setZFrontIndex] = useState(0);
   const shufflingRef = useRef(false);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
+  const { scrollYProgress: storyScrollProgress } = useScroll({
+    target: storyRef,
+    offset: ["start 72%", "end 35%"],
   });
-
-  const imageY = useTransform(scrollYProgress, [0, 1], [30, -30]);
 
   const shuffle = useCallback(() => {
     if (shufflingRef.current) return;
@@ -85,9 +84,11 @@ export function Story() {
   }, []);
 
   return (
-    <section className="bg-brand-forest overflow-hidden">
+    <section ref={storyRef} className="relative isolate bg-brand-forest overflow-hidden">
+      <ScrollVine progress={storyScrollProgress} className="z-0 opacity-90" />
+
       {/* ── Beat 1: Christin's Journey ── */}
-      <div className="py-14 sm:py-20 md:py-28">
+      <div className="relative z-10 py-14 sm:py-20 md:py-28">
         <div className="max-w-4xl mx-auto px-5 sm:px-6 md:px-10">
           <FadeIn>
             <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-4 text-center">
@@ -132,19 +133,18 @@ export function Story() {
       </div>
 
       {/* Subtle divider */}
-      <div className="max-w-xs mx-auto flex items-center gap-4 px-5">
+      <div className="relative z-10 max-w-xs mx-auto flex items-center gap-4 px-5">
         <div className="flex-1 h-px bg-brand-gold/20" />
         <div className="w-1.5 h-1.5 rounded-full bg-brand-gold/40" />
         <div className="flex-1 h-px bg-brand-gold/20" />
       </div>
 
       {/* ── Beat 2: The Happy Ending — Chad & Building Manna Together ── */}
-      <div className="py-14 sm:py-20 md:py-28">
+      <div className="relative z-10 py-14 sm:py-20 md:py-28">
         <div className="max-w-6xl mx-auto px-5 sm:px-6 md:px-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
             {/* Image card stack with disconnected frame + parallax */}
             <motion.div
-              ref={containerRef}
               className="relative w-full max-w-[280px] sm:max-w-sm mx-auto md:max-w-none cursor-pointer"
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -181,10 +181,7 @@ export function Story() {
                       }}
                       className="absolute inset-0 rounded-2xl overflow-hidden"
                     >
-                      <motion.div
-                        style={{ y: imageY }}
-                        className="relative w-full h-[120%] -mt-[10%]"
-                      >
+                      <div className="relative w-full h-full">
                         <Image
                           src={img.src}
                           alt={img.alt}
@@ -192,9 +189,8 @@ export function Story() {
                           height={img.height}
                           className="w-full h-full object-cover"
                           sizes="(max-width: 768px) 100vw, 50vw"
-                          priority
                         />
-                      </motion.div>
+                      </div>
                     </motion.div>
                   );
                 })}

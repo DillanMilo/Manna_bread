@@ -2,10 +2,11 @@
 
 import Image from 'next/image';
 import { FadeIn, LineDraw, StaggerContainer, StaggerItem } from '@/components/ui/Motion';
-import { Button } from '@/components/ui/Button';
-import { CONTACT } from '@/lib/constants';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { PageVine } from '@/components/ui/ScrollVine';
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { InquirySection } from '@/components/sections/InquirySection';
+import { FloatingInquiryButton } from '@/components/ui/FloatingInquiryButton';
 
 /* ─── types ─── */
 
@@ -160,116 +161,110 @@ const SOUP_FLAVORS: string[] = [
   'Zuppa Toscano',
 ];
 
-/* ─── parallax image for CTA ─── */
-
-function CateringParallaxImage() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], [30, -30]);
-
-  return (
-    <div ref={ref} className="relative aspect-[3/4] rounded-t-full rounded-b-2xl overflow-hidden shadow-xl">
-      <motion.div
-        style={{ y }}
-        className="absolute -top-[15%] -bottom-[15%] left-0 right-0 will-change-transform"
-      >
-        <Image
-          src="/images/IMG_0902.jpg"
-          alt="Manna Bakery gathering and event space"
-          fill
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, 40vw"
-        />
-      </motion.div>
-    </div>
-  );
-}
-
 /* ─── parallax image for quote section ─── */
 
 function QuoteParallaxImage() {
   const ref = useRef<HTMLDivElement>(null);
+  const inViewRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(inViewRef, { once: true, amount: 0.25 });
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
   });
-  const y = useTransform(scrollYProgress, [0, 1], [25, -25]);
+  const y = useTransform(scrollYProgress, [0, 1], [70, -70]);
 
   return (
-    <div ref={ref} className="relative aspect-[4/5] rounded-t-full rounded-b-2xl overflow-hidden shadow-xl">
-      <motion.div
-        style={{ y }}
-        className="absolute -top-[12%] -bottom-[12%] left-0 right-0 will-change-transform"
-      >
-        <Image
-          src="/images/IMG_0903.jpg"
-          alt="Manna Bakery pastry tray prepared with care"
-          fill
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, 40vw"
-        />
-      </motion.div>
-    </div>
-  );
-}
-
-/* ─── image placeholder ─── */
-
-function ImagePlaceholder({
-  label,
-  aspect = 'aspect-[16/9]',
-  className = '',
-  arch = false,
-}: {
-  label: string;
-  aspect?: string;
-  className?: string;
-  arch?: boolean;
-}) {
-  return (
-    <div
-      className={`relative overflow-hidden bg-brand-forest-mid/40 border-2 border-dashed border-white/20 flex flex-col items-center justify-center ${aspect} ${
-        arch ? 'rounded-t-full rounded-b-2xl' : 'rounded-2xl'
-      } ${className}`}
+    <motion.div
+      ref={inViewRef}
+      initial={{ opacity: 0, scale: 1.04, clipPath: 'inset(8% 0% 8% 0% round 9999px 9999px 16px 16px)' }}
+      animate={isInView
+        ? { opacity: 1, scale: 1, clipPath: 'inset(0% 0% 0% 0% round 9999px 9999px 16px 16px)' }
+        : {}}
+      transition={{ duration: 1.1, ease: [0.22, 0.61, 0.36, 1] }}
+      className="relative aspect-[4/5] max-w-[320px] sm:max-w-none mx-auto rounded-t-full rounded-b-2xl overflow-hidden shadow-xl"
     >
-      {/* subtle cross-hatch pattern */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 10px, #8A9A8E 10px, #8A9A8E 11px),
-          repeating-linear-gradient(-45deg, transparent, transparent 10px, #8A9A8E 10px, #8A9A8E 11px)`,
-      }} />
-
-      <svg
-        className="w-10 h-10 text-white/30 mb-3"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth={1.2}
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"
-        />
-      </svg>
-      <p className="font-body text-xs font-medium tracking-[1.5px] uppercase text-white/40">
-        {label}
-      </p>
-    </div>
+      <div ref={ref} className="absolute inset-0">
+        <motion.div
+          style={{ y }}
+          className="absolute left-0 right-0 top-[-25%] h-[150%] will-change-transform"
+        >
+          <Image
+            src="/images/manna-quiche-fruit.webp"
+            alt="House-made quiche with side fruit cup, plated on marble with gold flatware"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 40vw"
+          />
+        </motion.div>
+      </div>
+    </motion.div>
   );
 }
 
-/* ─── section divider ─── */
+/* ─── generic parallax image (for static frames) ─── */
 
-function Divider() {
+function ParallaxImage({
+  src,
+  alt,
+  className = '',
+  sizes,
+  speed = 70,
+  objectPosition = 'center',
+  reveal = 'wipe-up',
+  priority = false,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+  sizes?: string;
+  speed?: number;
+  objectPosition?: string;
+  reveal?: 'wipe-up' | 'wipe-down' | 'wipe-left' | 'wipe-right' | 'zoom';
+  priority?: boolean;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inViewRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(inViewRef, { once: true, amount: 0.2 });
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], [speed, -speed]);
+
+  const initialClip =
+    reveal === 'wipe-up'    ? 'inset(15% 0% 0% 0%)'
+    : reveal === 'wipe-down'? 'inset(0% 0% 15% 0%)'
+    : reveal === 'wipe-left'? 'inset(0% 0% 0% 15%)'
+    : reveal === 'wipe-right'?'inset(0% 15% 0% 0%)'
+    : 'inset(0% 0% 0% 0%)';
+
   return (
-    <div className="flex items-center justify-center gap-4 py-12 md:py-16">
-      <LineDraw className="h-px w-16 bg-white/20" />
-      <div className="w-1.5 h-1.5 rounded-full bg-brand-gold/50" />
-      <LineDraw className="h-px w-16 bg-white/20" delay={0.2} />
-    </div>
+    <motion.div
+      ref={inViewRef}
+      initial={{ opacity: 0, scale: 1.04, clipPath: initialClip }}
+      animate={isInView
+        ? { opacity: 1, scale: 1, clipPath: 'inset(0% 0% 0% 0%)' }
+        : {}}
+      transition={{ duration: 1.1, ease: [0.22, 0.61, 0.36, 1] }}
+      className={`relative overflow-hidden ${className}`}
+    >
+      <div ref={ref} className="absolute inset-0">
+        <motion.div
+          style={{ y }}
+          className="absolute left-0 right-0 top-[-28%] h-[156%] will-change-transform"
+        >
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            sizes={sizes}
+            priority={priority}
+            className="object-cover"
+            style={{ objectPosition }}
+          />
+        </motion.div>
+      </div>
+    </motion.div>
   );
 }
 
@@ -277,19 +272,19 @@ function Divider() {
 
 function PricingCards({ sizes }: { sizes: TraySize[] }) {
   return (
-    <StaggerContainer className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 mb-10">
+    <StaggerContainer className="grid grid-cols-3 gap-2.5 sm:gap-4 md:gap-6 mb-8 sm:mb-10">
       {sizes.map((size) => (
         <StaggerItem key={size.name}>
-          <div className="bg-brand-forest-mid/60 rounded-2xl p-6 shadow-sm border border-white/10 text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-            <p className="font-body text-sm font-semibold text-white mb-1">
+          <div className="bg-brand-forest-mid/60 rounded-xl sm:rounded-2xl px-2 py-4 sm:p-6 shadow-sm border border-white/10 text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+            <p className="font-body text-xs sm:text-sm font-semibold text-white mb-1 leading-tight">
               {size.name}
             </p>
             {size.detail && (
-              <p className="font-body text-sm text-white/60 mb-3">
+              <p className="font-body text-[11px] sm:text-sm text-white/60 mb-2 sm:mb-3 leading-tight">
                 {size.detail}
               </p>
             )}
-            <p className="font-display text-2xl text-brand-gold">
+            <p className="font-display text-xl sm:text-2xl text-brand-gold">
               {size.price}
             </p>
           </div>
@@ -303,15 +298,15 @@ function PricingCards({ sizes }: { sizes: TraySize[] }) {
 
 function ItemGrid({ items }: { items: CateringItem[] }) {
   return (
-    <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-3">
+    <StaggerContainer className="grid grid-cols-2 md:grid-cols-3 gap-x-4 sm:gap-x-6 gap-y-2 sm:gap-y-3">
       {items.map((item) => (
         <StaggerItem key={item.name}>
-          <div className="py-2">
-            <p className="font-body text-[15px] font-medium text-white/85">
+          <div className="py-1.5 sm:py-2">
+            <p className="font-body text-sm sm:text-[15px] font-medium text-white/85 leading-snug">
               {item.name}
             </p>
             {item.note && (
-              <p className="font-body text-sm text-white/60 mt-0.5">
+              <p className="font-body text-xs sm:text-sm text-white/60 mt-0.5 leading-snug">
                 {item.note}
               </p>
             )}
@@ -327,8 +322,17 @@ function ItemGrid({ items }: { items: CateringItem[] }) {
    ═══════════════════════════════════════════ */
 
 export default function CateringPage() {
+  const pageRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: pageRef,
+    offset: ['start start', 'end end'],
+  });
+
   return (
-    <main className="bg-brand-forest min-h-screen">
+    <main ref={pageRef} className="relative isolate bg-brand-forest min-h-screen overflow-hidden">
+      <PageVine variant="catering" progress={scrollYProgress} className="z-0 opacity-85" />
+      <FloatingInquiryButton variant="catering" />
+      <div className="relative z-10">
 
       {/* ─── HERO ─── */}
       <section className="pt-24 sm:pt-32 md:pt-44 pb-12 sm:pb-16 md:pb-20 px-5 sm:px-6 md:px-10">
@@ -361,14 +365,17 @@ export default function CateringPage() {
         </div>
 
         {/* Hero image — catering spread / table setting */}
-        <FadeIn delay={0.5}>
-          <div className="max-w-5xl mx-auto mt-8 sm:mt-12 md:mt-16 px-5 sm:px-6 md:px-10">
-            <ImagePlaceholder
-              label="Catering spread photo"
-              aspect="aspect-[16/9] sm:aspect-[21/9]"
-            />
-          </div>
-        </FadeIn>
+        <div className="max-w-5xl mx-auto mt-8 sm:mt-12 md:mt-16 px-5 sm:px-6 md:px-10">
+          <ParallaxImage
+            src="/images/manna-breakfast-spread.webp"
+            alt="A breakfast spread of croissant sandwich and grilled cheese with fresh fruit"
+            className="aspect-[16/9] sm:aspect-[21/9] rounded-2xl shadow-xl"
+            sizes="(max-width: 1024px) 100vw, 1024px"
+            speed={90}
+            reveal="zoom"
+            priority
+          />
+        </div>
       </section>
 
       {/* ─── PASTRY TRAYS ─── */}
@@ -515,18 +522,23 @@ export default function CateringPage() {
       {/* ─── IMAGE BREAK: Two-up food photography ─── */}
       <section className="py-12 md:py-16 px-5 sm:px-6 md:px-10">
         <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-          <FadeIn>
-            <ImagePlaceholder
-              label="Drinks / coffee service"
-              aspect="aspect-[4/3]"
-            />
-          </FadeIn>
-          <FadeIn delay={0.15}>
-            <ImagePlaceholder
-              label="Fresh fruit arrangement"
-              aspect="aspect-[4/3]"
-            />
-          </FadeIn>
+          <ParallaxImage
+            src="/images/manna-latte-art.webp"
+            alt="A flat white with rosetta latte art on a marble counter"
+            className="aspect-[4/3] max-w-[340px] sm:max-w-none mx-auto rounded-2xl shadow-lg"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            speed={65}
+            reveal="wipe-right"
+          />
+          <ParallaxImage
+            src="/images/manna-grilled-panini.webp"
+            alt="Grilled panini with kettle chips on marble, gold flatware and baby's breath"
+            className="aspect-[4/3] max-w-[340px] sm:max-w-none mx-auto rounded-2xl shadow-lg"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            speed={65}
+            objectPosition="center 75%"
+            reveal="wipe-left"
+          />
         </div>
       </section>
 
@@ -601,12 +613,15 @@ export default function CateringPage() {
       {/* ─── IMAGE BREAK: Soup / kitchen scene ─── */}
       <section className="py-12 md:py-16 px-5 sm:px-6 md:px-10">
         <div className="max-w-3xl mx-auto">
-          <FadeIn>
-            <ImagePlaceholder
-              label="Kitchen / soup preparation"
-              aspect="aspect-[16/7]"
-            />
-          </FadeIn>
+          <ParallaxImage
+            src="/images/manna-tomato-soup.webp"
+            alt="Tomato basil soup with bread on marble, baby's breath in a clear vase"
+            className="aspect-[3/2] rounded-2xl shadow-xl"
+            sizes="(max-width: 768px) 100vw, 768px"
+            speed={70}
+            objectPosition="center 60%"
+            reveal="zoom"
+          />
         </div>
       </section>
 
@@ -640,45 +655,9 @@ export default function CateringPage() {
         </div>
       </section>
 
-      {/* ─── CLOSING CTA ─── */}
-      <section className="py-20 md:py-28 bg-brand-forest-mid">
-        <div className="max-w-5xl mx-auto px-5 sm:px-6 md:px-10">
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 sm:gap-10 md:gap-14 items-center">
-            {/* Image — gathering / event scene */}
-            <FadeIn className="md:col-span-2">
-              <CateringParallaxImage />
-            </FadeIn>
+      <InquirySection id="catering-inquiry" variant="catering" />
 
-            {/* Text */}
-            <div className="md:col-span-3 text-center md:text-left">
-              <FadeIn>
-                <p className="font-accent text-lg md:text-xl italic text-white/60 mb-3">
-                  Let us bring the warmth to your table
-                </p>
-                <h2 className="font-display text-3xl md:text-4xl font-medium text-white leading-tight mb-6">
-                  Ready to place your order?
-                </h2>
-                <p className="font-body text-base text-white/70 leading-relaxed mb-8">
-                  Whether it&apos;s a corporate breakfast, a family celebration, or an
-                  intimate gathering with friends, we&apos;d love to help you curate
-                  the perfect spread. Reach out and let&apos;s start planning.
-                </p>
-              </FadeIn>
-              <FadeIn delay={0.2}>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                  <Button href="/contact" variant="primary" className="w-full sm:w-auto">
-                    Contact us
-                  </Button>
-                  <Button href={`tel:${CONTACT.phone.replace(/[^0-9+]/g, '')}`} variant="secondary" className="w-full sm:w-auto">
-                    Call {CONTACT.phone}
-                  </Button>
-                </div>
-              </FadeIn>
-            </div>
-          </div>
-        </div>
-      </section>
-
+      </div>
     </main>
   );
 }

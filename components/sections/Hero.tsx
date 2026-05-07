@@ -5,10 +5,12 @@ import { useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
 import { BRAND, TOAST } from '@/lib/constants';
+import { useMobilePerformanceMode } from '@/components/ui/useMobilePerformanceMode';
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const mobilePerformanceMode = useMobilePerformanceMode();
 
   useEffect(() => {
     if (videoRef.current) {
@@ -16,16 +18,37 @@ export function Hero() {
     }
   }, []);
 
+  useEffect(() => {
+    const section = sectionRef.current;
+    const video = videoRef.current;
+
+    if (!section || !video) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.15 },
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
   });
 
-  // Parallax: move background slower than scroll
-  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
-  // Fade out content as user scrolls down
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const contentY = useTransform(scrollYProgress, [0, 0.5], [0, -50]);
+  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '0%']);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.58], [1, 0]);
+  const contentY = useTransform(scrollYProgress, [0, 0.58], [0, mobilePerformanceMode ? -18 : -24]);
 
   return (
     <section ref={sectionRef} className="relative min-h-[70vh] sm:min-h-[80vh] md:min-h-[90vh] flex items-center justify-center overflow-hidden">
@@ -33,9 +56,9 @@ export function Hero() {
       <motion.div
         className="absolute inset-0 z-0"
         style={{ y: bgY }}
-        initial={{ scale: 1.06, filter: 'blur(6px)' }}
-        animate={{ scale: 1, filter: 'blur(0px)' }}
-        transition={{ duration: 2.0, ease: [0.25, 0.4, 0.25, 1] }}
+        initial={{ scale: 1.02, opacity: 0.96 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 1.4, ease: [0.25, 0.4, 0.25, 1] }}
       >
         <video
           ref={videoRef}
@@ -43,8 +66,10 @@ export function Hero() {
           muted
           loop
           playsInline
+          poster="/images/manna-arched-alcove.webp"
+          preload="auto"
           className="absolute inset-0 w-full h-full object-cover"
-          src="/images/1SE - Manna Evenings (20251221-223245).mov"
+          src="/videos/manna-evenings-hero.mp4"
         />
         {/* Overlay gradient so content stays readable */}
         <div className="absolute inset-0 z-[1] bg-gradient-to-b from-brand-forest/50 via-brand-forest/35 to-brand-forest/70" />
@@ -58,8 +83,8 @@ export function Hero() {
         {/* Logo */}
         <motion.div
           className="flex justify-center mb-4 sm:mb-5"
-          initial={{ opacity: 0, filter: 'blur(8px)' }}
-          animate={{ opacity: 1, filter: 'blur(0px)' }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 1.2, delay: 0.4, ease: [0.25, 0.4, 0.25, 1] }}
         >
           <motion.div
@@ -81,8 +106,8 @@ export function Hero() {
         {/* Headline — emerges as one calm moment */}
         <motion.h1
           className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-white leading-[1.15] mb-5 sm:mb-6"
-          initial={{ opacity: 0, y: 16, filter: 'blur(10px)' }}
-          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.4, delay: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
         >
           A place to gather,<br />
@@ -92,8 +117,8 @@ export function Hero() {
         {/* Description */}
         <motion.p
           className="font-body text-[15px] sm:text-base md:text-lg text-white/90 leading-relaxed mb-8 sm:mb-10 max-w-xl mx-auto"
-          initial={{ opacity: 0, filter: 'blur(6px)' }}
-          animate={{ opacity: 1, filter: 'blur(0px)' }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 1.2, delay: 1.4, ease: [0.25, 0.4, 0.25, 1] }}
         >
           {BRAND.description} Welcome to Manna.
