@@ -10,7 +10,7 @@ const FEATURED_ITEMS = [
   {
     title: 'Cappuccino',
     description: 'Rich espresso folded with velvety steamed milk and a cloud of foam, finished warm and beautifully balanced.',
-    price: '$6.00+',
+    price: '$6.00',
     image: '/images/manna-latte-art.webp',
   },
   {

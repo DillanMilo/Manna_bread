@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { CONTACT } from "@/lib/constants";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import { MannaMap, MapInfoCard } from "@/components/ui/MannaMap";
@@ -8,7 +7,7 @@ import { VineAccent } from "@/components/ui/ScrollVine";
 
 export function Contact() {
   return (
-    <section className="relative isolate py-12 sm:py-16 md:py-20 lg:py-28 bg-brand-forest-mid overflow-hidden">
+    <section className="relative isolate py-12 sm:py-16 md:py-20 lg:py-28 bg-[#18231d] overflow-hidden">
       <VineAccent variant="left" className="z-0 opacity-55" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
@@ -80,32 +79,13 @@ export function Contact() {
             </StaggerContainer>
           </div>
 
-          {/* Map — stone arch window */}
+          {/* Map */}
           <FadeIn direction="right" distance={50} delay={0.3}>
             <div className="relative aspect-[3/4] max-w-[340px] sm:max-w-[420px] md:max-w-[520px] mx-auto">
-              {/* Soft gold glow behind the arch */}
-              <div
-                className="absolute -inset-4 hidden sm:block sm:-inset-6 md:-inset-10"
-                style={{
-                  background:
-                    "radial-gradient(ellipse at center, rgba(201, 168, 76, 0.18) 0%, rgba(201, 168, 76, 0.06) 50%, transparent 75%)",
-                  filter: "blur(24px)",
-                }}
-              />
-              {/* Map sits behind the stone arch */}
-              <div className="absolute inset-[10%] top-[5%] bottom-[12%] overflow-hidden rounded-t-full rounded-b-lg">
+              <div className="absolute inset-0 overflow-hidden rounded-t-full rounded-b-xl border border-brand-gold/35 bg-brand-forest shadow-[0_26px_70px_rgba(0,0,0,0.34)]">
                 <MannaMap />
               </div>
-              {/* Stone arch image on top — scaled up to wrap around the map */}
-              <Image
-                src="/images/image_arch.png"
-                alt=""
-                fill
-                className="relative z-10 object-contain pointer-events-none scale-[1.15]"
-                sizes="(max-width: 640px) 340px, (max-width: 768px) 420px, 520px"
-              />
-              {/* Info card — behind the arch, inside the opening */}
-              <div className="absolute z-[5] top-[16%] sm:top-[18%] inset-x-0 flex justify-center">
+              <div className="absolute z-[5] top-[14%] sm:top-[16%] inset-x-0 flex justify-center">
                 <MapInfoCard />
               </div>
             </div>

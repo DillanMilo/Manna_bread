@@ -12,6 +12,8 @@ import { TOAST } from '@/lib/constants';
 const EASE: [number, number, number, number] = [0.25, 0.4, 0.25, 1];
 
 function MenuItemRow({ item }: { item: MenuItem }) {
+  const price = item.price.display.replace(/\+$/, '');
+
   return (
     <div
       className={`py-4 border-b border-white/10 ${
@@ -23,7 +25,7 @@ function MenuItemRow({ item }: { item: MenuItem }) {
           {item.name}
         </h4>
         <span className="font-accent text-lg text-brand-gold shrink-0">
-          {item.price.display}
+          {price}
         </span>
       </div>
       {item.description && (

@@ -268,6 +268,57 @@ function ParallaxImage({
   );
 }
 
+/* ─── section preview image ─── */
+
+function SectionPreviewImage({
+  src,
+  alt,
+  className = 'aspect-[16/9]',
+  objectPosition = 'center',
+  parallax = true,
+  speed = 55,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+  objectPosition?: string;
+  parallax?: boolean;
+  speed?: number;
+}) {
+  if (!parallax) {
+    return (
+      <FadeIn delay={0.12}>
+        <div className={`relative mb-8 sm:mb-10 overflow-hidden rounded-2xl shadow-xl ${className}`}>
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            sizes="(max-width: 768px) 100vw, 896px"
+            className="object-cover"
+            style={{ objectPosition }}
+          />
+        </div>
+      </FadeIn>
+    );
+  }
+
+  return (
+    <FadeIn delay={0.12}>
+      <div className="mb-8 sm:mb-10">
+        <ParallaxImage
+          src={src}
+          alt={alt}
+          className={`${className} rounded-2xl shadow-xl`}
+          sizes="(max-width: 768px) 100vw, 896px"
+          speed={speed}
+          objectPosition={objectPosition}
+          reveal="zoom"
+        />
+      </div>
+    </FadeIn>
+  );
+}
+
 /* ─── pricing card row ─── */
 
 function PricingCards({ sizes }: { sizes: TraySize[] }) {
@@ -393,6 +444,12 @@ export default function CateringPage() {
             </p>
           </FadeIn>
 
+          <SectionPreviewImage
+            src="/images/manna-croissant-tray.webp"
+            alt="Assorted fresh pastries arranged on a catering tray"
+            objectPosition="center 58%"
+          />
+
           <FadeIn delay={0.15}>
             <PricingCards sizes={PASTRY_TRAYS.sizes} />
           </FadeIn>
@@ -447,6 +504,14 @@ export default function CateringPage() {
               {SANDWICH_PLATTERS.description}
             </p>
           </FadeIn>
+
+          <SectionPreviewImage
+            src="/images/manna-turkey-panini.webp"
+            alt="Turkey pesto panini sandwiches plated for catering"
+            className="aspect-[4/3]"
+            objectPosition="center 80%"
+            parallax={false}
+          />
 
           <FadeIn delay={0.15}>
             <PricingCards sizes={SANDWICH_PLATTERS.sizes} />
@@ -610,21 +675,6 @@ export default function CateringPage() {
         </div>
       </section>
 
-      {/* ─── IMAGE BREAK: Soup / kitchen scene ─── */}
-      <section className="py-12 md:py-16 px-5 sm:px-6 md:px-10">
-        <div className="max-w-3xl mx-auto">
-          <ParallaxImage
-            src="/images/manna-tomato-soup.webp"
-            alt="Tomato basil soup with bread on marble, baby's breath in a clear vase"
-            className="aspect-[3/2] rounded-2xl shadow-xl"
-            sizes="(max-width: 768px) 100vw, 768px"
-            speed={70}
-            objectPosition="center 60%"
-            reveal="zoom"
-          />
-        </div>
-      </section>
-
       {/* ─── SCRATCH SOUP ─── */}
       <section className="py-16 md:py-24 px-5 sm:px-6 md:px-10">
         <div className="max-w-4xl mx-auto">
@@ -635,6 +685,15 @@ export default function CateringPage() {
             <h2 className="font-display text-3xl md:text-4xl font-medium text-white leading-tight mb-4">
               Scratch Soup
             </h2>
+          </FadeIn>
+
+          <SectionPreviewImage
+            src="/images/manna-tomato-soup.webp"
+            alt="Tomato basil soup with bread on marble"
+            objectPosition="center 60%"
+          />
+
+          <FadeIn>
             <p className="font-body text-base text-white/70 leading-relaxed mb-10">
               Ten servings per flavor&ensp;|&ensp;
               <span className="font-display text-xl text-brand-gold">$40</span>
