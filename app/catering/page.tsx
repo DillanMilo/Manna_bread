@@ -610,6 +610,11 @@ export default function CateringPage() {
       {/* ─── FRUIT & VEGETABLE TRAYS ─── */}
       <section className="py-16 md:py-24 px-5 sm:px-6 md:px-10">
         <div className="max-w-4xl mx-auto">
+          <SectionPreviewImage
+            src="/images/0606EF79-0239-4CFF-B59C-A0D7898904A5.PNG"
+            alt="Fresh fruit and vegetable tray"
+          />
+
           <FadeIn>
             <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-4">
               Fresh Selections
@@ -645,6 +650,19 @@ export default function CateringPage() {
       {/* ─── SALAD BOWLS ─── */}
       <section className="py-16 md:py-24 px-5 sm:px-6 md:px-10 bg-brand-forest-mid">
         <div className="max-w-4xl mx-auto">
+          <FadeIn delay={0.12}>
+            <div className="mb-8 sm:mb-10">
+              <ParallaxImage
+                src="/images/IMG_1389.jpeg"
+                alt="Fresh salad bowl"
+                className="aspect-[16/9] rounded-2xl shadow-xl"
+                sizes="(max-width: 768px) 100vw, 896px"
+                speed={70}
+                reveal="wipe-up"
+              />
+            </div>
+          </FadeIn>
+
           <FadeIn>
             <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-4">
               Fresh Selections
