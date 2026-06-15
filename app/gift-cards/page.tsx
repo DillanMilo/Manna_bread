@@ -15,9 +15,6 @@ export default function GiftCardsPage() {
         </h1>
 
         <div className="bg-brand-forest-mid/50 border border-white/10 rounded-2xl p-6 sm:p-8 md:p-12 mb-6 sm:mb-8">
-          <p className="font-body text-white/70 mb-6">
-            [ Toast Gift Card Embed ]
-          </p>
           <Button href={TOAST.giftCards} external variant="accent" className="w-full sm:w-auto">
             Purchase Gift Card
           </Button>
