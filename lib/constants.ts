@@ -30,12 +30,12 @@ export const SOCIAL = {
 export const TOAST = {
   restaurantId: '235277',
   slug: 'manna-bread-from-heaven-306-commerce-st',
-  orderOnline: 'https://mannabread.com/order',
-  menu: 'https://mannabread.com/order',
-  giftCards: 'https://mannabread.com/gift-cards',
-  rewards: 'https://mannabread.com/order',
-  signIn: 'https://mannabread.com/order',
-  cart: 'https://mannabread.com/order',
+  orderOnline: 'https://www.toasttab.com/local/order/manna-bread-from-heaven-306-commerce-st',
+  menu: 'https://www.toasttab.com/local/order/manna-bread-from-heaven-306-commerce-st',
+  giftCards: 'https://order.toasttab.com/egiftcards/manna-bread-from-heaven-306-commerce-st',
+  rewards: 'https://www.toasttab.com/manna-bread-from-heaven-306-commerce-st/rewardsLookup',
+  signIn: 'https://www.toasttab.com/local/order/manna-bread-from-heaven-306-commerce-st',
+  cart: 'https://www.toasttab.com/local/order/manna-bread-from-heaven-306-commerce-st',
 };
 
 export const NAV_LINKS = [
