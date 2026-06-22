@@ -334,8 +334,8 @@ export default function RentalsPage() {
 
               <FadeIn delay={0.25}>
                 <div className="space-y-2 mb-6">
-                  <DetailItem label="Availability" value="Monday &ndash; Saturday" />
-                  <DetailItem label="Hours" value="6am &ndash; 2pm" />
+                  <DetailItem label="Availability" value="Monday - Saturday" />
+                  <DetailItem label="Hours" value="6am - 2pm" />
                   <DetailItem label="Capacity" value="Up to 14 guests" />
                 </div>
               </FadeIn>
@@ -406,7 +406,7 @@ export default function RentalsPage() {
                 <div className="space-y-2 mb-6">
                   <DetailItem
                     label="Availability"
-                    value="Monday &ndash; Saturday, beginning at 2pm"
+                    value="Monday - Saturday, beginning at 2pm"
                   />
                   <DetailItem
                     label="Cleaning fee"
@@ -559,7 +559,7 @@ export default function RentalsPage() {
             </StaggerItem>
             <StaggerItem>
               <IncludedCard
-                title="Microphone &amp; Amp"
+                title="Microphone & Amp"
                 description="A simple, ready-to-use sound setup for toasts, readings, or a few thoughtful words."
                 icon={
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
@@ -582,7 +582,7 @@ export default function RentalsPage() {
             <StaggerItem>
               <IncludedCard
                 title="Outdoor Patio"
-                description="Our shaded patio is yours to use during your rental window &mdash; great for spillover and fresh air."
+                description="Our shaded patio is yours to use during your rental window - great for spillover and fresh air."
                 icon={
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
@@ -593,7 +593,7 @@ export default function RentalsPage() {
             <StaggerItem>
               <IncludedCard
                 title="Kitchen Space"
-                description="Storage and sink access for catering &mdash; a place to stage food. Equipment and tools stay with the kitchen."
+                description="Storage and sink access for catering - a place to stage food. Equipment and tools stay with the kitchen."
                 icon={
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M21 11.25v8.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 1 0 9.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1 1 14.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
@@ -604,7 +604,7 @@ export default function RentalsPage() {
             <StaggerItem>
               <IncludedCard
                 title="Unlimited Cubed Ice"
-                description="Help yourself &mdash; there&apos;s always more where that came from."
+                description="Help yourself - there's always more where that came from."
                 icon={
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v18m9-9H3m15.364-6.364L5.636 18.364M5.636 5.636l12.728 12.728" />
@@ -615,7 +615,7 @@ export default function RentalsPage() {
             <StaggerItem>
               <IncludedCard
                 title="Ambient Music"
-                description="Manna&apos;s house playlist runs during your event. Custom playlists or volume changes &mdash; just run them by us first."
+                description="Manna's house playlist runs during your event. Custom playlists or volume changes - just run them by us first."
                 icon={
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 9l10.5-3m0 6.553v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 1 1-.99-3.467l2.31-.66a2.25 2.25 0 0 0 1.632-2.163Zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 0 1-.99-3.467l2.31-.66A2.25 2.25 0 0 0 9 15.553Z" />
@@ -782,7 +782,7 @@ export default function RentalsPage() {
                 </h3>
                 <PolicyList
                   items={[
-                    'Anything hung or mounted cannot leave residue, marks, or holes &mdash; an additional fee applies if it does.',
+                    'Anything hung or mounted cannot leave residue, marks, or holes - an additional fee applies if it does.',
                     'No loose glitter, confetti, or other small-particle decor.',
                     'Balloons, arches, and similar pieces must be taken with you at the end of the night, or a disposal fee applies.',
                   ]}
@@ -810,7 +810,7 @@ export default function RentalsPage() {
                   items={[
                     'Snap a quick photo before you move anything.',
                     'Return each piece to its original spot before you leave.',
-                    'Tell us your vision and we&rsquo;re happy to help shape the room.',
+                    "Tell us your vision and we're happy to help shape the room.",
                   ]}
                 />
               </div>

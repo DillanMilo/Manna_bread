@@ -58,7 +58,7 @@ export function InquiryForm({
 
   if (status === 'success') {
     return (
-      <div className="rounded-2xl border border-brand-gold/30 bg-brand-gold/10 p-5 text-center">
+      <div role="status" className="rounded-2xl border border-brand-gold/30 bg-brand-gold/10 p-5 text-center">
         <p className="font-display text-2xl text-white mb-2">Inquiry sent</p>
         <p className="font-body text-sm text-white/70 leading-relaxed">
           Thank you. We&apos;ll follow up as soon as we can.
@@ -82,18 +82,18 @@ export function InquiryForm({
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <label className="block">
           <span className="sr-only">Name</span>
-          <input name="name" required className={inputClass} placeholder="Your name" />
+          <input name="name" required autoComplete="name" className={inputClass} placeholder="Your name" />
         </label>
         <label className="block">
           <span className="sr-only">Email</span>
-          <input name="email" required type="email" className={inputClass} placeholder="Email address" />
+          <input name="email" required type="email" autoComplete="email" className={inputClass} placeholder="Email address" />
         </label>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <label className="block">
           <span className="sr-only">Phone</span>
-          <input name="phone" type="tel" className={inputClass} placeholder="Phone number" />
+          <input name="phone" type="tel" autoComplete="tel" className={inputClass} placeholder="Phone number" />
         </label>
         <label className="block">
           <span className="sr-only">Inquiry type</span>
@@ -128,7 +128,7 @@ export function InquiryForm({
       </label>
 
       {status === 'error' && (
-        <p className="rounded-lg border border-red-300/20 bg-red-500/10 px-4 py-3 font-body text-sm text-red-100">
+        <p role="alert" className="rounded-lg border border-red-300/20 bg-red-500/10 px-4 py-3 font-body text-sm text-red-100">
           {error}
         </p>
       )}

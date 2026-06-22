@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
@@ -17,11 +18,12 @@ export function FounderInterlude() {
     >
       {/* Parallax image */}
       <div className="absolute inset-0">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src="/images/5094151F-9BC2-4D50-87F7-E1751B7D59BA.jpeg"
           alt="Christin enjoying coffee and pastries at Manna Bakery"
-          className="w-full h-full object-cover object-[center_35%]"
+          fill
+          sizes="100vw"
+          className="object-cover object-[center_35%]"
         />
       </div>
 

@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/Button';
 export function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const mobileMenuId = 'site-mobile-menu';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,7 +60,7 @@ export function Navigation() {
                 key={link.href}
                 initial={{ opacity: 0, filter: 'blur(4px)' }}
                 animate={{ opacity: 1, filter: 'blur(0px)' }}
-                transition={{ delay: 0.4 * i + 0.6, duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
+                transition={{ delay: i * 0.07 + 0.35, duration: 0.55, ease: [0.25, 0.4, 0.25, 1] }}
               >
                 <Link
                   href={link.href}
@@ -76,7 +77,7 @@ export function Navigation() {
             className="hidden lg:flex items-center gap-3"
             initial={{ opacity: 0, filter: 'blur(4px)' }}
             animate={{ opacity: 1, filter: 'blur(0px)' }}
-            transition={{ delay: 0.4 * NAV_LINKS.length + 0.6, duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
+            transition={{ delay: 0.75, duration: 0.55, ease: [0.25, 0.4, 0.25, 1] }}
           >
             <a
               href={TOAST.signIn}
@@ -110,7 +111,8 @@ export function Navigation() {
           <button
             className="lg:hidden flex items-center justify-center w-11 h-11 text-white touch-manipulation"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-controls={mobileMenuId}
             aria-expanded={mobileMenuOpen}
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -127,6 +129,7 @@ export function Navigation() {
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
+              id={mobileMenuId}
               className="lg:hidden overflow-hidden border-t border-white/10"
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}

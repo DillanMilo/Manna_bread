@@ -1,9 +1,7 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
-import { useRef } from 'react';
-
 
 const TESTIMONIALS = [
   {
@@ -12,7 +10,7 @@ const TESTIMONIALS = [
     detail: 'Food: 5/5 · Service: 5/5 · Atmosphere: 5/5',
   },
   {
-    quote: "This place has such a positive and calming vibe. The bread and pastries is a 10/10. Christian owned and operated. The perfect spot to grab lunch, catch up with friends or work from your laptop.",
+    quote: "This place has such a positive and calming vibe. The bread and pastries are a 10/10. Christian owned and operated. The perfect spot to grab lunch, catch up with friends, or work from your laptop.",
     author: 'MC S',
     detail: 'Food: 5/5 · Service: 5/5 · Atmosphere: 5/5',
   },
@@ -27,7 +25,7 @@ const TESTIMONIALS = [
     detail: 'Food: 4/5 · Service: 5/5 · Atmosphere: 5/5',
   },
   {
-    quote: "I lost my wallet about a month ago and assumed it was gone for good. The owner of this coffee shop found it and went out of their way to return it to me. They kept it safe and made sure it got back into my hands. That level of honesty and care says everything about how this business operates. Great coffee. Even better people. I will keep coming back.",
+    quote: "I lost my wallet about a month ago and assumed it was gone for good. The owner found it and went out of their way to return it to me. They kept it safe and made sure it got back into my hands. That level of honesty and care says everything about how this business operates. Great coffee. Even better people. I will keep coming back.",
     author: 'Christian Ceser',
     detail: '',
   },

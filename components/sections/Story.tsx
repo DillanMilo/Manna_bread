@@ -233,7 +233,7 @@ export function Story() {
 
               <FadeIn delay={0.5}>
                 <QuoteBlock
-                  quote="I have a resilient sense of hope &mdash; like a beach ball in a swimming pool. I felt like everything was somehow going to be okay, over and over again."
+                  quote="I have a resilient sense of hope - like a beach ball in a swimming pool. I felt like everything was somehow going to be okay, over and over again."
                   variant="bordered"
                 />
               </FadeIn>

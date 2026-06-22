@@ -100,7 +100,7 @@ export function Experience() {
           <SectionHeader
             label="More Than a Bakery"
             title="A space designed for connection"
-            description="Our Jerusalem-inspired storefront isn't just a place to grab coffee—it's a sanctuary for community, creativity, and conversation."
+            description="Our Jerusalem-inspired storefront is more than a quick stop - it is a sanctuary for community, creativity, and conversation."
             light
           />
         </FadeIn>

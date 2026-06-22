@@ -37,7 +37,7 @@ export function FeaturedMenu() {
           <SectionHeader
             label="From Our Kitchen"
             title="Crafted with intention"
-            description="Everything here is baked with intention&mdash;real ingredients, unhurried process, and a lot of love in every batch."
+            description="Everything here is baked with intention - real ingredients, unhurried process, and a lot of love in every batch."
             light
           />
         </FadeIn>

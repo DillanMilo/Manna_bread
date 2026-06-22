@@ -30,9 +30,10 @@ interface ButtonProps extends VariantProps<typeof buttonVariants> {
   external?: boolean;
   className?: string;
   onClick?: () => void;
+  type?: 'button' | 'submit' | 'reset';
 }
 
-export function Button({ children, variant, size, href, external, className, onClick }: ButtonProps) {
+export function Button({ children, variant, size, href, external, className, onClick, type = 'button' }: ButtonProps) {
   const classes = buttonVariants({ variant, size, className });
 
   if (href) {
@@ -51,7 +52,7 @@ export function Button({ children, variant, size, href, external, className, onC
   }
 
   return (
-    <button onClick={onClick} className={classes}>
+    <button type={type} onClick={onClick} className={classes}>
       {children}
     </button>
   );

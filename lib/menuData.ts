@@ -1,5 +1,4 @@
-// Menu data sourced from Toast POS
-// When Toast API keys are available, this static data can be replaced with API calls
+// Static fallback menu used when Toast API credentials are unavailable.
 
 export type Price = {
   display: string;
@@ -30,7 +29,7 @@ export const menuData: MenuCategory[] = [
         title: 'Coffee',
         items: [
           { name: 'Latte', description: 'creamy, smooth espresso mixed with steamed milk.', price: { display: '$6.00+' } },
-          { name: 'Cappucino', description: 'bold espresso topped with equal parts steamed milk and foam.', price: { display: '$6.00+' } },
+          { name: 'Cappuccino', description: 'bold espresso topped with equal parts steamed milk and foam.', price: { display: '$6.00+' } },
           { name: 'House Drip', description: 'our classic brewed coffee.', price: { display: '$3.50+' } },
           { name: 'Mocha', description: 'rich chocolate blended with espresso and steamed milk.', price: { display: '$6.00+' } },
           { name: 'Flavored Macchiato', description: 'espresso layered with steamed milk and your choice of flavor.', price: { display: '$6.00+' } },
@@ -95,7 +94,7 @@ export const menuData: MenuCategory[] = [
           { name: 'Biscuits & Gravy', description: 'delicious flaky biscuits topped with scratch made sausage gravy', price: { display: '$10.00+' } },
         ],
       },
-      // TODO: "Waffles & French Toast" section — awaiting full data from client
+      // "Waffles & French Toast" section awaiting full data from client.
     ],
   },
 
@@ -106,12 +105,12 @@ export const menuData: MenuCategory[] = [
         title: 'Sandwiches & Paninis',
         items: [
           { name: 'Handwhich', description: 'fresh pepperoni, salami, ham, and provolone rolled with lettuce, pepperoncinis, red onion, red vinegar, olive oil, mayo, oregano and completely wrapped in our fresh scratch bread.', price: { display: '$16.00' } },
-          { name: 'Sandwhich', description: 'fresh turkey and provolone rolled with lettuce, tomato, red onion, mayo and completely wrapped in our fresh scratch bread.', price: { display: '$14.00' } },
+          { name: 'Sandwich', description: 'fresh turkey and provolone rolled with lettuce, tomato, red onion, mayo and completely wrapped in our fresh scratch bread.', price: { display: '$14.00' } },
           { name: 'BBQ Brisket Sandwich', description: 'savory pulled brisket served on a homemade pretzel bun with a side of sweet and tangy barbecue sauce', price: { display: '$14.00' }, isOutOfStock: true },
           { name: 'Turkey Pesto Panini', description: 'turkey, provolone, and basil pesto sandwiched between two slices of our from scratch buttered sourdough and toasted until golden', price: { display: '$16.00' } },
           { name: 'Ham & Honey Mustard Panini', description: 'ham, swiss cheese, and honey mustard sandwiched between two slices of our from scratch buttered sourdough and toasted until golden', price: { display: '$16.00' } },
           { name: 'Grilled Cheese Panini', description: 'cheddar and provolone cheese sandwiched between two slices of our from scratch buttered sourdough and toasted until golden', price: { display: '$12.00' } },
-          { name: 'Chicken Salad Sandwhich', description: 'made with white chicken, mayo, celery, pecans, craisins, pineapple, and poppy seeds. Served on a croissant or sourdough', price: { display: '$14.00' } },
+          { name: 'Chicken Salad Sandwich', description: 'made with white chicken, mayo, celery, pecans, craisins, pineapple, and poppy seeds. Served on a croissant or sourdough', price: { display: '$14.00' } },
         ],
       },
       {

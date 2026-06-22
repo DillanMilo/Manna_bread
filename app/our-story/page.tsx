@@ -310,7 +310,7 @@ export default function OurStoryPage() {
 
             <FadeIn delay={0.35}>
               <QuoteBlock
-                quote="It actually &mdash; I wouldn&apos;t describe it as courage. I would describe it more as surrender. It was more of a letting go."
+                quote="It actually - I wouldn't describe it as courage. I would describe it more as surrender. It was more of a letting go."
                 attribution="Christin"
                 variant="bordered"
               />

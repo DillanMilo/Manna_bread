@@ -83,7 +83,7 @@ const PASTRY_TRAYS: CateringCategory = {
 const SANDWICH_PLATTERS: CateringCategory = {
   id: 'sandwich-platters',
   title: 'Sandwich Platters',
-  description: 'Trays include one-dozen pastries. Up to two flavor selections per tray.',
+  description: 'Platters include one dozen sandwiches. Up to two selections per tray.',
   sizes: [
     { name: 'Mini', price: '$30' },
     { name: 'Medium', price: '$40' },
@@ -105,7 +105,7 @@ const SANDWICH_PLATTERS: CateringCategory = {
 };
 
 const COFFEE_DRINKS: DrinkItem[] = [
-  { name: 'Espresso Drinks', price: 'Tea Order, Open Tab' },
+  { name: 'Espresso Drinks', price: 'Open tab' },
   { name: 'Bar Drinks', price: '$5' },
   { name: 'Hot Chocolate', price: '$5' },
   { name: 'House Drip', price: '$3 per person', note: 'Refills Included' },
@@ -158,7 +158,7 @@ const SOUP_FLAVORS: string[] = [
   'Chophouse Potato',
   'Beef & Barley',
   'Poblano Pepper',
-  'Zuppa Toscano',
+  'Zuppa Toscana',
 ];
 
 /* ─── parallax image for quote section ─── */
