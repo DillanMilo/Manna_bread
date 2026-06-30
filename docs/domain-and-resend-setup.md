@@ -104,6 +104,14 @@ Required production environment variables:
 | `INQUIRY_TO_EMAIL` | Destination inbox for catering/rental/contact inquiries | `hello@mannabread.com` until Christin requests a different operational inbox. |
 | `NEXT_PUBLIC_SITE_URL` | Canonical site URL used by metadata | Set to the final public URL at launch. |
 
+Optional inquiry spam-protection variables:
+
+| Variable | Purpose | Notes |
+| --- | --- | --- |
+| `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` | Browser key for Google reCAPTCHA v3 | Safe to expose publicly. Add with the Production/Preview value from Google reCAPTCHA. |
+| `RECAPTCHA_SECRET_KEY` | Server-side key used to verify reCAPTCHA tokens | Keep secret. Add to Vercel only, never commit. |
+| `RECAPTCHA_MIN_SCORE` | Minimum acceptable reCAPTCHA v3 score | Defaults to `0.5` if unset. Higher is stricter. |
+
 Vercel environment status as of 2026-06-30:
 
 | Variable | Environments |
@@ -112,11 +120,25 @@ Vercel environment status as of 2026-06-30:
 | `RESEND_FROM_EMAIL` | Preview, Production |
 | `INQUIRY_TO_EMAIL` | Preview, Production |
 
+Current form protections:
+
+- Honeypot field: hidden `company` field silently discards obvious bot submissions.
+- Timing check: submissions sent too quickly after page load are rejected.
+- Server-side rate limits: currently limits repeated submissions by IP and by sender email in each running Vercel function instance.
+- Google reCAPTCHA v3: code is wired, but enforcement only activates after `RECAPTCHA_SECRET_KEY` is set in Vercel and the public site key is available to the browser.
+
+Current email behavior:
+
+- Manna receives the internal inquiry notification at `INQUIRY_TO_EMAIL`.
+- The visitor receives a confirmation email at the email address they entered after the internal notification succeeds.
+- If the visitor confirmation email fails, the inquiry still succeeds and the failure is logged in Vercel.
+
 Current code items to revisit before launch:
 
 - `lib/constants.ts` now uses `hello@mannabread.com` as the public fallback contact email.
 - `app/layout.tsx` now falls back to `https://mannabread.com` if `NEXT_PUBLIC_SITE_URL` is not set.
 - Confirm whether Christin wants inquiries to continue going to `hello@mannabread.com` or move to a more specific operations inbox.
+- Add Google reCAPTCHA v3 keys to Vercel if Christin wants CAPTCHA enforcement before launch.
 
 ## Future Launch DNS Checklist
 

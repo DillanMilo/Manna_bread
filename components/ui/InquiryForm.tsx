@@ -36,11 +36,24 @@ type InquiryFormProps = {
 };
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
+type Grecaptcha = {
+  ready: (callback: () => void) => void;
+  execute: (siteKey: string, options: { action: string }) => Promise<string>;
+};
+
+declare global {
+  interface Window {
+    grecaptcha?: Grecaptcha;
+  }
+}
 
 const inputClass =
   'w-full rounded-lg border border-white/12 bg-brand-forest/70 px-4 py-3 font-body text-sm text-white placeholder:text-white/40 outline-none transition-colors focus:border-brand-gold/70';
 const labelClass = 'mb-1.5 block font-body text-[11px] font-semibold uppercase tracking-[1.5px] text-brand-gold/85';
 const weekdayLabels = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+const recaptchaAction = 'manna_inquiry';
+let recaptchaScriptPromise: Promise<void> | null = null;
 
 const sharedFields: FieldConfig[] = [
   {
@@ -201,6 +214,7 @@ export function InquiryForm({
 }: InquiryFormProps) {
   const [status, setStatus] = useState<FormStatus>('idle');
   const [error, setError] = useState('');
+  const [startedAt] = useState(() => String(Date.now()));
   const content = formContent[defaultType];
   const fields = [...sharedFields, ...content.fields];
 
@@ -211,7 +225,7 @@ export function InquiryForm({
 
     const form = event.currentTarget;
     const formData = new FormData(form);
-    const payload = Object.fromEntries(formData.entries());
+    const payload: Record<string, FormDataEntryValue | string> = Object.fromEntries(formData.entries());
     const missingRequiredField = fields.find((field) => field.required && !String(payload[field.name] ?? '').trim());
 
     if (missingRequiredField) {
@@ -221,6 +235,12 @@ export function InquiryForm({
     }
 
     try {
+      const recaptchaToken = await getRecaptchaToken();
+
+      if (recaptchaToken) {
+        payload.recaptchaToken = recaptchaToken;
+      }
+
       const response = await fetch('/api/inquiry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -264,6 +284,7 @@ export function InquiryForm({
     <form onSubmit={handleSubmit} className={compact ? 'space-y-3' : 'space-y-4'}>
       <input type="hidden" name="source" value={source} />
       <input type="hidden" name="inquiryType" value={defaultType} />
+      <input type="hidden" name="startedAt" value={startedAt} />
       <input type="text" name="company" className="hidden" tabIndex={-1} autoComplete="off" />
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -520,4 +541,60 @@ function formatDisplayDate(date: Date) {
     day: 'numeric',
     year: 'numeric',
   });
+}
+
+async function getRecaptchaToken() {
+  if (!recaptchaSiteKey || typeof window === 'undefined') {
+    return '';
+  }
+
+  await loadRecaptchaScript(recaptchaSiteKey);
+
+  if (!window.grecaptcha) {
+    throw new Error('The verification service did not load. Please try again.');
+  }
+
+  return new Promise<string>((resolve, reject) => {
+    window.grecaptcha?.ready(() => {
+      window.grecaptcha
+        ?.execute(recaptchaSiteKey, { action: recaptchaAction })
+        .then(resolve)
+        .catch(() => reject(new Error('The verification service did not complete. Please try again.')));
+    });
+  });
+}
+
+function loadRecaptchaScript(siteKey: string) {
+  if (typeof window === 'undefined') {
+    return Promise.resolve();
+  }
+
+  if (window.grecaptcha) {
+    return Promise.resolve();
+  }
+
+  if (recaptchaScriptPromise) {
+    return recaptchaScriptPromise;
+  }
+
+  recaptchaScriptPromise = new Promise((resolve, reject) => {
+    const existingScript = document.querySelector<HTMLScriptElement>('script[data-manna-recaptcha="true"]');
+
+    if (existingScript) {
+      existingScript.addEventListener('load', () => resolve(), { once: true });
+      existingScript.addEventListener('error', () => reject(new Error('The verification service did not load.')), { once: true });
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = `https://www.google.com/recaptcha/api.js?render=${encodeURIComponent(siteKey)}`;
+    script.async = true;
+    script.defer = true;
+    script.dataset.mannaRecaptcha = 'true';
+    script.addEventListener('load', () => resolve(), { once: true });
+    script.addEventListener('error', () => reject(new Error('The verification service did not load.')), { once: true });
+    document.head.append(script);
+  });
+
+  return recaptchaScriptPromise;
 }
