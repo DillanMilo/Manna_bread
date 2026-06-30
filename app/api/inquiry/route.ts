@@ -8,15 +8,54 @@ type InquiryPayload = {
   inquiryType?: string;
   eventDate?: string;
   guestCount?: string;
+  eventLocation?: string;
+  occasion?: string;
+  serviceStyle?: string;
+  rentalWindow?: string;
+  cateringNeeds?: string;
+  helpTopic?: string;
+  preferredContact?: string;
   message?: string;
   source?: string;
   company?: string;
 };
 
-const inquiryLabels: Record<string, string> = {
+type InquiryType = 'catering' | 'rentals' | 'general';
+
+const inquiryConfig: Record<InquiryType, { label: string; subject: string; preview: string }> = {
+  catering: {
+    label: 'Catering',
+    subject: 'New Catering Inquiry',
+    preview: 'A catering request came in from the website.',
+  },
+  rentals: {
+    label: 'Private Rental',
+    subject: 'New Private Rental Inquiry',
+    preview: 'A private rental request came in from the website.',
+  },
+  general: {
+    label: 'General',
+    subject: 'New Website Message',
+    preview: 'A general message came in from the website.',
+  },
+};
+
+const valueLabels: Record<string, string> = {
+  email: 'Email',
+  phone: 'Phone',
+  either: 'Either is fine',
+  pickup: 'Pickup',
+  delivery: 'Delivery',
+  setup: 'Setup help',
+  'not-sure': 'Still deciding',
+  'manna-catering': 'Manna catering',
+  'outside-catering': 'Outside catering',
+  mixed: 'A mix of both',
+  general: 'General question',
+  'menu-order': 'Menu or order',
   catering: 'Catering',
-  rentals: 'Private Rental',
-  general: 'General',
+  rentals: 'Private rental',
+  'gift-cards-rewards': 'Gift cards or rewards',
 };
 
 export async function POST(request: Request) {
@@ -43,11 +82,19 @@ export async function POST(request: Request) {
     );
   }
 
+  if (!email.includes('@')) {
+    return NextResponse.json(
+      { error: 'Please include a valid email address.' },
+      { status: 400 },
+    );
+  }
+
   const resendApiKey = process.env.RESEND_API_KEY;
   const toEmail = process.env.INQUIRY_TO_EMAIL ?? CONTACT.email;
   const fromEmail = process.env.RESEND_FROM_EMAIL ?? 'Manna Bakery <onboarding@resend.dev>';
-  const inquiryType = clean(payload.inquiryType) || 'general';
-  const subject = `New ${inquiryLabels[inquiryType] ?? 'Website'} Inquiry from ${name}`;
+  const inquiryType = getInquiryType(payload.inquiryType);
+  const config = inquiryConfig[inquiryType];
+  const subject = `${config.subject} from ${name}`;
 
   if (!resendApiKey) {
     return NextResponse.json(
@@ -67,12 +114,15 @@ export async function POST(request: Request) {
       to: [toEmail],
       reply_to: email,
       subject,
-      text: buildTextEmail(payload),
-      html: buildHtmlEmail(payload),
+      text: buildTextEmail(payload, inquiryType),
+      html: buildHtmlEmail(payload, inquiryType),
     }),
   });
 
   if (!response.ok) {
+    const error = await response.text().catch(() => '');
+    console.error('Resend inquiry send failed', { status: response.status, error });
+
     return NextResponse.json(
       { error: 'We could not send that inquiry right now. Please try again or email us directly.' },
       { status: 502 },
@@ -82,50 +132,109 @@ export async function POST(request: Request) {
   return NextResponse.json({ ok: true });
 }
 
-function buildTextEmail(payload: InquiryPayload) {
+function buildTextEmail(payload: InquiryPayload, inquiryType: InquiryType) {
+  const config = inquiryConfig[inquiryType];
+  const rows = buildRows(payload, inquiryType);
+
   return [
-    `Name: ${clean(payload.name)}`,
-    `Email: ${clean(payload.email)}`,
-    `Phone: ${clean(payload.phone) || 'Not provided'}`,
-    `Inquiry: ${inquiryLabels[clean(payload.inquiryType)] ?? 'General'}`,
-    `Event date: ${clean(payload.eventDate) || 'Not provided'}`,
-    `Guest count: ${clean(payload.guestCount) || 'Not provided'}`,
-    `Source: ${clean(payload.source) || 'website'}`,
+    config.preview,
     '',
+    ...rows.map(([label, value]) => `${label}: ${value}`),
+    '',
+    'Message:',
     clean(payload.message),
   ].join('\n');
 }
 
-function buildHtmlEmail(payload: InquiryPayload) {
-  const rows = [
-    ['Name', clean(payload.name)],
-    ['Email', clean(payload.email)],
-    ['Phone', clean(payload.phone) || 'Not provided'],
-    ['Inquiry', inquiryLabels[clean(payload.inquiryType)] ?? 'General'],
-    ['Event date', clean(payload.eventDate) || 'Not provided'],
-    ['Guest count', clean(payload.guestCount) || 'Not provided'],
-    ['Source', clean(payload.source) || 'website'],
-  ];
+function buildHtmlEmail(payload: InquiryPayload, inquiryType: InquiryType) {
+  const config = inquiryConfig[inquiryType];
+  const rows = buildRows(payload, inquiryType);
 
   return `
-    <div style="font-family:Arial,sans-serif;color:#1f2a23;line-height:1.5">
-      <h2 style="margin:0 0 16px">New Manna inquiry</h2>
-      <table style="border-collapse:collapse;width:100%;max-width:560px">
-        ${rows
-          .map(
-            ([label, value]) => `
-              <tr>
-                <td style="padding:8px 12px;border:1px solid #e6e0d6;font-weight:bold">${escapeHtml(label)}</td>
-                <td style="padding:8px 12px;border:1px solid #e6e0d6">${escapeHtml(value)}</td>
-              </tr>
-            `,
-          )
-          .join('')}
-      </table>
-      <p style="margin:18px 0 6px;font-weight:bold">Message</p>
-      <p style="white-space:pre-wrap;margin:0">${escapeHtml(clean(payload.message))}</p>
+    <div style="margin:0;background:#faf9f6;padding:32px 20px;font-family:Georgia,serif;color:#2d2a26;line-height:1.55">
+      <div style="max-width:640px;margin:0 auto;border:1px solid #e2d8c9;background:#fffdf9">
+        <div style="background:#3d5247;padding:28px 30px;color:#faf9f6">
+          <p style="margin:0 0 8px;font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#c9a84c">
+            ${escapeHtml(config.label)}
+          </p>
+          <h1 style="margin:0;font-size:28px;font-weight:500;line-height:1.2">${escapeHtml(config.subject)}</h1>
+          <p style="margin:12px 0 0;font-family:Arial,sans-serif;font-size:14px;color:#f5f2ed">
+            ${escapeHtml(config.preview)}
+          </p>
+        </div>
+
+        <div style="padding:28px 30px">
+          <table style="border-collapse:collapse;width:100%">
+            ${rows
+              .map(
+                ([label, value]) => `
+                  <tr>
+                    <td style="width:35%;padding:10px 12px;border-bottom:1px solid #ece4d8;font-family:Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#6b705c">${escapeHtml(label)}</td>
+                    <td style="padding:10px 12px;border-bottom:1px solid #ece4d8;font-family:Arial,sans-serif;font-size:14px;color:#2d2a26">${escapeHtml(value)}</td>
+                  </tr>
+                `,
+              )
+              .join('')}
+          </table>
+
+          <div style="margin-top:24px">
+            <p style="margin:0 0 8px;font-family:Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#6b705c">Message</p>
+            <div style="white-space:pre-wrap;border-left:3px solid #c9a84c;background:#f5f2ed;padding:16px 18px;font-family:Arial,sans-serif;font-size:15px;color:#2d2a26">${escapeHtml(clean(payload.message))}</div>
+          </div>
+        </div>
+      </div>
     </div>
   `;
+}
+
+function buildRows(payload: InquiryPayload, inquiryType: InquiryType): Array<[string, string]> {
+  const commonRows: Array<[string, string]> = [
+    ['Name', display(payload.name)],
+    ['Email', display(payload.email)],
+    ['Phone', display(payload.phone)],
+    ['Preferred reply', displayLabel(payload.preferredContact)],
+    ['Inquiry type', inquiryConfig[inquiryType].label],
+  ];
+
+  const contextRows: Record<InquiryType, Array<[string, string]>> = {
+    catering: [
+      ['Gathering', display(payload.occasion)],
+      ['Date', display(payload.eventDate)],
+      ['Guests', display(payload.guestCount)],
+      ['Service', displayLabel(payload.serviceStyle)],
+      ['Location', display(payload.eventLocation)],
+    ],
+    rentals: [
+      ['Gathering', display(payload.occasion)],
+      ['Preferred date', display(payload.eventDate)],
+      ['Time window', display(payload.rentalWindow)],
+      ['Guests', display(payload.guestCount)],
+      ['Food plans', displayLabel(payload.cateringNeeds)],
+    ],
+    general: [
+      ['Topic', displayLabel(payload.helpTopic)],
+    ],
+  };
+
+  return [
+    ...commonRows,
+    ...contextRows[inquiryType],
+    ['Source', display(payload.source, 'website')],
+  ];
+}
+
+function getInquiryType(value: unknown): InquiryType {
+  const type = clean(value);
+  return type === 'catering' || type === 'rentals' ? type : 'general';
+}
+
+function display(value: unknown, fallback = 'Not provided') {
+  return clean(value) || fallback;
+}
+
+function displayLabel(value: unknown) {
+  const cleaned = clean(value);
+  return cleaned ? valueLabels[cleaned] ?? cleaned : 'Not provided';
 }
 
 function clean(value: unknown) {

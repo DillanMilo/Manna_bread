@@ -14,7 +14,7 @@ export const CONTACT = {
   },
   mapQuery: 'Manna+Bread+from+Heaven,+306+Commerce+St,+Tomball,+TX+77375',
   phone: '(832) 843-3999',
-  email: 'hello@mannabakery.com',
+  email: 'hello@mannabread.com',
   hours: {
     weekdays: '6:00 AM – 2:00 PM',
     saturday: '6:00 AM – 2:00 PM',

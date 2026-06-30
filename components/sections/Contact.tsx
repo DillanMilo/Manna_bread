@@ -2,6 +2,7 @@
 
 import { CONTACT } from "@/lib/constants";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
+import { InquiryForm } from "@/components/ui/InquiryForm";
 import { MannaMap, MapInfoCard } from "@/components/ui/MannaMap";
 import { VineAccent } from "@/components/ui/ScrollVine";
 
@@ -11,9 +12,9 @@ export function Contact() {
       <VineAccent variant="left" className="z-0 opacity-55" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
+        <div className="grid grid-cols-1 gap-8 sm:gap-12 lg:grid-cols-12 lg:items-start">
           {/* Contact Info */}
-          <div>
+          <div className="lg:col-span-4">
             <FadeIn>
               <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-medium text-white mb-6 sm:mb-8">
                 Visit Us
@@ -79,9 +80,24 @@ export function Contact() {
             </StaggerContainer>
           </div>
 
+          <FadeIn direction="up" distance={40} delay={0.24} className="lg:col-span-4">
+            <div className="rounded-2xl border border-white/10 bg-brand-forest-mid/70 p-5 shadow-xl shadow-black/10 sm:p-6">
+              <p className="mb-3 font-body text-[11px] font-semibold uppercase tracking-[2px] text-brand-gold">
+                Send a note
+              </p>
+              <h3 className="mb-3 font-display text-2xl font-medium text-white">
+                We will point you the right way.
+              </h3>
+              <p className="mb-5 font-body text-sm leading-relaxed text-white/68">
+                For questions about orders, visits, catering, rentals, or anything else that needs a human answer.
+              </p>
+              <InquiryForm defaultType="general" source="contact-section" compact />
+            </div>
+          </FadeIn>
+
           {/* Map */}
-          <FadeIn direction="right" distance={50} delay={0.3}>
-            <div className="relative aspect-[3/4] max-w-[340px] sm:max-w-[420px] md:max-w-[520px] mx-auto">
+          <FadeIn direction="right" distance={50} delay={0.3} className="lg:col-span-4">
+            <div className="relative aspect-[3/4] max-w-[340px] sm:max-w-[420px] lg:max-w-[360px] mx-auto">
               <div className="absolute inset-0 overflow-hidden rounded-t-full rounded-b-xl border border-brand-gold/35 bg-brand-forest shadow-[0_26px_70px_rgba(0,0,0,0.34)]">
                 <MannaMap />
               </div>
