@@ -351,7 +351,7 @@ function DateField({ field }: { field: FieldConfig }) {
           required={field.required}
           type="date"
           autoComplete={field.autoComplete}
-          className={`${inputClass} pr-12 [color-scheme:dark]`}
+          className={`${inputClass} pr-12 [color-scheme:dark] [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none`}
         />
         <button
           type="button"
