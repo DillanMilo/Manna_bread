@@ -1,5 +1,6 @@
 'use client';
 
+import { CalendarDays } from 'lucide-react';
 import { useState } from 'react';
 
 type InquiryType = 'catering' | 'rentals' | 'general';
@@ -21,7 +22,7 @@ type FieldConfig = {
   name: FieldName;
   label: string;
   placeholder?: string;
-  type?: 'text' | 'email' | 'tel';
+  type?: 'text' | 'email' | 'tel' | 'date';
   autoComplete?: string;
   required?: boolean;
   options?: Array<{ value: string; label: string }>;
@@ -102,7 +103,8 @@ const formContent: Record<
       {
         name: 'eventDate',
         label: 'Date',
-        placeholder: 'Date or timing',
+        type: 'date',
+        required: true,
       },
       {
         name: 'guestCount',
@@ -142,7 +144,8 @@ const formContent: Record<
       {
         name: 'eventDate',
         label: 'Preferred date',
-        placeholder: 'Date or date range',
+        type: 'date',
+        required: true,
       },
       {
         name: 'rentalWindow',
@@ -290,6 +293,10 @@ export function InquiryForm({
 }
 
 function FormField({ field }: { field: FieldConfig }) {
+  if (field.type === 'date') {
+    return <DateField field={field} />;
+  }
+
   if (field.options) {
     return (
       <label className="block">
@@ -316,6 +323,45 @@ function FormField({ field }: { field: FieldConfig }) {
         className={inputClass}
         placeholder={field.placeholder}
       />
+    </label>
+  );
+}
+
+function DateField({ field }: { field: FieldConfig }) {
+  function openPicker(event: React.MouseEvent<HTMLButtonElement>) {
+    const input = event.currentTarget.previousElementSibling;
+
+    if (input instanceof HTMLInputElement && typeof input.showPicker === 'function') {
+      input.showPicker();
+      return;
+    }
+
+    if (input instanceof HTMLInputElement) {
+      input.focus();
+      input.click();
+    }
+  }
+
+  return (
+    <label className="block">
+      <span className={labelClass}>{field.label}</span>
+      <span className="relative block">
+        <input
+          name={field.name}
+          required={field.required}
+          type="date"
+          autoComplete={field.autoComplete}
+          className={`${inputClass} pr-12 [color-scheme:dark]`}
+        />
+        <button
+          type="button"
+          aria-label={`Open ${field.label.toLowerCase()} calendar`}
+          onClick={openPicker}
+          className="absolute right-2.5 top-1/2 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-md text-brand-gold transition-colors hover:bg-white/8 hover:text-brand-cognac-light focus:outline-none focus:ring-2 focus:ring-brand-gold/60"
+        >
+          <CalendarDays aria-hidden="true" className="h-4.5 w-4.5" strokeWidth={1.8} />
+        </button>
+      </span>
     </label>
   );
 }
