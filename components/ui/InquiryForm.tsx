@@ -1,7 +1,7 @@
 'use client';
 
-import { CalendarDays } from 'lucide-react';
-import { useState } from 'react';
+import { CalendarDays, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 
 type InquiryType = 'catering' | 'rentals' | 'general';
 type FieldName =
@@ -40,6 +40,7 @@ type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 const inputClass =
   'w-full rounded-lg border border-white/12 bg-brand-forest/70 px-4 py-3 font-body text-sm text-white placeholder:text-white/40 outline-none transition-colors focus:border-brand-gold/70';
 const labelClass = 'mb-1.5 block font-body text-[11px] font-semibold uppercase tracking-[1.5px] text-brand-gold/85';
+const weekdayLabels = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
 const sharedFields: FieldConfig[] = [
   {
@@ -211,6 +212,13 @@ export function InquiryForm({
     const form = event.currentTarget;
     const formData = new FormData(form);
     const payload = Object.fromEntries(formData.entries());
+    const missingRequiredField = fields.find((field) => field.required && !String(payload[field.name] ?? '').trim());
+
+    if (missingRequiredField) {
+      setStatus('error');
+      setError(`Please add ${missingRequiredField.label.toLowerCase()}.`);
+      return;
+    }
 
     try {
       const response = await fetch('/api/inquiry', {
@@ -328,40 +336,188 @@ function FormField({ field }: { field: FieldConfig }) {
 }
 
 function DateField({ field }: { field: FieldConfig }) {
-  function openPicker(event: React.MouseEvent<HTMLButtonElement>) {
-    const input = event.currentTarget.previousElementSibling;
+  const inputId = useId();
+  const calendarId = `${inputId}-calendar`;
+  const [selectedValue, setSelectedValue] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+  const [viewDate, setViewDate] = useState(() => startOfMonth(new Date()));
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const selectedDate = selectedValue ? parseDateValue(selectedValue) : null;
+  const calendarDays = useMemo(() => buildCalendarDays(viewDate), [viewDate]);
 
-    if (input instanceof HTMLInputElement && typeof input.showPicker === 'function') {
-      input.showPicker();
-      return;
+  useEffect(() => {
+    if (!isOpen) return;
+
+    function handlePointerDown(event: PointerEvent) {
+      if (!wrapperRef.current?.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
     }
 
-    if (input instanceof HTMLInputElement) {
-      input.focus();
-      input.click();
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        setIsOpen(false);
+      }
     }
+
+    document.addEventListener('pointerdown', handlePointerDown);
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen]);
+
+  function handleSelectDate(date: Date) {
+    setSelectedValue(formatDateValue(date));
+    setViewDate(startOfMonth(date));
+    setIsOpen(false);
+  }
+
+  function showPreviousMonth() {
+    setViewDate((current) => new Date(current.getFullYear(), current.getMonth() - 1, 1));
+  }
+
+  function showNextMonth() {
+    setViewDate((current) => new Date(current.getFullYear(), current.getMonth() + 1, 1));
   }
 
   return (
-    <label className="block">
-      <span className={labelClass}>{field.label}</span>
-      <span className="relative block">
+    <div className="block">
+      <label htmlFor={inputId} className={labelClass}>
+        {field.label}
+      </label>
+      <div ref={wrapperRef} className="relative">
         <input
+          id={inputId}
           name={field.name}
           required={field.required}
-          type="date"
+          type="text"
+          readOnly
+          inputMode="none"
           autoComplete={field.autoComplete}
-          className={`${inputClass} pr-12 [color-scheme:dark] [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none`}
+          aria-haspopup="dialog"
+          value={selectedDate ? formatDisplayDate(selectedDate) : ''}
+          onClick={() => setIsOpen(true)}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
+              setIsOpen((current) => !current);
+            }
+          }}
+          className={`${inputClass} cursor-pointer pr-12`}
+          placeholder="Select a date"
         />
         <button
           type="button"
           aria-label={`Open ${field.label.toLowerCase()} calendar`}
-          onClick={openPicker}
+          aria-controls={isOpen ? calendarId : undefined}
+          aria-expanded={isOpen}
+          onClick={() => setIsOpen((current) => !current)}
           className="absolute right-2.5 top-1/2 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-md text-brand-gold transition-colors hover:bg-white/8 hover:text-brand-cognac-light focus:outline-none focus:ring-2 focus:ring-brand-gold/60"
         >
           <CalendarDays aria-hidden="true" className="h-4.5 w-4.5" strokeWidth={1.8} />
         </button>
-      </span>
-    </label>
+
+        {isOpen && (
+          <div
+            id={calendarId}
+            role="dialog"
+            aria-label={`${field.label} calendar`}
+            className="absolute left-0 top-full z-40 mt-2 w-full min-w-[280px] rounded-xl border border-brand-gold/25 bg-brand-forest p-3 shadow-2xl shadow-black/30"
+          >
+            <div className="mb-3 flex items-center justify-between gap-2">
+              <button
+                type="button"
+                aria-label="Previous month"
+                onClick={showPreviousMonth}
+                className="inline-flex h-9 w-9 items-center justify-center rounded-md text-brand-gold transition-colors hover:bg-white/8 focus:outline-none focus:ring-2 focus:ring-brand-gold/60"
+              >
+                <ChevronLeft aria-hidden="true" className="h-4 w-4" />
+              </button>
+              <p className="font-body text-sm font-semibold text-white">
+                {viewDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+              </p>
+              <button
+                type="button"
+                aria-label="Next month"
+                onClick={showNextMonth}
+                className="inline-flex h-9 w-9 items-center justify-center rounded-md text-brand-gold transition-colors hover:bg-white/8 focus:outline-none focus:ring-2 focus:ring-brand-gold/60"
+              >
+                <ChevronRight aria-hidden="true" className="h-4 w-4" />
+              </button>
+            </div>
+
+            <div className="mb-1 grid grid-cols-7 gap-1 text-center font-body text-[11px] font-semibold uppercase tracking-[1px] text-brand-gold/80">
+              {weekdayLabels.map((day) => (
+                <span key={day}>{day}</span>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-7 gap-1">
+              {calendarDays.map((date) => {
+                const dateValue = formatDateValue(date);
+                const isSelected = selectedValue === dateValue;
+                const isCurrentMonth = date.getMonth() === viewDate.getMonth();
+
+                return (
+                  <button
+                    key={dateValue}
+                    type="button"
+                    onClick={() => handleSelectDate(date)}
+                    className={[
+                      'flex aspect-square items-center justify-center rounded-md font-body text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-brand-gold/60',
+                      isSelected
+                        ? 'bg-brand-gold text-brand-forest'
+                        : 'text-white hover:bg-white/8 hover:text-brand-gold',
+                      isCurrentMonth ? '' : 'opacity-35',
+                    ].join(' ')}
+                  >
+                    {date.getDate()}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
   );
+}
+
+function startOfMonth(date: Date) {
+  return new Date(date.getFullYear(), date.getMonth(), 1);
+}
+
+function buildCalendarDays(month: Date) {
+  const firstDay = startOfMonth(month);
+  const startDate = new Date(firstDay);
+  startDate.setDate(firstDay.getDate() - firstDay.getDay());
+
+  return Array.from({ length: 42 }, (_, index) => {
+    const date = new Date(startDate);
+    date.setDate(startDate.getDate() + index);
+    return date;
+  });
+}
+
+function formatDateValue(date: Date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+function parseDateValue(value: string) {
+  const [year, month, day] = value.split('-').map(Number);
+  return new Date(year, month - 1, day);
+}
+
+function formatDisplayDate(date: Date) {
+  return date.toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
 }
