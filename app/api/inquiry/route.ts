@@ -38,6 +38,15 @@ type RecaptchaResponse = {
   action?: string;
   'error-codes'?: string[];
 };
+type RecaptchaResult = {
+  ok: boolean;
+  error?: string;
+  reason?: string;
+  errors?: string[];
+  score?: number;
+  minimumScore?: number;
+  action?: string;
+};
 type ResendMessage = {
   from: string;
   to: string[];
@@ -161,10 +170,18 @@ export async function POST(request: Request) {
   const recaptcha = await verifyRecaptcha(payload.recaptchaToken, request);
 
   if (!recaptcha.ok) {
-    return NextResponse.json(
-      { error: recaptcha.error },
-      { status: 400 },
-    );
+    const recaptchaLog = buildRecaptchaLog(recaptcha);
+
+    if (!canAllowRecaptchaMonitorFailure(recaptcha)) {
+      console.error('reCAPTCHA verification failed', recaptchaLog);
+
+      return NextResponse.json(
+        { error: recaptcha.error },
+        { status: 400 },
+      );
+    }
+
+    console.warn('reCAPTCHA verification failed in monitor mode; allowing inquiry submission.', recaptchaLog);
   }
 
   const businessResponse = await sendResendEmail(resendApiKey, {
@@ -472,7 +489,7 @@ function pruneRateLimitStore(now: number) {
   }
 }
 
-async function verifyRecaptcha(token: unknown, request: Request) {
+async function verifyRecaptcha(token: unknown, request: Request): Promise<RecaptchaResult> {
   const secretKey = process.env.RECAPTCHA_SECRET_KEY;
 
   if (!secretKey) {
@@ -482,7 +499,11 @@ async function verifyRecaptcha(token: unknown, request: Request) {
   const recaptchaToken = clean(token);
 
   if (!recaptchaToken) {
-    return { ok: false, error: 'Please verify the form and try again.' };
+    return {
+      ok: false,
+      error: 'Please verify the form and try again.',
+      reason: 'missing-token',
+    };
   }
 
   const body = new URLSearchParams({
@@ -507,25 +528,61 @@ async function verifyRecaptcha(token: unknown, request: Request) {
     const minimumScore = Number(process.env.RECAPTCHA_MIN_SCORE ?? '0.5');
 
     if (!result.success) {
-      console.error('reCAPTCHA verification failed', { errors: result['error-codes'] });
-      return { ok: false, error: 'Please verify the form and try again.' };
+      return {
+        ok: false,
+        error: 'Please verify the form and try again.',
+        reason: 'google-failed',
+        errors: result['error-codes'],
+      };
     }
 
     if (result.action && result.action !== recaptchaAction) {
-      console.error('reCAPTCHA action mismatch', { action: result.action });
-      return { ok: false, error: 'Please verify the form and try again.' };
+      return {
+        ok: false,
+        error: 'Please verify the form and try again.',
+        reason: 'action-mismatch',
+        action: result.action,
+      };
     }
 
     if (typeof result.score === 'number' && result.score < minimumScore) {
-      console.error('reCAPTCHA score below threshold', { score: result.score, minimumScore });
-      return { ok: false, error: 'Please verify the form and try again.' };
+      return {
+        ok: false,
+        error: 'Please verify the form and try again.',
+        reason: 'score-below-threshold',
+        score: result.score,
+        minimumScore,
+      };
     }
 
     return { ok: true };
-  } catch (error) {
-    console.error('reCAPTCHA verification request failed', error);
-    return { ok: false, error: 'Please verify the form and try again.' };
+  } catch {
+    return {
+      ok: false,
+      error: 'Please verify the form and try again.',
+      reason: 'verification-request-failed',
+    };
   }
+}
+
+function isRecaptchaMonitorMode() {
+  const mode = process.env.RECAPTCHA_MODE?.toLowerCase();
+
+  return mode === 'monitor' || mode === 'off' || mode === 'false';
+}
+
+function canAllowRecaptchaMonitorFailure(result: RecaptchaResult) {
+  return isRecaptchaMonitorMode() && result.reason !== 'missing-token';
+}
+
+function buildRecaptchaLog(result: RecaptchaResult) {
+  return {
+    reason: result.reason,
+    errors: result.errors,
+    score: result.score,
+    minimumScore: result.minimumScore,
+    action: result.action,
+  };
 }
 
 function getClientIp(request: Request) {
