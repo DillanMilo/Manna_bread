@@ -7,6 +7,7 @@ import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { InquirySection } from '@/components/sections/InquirySection';
 import { FloatingInquiryButton } from '@/components/ui/FloatingInquiryButton';
+import { formatDisplayPrice } from '@/lib/pricing';
 
 /* ─── types ─── */
 
@@ -50,7 +51,7 @@ const PASTRY_TRAYS: CateringCategory = {
   sizes: [
     { name: 'Mini', detail: '2-3 flavors', price: '$30' },
     { name: 'Medium', detail: '4-5 flavors', price: '$40' },
-    { name: 'Full Size', detail: '7-10+', price: '$60' },
+    { name: 'Full Size', detail: '7-10 flavors', price: '$60' },
   ],
   items: [],
   subsections: [
@@ -336,7 +337,7 @@ function PricingCards({ sizes }: { sizes: TraySize[] }) {
               </p>
             )}
             <p className="font-display text-xl sm:text-2xl text-brand-gold">
-              {size.price}
+              {formatDisplayPrice(size.price)}
             </p>
           </div>
         </StaggerItem>
@@ -575,7 +576,7 @@ export default function CateringPage() {
                     )}
                   </div>
                   <p className="font-body text-[15px] font-medium text-brand-gold whitespace-nowrap ml-4">
-                    {drink.price}
+                    {formatDisplayPrice(drink.price)}
                   </p>
                 </div>
               ))}

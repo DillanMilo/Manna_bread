@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { useRef } from 'react';
+import { formatDisplayPrice } from '@/lib/pricing';
 
 interface MenuCardProps {
   title: string;
@@ -12,6 +13,7 @@ interface MenuCardProps {
 }
 
 export function MenuCard({ title, description, price, image }: MenuCardProps) {
+  const displayPrice = formatDisplayPrice(price);
   const imageRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
@@ -44,7 +46,7 @@ export function MenuCard({ title, description, price, image }: MenuCardProps) {
       <div className="p-4 sm:p-5 md:p-6">
         <h3 className="font-display text-lg md:text-xl text-white mb-1.5 sm:mb-2">{title}</h3>
         <p className="font-body text-sm text-white/70 leading-relaxed mb-2.5 sm:mb-3">{description}</p>
-        <span className="font-accent text-xl font-semibold text-brand-cognac">{price}</span>
+        <span className="font-accent text-xl font-semibold text-brand-cognac">{displayPrice}</span>
       </div>
     </div>
   );

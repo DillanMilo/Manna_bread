@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/Button';
 import { FadeIn } from '@/components/ui/Motion';
 import { PageVine } from '@/components/ui/ScrollVine';
 import { TOAST } from '@/lib/constants';
+import { formatDisplayPrice } from '@/lib/pricing';
 
 const EASE: [number, number, number, number] = [0.25, 0.4, 0.25, 1];
 
@@ -19,7 +20,7 @@ type MenuExperienceProps = {
 };
 
 function MenuItemRow({ item }: { item: MenuItem }) {
-  const price = item.price.display.replace(/\+$/, '');
+  const price = formatDisplayPrice(item.price.display);
 
   return (
     <div

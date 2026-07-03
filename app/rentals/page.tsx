@@ -14,6 +14,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { InquirySection } from '@/components/sections/InquirySection';
 import { FloatingInquiryButton } from '@/components/ui/FloatingInquiryButton';
+import { formatDisplayPrice } from '@/lib/pricing';
 
 /* ─── rental images ─── */
 const RENTAL_IMAGES = {
@@ -103,7 +104,7 @@ function PriceCard({
           : 'bg-brand-forest-mid/60 border-white/10'
       }`}
     >
-      <p className="font-display text-3xl sm:text-4xl text-brand-gold">{price}</p>
+      <p className="font-display text-3xl sm:text-4xl text-brand-gold">{formatDisplayPrice(price)}</p>
       <p className="font-body text-sm text-white/60 mt-1">{unit}</p>
       {extra && (
         <p className="font-body text-sm text-brand-gold/80 mt-1">{extra}</p>
