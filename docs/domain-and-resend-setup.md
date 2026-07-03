@@ -136,7 +136,7 @@ Current email behavior:
 Current code items to revisit before launch:
 
 - `lib/constants.ts` now uses `hello@mannabread.com` as the public fallback contact email.
-- `app/layout.tsx` now falls back to `https://mannabread.com` if `NEXT_PUBLIC_SITE_URL` is not set.
+- `app/layout.tsx` uses `NEXT_PUBLIC_SITE_URL` when set, then Vercel's production/deployment URL, then `https://manna-bread.vercel.app` as the local fallback for metadata.
 - Confirm whether Christin wants inquiries to continue going to `hello@mannabread.com` or move to a more specific operations inbox.
 - Add Google reCAPTCHA v3 keys to Vercel if Christin wants CAPTCHA enforcement before launch.
 

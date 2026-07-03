@@ -26,6 +26,19 @@ const libreFranklin = Libre_Franklin({
   display: 'swap',
 });
 
+function getSiteUrl() {
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    process.env.VERCEL_PROJECT_PRODUCTION_URL ??
+    process.env.VERCEL_URL ??
+    'manna-bread.vercel.app';
+
+  return siteUrl.startsWith('http') ? siteUrl : `https://${siteUrl}`;
+}
+
+const siteUrl = getSiteUrl();
+const shareImage = '/images/manna-logo-share.png';
+
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
@@ -34,17 +47,20 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mannabread.com'),
+  metadataBase: new URL(siteUrl),
   title: `${BRAND.name} | ${BRAND.tagline}`,
   description: BRAND.description,
   openGraph: {
     title: `${BRAND.name} | ${BRAND.tagline}`,
     description: BRAND.description,
+    url: siteUrl,
+    siteName: BRAND.name,
     images: [
       {
-        url: '/images/Bread from Heaven.PNG',
+        url: shareImage,
         width: 1050,
         height: 600,
+        type: 'image/png',
         alt: 'Manna — Cafe and Bakery, Bread from Heaven',
       },
     ],
@@ -53,7 +69,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: `${BRAND.name} | ${BRAND.tagline}`,
     description: BRAND.description,
-    images: ['/images/Bread from Heaven.PNG'],
+    images: [shareImage],
   },
 };
 
