@@ -12,8 +12,8 @@ const organic = [0.25, 0.4, 0.25, 1] as const;
 /* ─── story image data ─── */
 const STORY_IMAGES = {
   christin: {
-    src: '/images/AAD55839-464A-46C6-80EE-B05190941FF9.JPG',
-    alt: 'Christin, founder of Manna Bakery, smiling warmly',
+    src: '/images/christin-desert-portrait.jpeg',
+    alt: 'Christin, founder of Manna Bakery, smiling outdoors in the desert',
   },
   couple: {
     src: '/images/IMG_6873.PNG',
