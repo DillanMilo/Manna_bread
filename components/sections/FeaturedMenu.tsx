@@ -35,9 +35,9 @@ export function FeaturedMenu() {
       <div className="relative z-10 max-w-6xl mx-auto px-5 sm:px-6 md:px-10">
         <FadeIn>
           <SectionHeader
-            label="From Our Kitchen"
+            label="From Manna's Kitchen"
             title="Crafted with intention"
-            description="Everything here is baked with intention - real ingredients, unhurried process, and a lot of love in every batch."
+            description="Everything at Manna is baked with intention - real ingredients, an unhurried process, and care in every batch."
             light
           />
         </FadeIn>
@@ -53,7 +53,7 @@ export function FeaturedMenu() {
         <FadeIn delay={0.3}>
           <div className="text-center mt-12">
             <Button href="/menu" variant="primary" className="w-full sm:w-auto">
-              View Full Menu
+              Menu Coming Soon
             </Button>
           </div>
         </FadeIn>

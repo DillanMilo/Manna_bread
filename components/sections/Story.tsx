@@ -7,6 +7,7 @@ import Link from "next/link";
 import { QuoteBlock } from "@/components/ui/QuoteBlock";
 import { FadeIn } from "@/components/ui/Motion";
 import { ScrollVine } from "@/components/ui/ScrollVine";
+import { useMediaParallax } from "@/components/ui/useMediaParallax";
 
 const organic = [0.25, 0.4, 0.25, 1] as const;
 
@@ -31,6 +32,7 @@ export function Story() {
   const storyRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const videoContainerRef = useRef<HTMLDivElement>(null);
+  const imageStackRef = useRef<HTMLDivElement>(null);
   const [frontIndex, setFrontIndex] = useState(0);
   const [zFrontIndex, setZFrontIndex] = useState(0);
   const shufflingRef = useRef(false);
@@ -39,6 +41,7 @@ export function Story() {
     target: storyRef,
     offset: ["start 72%", "end 35%"],
   });
+  const imageY = useMediaParallax(imageStackRef, 18);
 
   const shuffle = useCallback(() => {
     if (shufflingRef.current) return;
@@ -103,8 +106,11 @@ export function Story() {
           </FadeIn>
 
           <FadeIn delay={0.2}>
-            <p className="font-body text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl mx-auto text-center mb-10 sm:mb-14">
-              Every loaf begins with a story. This is Christin&apos;s.
+            <p className="font-body text-base sm:text-lg text-white/70 leading-relaxed max-w-3xl mx-auto text-center mb-10 sm:mb-14">
+              Manna began long before its doors opened. In this short film,
+              Christin shares the faith, family, and hard-won hope that shaped
+              the bakery &mdash; and the welcome she hopes every guest feels
+              when they walk through its doors.
             </p>
           </FadeIn>
 
@@ -145,12 +151,22 @@ export function Story() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
             {/* Image card stack with disconnected frame + parallax */}
             <motion.div
+              ref={imageStackRef}
               className="relative w-full max-w-[280px] sm:max-w-sm mx-auto md:max-w-none cursor-pointer"
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.9, ease: organic }}
               onClick={shuffle}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  shuffle();
+                }
+              }}
+              role="button"
+              tabIndex={0}
+              aria-label="Show another photo of Christin and Chad"
             >
               {/* Decorative offset frame */}
               <div className="absolute inset-0 top-3 left-3 sm:top-5 sm:left-5 -right-3 -bottom-3 sm:-right-5 sm:-bottom-5 rounded-2xl border border-brand-gold/25" />
@@ -181,16 +197,18 @@ export function Story() {
                       }}
                       className="absolute inset-0 rounded-2xl overflow-hidden"
                     >
-                      <div className="relative w-full h-full">
+                      <motion.div
+                        style={{ y: imageY }}
+                        className="absolute -inset-y-[5%] left-0 right-0 will-change-transform"
+                      >
                         <Image
                           src={img.src}
                           alt={img.alt}
-                          width={img.width}
-                          height={img.height}
-                          className="w-full h-full object-cover"
+                          fill
+                          className="object-cover"
                           sizes="(max-width: 768px) 100vw, 50vw"
                         />
-                      </div>
+                      </motion.div>
                     </motion.div>
                   );
                 })}
@@ -201,7 +219,7 @@ export function Story() {
             <div className="py-4">
               <FadeIn delay={0.1}>
                 <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-4">
-                  Our Story
+                  Manna&apos;s Story
                 </p>
               </FadeIn>
 
@@ -243,7 +261,7 @@ export function Story() {
                   href="/our-story"
                   className="inline-flex items-center gap-2 font-body text-sm font-medium text-brand-gold hover:text-brand-cognac-light transition-colors mt-6 group"
                 >
-                  Read our full story{" "}
+                  Read Manna&apos;s full story{" "}
                   <span
                     aria-hidden="true"
                     className="transition-transform duration-300 group-hover:translate-x-1"

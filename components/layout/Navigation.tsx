@@ -54,7 +54,7 @@ export function Navigation() {
             />
           </Link>
 
-          <div className="hidden lg:flex items-center gap-6 xl:gap-8">
+          <div className="hidden lg:flex items-center gap-5 xl:gap-7">
             {NAV_LINKS.map((link, i) => (
               <motion.div
                 key={link.href}
@@ -64,7 +64,7 @@ export function Navigation() {
               >
                 <Link
                   href={link.href}
-                  className="font-body text-[13px] font-medium text-white/80 hover:text-white transition-colors tracking-wide relative group"
+                  className="font-body text-[12px] xl:text-[13px] font-medium text-white/80 hover:text-white transition-colors tracking-wide whitespace-nowrap relative group"
                 >
                   {link.label}
                   <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-brand-gold transition-all duration-300 group-hover:w-full" />

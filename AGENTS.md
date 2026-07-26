@@ -23,7 +23,7 @@ Manna Bakery is **more than a bakery—it's a sanctuary**. The physical space is
 - Reclaimed timber beam structures
 - Arched alcoves with soft lighting
 - Abundant greenery and living walls
-- Warm cognac lher seating
+- Warm cognac leather seating
 - High ceilings with white-painted industrial elements
 - A compass rose motif on the exterior
 
@@ -46,7 +46,9 @@ The website must capture this feeling: **warm, intentional, organic, and experie
 
 ## Brand Story Context
 
-The founder, **Christin**, has an incredible personal journey—leaving the Mormon church, becoming a born-again Christian, and building Manna Bakery with her familyignificant hardship. This resilience and faith are core to the brand identity.
+The founder, **Christin**, has an incredible personal journey—rebuilding through divorce and significant hardship, raising six children, deepening her faith, and building Manna Bakery first on her own and later alongside Chad. This resilience and faith are core to the brand identity.
+
+**Public story guardrail:** Describe Christin's faith transition in warm, general terms. Do not name her former denomination or reference its sacred rites. Center her belief that blessings from God were tied to obedience, followed by her discovery of grace, daily provision, and a faith that did not have to be earned.
 
 The name "Manna" references the biblical bread from heaven—nourishment for the journey, provided with love. The tagline **"Bread from Heaven"** appears on the storefront.
 
@@ -66,7 +68,7 @@ Christin is **font-sensitive** and believes free fonts signal cheap quality. We'
 |------|------|--------|-------|
 | **Display / Headlines** | Playfair Display | 400, 500, 600 | Hero headlines, section titles, page titles |
 | **Accent / Quotes** | Lora | 400 italic, 500, 600 | Scripture quotes, testimonials, taglines, elegant accents |
-| **Body / UI** | Libre Franklin | 300, 400, 500, 600 | Body text, navition, buttons, labels, form elements |
+| **Body / UI** | Libre Franklin | 300, 400, 500, 600 | Body text, navigation, buttons, labels, form elements |
 
 ### Typography Rules
 - Headlines should feel elegant and warm, never cold or corporate
@@ -191,7 +193,7 @@ Per the contract, we're building 6 pages:
 
 1. **Home** — Hero, about snippet, featured menu, experience, testimonials, services teaser, contact
 2. **Menu** — Links to / embeds Toast menu
-3. **Our Story** — Full narrative of Christin's journey and Manna's founding
+3. **Story** — Full narrative of Christin's journey and Manna's founding
 4. **Catering** — Catering packages, inquiry form
 5. **Gift Cards** — Toast gift card integration
 6. **Rentals** — Private event space info, inquiry form

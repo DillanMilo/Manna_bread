@@ -2,6 +2,9 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { useMediaParallax } from '@/components/ui/useMediaParallax';
 
 interface ServiceCardProps {
   title: string;
@@ -20,17 +23,25 @@ export function ServiceCard({
   image,
   imagePosition = 'center',
 }: ServiceCardProps) {
+  const imageRef = useRef<HTMLDivElement>(null);
+  const imageY = useMediaParallax(imageRef, 14);
+
   return (
     <div className="bg-brand-forest-mid/80 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-white/10 w-full max-w-[360px] sm:max-w-none mx-auto">
-      <div className="h-52 sm:h-48 md:h-52 relative overflow-hidden">
-        <Image
-          src={image}
-          alt={title}
-          fill
-          className="object-cover"
-          style={{ objectPosition: imagePosition }}
-          sizes="(max-width: 768px) 100vw, 50vw"
-        />
+      <div ref={imageRef} className="h-52 sm:h-48 md:h-52 relative overflow-hidden">
+        <motion.div
+          style={{ y: imageY }}
+          className="absolute -inset-y-[6%] left-0 right-0 will-change-transform"
+        >
+          <Image
+            src={image}
+            alt={title}
+            fill
+            className="object-cover"
+            style={{ objectPosition: imagePosition }}
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        </motion.div>
       </div>
       <div className="p-4 sm:p-6 md:p-7">
         <h3 className="font-display text-xl sm:text-2xl text-white mb-1.5 sm:mb-3">{title}</h3>

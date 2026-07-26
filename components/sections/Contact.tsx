@@ -86,7 +86,7 @@ export function Contact() {
                 Send a note
               </p>
               <h3 className="mb-3 font-display text-2xl font-medium text-white">
-                We will point you the right way.
+                Manna will point you the right way.
               </h3>
               <p className="mb-5 font-body text-sm leading-relaxed text-white/68">
                 For questions about orders, visits, catering, rentals, or anything else that needs a human answer.

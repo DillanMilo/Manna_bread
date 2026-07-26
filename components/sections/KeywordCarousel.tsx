@@ -6,19 +6,19 @@ import { VineAccent } from '@/components/ui/ScrollVine';
 
 const CARDS = [
   {
-    label: 'Our Craft',
+    label: 'Manna’s Craft',
     title: 'Handcrafted',
-    body: 'Every loaf shaped by hand. Every recipe earned through patience. We believe the best things are made with care — the way God intended.',
+    body: 'Every loaf is shaped by hand. Every recipe is earned through patience. Manna believes the best things are made with care — the way God intended.',
   },
   {
-    label: 'Our Space',
+    label: 'Manna’s Space',
     title: 'Rooted',
     body: 'Timber, greenery, and warm light — a place that feels set apart. Step in and let the rest of the world quiet down.',
   },
   {
-    label: 'Our Why',
+    label: 'Manna’s Why',
     title: 'Community',
-    body: 'God put it on our hearts to build a gathering place. Come for the bread, stay for the people.',
+    body: 'God put it on Christin’s heart to build a gathering place. Come for the bread, stay for the people.',
   },
 ];
 

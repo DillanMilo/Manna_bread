@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
@@ -11,6 +11,7 @@ export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const mobilePerformanceMode = useMobilePerformanceMode();
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     if (videoRef.current) {
@@ -46,7 +47,11 @@ export function Hero() {
     offset: ["start start", "end start"],
   });
 
-  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '0%']);
+  const bgY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    prefersReducedMotion || mobilePerformanceMode ? ['0%', '0%'] : ['0%', '4%'],
+  );
   const contentOpacity = useTransform(scrollYProgress, [0, 0.58], [1, 0]);
   const contentY = useTransform(scrollYProgress, [0, 0.58], [0, mobilePerformanceMode ? -18 : -24]);
 
@@ -54,7 +59,7 @@ export function Hero() {
     <section ref={sectionRef} className="relative min-h-[70vh] sm:min-h-[80vh] md:min-h-[90vh] flex items-center justify-center overflow-hidden">
       {/* Background video — soft reveal like eyes adjusting to the space */}
       <motion.div
-        className="absolute inset-0 z-0"
+        className="absolute -inset-y-[5%] left-0 right-0 z-0 will-change-transform"
         style={{ y: bgY }}
         initial={{ scale: 1.02, opacity: 0.96 }}
         animate={{ scale: 1, opacity: 1 }}
@@ -135,7 +140,7 @@ export function Hero() {
             Order Online
           </Button>
           <Button href="/menu" variant="ghost" size="lg" className="w-full sm:w-auto">
-            Explore Menu
+            Menu Coming Soon
           </Button>
         </motion.div>
       </motion.div>

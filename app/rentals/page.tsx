@@ -84,35 +84,6 @@ function Divider() {
   );
 }
 
-/* ─── price card component ─── */
-function PriceCard({
-  price,
-  unit,
-  extra,
-  highlight = false,
-}: {
-  price: string;
-  unit: string;
-  extra?: string;
-  highlight?: boolean;
-}) {
-  return (
-    <div
-      className={`rounded-2xl p-5 sm:p-7 shadow-sm border w-full ${
-        highlight
-          ? 'bg-brand-gold/10 border-brand-gold/40'
-          : 'bg-brand-forest-mid/60 border-white/10'
-      }`}
-    >
-      <p className="font-display text-3xl sm:text-4xl text-brand-gold">{formatDisplayPrice(price)}</p>
-      <p className="font-body text-sm text-white/60 mt-1">{unit}</p>
-      {extra && (
-        <p className="font-body text-sm text-brand-gold/80 mt-1">{extra}</p>
-      )}
-    </div>
-  );
-}
-
 /* ─── detail item ─── */
 function DetailItem({ label, value }: { label: string; value: string }) {
   return (
@@ -263,9 +234,10 @@ export default function RentalsPage() {
 
           <FadeIn delay={0.3}>
             <p className="font-body text-lg md:text-xl text-white/70 leading-relaxed max-w-2xl mx-auto">
-              From quiet morning meetings around the community table to full
-              evenings with the building all to yourselves &mdash; Manna opens
-              its doors for the moments worth gathering for.
+              Manna was created with you and your people in mind &mdash; for company
+              meetings and Bible studies, birthday brunches and showers, rehearsal
+              dinners and full-house celebrations. Manna opens its doors for the
+              moments worth gathering for.
             </p>
           </FadeIn>
 
@@ -317,32 +289,57 @@ export default function RentalsPage() {
 
               <FadeIn delay={0.15}>
                 <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-5">
-                  Perfect for small gatherings, our conference room seats up to 14
-                  guests at our 9.5ft community table. Nestled between beautiful
-                  wood panel walls and modern sliding glass doors, your party will
-                  enjoy meeting together in our unique and cozy conference room.
+                  Manna&apos;s conference room seats up to 14 guests around a long
+                  community table. Nestled between beautiful wood panel walls and
+                  modern sliding glass doors, it is a cozy setting for company
+                  meetings, Bible studies, planning sessions, birthday gatherings,
+                  and other small groups.
                 </p>
               </FadeIn>
 
               <FadeIn delay={0.2}>
                 <p className="font-body text-sm text-white/70 leading-[1.7] mb-6">
-                  Outside food, promotional materials, and solicitation to our
-                  customers is not permitted during conference room rentals unless
-                  authorized by Manna Staff. We ask that all activities align with
-                  Manna Bread From Heaven&apos;s welcoming and peaceful environment.
+                  Outside food, promotional materials, and solicitation to Manna
+                  customers are not permitted during conference room rentals unless
+                  authorized by Manna staff. All activities should align with Manna
+                  Bread From Heaven&apos;s welcoming and peaceful environment.
                 </p>
               </FadeIn>
 
               <FadeIn delay={0.25}>
                 <div className="space-y-2 mb-6">
                   <DetailItem label="Availability" value="Monday - Saturday" />
-                  <DetailItem label="Hours" value="6am - 2pm" />
+                  <DetailItem label="Hours" value="6am - 4pm" />
                   <DetailItem label="Capacity" value="Up to 14 guests" />
                 </div>
               </FadeIn>
 
               <FadeIn delay={0.35}>
-                <PriceCard price="$20" unit="per hour" />
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                  <div className="rounded-2xl border border-white/10 bg-brand-forest-mid/60 p-5 shadow-sm">
+                    <p className="mb-2 font-body text-[11px] font-semibold uppercase tracking-[2px] text-white/65">
+                      Monday &ndash; Thursday
+                    </p>
+                    <p className="font-display text-3xl text-brand-gold">
+                      {formatDisplayPrice('$35')}
+                    </p>
+                    <p className="mt-1 font-body text-sm text-white/60">per hour</p>
+                  </div>
+                  <div className="rounded-2xl border border-brand-gold/35 bg-brand-gold/10 p-5 shadow-sm">
+                    <p className="mb-2 font-body text-[11px] font-semibold uppercase tracking-[2px] text-white/65">
+                      Friday &amp; Saturday
+                    </p>
+                    <p className="font-display text-3xl text-brand-gold">
+                      {formatDisplayPrice('$45')}
+                    </p>
+                    <p className="mt-1 font-body text-sm text-white/60">per hour</p>
+                  </div>
+                </div>
+                <div className="mt-4 rounded-xl border-l-4 border-brand-gold bg-brand-forest/45 px-4 py-3">
+                  <p className="font-body text-sm leading-relaxed text-white/85">
+                    Saturday reservations are available in 2-hour increments only.
+                  </p>
+                </div>
               </FadeIn>
             </div>
 
@@ -390,7 +387,7 @@ export default function RentalsPage() {
                   Full Building Rentals
                 </p>
                 <h2 className="font-display text-3xl md:text-4xl font-medium text-white leading-tight mb-6">
-                  The Whole Place, Yours for the Evening
+                  Manna Is All Yours for the Evening
                 </h2>
               </FadeIn>
 
@@ -435,7 +432,7 @@ export default function RentalsPage() {
                   per hour, at or after 2pm
                 </p>
                 <p className="font-body text-sm text-white/60 leading-relaxed">
-                  Our weekend evening rate &mdash; the most-requested window for
+                  Manna&apos;s weekend evening rate &mdash; the most-requested window for
                   receptions and celebrations.
                 </p>
               </div>
@@ -522,8 +519,8 @@ export default function RentalsPage() {
 
           <FadeIn delay={0.4}>
             <p className="font-body text-sm text-white/60 text-center mt-10 max-w-xl mx-auto leading-relaxed">
-              We&apos;re flexible on layout &mdash; tell us how you picture the
-              evening and we&apos;ll help shape the room around it.
+              Manna&apos;s layout is flexible. Share how you picture the evening,
+              and the team can help shape the room around it.
             </p>
           </FadeIn>
         </div>
@@ -572,7 +569,7 @@ export default function RentalsPage() {
             <StaggerItem>
               <IncludedCard
                 title="Service Counters"
-                description="Use of our front counters for catering setup, drink stations, or dessert displays."
+                description="Use of Manna's front counters for catering setup, drink stations, or dessert displays."
                 icon={
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
@@ -583,21 +580,10 @@ export default function RentalsPage() {
             <StaggerItem>
               <IncludedCard
                 title="Outdoor Patio"
-                description="Our shaded patio is yours to use during your rental window - great for spillover and fresh air."
+                description="Manna's shaded patio is yours to use during the rental window - great for spillover and fresh air."
                 icon={
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
-                  </svg>
-                }
-              />
-            </StaggerItem>
-            <StaggerItem>
-              <IncludedCard
-                title="Kitchen Space"
-                description="Storage and sink access for catering - a place to stage food. Equipment and tools stay with the kitchen."
-                icon={
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 11.25v8.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 1 0 9.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1 1 14.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
                   </svg>
                 }
               />
@@ -639,7 +625,7 @@ export default function RentalsPage() {
                 Catering
               </p>
               <h2 className="font-display text-3xl md:text-4xl font-medium text-white leading-tight">
-                Feed your people, our way &mdash; or yours.
+                Feed your people, the Manna way &mdash; or yours.
               </h2>
             </FadeIn>
           </div>
@@ -652,11 +638,11 @@ export default function RentalsPage() {
                   In-House Catering
                 </p>
                 <h3 className="font-display text-2xl md:text-3xl font-medium text-white mb-5">
-                  Made fresh, the way we always do it.
+                  Made fresh, the way Manna always does it.
                 </h3>
                 <p className="font-body text-[15px] text-white/85 leading-[1.8] mb-5">
                   Manna offers a full in-house catering menu pulled straight from
-                  our regular kitchen &mdash; the same hands, the same recipes,
+                  the bakery kitchen &mdash; the same hands, the same recipes,
                   the same care. Custom variations, special diets, or a personal
                   favorite of yours can often be folded in. Just ask.
                 </p>
@@ -791,7 +777,7 @@ export default function RentalsPage() {
                 <div className="mt-6 border-l-2 border-brand-gold/50 pl-5">
                   <p className="font-accent text-lg italic text-white/80 leading-relaxed">
                     If you&apos;d like to leave behind extra flowers or plants,
-                    we&apos;ll happily put them out for the next morning&apos;s
+                    Manna&apos;s team will happily put them out for the next morning&apos;s
                     customers to enjoy.
                   </p>
                 </div>
@@ -811,7 +797,7 @@ export default function RentalsPage() {
                   items={[
                     'Snap a quick photo before you move anything.',
                     'Return each piece to its original spot before you leave.',
-                    "Tell us your vision and we're happy to help shape the room.",
+                    "Share your vision and Manna's team can help shape the room.",
                   ]}
                 />
               </div>

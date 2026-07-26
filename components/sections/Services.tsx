@@ -14,7 +14,7 @@ export function Services() {
           <StaggerItem>
             <ServiceCard
               title="Catering"
-              description="From corporate breakfasts to wedding brunches, we bring the Manna experience to your gathering."
+              description="From corporate breakfasts to wedding brunches, Manna brings something handcrafted to the table."
               href="/catering"
               linkText="Learn more"
               image="/images/manna-strawberry-waffle.webp"
@@ -24,7 +24,7 @@ export function Services() {
           <StaggerItem>
             <ServiceCard
               title="Private Rentals"
-              description="Host your next event in our beautiful space. Intimate gatherings, showers, and celebrations welcome."
+              description="Gather at Manna for intimate meetings, showers, milestone dinners, and full-house celebrations."
               href="/rentals"
               linkText="Inquire now"
               image="/images/manna-cognac-lounge.webp"

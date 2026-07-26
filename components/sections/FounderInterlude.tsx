@@ -3,13 +3,14 @@
 import Image from 'next/image';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-
+import { useMediaParallax } from '@/components/ui/useMediaParallax';
 
 const organic = [0.25, 0.4, 0.25, 1] as const;
 
 export function FounderInterlude() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.25 });
+  const imageY = useMediaParallax(containerRef, 28);
 
   return (
     <section
@@ -17,7 +18,10 @@ export function FounderInterlude() {
       className="relative h-[50vh] sm:h-[55vh] md:h-[65vh] overflow-hidden"
     >
       {/* Parallax image */}
-      <div className="absolute inset-0">
+      <motion.div
+        style={{ y: imageY }}
+        className="absolute -inset-y-[7%] left-0 right-0 will-change-transform"
+      >
         <Image
           src="/images/5094151F-9BC2-4D50-87F7-E1751B7D59BA.jpeg"
           alt="Christin enjoying coffee and pastries at Manna Bakery"
@@ -25,7 +29,7 @@ export function FounderInterlude() {
           sizes="100vw"
           className="object-cover object-[center_35%]"
         />
-      </div>
+      </motion.div>
 
       {/* Gradient overlay — soft dark from bottom for legible text */}
       <div className="absolute inset-0 bg-gradient-to-t from-brand-forest/80 via-brand-forest/25 to-transparent" />

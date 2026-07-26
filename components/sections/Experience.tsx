@@ -5,6 +5,7 @@ import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { FadeIn } from '@/components/ui/Motion';
+import { useMediaParallax } from '@/components/ui/useMediaParallax';
 
 const CAROUSEL_IMAGES = [
   '/images/manna-interior-timber-beams.webp',
@@ -64,6 +65,8 @@ function FeatureCard({ icon, title, description, index }: { icon: string; title:
 
 export function Experience() {
   const [currentImage, setCurrentImage] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const imageY = useMediaParallax(sectionRef, 22);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -73,12 +76,13 @@ export function Experience() {
   }, []);
 
   return (
-    <section className="py-12 sm:py-16 md:py-20 lg:py-28 text-white relative overflow-hidden">
+    <section ref={sectionRef} className="py-12 sm:py-16 md:py-20 lg:py-28 text-white relative overflow-hidden">
       {/* Smooth crossfade carousel background — all images rendered, opacity toggled */}
       {CAROUSEL_IMAGES.map((src, index) => (
         <motion.div
           key={src}
-          className="absolute inset-0"
+          style={{ y: imageY }}
+          className="absolute -inset-y-[6%] left-0 right-0 will-change-transform"
           animate={{ opacity: index === currentImage ? 1 : 0 }}
           transition={{ duration: 1.5, ease: 'easeInOut' }}
         >
@@ -100,7 +104,7 @@ export function Experience() {
           <SectionHeader
             label="More Than a Bakery"
             title="A space designed for connection"
-            description="Our Jerusalem-inspired storefront is more than a quick stop - it is a sanctuary for community, creativity, and conversation."
+            description="Manna's Jerusalem-inspired storefront is more than a quick stop - it is a sanctuary for community, creativity, and conversation."
             light
           />
         </FadeIn>

@@ -47,7 +47,7 @@ interface SaladItem {
 const PASTRY_TRAYS: CateringCategory = {
   id: 'pastry-trays',
   title: 'Pastry Trays',
-  description: 'Trays include our dozen pastries. Up to two flavor selections per tray.',
+  description: 'Trays include one dozen Manna pastries. Up to two flavor selections per tray.',
   sizes: [
     { name: 'Mini', detail: '2-3 flavors', price: '$30' },
     { name: 'Medium', detail: '4-5 flavors', price: '$40' },
@@ -126,7 +126,7 @@ const FRUIT_VEG_SIZES: TraySize[] = [
 const FRUIT_VEG_ITEMS: CateringItem[] = [
   { name: 'Fruit Tray', note: 'Assorted seasonal fruits' },
   { name: 'Vegetable Tray', note: 'Assorted seasonal vegetables & ranch dressing' },
-  { name: 'Fruit Bowl', note: 'Our fresh fruit variety, cut and served in style' },
+  { name: 'Fruit Bowl', note: 'Manna’s fresh fruit variety, cut and served in style' },
 ];
 
 const SALAD_SIZES: TraySize[] = [
@@ -405,9 +405,9 @@ export default function CateringPage() {
 
           <FadeIn delay={0.3}>
             <p className="font-body text-lg md:text-xl text-white/70 leading-relaxed max-w-2xl mx-auto">
-              Select from an assortment of our catering trays to satisfy your
-              craving for pastries, sandwiches, soup, salads, and more for your
-              in-house events.
+              Select from Manna&apos;s catering trays of pastries, sandwiches,
+              soup, salads, and more&mdash;all prepared for gatherings around
+              the bakery table.
             </p>
           </FadeIn>
 

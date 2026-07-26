@@ -39,8 +39,8 @@ export const TOAST = {
 };
 
 export const NAV_LINKS = [
-  { label: 'Menu', href: '/menu' },
-  { label: 'Our Story', href: '/our-story' },
+  { label: 'Menu (Coming Soon)', href: '/menu' },
+  { label: 'Story', href: '/our-story' },
   { label: 'Catering', href: '/catering' },
   { label: 'Gift Cards', href: '/gift-cards' },
   { label: 'Rentals', href: '/rentals' },

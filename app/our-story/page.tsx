@@ -27,7 +27,30 @@ const STORY_IMAGES = {
     src: '/images/IMG_9181.jpeg',
     alt: 'Christin surrounded by the Manna Bakery community',
   },
+  familyYounger: {
+    src: '/images/christin-family-younger.jpeg',
+    alt: 'Christin with her six children when they were younger',
+  },
+  familyGrown: {
+    src: '/images/christin-family-grown.jpeg',
+    alt: 'Christin with her six children, now grown',
+  },
 };
+
+const NEW_LOCATION_IMAGES = [
+  {
+    src: '/images/manna-front-entry.webp',
+    alt: 'The arched front entry at Manna Bakery in Tomball',
+  },
+  {
+    src: '/images/manna-interior-timber-beams.webp',
+    alt: 'Manna Bakery interior with reclaimed timber beams and greenery',
+  },
+  {
+    src: '/images/manna-arched-alcove.webp',
+    alt: 'A softly lit arched alcove inside Manna Bakery',
+  },
+] as const;
 
 /* ─── floating story image with parallax ─── */
 function StoryImage({
@@ -80,6 +103,80 @@ function StoryImage({
         />
       </motion.div>
     </motion.div>
+  );
+}
+
+/* ─── family timeline photo with reveal + parallax ─── */
+function FamilyPhoto({
+  image,
+  label,
+  delay,
+  offset = false,
+}: {
+  image: { src: string; alt: string };
+  label: string;
+  delay: number;
+  offset?: boolean;
+}) {
+  const ref = useRef<HTMLElement>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.25 });
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+  const imageY = useTransform(scrollYProgress, [0, 1], [8, -8]);
+
+  return (
+    <motion.figure
+      ref={ref}
+      initial={{
+        opacity: 0,
+        y: 54,
+        rotate: offset ? 1.5 : -1.5,
+        clipPath: 'inset(10% 8% 10% 8% round 24px)',
+      }}
+      animate={
+        isInView
+          ? {
+              opacity: 1,
+              y: 0,
+              rotate: offset ? 0.75 : -0.75,
+              clipPath: 'inset(0% 0% 0% 0% round 24px)',
+            }
+          : {}
+      }
+      transition={{ duration: 1, delay, ease: organic }}
+      className={`relative ${offset ? 'md:mt-14' : ''}`}
+    >
+      <div className="absolute -inset-5 rounded-[2rem] bg-brand-gold/[0.11] blur-3xl" />
+      <motion.div
+        initial={{ opacity: 0, scale: 0.92 }}
+        animate={isInView ? { opacity: 1, scale: 1 } : {}}
+        transition={{ duration: 0.9, delay: delay + 0.22, ease: organic }}
+        className={`absolute inset-0 rounded-2xl border border-brand-gold/40 ${
+          offset ? '-translate-x-3 translate-y-3' : 'translate-x-3 translate-y-3'
+        }`}
+      />
+
+      <div className="relative aspect-[7/5] overflow-hidden rounded-2xl border border-white/10 bg-brand-forest-mid shadow-2xl">
+        <motion.div
+          style={{ y: imageY, scale: 1.035 }}
+          className="absolute inset-0 will-change-transform"
+        >
+          <Image
+            src={image.src}
+            alt={image.alt}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        </motion.div>
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-forest/70 via-transparent to-transparent" />
+        <figcaption className="absolute bottom-0 left-0 px-5 py-4 font-body text-[10px] font-semibold uppercase tracking-[2px] text-brand-gold">
+          {label}
+        </figcaption>
+      </div>
+    </motion.figure>
   );
 }
 
@@ -190,7 +287,7 @@ function ClosingImage() {
 }
 
 /* ═══════════════════════════════════════════
-   OUR STORY PAGE
+   MANNA'S STORY PAGE
    ═══════════════════════════════════════════ */
 export default function OurStoryPage() {
   const pageRef = useRef<HTMLElement>(null);
@@ -208,7 +305,7 @@ export default function OurStoryPage() {
         <div className="max-w-4xl mx-auto text-center">
           <FadeIn>
             <p className="font-body text-[11px] font-semibold tracking-[3px] uppercase text-brand-gold mb-5">
-              Our Story
+              Manna&apos;s Story
             </p>
           </FadeIn>
 
@@ -255,18 +352,19 @@ export default function OurStoryPage() {
 
             <FadeIn delay={0.15}>
               <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-5">
-                Christin grew up in a devout Mormon household in Utah, where faith wasn&apos;t
-                just a Sunday morning practice&mdash;it was the air she breathed. She strived
-                to be the very best version of what her community expected: faithful,
-                obedient, and certain that her church held the exclusive path to truth.
+                Christin grew up in Utah with a deep faith and a belief that every
+                blessing from God was tied to her obedience. Faith wasn&apos;t simply
+                a Sunday practice&mdash;it shaped the way she understood family,
+                purpose, and the path set before her.
               </p>
             </FadeIn>
 
             <FadeIn delay={0.25}>
               <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8]">
-                Life had a clear map. Marriage, family, temple&mdash;each step was a
-                rung on an eternal ladder. But as she would come to learn,
-                God&apos;s plans don&apos;t always follow the maps we draw for ourselves.
+                Life seemed to have a clear map: marriage, family, service, and the
+                steady work of doing everything right. But as she would come to
+                learn, God&apos;s plans do not always follow the maps people draw for
+                themselves.
               </p>
             </FadeIn>
           </Chapter>
@@ -290,11 +388,11 @@ export default function OurStoryPage() {
 
             <FadeIn delay={0.15}>
               <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-5">
-                Christin&apos;s marriage was tested by her husband&apos;s battle with
-                addiction&mdash;a struggle that brought their family to the edge of
-                hopelessness. The teachings she had built her life upon began to crack
-                under the weight of reality, and the &ldquo;eternal family potential&rdquo;
-                she&apos;d been promised felt impossibly far away.
+                Christin&apos;s marriage was tested by the addiction battle faced
+                by her husband (ex)&mdash;a struggle that brought their family to
+                the edge of hopelessness. The certainty she had built her life upon
+                began to crack under the weight of reality, and the future she had
+                worked so hard to protect felt impossibly far away.
               </p>
             </FadeIn>
 
@@ -316,6 +414,7 @@ export default function OurStoryPage() {
               />
             </FadeIn>
           </div>
+
         </div>
       </section>
 
@@ -363,9 +462,9 @@ export default function OurStoryPage() {
                 Inspired by an unexpected connection on social media, Christin and
                 her son traveled to Kenya on a mission trip that would change everything.
                 There, among Kenyan Christians whose faith was raw and unfiltered, she
-                encountered questions that shook her to the core. Their simple, piercing
-                inquiries about her beliefs forced her to examine what she truly believed
-                versus what she had been taught.
+                encountered questions that shook her to the core. Their simple,
+                piercing inquiries invited her to examine what she truly believed
+                and where God might be leading her next.
               </p>
             </FadeIn>
 
@@ -398,17 +497,19 @@ export default function OurStoryPage() {
             <FadeIn delay={0.15}>
               <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-5">
                 When Christin returned home from Kenya, life didn&apos;t offer a
-                soft landing. Her husband was arrested and imprisoned due to his
+                soft landing. Her husband (ex) was arrested and imprisoned due to his
                 long-standing battle with addiction. The life she knew crumbled
-                overnight, and she was left standing in the rubble with her children,
-                wondering how to take the next breath.
+                overnight. Divorce, court, and wave after wave of change followed.
+                Christin became a single mom to six children, learning how to take
+                the next breath while keeping a family moving forward.
               </p>
             </FadeIn>
 
             <FadeIn delay={0.25}>
               <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-6">
-                It was during this devastating season that Christin clung to a
-                biblical image that would eventually name her life&apos;s work:
+                It was during this devastating season of divorce, court, and
+                rebuilding that Christin clung to a Biblical image that would
+                eventually name her life&apos;s work:
                 <em> manna</em>&mdash;the bread God provided daily to wanderers in
                 the wilderness. Not a month&apos;s supply. Not a year&apos;s worth of answers.
                 Just enough for today. She learned to trust in provision that arrived
@@ -422,7 +523,7 @@ export default function OurStoryPage() {
                   &ldquo;
                 </span>
                 <p className="font-accent text-xl md:text-2xl italic text-white leading-relaxed relative z-10">
-                  The Mana from Heaven, just one day at a time, one piece of bread at a time.
+                  The Manna from Heaven, just one day at a time, one piece of bread at a time.&rdquo;
                 </p>
                 <cite className="block mt-5 font-body text-sm font-medium text-white/60 not-italic">
                   &mdash; Christin
@@ -430,125 +531,226 @@ export default function OurStoryPage() {
               </div>
             </FadeIn>
           </div>
+
+          <div className="mt-14 grid grid-cols-1 gap-9 md:mt-20 md:grid-cols-2 md:gap-7">
+            <FamilyPhoto
+              image={STORY_IMAGES.familyYounger}
+              label="The early years"
+              delay={0.08}
+            />
+            <FamilyPhoto
+              image={STORY_IMAGES.familyGrown}
+              label="Years later"
+              delay={0.24}
+              offset
+            />
+          </div>
+
+          <motion.div
+            initial={{
+              opacity: 0,
+              scale: 0.94,
+              clipPath: 'inset(18% 14% 18% 14% round 32px)',
+            }}
+            whileInView={{
+              opacity: 1,
+              scale: 1,
+              clipPath: 'inset(0% 0% 0% 0% round 32px)',
+            }}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{ duration: 0.95, delay: 0.12, ease: organic }}
+            className="relative mx-auto mt-14 max-w-3xl overflow-hidden rounded-[2rem] border border-brand-gold/30 bg-brand-forest-mid/60 px-6 py-9 text-center shadow-xl sm:px-10 md:mt-20 md:py-11"
+          >
+            <div className="absolute -top-12 left-1/2 h-28 w-64 -translate-x-1/2 rounded-full bg-brand-gold/[0.12] blur-3xl" />
+            <p className="relative mb-4 font-body text-[10px] font-semibold uppercase tracking-[3px] text-brand-gold">
+              Before the Bakery
+            </p>
+            <p className="relative font-accent text-xl italic leading-relaxed text-white sm:text-2xl md:text-[28px]">
+              The bakery would come later. First came six children, a home to
+              rebuild, and enough grace for one day at a time.
+            </p>
+            <div className="relative mx-auto mt-7 flex max-w-48 items-center gap-3">
+              <LineDraw className="h-px flex-1 bg-brand-gold/35" />
+              <span className="h-1.5 w-1.5 rounded-full bg-brand-gold/60" />
+              <LineDraw className="h-px flex-1 bg-brand-gold/35" delay={0.2} />
+            </div>
+          </motion.div>
         </div>
       </section>
 
       {/* ─── CHAPTER 5: FINDING HOME ─── */}
       <section className="py-16 md:py-24 bg-brand-forest-mid overflow-hidden">
-        <div className="max-w-6xl mx-auto px-5 sm:px-6 md:px-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-            {/* Image — couple B&W on dark background */}
-            <div className="lg:col-span-5 lg:order-1">
-              <StoryImage
-                src={STORY_IMAGES.couple.src}
-                alt={STORY_IMAGES.couple.alt}
-                side="left"
-                aspectRatio="aspect-[3/4]"
-                parallaxStrength={72}
-              />
-            </div>
+        <div className="max-w-3xl mx-auto px-5 sm:px-6 md:px-10">
+          <FadeIn>
+            <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-cognac-light mb-4">
+              Chapter Five
+            </p>
+            <h2 className="font-display text-3xl md:text-4xl font-medium text-white leading-tight mb-6">
+              Finding home
+            </h2>
+          </FadeIn>
 
-            {/* Text */}
-            <div className="lg:col-span-6 lg:order-2 lg:col-start-7">
-              <FadeIn>
-                <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-cognac-light mb-4">
-                  Chapter Five
-                </p>
-                <h2 className="font-display text-3xl md:text-4xl font-medium text-white leading-tight mb-6">
-                  Finding home
-                </h2>
-              </FadeIn>
+          <FadeIn delay={0.15}>
+            <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-5">
+              Through months of studying the Bible and long conversations with a
+              trusted Christian friend, Christin began to understand grace in a new
+              way. The faith of her childhood had taught her to connect God&apos;s
+              blessings to her obedience. Now she was discovering a love that did
+              not have to be earned.
+            </p>
+          </FadeIn>
 
-              <FadeIn delay={0.15}>
-                <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-5">
-                  Through months of studying the Bible on her own and deep conversations
-                  with a Christian friend, Christin came to a realization that changed
-                  everything: the teachings she had followed her whole life didn&apos;t
-                  align with the message of grace she was discovering in Scripture. Salvation
-                  wasn&apos;t a checklist. It wasn&apos;t earned. It was already finished.
-                </p>
-              </FadeIn>
+          <FadeIn delay={0.25}>
+            <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-5">
+              Following that conviction meant stepping beyond familiar traditions,
+              community, and an identity she had known since birth. It was tender
+              and costly, but a new church community met Christin and her children
+              with open arms and showed them what grace could look like in practice.
+            </p>
+          </FadeIn>
 
-              <FadeIn delay={0.25}>
-                <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-5">
-                  Leaving the Mormon church was one of the hardest decisions of her
-                  life&mdash;it meant leaving a community, a culture, and an identity
-                  she&apos;d known since birth. But on the other side of that door,
-                  she found something she never expected: a church that met her with
-                  open arms and no conditions. A community that showed her what grace
-                  looked like in practice, not just in theory.
-                </p>
-              </FadeIn>
+          <FadeIn delay={0.35}>
+            <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-6">
+              Christin&apos;s children each moved through the transition in their
+              own way. Together, the family learned to make room for honest questions
+              and new beginnings. In that church home, Christin began baking bread
+              for communion&mdash;a living symbol of daily provision and broken
+              things made whole.
+            </p>
+          </FadeIn>
 
-              <FadeIn delay={0.35}>
-                <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-6">
-                  Her children each responded to the transition in their own way, but
-                  together they navigated the unfamiliar terrain of a new faith with
-                  honesty and courage. And in this new church home, Christin found
-                  a beautiful calling: baking bread for the sacrament&mdash;a living
-                  symbol of daily provision, of broken things made whole.
-                </p>
-              </FadeIn>
+          <FadeIn delay={0.45}>
+            <LineDraw className="h-px w-16 bg-brand-gold/30 mb-8" />
+          </FadeIn>
 
-              <FadeIn delay={0.45}>
-                <LineDraw className="h-px w-16 bg-brand-gold/30 mb-8" />
-              </FadeIn>
-
-              <FadeIn delay={0.5}>
-                <p className="font-accent text-xl md:text-2xl italic text-brand-cognac-light leading-relaxed">
-                  &ldquo;It&apos;s been really humbling as I realize how much he&apos;s gone out of his way&mdash;just
-                  for me to know him and to know his love. The whole point is just Jesus.
-                  And him reaching me, rather than me having to strive for him&mdash;that was what the gospel is all about. So simple.&rdquo;
-                </p>
-              </FadeIn>
-            </div>
-          </div>
+          <FadeIn delay={0.5}>
+            <p className="font-accent text-xl md:text-2xl italic text-brand-cognac-light leading-relaxed">
+              &ldquo;It&apos;s been really humbling as I realize how much he&apos;s gone out of his way&mdash;just
+              for me to know him and to know his love. The whole point is just Jesus.
+              And him reaching me, rather than me having to strive for him&mdash;that was what the gospel is all about. So simple.&rdquo;
+            </p>
+          </FadeIn>
         </div>
       </section>
 
-      {/* ─── CHAPTER 6: MANNA ─── */}
-      <section className="py-16 md:py-24 px-5 sm:px-6 md:px-10">
+      <Divider />
+
+      {/* ─── CHAPTER 6: CHAD & THE DREAM ─── */}
+      <section className="py-10 md:py-16 px-5 sm:px-6 md:px-10">
         <div className="max-w-6xl mx-auto">
-          <div className="max-w-3xl mx-auto text-center">
+          <Chapter
+            image={STORY_IMAGES.couple}
+            imagePosition="left"
+            imageAspect="aspect-[3/4]"
+            imageParallaxStrength={72}
+          >
             <FadeIn>
               <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-4">
-                Today
+                Chapter Six
               </p>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium text-white leading-tight mb-8">
-                Bread from Heaven
+              <h2 className="font-display text-3xl md:text-4xl font-medium text-white leading-tight mb-6">
+                Then came Chad, and the dream grew
               </h2>
             </FadeIn>
 
             <FadeIn delay={0.15}>
               <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-5">
-                Manna Bakery was born from every broken road, every tear-stained
-                prayer, and every morning where provision arrived just in time.
-                When Christin kneads dough today, she&apos;s not just making bread.
-                She&apos;s living out the story that saved her&mdash;that God provides,
-                that grace is real, and that the best things in life are meant
-                to be shared.
+                Christin built the first chapters of Manna with faith, grit, and
+                the conviction that bread could become a language for love. Then
+                Chad entered the story, and a dream carried by one determined woman
+                became a partnership.
+              </p>
+            </FadeIn>
+
+            <FadeIn delay={0.25}>
+              <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-6">
+                Together, Christin and Chad shaped the next home for Manna&mdash;the
+                arches, timber, greenery, generous tables, and quiet corners that
+                make the bakery feel set apart. What they built carries both of
+                their fingerprints and welcomes every guest like family.
+              </p>
+            </FadeIn>
+
+            <FadeIn delay={0.35}>
+              <QuoteBlock
+                quote="I have a resilient sense of hope - like a beach ball in a swimming pool. I felt like everything was somehow going to be okay, over and over again."
+                attribution="Christin"
+                variant="bordered"
+              />
+            </FadeIn>
+          </Chapter>
+        </div>
+      </section>
+
+      <Divider />
+
+      {/* ─── CHAPTER 7: MANNA ─── */}
+      <section className="py-16 md:py-24 px-5 sm:px-6 md:px-10">
+        <div className="max-w-6xl mx-auto">
+          <div className="max-w-3xl mx-auto text-center">
+            <FadeIn>
+              <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-4">
+                Chapter Seven
+              </p>
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium text-white leading-tight mb-8">
+                The Manna you know now
+              </h2>
+            </FadeIn>
+
+            <FadeIn delay={0.15}>
+              <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-5">
+                For nearly five years, Manna&apos;s North Point location held the
+                beginnings&mdash;the regulars, recipes, and everyday moments that
+                proved a bakery could become part of a community&apos;s rhythm. That
+                first home still matters to the guests who gathered there.
               </p>
             </FadeIn>
 
             <FadeIn delay={0.25}>
               <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-5">
-                Every loaf, every pastry, every cup of coffee at Manna is an
-                invitation. An invitation to slow down. To gather. To break
-                bread with the people who matter. The bakery is a sanctuary&mdash;not
-                just because of the Jerusalem-inspired arches or the warm timber
-                beams, but because of the spirit of welcome that fills the space.
+                The Tomball location gave that story room to grow. This is where the
+                Manna people know now came into view: Jerusalem-inspired arches,
+                reclaimed timber, living green, and tables designed for lingering.
+                It is not only Christin&apos;s story. It is Manna&apos;s story, shaped
+                by family, community, and each person who walks through the door.
               </p>
             </FadeIn>
 
             <FadeIn delay={0.35}>
               <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8]">
-                Christin marvels at God&apos;s unconditional love. She marvels at
-                grace. And every single day, she shows up to do the only thing
-                she knows to do&mdash;break bread and share it with whoever walks
-                through the door.
+                Every loaf, every pastry, and every cup of coffee is an invitation
+                to slow down, gather, and break bread with the people who matter.
               </p>
             </FadeIn>
           </div>
+
+          <FadeIn delay={0.25}>
+            <div className="mt-12 grid grid-cols-2 gap-3 sm:mt-16 sm:gap-5 md:grid-cols-12">
+              {NEW_LOCATION_IMAGES.map((image, index) => (
+                <div
+                  key={image.src}
+                  className={`relative overflow-hidden rounded-2xl border border-brand-gold/15 shadow-xl ${
+                    index === 0
+                      ? 'col-span-2 aspect-[16/10] md:col-span-5 md:row-span-2 md:aspect-auto md:min-h-[520px]'
+                      : 'col-span-1 aspect-[4/5] md:col-span-7 md:aspect-[16/7]'
+                  }`}
+                >
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    className="object-cover"
+                    sizes={
+                      index === 0
+                        ? '(max-width: 768px) 100vw, 42vw'
+                        : '(max-width: 768px) 50vw, 58vw'
+                    }
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-brand-forest/25 via-transparent to-transparent" />
+                </div>
+              ))}
+            </div>
+          </FadeIn>
         </div>
       </section>
 
@@ -572,10 +774,10 @@ export default function OurStoryPage() {
           <FadeIn delay={0.2}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="/menu"
+                href="/contact"
                 className="inline-flex items-center justify-center px-7 py-3.5 min-h-[44px] w-full sm:w-auto bg-brand-gold text-brand-forest font-body text-sm font-medium rounded-lg hover:bg-brand-cognac-light transition-colors duration-300"
               >
-                View our menu
+                Plan a visit
               </a>
               <a
                 href="/contact"
