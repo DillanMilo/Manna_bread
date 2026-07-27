@@ -14,17 +14,17 @@ export const CONTACT = {
   },
   mapQuery: 'Manna+Bread+from+Heaven,+306+Commerce+St,+Tomball,+TX+77375',
   phone: '(832) 843-3999',
-  email: 'hello@mannabread.com',
+  email: 'support@mannabread.com',
   hours: {
-    weekdays: '6:00 AM – 2:00 PM',
-    saturday: '6:00 AM – 2:00 PM',
+    weekdays: '6:00 AM – 4:00 PM',
+    saturday: '6:00 AM – 4:00 PM',
     sunday: 'Closed',
   },
 };
 
 export const SOCIAL = {
-  instagram: 'https://instagram.com/mannabakery',
-  facebook: 'https://facebook.com/mannabakery',
+  instagram: 'https://www.instagram.com/manna_bakeries?igsh=am00OTF5cDB4aXAw',
+  facebook: 'https://www.facebook.com/share/18HD2Sg3WV/?mibextid=wwXIfr',
 };
 
 export const TOAST = {

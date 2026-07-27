@@ -1,31 +1,119 @@
 'use client';
 
+import Image from 'next/image';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
+import { useRef } from 'react';
 import { SectionHeader } from '@/components/ui/SectionHeader';
-import { MenuCard } from '@/components/ui/MenuCard';
 import { Button } from '@/components/ui/Button';
-import { FadeIn, StaggerContainer, StaggerItem } from '@/components/ui/Motion';
+import { FadeIn } from '@/components/ui/Motion';
 import { VineAccent } from '@/components/ui/ScrollVine';
+import { useMediaParallax } from '@/components/ui/useMediaParallax';
 
 const FEATURED_ITEMS = [
   {
-    title: 'Cappuccino',
-    description: 'Rich espresso folded with velvety steamed milk and a cloud of foam, finished warm and beautifully balanced.',
-    price: '$6.00',
     image: '/images/manna-latte-art.webp',
+    alt: 'Leaf-shaped latte art in a freshly poured cappuccino',
+    className: 'sm:col-span-7 md:col-span-5',
+    frameClassName: 'aspect-[4/5] rounded-[2.75rem_2.75rem_0.875rem_0.875rem]',
+    objectPosition: 'object-[center_42%]',
+    parallaxStrength: 26,
+    delay: 0,
+    tilt: -1.5,
   },
   {
-    title: 'Butter Croissant',
-    description: 'Flaky, golden layers of hand-folded buttery dough, baked fresh daily.',
-    price: '$6.00',
     image: '/images/manna-croissant-tray.webp',
+    alt: 'Trays of golden croissants cooling in Manna Bakery',
+    className: 'ml-8 sm:ml-0 sm:col-span-5 sm:mt-16 md:col-span-3 md:mt-20',
+    frameClassName: 'aspect-[3/4] rounded-[0.875rem_2.75rem_0.875rem_2.75rem]',
+    objectPosition: 'object-[center_48%]',
+    parallaxStrength: 34,
+    delay: 0.16,
+    tilt: 1.75,
   },
   {
-    title: 'Chocolate Danish',
-    description: 'Buttery puff pastry layered with rich chocolate filling, drizzled and finished by hand.',
-    price: '$7.00',
     image: '/images/manna-danish-prep.webp',
+    alt: 'Chocolate danishes being finished by hand in Manna Bakery',
+    className: 'mr-8 sm:mr-0 sm:col-span-7 sm:col-start-4 md:col-span-4 md:col-start-auto md:mt-7',
+    frameClassName: 'aspect-[4/5] rounded-[2.75rem_0.875rem_2.75rem_0.875rem]',
+    objectPosition: 'object-[center_48%]',
+    parallaxStrength: 22,
+    delay: 0.32,
+    tilt: -1,
   },
-];
+] as const;
+
+interface FoodTeaserImageProps {
+  image: string;
+  alt: string;
+  className: string;
+  frameClassName: string;
+  objectPosition: string;
+  parallaxStrength: number;
+  delay: number;
+  tilt: number;
+}
+
+function FoodTeaserImage({
+  image,
+  alt,
+  className,
+  frameClassName,
+  objectPosition,
+  parallaxStrength,
+  delay,
+  tilt,
+}: FoodTeaserImageProps) {
+  const frameRef = useRef<HTMLElement>(null);
+  const isInView = useInView(frameRef, { once: true, amount: 0.22 });
+  const prefersReducedMotion = useReducedMotion();
+  const imageY = useMediaParallax(frameRef, parallaxStrength);
+
+  return (
+    <motion.figure
+      ref={frameRef}
+      initial={{
+        opacity: 0,
+        y: prefersReducedMotion ? 0 : 54,
+        scale: prefersReducedMotion ? 1 : 0.96,
+        rotate: prefersReducedMotion ? 0 : tilt,
+      }}
+      animate={
+        isInView
+          ? { opacity: 1, y: 0, scale: 1, rotate: 0 }
+          : {
+              opacity: 0,
+              y: prefersReducedMotion ? 0 : 54,
+              scale: prefersReducedMotion ? 1 : 0.96,
+              rotate: prefersReducedMotion ? 0 : tilt,
+            }
+      }
+      transition={{
+        duration: prefersReducedMotion ? 0.2 : 0.9,
+        delay: prefersReducedMotion ? 0 : delay,
+        ease: [0.25, 0.4, 0.25, 1],
+      }}
+      className={className}
+    >
+      <div
+        className={`group relative isolate overflow-hidden border border-brand-gold/35 bg-brand-forest shadow-[0_24px_70px_rgba(24,38,31,0.32)] ${frameClassName}`}
+      >
+        <motion.div
+          style={{ y: imageY }}
+          className="absolute -inset-y-[8%] left-0 right-0 will-change-transform"
+        >
+          <Image
+            src={image}
+            alt={alt}
+            fill
+            sizes="(min-width: 1024px) 34vw, (min-width: 640px) 58vw, 88vw"
+            className={`object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.035] ${objectPosition}`}
+          />
+        </motion.div>
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-forest/20 via-transparent to-white/5" />
+      </div>
+    </motion.figure>
+  );
+}
 
 export function FeaturedMenu() {
   return (
@@ -42,16 +130,18 @@ export function FeaturedMenu() {
           />
         </FadeIn>
 
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8" staggerDelay={0.2}>
+        <div className="relative mt-10 grid grid-cols-1 items-start gap-5 sm:mt-14 sm:grid-cols-12 sm:gap-6 md:gap-7">
+          <div
+            aria-hidden="true"
+            className="absolute left-1/2 top-0 hidden h-px w-[72%] -translate-x-1/2 bg-gradient-to-r from-transparent via-brand-gold/35 to-transparent sm:block"
+          />
           {FEATURED_ITEMS.map((item) => (
-            <StaggerItem key={item.title}>
-              <MenuCard {...item} />
-            </StaggerItem>
+            <FoodTeaserImage key={item.image} {...item} />
           ))}
-        </StaggerContainer>
+        </div>
 
         <FadeIn delay={0.3}>
-          <div className="text-center mt-12">
+          <div className="mt-12 text-center sm:mt-14">
             <Button href="/menu" variant="primary" className="w-full sm:w-auto">
               Menu Coming Soon
             </Button>

@@ -15,12 +15,12 @@ const CAROUSEL_IMAGES = [
 
 const FEATURES = [
   {
-    icon: '/images/21EC4EE8-374D-42F1-96C4-5D40C388690F.png',
+    icon: '/images/manna-spider-plant-watercolor.png',
     title: 'Living Spaces',
     description: 'Abundant greenery and natural light create a calming, restorative atmosphere.',
   },
   {
-    icon: '/images/8A6B8ED0-5C73-4831-9F5B-4D78AB5DC0BB.png',
+    icon: '/images/manna-hammer-timber-watercolor.png',
     title: 'Reclaimed Beauty',
     description: 'Timber beams and handcrafted details tell a story in every corner.',
   },
@@ -31,7 +31,21 @@ const FEATURES = [
   },
 ];
 
-function FeatureCard({ icon, title, description, index }: { icon: string; title: string; description: string; index: number }) {
+interface FeatureCardProps {
+  icon: string;
+  iconClassName?: string;
+  title: string;
+  description: string;
+  index: number;
+}
+
+function FeatureCard({
+  icon,
+  iconClassName = '',
+  title,
+  description,
+  index,
+}: FeatureCardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
 
@@ -55,7 +69,13 @@ function FeatureCard({ icon, title, description, index }: { icon: string; title:
           damping: 12
         }}
       >
-        <Image src={icon} alt={title} width={80} height={80} className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20" />
+        <Image
+          src={icon}
+          alt={title}
+          width={80}
+          height={80}
+          className={`h-14 w-14 sm:h-16 sm:w-16 md:h-20 md:w-20 ${iconClassName}`}
+        />
       </motion.div>
       <h3 className="font-display text-lg sm:text-xl font-medium mb-2 sm:mb-3">{title}</h3>
       <p className="font-body text-base sm:text-sm md:text-base text-white/70 leading-relaxed max-w-xs mx-auto">{description}</p>

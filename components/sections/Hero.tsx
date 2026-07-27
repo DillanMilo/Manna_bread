@@ -102,7 +102,7 @@ export function Hero() {
               alt="Manna — Bread from Heaven"
               width={200}
               height={112}
-              className="h-20 sm:h-24 md:h-28 w-auto object-contain rounded-xl"
+              className="h-28 sm:h-32 md:h-36 lg:h-40 w-auto object-contain rounded-xl"
               priority
             />
           </motion.div>

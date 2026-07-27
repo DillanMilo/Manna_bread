@@ -1,6 +1,36 @@
 import Link from 'next/link';
 import { BRAND, CONTACT, SOCIAL, NAV_LINKS, TOAST } from '@/lib/constants';
 
+function InstagramIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      className="h-4 w-4"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+    >
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function FacebookIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      className="h-4 w-4"
+      fill="currentColor"
+    >
+      <path d="M13.8 22v-8h2.7l.4-3h-3.1v-1.9c0-.9.25-1.5 1.55-1.5H17V4.9c-.3-.04-1.3-.13-2.5-.13-2.48 0-4.18 1.51-4.18 4.3V11H7.5v3h2.82v8h3.48Z" />
+    </svg>
+  );
+}
+
 export function Footer() {
   return (
     <footer className="bg-brand-walnut text-white">
@@ -58,11 +88,27 @@ export function Footer() {
             </h5>
             <div className="flex flex-wrap items-start justify-between gap-x-6 gap-y-3 md:block">
               <div className="flex gap-5 md:flex-col md:gap-3">
-                <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" className="font-body text-sm text-white/80 hover:text-white transition-colors py-1 inline-block sm:py-1.5">
-                  Instagram
+                <a
+                  href={SOCIAL.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-2.5 py-1 font-body text-sm text-white/80 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-4 focus-visible:ring-offset-brand-walnut sm:py-1.5"
+                >
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full border border-brand-cognac/50 bg-white/[0.04] transition-all duration-300 group-hover:-translate-y-0.5 group-hover:border-brand-gold group-hover:bg-brand-gold/10">
+                    <InstagramIcon />
+                  </span>
+                  <span>Instagram</span>
                 </a>
-                <a href={SOCIAL.facebook} target="_blank" rel="noopener noreferrer" className="font-body text-sm text-white/80 hover:text-white transition-colors py-1 inline-block sm:py-1.5">
-                  Facebook
+                <a
+                  href={SOCIAL.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-2.5 py-1 font-body text-sm text-white/80 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-4 focus-visible:ring-offset-brand-walnut sm:py-1.5"
+                >
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full border border-brand-cognac/50 bg-white/[0.04] transition-all duration-300 group-hover:-translate-y-0.5 group-hover:border-brand-gold group-hover:bg-brand-gold/10">
+                    <FacebookIcon />
+                  </span>
+                  <span>Facebook</span>
                 </a>
               </div>
               <div className="md:mt-6">

@@ -28,7 +28,11 @@ interface CateringCategory {
   description: string;
   sizes: TraySize[];
   items: CateringItem[];
-  subsections?: { label: string; items: CateringItem[] }[];
+  subsections?: {
+    label: string;
+    description?: string;
+    items: CateringItem[];
+  }[];
 }
 
 interface DrinkItem {
@@ -47,16 +51,16 @@ interface SaladItem {
 const PASTRY_TRAYS: CateringCategory = {
   id: 'pastry-trays',
   title: 'Pastry Trays',
-  description: 'Trays include one dozen Manna pastries. Up to two flavor selections per tray.',
+  description: 'Trays include one dozen Manna pastries. Up to two selections per tray.',
   sizes: [
-    { name: 'Mini', detail: '2-3 flavors', price: '$30' },
-    { name: 'Medium', detail: '4-5 flavors', price: '$40' },
-    { name: 'Full Size', detail: '7-10 flavors', price: '$60' },
+    { name: 'Mini', detail: '2-3 bites', price: '$30' },
+    { name: 'Medium', detail: '4-5 bites', price: '$40' },
+    { name: 'Full Size', detail: '7-10 bites', price: '$60' },
   ],
   items: [],
   subsections: [
     {
-      label: 'Sweet',
+      label: 'Sweet Selections',
       items: [
         { name: 'Almond Danish' },
         { name: 'Cinnamon Roll' },
@@ -70,10 +74,9 @@ const PASTRY_TRAYS: CateringCategory = {
       ],
     },
     {
-      label: 'Savory',
+      label: 'Savory Selections',
       items: [
         { name: 'Croissant' },
-        { name: 'Cheese Stick' },
         { name: 'Assorted Kolache' },
         { name: 'Assorted Strata' },
       ],
@@ -86,13 +89,11 @@ const SANDWICH_PLATTERS: CateringCategory = {
   title: 'Sandwich Platters',
   description: 'Platters include one dozen sandwiches. Up to two selections per tray.',
   sizes: [
-    { name: 'Mini', price: '$30' },
-    { name: 'Medium', price: '$40' },
-    { name: 'Full Size', price: '$60' },
+    { name: 'Mini', detail: 'Cut into quarters', price: '$30' },
+    { name: 'Medium', detail: 'Cut in half', price: '$40' },
+    { name: 'Full Size', detail: 'Full sandwiches', price: '$60' },
   ],
-  items: [
-    { name: 'Chicken Salad Croissant', note: 'Available on Sourdough' },
-  ],
+  items: [],
   subsections: [
     {
       label: 'Grilled Paninis',
@@ -102,12 +103,16 @@ const SANDWICH_PLATTERS: CateringCategory = {
         { name: 'Grilled Cheese' },
       ],
     },
+    {
+      label: 'Chicken Salad Sandwich',
+      description: 'Available on a croissant or sourdough.',
+      items: [],
+    },
   ],
 };
 
 const COFFEE_DRINKS: DrinkItem[] = [
-  { name: 'Espresso Drinks', price: 'Open tab' },
-  { name: 'Bar Drinks', price: '$5' },
+  { name: 'Espresso Drinks (Open Tab)', price: '$5 small · $6 large', note: 'Per cup' },
   { name: 'Hot Chocolate', price: '$5' },
   { name: 'House Drip', price: '$3 per person', note: 'Refills Included' },
   { name: 'Iced Tea', price: '$3 per person', note: 'Refills Included' },
@@ -123,11 +128,11 @@ const FRUIT_VEG_SIZES: TraySize[] = [
   { name: 'Large', detail: 'Serves 18-25', price: '$95' },
 ];
 
-const FRUIT_VEG_ITEMS: CateringItem[] = [
-  { name: 'Fruit Tray', note: 'Assorted seasonal fruits' },
-  { name: 'Vegetable Tray', note: 'Assorted seasonal vegetables & ranch dressing' },
-  { name: 'Fruit Bowl', note: 'Manna’s fresh fruit variety, cut and served in style' },
-];
+const FRUIT_BOWL = {
+  name: 'Fruit Bowl',
+  note: 'Manna’s fresh fruit variety, cut and served in style.',
+  price: 'Price available upon request',
+} as const;
 
 const SALAD_SIZES: TraySize[] = [
   { name: 'Small', detail: 'Serves 8-12', price: '$45' },
@@ -158,7 +163,6 @@ const SOUP_FLAVORS: string[] = [
   'Chicken Tortilla',
   'Chophouse Potato',
   'Beef & Barley',
-  'Poblano Pepper',
   'Zuppa Toscana',
 ];
 
@@ -461,10 +465,17 @@ export default function CateringPage() {
                 <h3 className="font-body text-sm font-semibold tracking-[1.5px] uppercase text-white mb-4">
                   {sub.label}
                 </h3>
+                {sub.description && (
+                  <p className="font-body text-sm text-white/70 leading-relaxed">
+                    {sub.description}
+                  </p>
+                )}
               </FadeIn>
-              <FadeIn delay={0.1}>
-                <ItemGrid items={sub.items} />
-              </FadeIn>
+              {sub.items.length > 0 && (
+                <FadeIn delay={0.1}>
+                  <ItemGrid items={sub.items} />
+                </FadeIn>
+              )}
             </div>
           ))}
         </div>
@@ -532,10 +543,17 @@ export default function CateringPage() {
                 <h3 className="font-body text-sm font-semibold tracking-[1.5px] uppercase text-white mb-4">
                   {sub.label}
                 </h3>
+                {sub.description && (
+                  <p className="font-body text-sm text-white/70 leading-relaxed">
+                    {sub.description}
+                  </p>
+                )}
               </FadeIn>
-              <FadeIn delay={0.1}>
-                <ItemGrid items={sub.items} />
-              </FadeIn>
+              {sub.items.length > 0 && (
+                <FadeIn delay={0.1}>
+                  <ItemGrid items={sub.items} />
+                </FadeIn>
+              )}
             </div>
           ))}
         </div>
@@ -552,7 +570,7 @@ export default function CateringPage() {
               Coffee & Drinks
             </h2>
             <p className="font-body text-base text-white/70 leading-relaxed mb-10">
-              $50 minimum for beverage catering orders.
+              $50 personal barista fee for live beverage service.
             </p>
           </FadeIn>
 
@@ -629,22 +647,24 @@ export default function CateringPage() {
             <PricingCards sizes={FRUIT_VEG_SIZES} />
           </FadeIn>
 
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {FRUIT_VEG_ITEMS.map((item) => (
-              <StaggerItem key={item.name}>
-                <div className="bg-brand-forest-mid rounded-2xl p-6 border border-white/10">
-                  <p className="font-body text-[15px] font-semibold text-white mb-2">
-                    {item.name}
-                  </p>
-                  {item.note && (
-                    <p className="font-body text-sm text-white/70 leading-relaxed">
-                      {item.note}
-                    </p>
-                  )}
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+          <FadeIn delay={0.25}>
+            <div className="rounded-2xl border border-brand-gold/25 bg-brand-forest-mid p-6 sm:p-8 shadow-sm sm:flex sm:items-center sm:justify-between sm:gap-8">
+              <div>
+                <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-2">
+                  Individual Selection
+                </p>
+                <h3 className="font-display text-2xl text-white mb-2">
+                  {FRUIT_BOWL.name}
+                </h3>
+                <p className="font-body text-sm text-white/70 leading-relaxed">
+                  {FRUIT_BOWL.note}
+                </p>
+              </div>
+              <p className="mt-5 sm:mt-0 font-accent italic text-base text-brand-gold sm:text-right sm:whitespace-nowrap">
+                {FRUIT_BOWL.price}
+              </p>
+            </div>
+          </FadeIn>
         </div>
       </section>
 

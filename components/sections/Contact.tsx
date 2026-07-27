@@ -106,7 +106,7 @@ export function Contact() {
               </div>
             </div>
             {/* Caption beneath */}
-            <p className="text-center font-accent text-xs sm:text-sm italic text-white/60 mt-3 sm:mt-4">
+            <p className="mt-3 text-center font-accent text-base italic tracking-[0.01em] text-white/70 sm:mt-4 sm:text-lg">
               306 Commerce St, Tomball TX 77375
             </p>
           </FadeIn>

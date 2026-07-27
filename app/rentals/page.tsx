@@ -297,15 +297,6 @@ export default function RentalsPage() {
                 </p>
               </FadeIn>
 
-              <FadeIn delay={0.2}>
-                <p className="font-body text-sm text-white/70 leading-[1.7] mb-6">
-                  Outside food, promotional materials, and solicitation to Manna
-                  customers are not permitted during conference room rentals unless
-                  authorized by Manna staff. All activities should align with Manna
-                  Bread From Heaven&apos;s welcoming and peaceful environment.
-                </p>
-              </FadeIn>
-
               <FadeIn delay={0.25}>
                 <div className="space-y-2 mb-6">
                   <DetailItem label="Availability" value="Monday - Saturday" />
@@ -337,9 +328,16 @@ export default function RentalsPage() {
                 </div>
                 <div className="mt-4 rounded-xl border-l-4 border-brand-gold bg-brand-forest/45 px-4 py-3">
                   <p className="font-body text-sm leading-relaxed text-white/85">
-                    Saturday reservations are available in 2-hour increments only.
+                    To make room for everyone, Saturday reservations are limited to
+                    one two-hour time block per group.
                   </p>
                 </div>
+                <p className="mt-4 px-1 font-body text-xs leading-[1.7] text-white/55">
+                  Please note: Outside food, promotional materials, and solicitation
+                  to Manna customers are not permitted during conference room rentals
+                  unless authorized by Manna staff. All activities should align with
+                  Manna Bread From Heaven&apos;s welcoming and peaceful environment.
+                </p>
               </FadeIn>
             </div>
 
@@ -393,10 +391,10 @@ export default function RentalsPage() {
 
               <FadeIn delay={0.15}>
                 <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-6">
-                  After 2pm the doors close to the public, the lights soften, and
-                  Manna becomes a private space for receptions, rehearsal dinners,
-                  showers, milestone parties, and the gatherings that deserve a
-                  little more room to breathe.
+                  Once the doors close to the public, the lights soften, and Manna
+                  becomes a private space for receptions, rehearsal dinners, showers,
+                  milestone parties, and the gatherings that deserve a little more
+                  room to breathe.
                 </p>
               </FadeIn>
 
@@ -404,7 +402,7 @@ export default function RentalsPage() {
                 <div className="space-y-2 mb-6">
                   <DetailItem
                     label="Availability"
-                    value="Monday - Saturday, beginning at 2pm"
+                    value="Monday - Saturday, beginning at 4pm"
                   />
                   <DetailItem
                     label="Cleaning fee"
@@ -421,24 +419,6 @@ export default function RentalsPage() {
             staggerDelay={0.12}
           >
             <StaggerItem>
-              <div className="bg-brand-forest-mid/60 rounded-2xl p-5 sm:p-8 border border-brand-gold/30 shadow-sm h-full">
-                <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-3">
-                  Friday &amp; Saturday
-                </p>
-                <p className="font-display text-4xl sm:text-6xl text-brand-gold leading-none mb-2">
-                  $295
-                </p>
-                <p className="font-body text-sm text-white/70 mb-4">
-                  per hour, at or after 2pm
-                </p>
-                <p className="font-body text-sm text-white/60 leading-relaxed">
-                  Manna&apos;s weekend evening rate &mdash; the most-requested window for
-                  receptions and celebrations.
-                </p>
-              </div>
-            </StaggerItem>
-
-            <StaggerItem>
               <div className="bg-brand-forest-mid/60 rounded-2xl p-5 sm:p-8 border border-white/10 shadow-sm h-full">
                 <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-3">
                   Monday &ndash; Thursday
@@ -447,11 +427,29 @@ export default function RentalsPage() {
                   $195
                 </p>
                 <p className="font-body text-sm text-white/70 mb-4">
-                  per hour, at or after 2pm
+                  per hour, at or after 4pm
                 </p>
                 <p className="font-body text-sm text-white/60 leading-relaxed">
                   A quieter weeknight rate for showers, dinners, and gatherings
                   that don&apos;t need a Saturday.
+                </p>
+              </div>
+            </StaggerItem>
+
+            <StaggerItem>
+              <div className="bg-brand-forest-mid/60 rounded-2xl p-5 sm:p-8 border border-brand-gold/30 shadow-sm h-full">
+                <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-3">
+                  Friday &amp; Saturday
+                </p>
+                <p className="font-display text-4xl sm:text-6xl text-brand-gold leading-none mb-2">
+                  $295
+                </p>
+                <p className="font-body text-sm text-white/70 mb-4">
+                  per hour, at or after 4pm
+                </p>
+                <p className="font-body text-sm text-white/60 leading-relaxed">
+                  Manna&apos;s weekend evening rate &mdash; the most-requested window for
+                  receptions and celebrations.
                 </p>
               </div>
             </StaggerItem>
@@ -537,6 +535,12 @@ export default function RentalsPage() {
               <h2 className="font-display text-3xl md:text-4xl font-medium text-white leading-tight">
                 Everything the building has to offer.
               </h2>
+              <p className="mx-auto mt-5 max-w-2xl font-body text-base leading-[1.8] text-white/70">
+                Manna is already thoughtfully styled and ready to welcome your
+                guests. With the furnishings and essentials in place, you can simply
+                bring your people &mdash; for a work gathering, Bible study,
+                celebration, or an easy evening together.
+              </p>
             </FadeIn>
           </div>
 
@@ -602,7 +606,7 @@ export default function RentalsPage() {
             <StaggerItem>
               <IncludedCard
                 title="Ambient Music"
-                description="Manna's house playlist runs during your event. Custom playlists or volume changes - just run them by us first."
+                description="Manna's house playlist runs during your event. Custom playlists or volume changes are available — just run them by us first."
                 icon={
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 9l10.5-3m0 6.553v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 1 1-.99-3.467l2.31-.66a2.25 2.25 0 0 0 1.632-2.163Zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 0 1-.99-3.467l2.31-.66A2.25 2.25 0 0 0 9 15.553Z" />
