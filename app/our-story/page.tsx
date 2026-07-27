@@ -50,6 +50,25 @@ const CHAD_STORY_IMAGES = [
   STORY_IMAGES.couple,
 ] as const;
 
+const KENYA_STORY_IMAGES = [
+  {
+    src: '/images/christin-kenya-gift.webp',
+    alt: 'Christin sharing a handmade bag with a woman in Kenya',
+  },
+  {
+    src: '/images/christin-kenya-community.webp',
+    alt: 'Christin and her son gathered with friends in Kenya',
+  },
+  {
+    src: '/images/christin-kenya-family.webp',
+    alt: 'Christin gathered with a family and community in Kenya',
+  },
+  {
+    src: '/images/christin-kenya-yard.webp',
+    alt: 'Christin walking through a family home in Kenya',
+  },
+] as const;
+
 const NEW_LOCATION_IMAGES = [
   {
     src: '/images/manna-front-entry.webp',
@@ -106,6 +125,7 @@ function ChadPhotoDeck() {
 
     return () => {
       clearInterval(interval);
+      shufflingRef.current = false;
       if (zIndexTimerRef.current) {
         clearTimeout(zIndexTimerRef.current);
       }
@@ -162,23 +182,93 @@ function ChadPhotoDeck() {
               }}
               className="absolute inset-0 overflow-hidden rounded-2xl"
             >
-              <motion.span
-                style={{ y: imageY }}
-                className="absolute -inset-y-[5%] left-0 right-0 will-change-transform"
-              >
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              </motion.span>
+              <span className="relative block h-full w-full overflow-hidden">
+                <motion.span
+                  style={{ y: imageY }}
+                  className="absolute -inset-y-[5%] left-0 right-0 will-change-transform"
+                >
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </motion.span>
+              </span>
             </motion.span>
           );
         })}
       </span>
     </motion.button>
+  );
+}
+
+function KenyaPhotoCollage() {
+  const layouts = [
+    {
+      className:
+        'left-[1%] top-[13%] z-30 w-[38%] sm:left-[3%] sm:top-[12%] sm:w-[29%] md:w-[25%]',
+      aspect: 'aspect-[9/16]',
+      rotate: -5,
+    },
+    {
+      className:
+        'right-[0%] top-[1%] z-10 w-[68%] sm:right-[12%] sm:w-[55%] md:right-[17%] md:w-[48%]',
+      aspect: 'aspect-video',
+      rotate: 4,
+    },
+    {
+      className:
+        'right-[1%] top-[39%] z-20 w-[66%] sm:right-[0%] sm:top-[35%] sm:w-[50%] md:right-[1%] md:top-[34%] md:w-[42%]',
+      aspect: 'aspect-video',
+      rotate: 6,
+    },
+    {
+      className:
+        'bottom-[1%] left-[14%] z-40 w-[67%] sm:left-[26%] sm:w-[53%] md:left-[29%] md:w-[43%]',
+      aspect: 'aspect-video',
+      rotate: -3,
+    },
+  ] as const;
+
+  return (
+    <div
+      className="relative mx-auto h-[390px] w-full max-w-[360px] sm:h-[430px] sm:max-w-[620px] md:h-[500px] md:max-w-[860px]"
+      aria-label="Photographs from Christin's time in Kenya"
+    >
+      {KENYA_STORY_IMAGES.map((image, index) => {
+        const layout = layouts[index];
+
+        return (
+          <motion.figure
+            key={image.src}
+            initial={{ opacity: 0, y: 28, rotate: layout.rotate * 0.35 }}
+            whileInView={{ opacity: 1, y: 0, rotate: layout.rotate }}
+            whileHover={{ y: -8, scale: 1.025, zIndex: 50 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{
+              duration: 0.75,
+              delay: index * 0.12,
+              ease: organic,
+            }}
+            className={`absolute ${layout.aspect} ${layout.className} overflow-hidden rounded-xl border border-brand-gold/35 bg-brand-forest shadow-2xl will-change-transform`}
+          >
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              className="object-cover"
+              sizes={
+                index === 0
+                  ? '(max-width: 640px) 38vw, 220px'
+                  : '(max-width: 640px) 68vw, 420px'
+              }
+            />
+          </motion.figure>
+        );
+      })}
+    </div>
   );
 }
 
@@ -562,14 +652,9 @@ export default function OurStoryPage() {
       </section>
 
       {/* ─── CHAPTER 3: ACROSS THE WORLD ─── */}
-      <section className="py-16 md:py-20 px-5 sm:px-6 md:px-10">
+      <section id="kenya" className="scroll-mt-24 py-16 md:py-20 px-5 sm:px-6 md:px-10">
         <div className="max-w-6xl mx-auto">
-          <Chapter
-            image={STORY_IMAGES.journey}
-            imagePosition="left"
-            imageAspect="aspect-[4/5]"
-            imageParallaxStrength={72}
-          >
+          <div className="max-w-3xl mx-auto">
             <FadeIn>
               <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-4">
                 Chapter Three
@@ -605,7 +690,11 @@ export default function OurStoryPage() {
                 a deeper understanding arriving one step at a time.
               </p>
             </FadeIn>
-          </Chapter>
+          </div>
+
+          <div className="mt-10 sm:mt-12 md:mt-14">
+            <KenyaPhotoCollage />
+          </div>
         </div>
       </section>
 
