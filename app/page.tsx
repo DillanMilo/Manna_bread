@@ -1,5 +1,6 @@
 import { Hero } from '@/components/sections/Hero';
 import { Story } from '@/components/sections/Story';
+import { WelcomeInterlude } from '@/components/sections/WelcomeInterlude';
 import { FeaturedMenu } from '@/components/sections/FeaturedMenu';
 
 import { KeywordCarousel } from '@/components/sections/KeywordCarousel';
@@ -14,6 +15,7 @@ export default function HomePage() {
     <main>
       <Hero />
       <Story />
+      <WelcomeInterlude />
       <FeaturedMenu />
       <KeywordCarousel />
       <Experience />

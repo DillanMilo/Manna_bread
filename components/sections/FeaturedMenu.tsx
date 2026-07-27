@@ -13,8 +13,9 @@ const FEATURED_ITEMS = [
   {
     image: '/images/manna-latte-art.webp',
     alt: 'Leaf-shaped latte art in a freshly poured cappuccino',
-    className: 'sm:col-span-7 md:col-span-5',
-    frameClassName: 'aspect-[4/5] rounded-[2.75rem_2.75rem_0.875rem_0.875rem]',
+    className: 'relative z-10 mr-auto w-[78%] sm:col-span-7 sm:mr-0 sm:w-auto md:col-span-5',
+    frameClassName: 'aspect-[5/4] sm:aspect-[4/5] rounded-[2.75rem_2.75rem_0.875rem_0.875rem]',
+    mobileTilt: '-rotate-2 sm:rotate-0',
     objectPosition: 'object-[center_42%]',
     parallaxStrength: 26,
     delay: 0,
@@ -23,8 +24,9 @@ const FEATURED_ITEMS = [
   {
     image: '/images/manna-croissant-tray.webp',
     alt: 'Trays of golden croissants cooling in Manna Bakery',
-    className: 'ml-8 sm:ml-0 sm:col-span-5 sm:mt-16 md:col-span-3 md:mt-20',
-    frameClassName: 'aspect-[3/4] rounded-[0.875rem_2.75rem_0.875rem_2.75rem]',
+    className: 'relative z-20 -mt-20 ml-auto w-[68%] sm:col-span-5 sm:ml-0 sm:mt-16 sm:w-auto md:col-span-3 md:mt-20',
+    frameClassName: 'aspect-[6/5] sm:aspect-[3/4] rounded-[0.875rem_2.75rem_0.875rem_2.75rem]',
+    mobileTilt: 'rotate-[2.5deg] sm:rotate-0',
     objectPosition: 'object-[center_48%]',
     parallaxStrength: 34,
     delay: 0.16,
@@ -33,8 +35,9 @@ const FEATURED_ITEMS = [
   {
     image: '/images/manna-danish-prep.webp',
     alt: 'Chocolate danishes being finished by hand in Manna Bakery',
-    className: 'mr-8 sm:mr-0 sm:col-span-7 sm:col-start-4 md:col-span-4 md:col-start-auto md:mt-7',
-    frameClassName: 'aspect-[4/5] rounded-[2.75rem_0.875rem_2.75rem_0.875rem]',
+    className: 'relative z-30 -mt-16 ml-7 mr-auto w-[72%] sm:col-span-7 sm:col-start-4 sm:ml-0 sm:mr-0 sm:mt-0 sm:w-auto md:col-span-4 md:col-start-auto md:mt-7',
+    frameClassName: 'aspect-[5/4] sm:aspect-[4/5] rounded-[2.75rem_0.875rem_2.75rem_0.875rem]',
+    mobileTilt: '-rotate-[1.5deg] sm:rotate-0',
     objectPosition: 'object-[center_48%]',
     parallaxStrength: 22,
     delay: 0.32,
@@ -47,6 +50,7 @@ interface FoodTeaserImageProps {
   alt: string;
   className: string;
   frameClassName: string;
+  mobileTilt: string;
   objectPosition: string;
   parallaxStrength: number;
   delay: number;
@@ -58,6 +62,7 @@ function FoodTeaserImage({
   alt,
   className,
   frameClassName,
+  mobileTilt,
   objectPosition,
   parallaxStrength,
   delay,
@@ -95,7 +100,7 @@ function FoodTeaserImage({
       className={className}
     >
       <div
-        className={`group relative isolate overflow-hidden border border-brand-gold/35 bg-brand-forest shadow-[0_24px_70px_rgba(24,38,31,0.32)] ${frameClassName}`}
+        className={`group relative isolate overflow-hidden border border-brand-gold/45 bg-brand-forest shadow-[0_24px_70px_rgba(24,38,31,0.42)] ring-4 ring-brand-soft-cream/[0.06] transition-transform duration-700 ${mobileTilt} ${frameClassName}`}
       >
         <motion.div
           style={{ y: imageY }}
@@ -130,7 +135,7 @@ export function FeaturedMenu() {
           />
         </FadeIn>
 
-        <div className="relative mt-10 grid grid-cols-1 items-start gap-5 sm:mt-14 sm:grid-cols-12 sm:gap-6 md:gap-7">
+        <div className="relative mx-auto mt-10 grid max-w-md grid-cols-1 items-start gap-0 px-2 sm:mt-14 sm:max-w-none sm:grid-cols-12 sm:gap-6 sm:px-0 md:gap-7">
           <div
             aria-hidden="true"
             className="absolute left-1/2 top-0 hidden h-px w-[72%] -translate-x-1/2 bg-gradient-to-r from-transparent via-brand-gold/35 to-transparent sm:block"

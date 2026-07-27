@@ -6,6 +6,7 @@ import {
   MotionValue,
   useReducedMotion,
   useScroll,
+  useSpring,
   useTransform,
 } from "framer-motion";
 import { useMobilePerformanceMode } from "@/components/ui/useMobilePerformanceMode";
@@ -17,6 +18,10 @@ type ScrollVineProps = {
 
 type VineAccentProps = {
   variant?: "left" | "right" | "low";
+  className?: string;
+};
+
+type CardVineProps = {
   className?: string;
 };
 
@@ -283,6 +288,122 @@ export function VineAccent({ variant = "right", className = "" }: VineAccentProp
         <motion.g style={leafStyle} className="fill-none stroke-brand-sage-light/22">
           <Leaf d={isLeft ? "M224 266 C252 252 274 262 284 292 C254 302 234 292 224 266Z" : "M676 266 C648 252 626 262 616 292 C646 302 666 292 676 266Z"} />
           <Leaf d={isLeft ? "M342 480 C316 466 306 442 320 416 C346 430 356 454 342 480Z" : "M558 480 C584 466 594 442 580 416 C554 430 544 454 558 480Z"} />
+        </motion.g>
+      </motion.svg>
+    </div>
+  );
+}
+
+export function CardVine({ className = "" }: CardVineProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 88%", "end 30%"],
+  });
+
+  const rawDraw = useTransform(scrollYProgress, [0.02, 0.82], [0, 1]);
+  const rawBranchDraw = useTransform(scrollYProgress, [0.16, 0.72], [0, 1]);
+  const draw = useSpring(rawDraw, {
+    stiffness: 105,
+    damping: 28,
+    mass: 0.3,
+  });
+  const branchDraw = useSpring(rawBranchDraw, {
+    stiffness: 95,
+    damping: 26,
+    mass: 0.3,
+  });
+  const leafOpacity = useTransform(
+    scrollYProgress,
+    [0.12, 0.34, 0.78],
+    [0, 0.48, 0.78],
+  );
+
+  const vineStyle = prefersReducedMotion ? { pathLength: 1 } : { pathLength: draw };
+  const branchStyle = prefersReducedMotion
+    ? { pathLength: 1 }
+    : { pathLength: branchDraw };
+  const leafStyle = prefersReducedMotion
+    ? { opacity: 0.68 }
+    : { opacity: leafOpacity };
+
+  return (
+    <div
+      ref={ref}
+      data-card-vine
+      aria-hidden="true"
+      className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}
+    >
+      <motion.svg
+        viewBox="0 0 390 920"
+        preserveAspectRatio="none"
+        className="absolute inset-0 h-full w-full md:hidden"
+      >
+        <VineTexture />
+        <motion.path
+          d="M72 900 C38 900 18 878 18 840 L18 116 C18 54 62 18 124 18 L266 18 C328 18 372 54 372 116 L372 826 C372 874 338 900 288 900 L72 900"
+          style={vineStyle}
+          className="stroke-brand-gold/80 drop-shadow-[0_0_7px_rgba(201,168,76,0.3)]"
+          strokeWidth="2.35"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
+        />
+        <motion.g
+          style={branchStyle}
+          className="fill-none stroke-brand-gold/65"
+        >
+          <path d="M18 292 C42 280 62 264 76 240" strokeWidth="1.45" vectorEffect="non-scaling-stroke" />
+          <path d="M180 18 C194 46 214 64 240 76" strokeWidth="1.45" vectorEffect="non-scaling-stroke" />
+          <path d="M372 512 C346 500 326 482 312 458" strokeWidth="1.45" vectorEffect="non-scaling-stroke" />
+          <path d="M260 900 C246 872 224 854 198 842" strokeWidth="1.45" vectorEffect="non-scaling-stroke" />
+        </motion.g>
+        <motion.g
+          style={leafStyle}
+          className="fill-brand-forest/35 stroke-brand-sage-light/90"
+        >
+          <Leaf d="M76 240 C92 222 110 222 124 238 C108 254 90 254 76 240Z" />
+          <Leaf d="M240 76 C258 62 276 66 286 84 C266 96 250 92 240 76Z" />
+          <Leaf d="M312 458 C294 444 276 448 266 466 C286 478 302 474 312 458Z" />
+          <Leaf d="M198 842 C180 828 162 832 152 850 C172 862 188 858 198 842Z" />
+        </motion.g>
+      </motion.svg>
+
+      <motion.svg
+        viewBox="0 0 1200 640"
+        preserveAspectRatio="none"
+        className="absolute inset-0 hidden h-full w-full md:block"
+      >
+        <VineTexture />
+        <motion.path
+          d="M92 620 C44 620 18 594 18 548 L18 124 C18 56 76 18 154 18 L1046 18 C1124 18 1182 56 1182 124 L1182 536 C1182 590 1142 620 1082 620 L92 620"
+          style={vineStyle}
+          className="stroke-brand-gold/80 drop-shadow-[0_0_8px_rgba(201,168,76,0.32)]"
+          strokeWidth="2.4"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
+        />
+        <motion.g
+          style={branchStyle}
+          className="fill-none stroke-brand-gold/65"
+        >
+          <path d="M18 274 C54 258 84 236 106 208" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+          <path d="M326 18 C344 46 370 66 404 78" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+          <path d="M1182 330 C1146 314 1116 292 1094 264" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+          <path d="M806 620 C788 590 762 570 728 558" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+        </motion.g>
+        <motion.g
+          style={leafStyle}
+          className="fill-brand-forest/35 stroke-brand-sage-light/90"
+        >
+          <Leaf d="M106 208 C130 188 154 192 168 214 C142 230 120 226 106 208Z" />
+          <Leaf d="M404 78 C430 62 454 70 466 94 C438 106 416 100 404 78Z" />
+          <Leaf d="M1094 264 C1070 244 1046 248 1032 270 C1058 286 1080 282 1094 264Z" />
+          <Leaf d="M728 558 C702 542 678 550 666 574 C694 586 716 580 728 558Z" />
         </motion.g>
       </motion.svg>
     </div>
