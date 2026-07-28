@@ -2,6 +2,7 @@
 
 import { CalendarDays, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
+import { trackEvent } from '@/lib/analytics';
 
 type InquiryType = 'catering' | 'rentals' | 'general';
 type FieldName =
@@ -215,6 +216,7 @@ export function InquiryForm({
   const [status, setStatus] = useState<FormStatus>('idle');
   const [error, setError] = useState('');
   const [startedAt] = useState(() => String(Date.now()));
+  const hasTrackedStart = useRef(false);
   const content = formContent[defaultType];
   const fields = [...sharedFields, ...content.fields];
 
@@ -255,10 +257,18 @@ export function InquiryForm({
 
       setStatus('success');
       form.reset();
+      trackEvent('generate_lead', {
+        lead_type: defaultType,
+        form_source: source,
+      });
       onSuccess?.();
     } catch (err) {
       setStatus('error');
       setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
+      trackEvent('inquiry_error', {
+        lead_type: defaultType,
+        form_source: source,
+      });
     }
   }
 
@@ -281,7 +291,21 @@ export function InquiryForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className={compact ? 'space-y-3' : 'space-y-4'}>
+    <form
+      onSubmit={handleSubmit}
+      onFocusCapture={() => {
+        if (hasTrackedStart.current) {
+          return;
+        }
+
+        hasTrackedStart.current = true;
+        trackEvent('form_start', {
+          lead_type: defaultType,
+          form_source: source,
+        });
+      }}
+      className={compact ? 'space-y-3' : 'space-y-4'}
+    >
       <input type="hidden" name="source" value={source} />
       <input type="hidden" name="inquiryType" value={defaultType} />
       <input type="hidden" name="startedAt" value={startedAt} />

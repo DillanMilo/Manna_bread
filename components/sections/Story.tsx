@@ -74,6 +74,7 @@ export function Story() {
               <div className="relative rounded-t-[3rem] sm:rounded-t-[4rem] rounded-b-xl overflow-hidden shadow-2xl border border-brand-gold/20">
                 <video
                   ref={videoRef}
+                  data-analytics-video="Christin's Manna Story"
                   muted
                   playsInline
                   controls

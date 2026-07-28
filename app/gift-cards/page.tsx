@@ -1,6 +1,15 @@
+import type { Metadata } from 'next';
 import { Button } from '@/components/ui/Button';
 import { GiftCardVine } from '@/components/ui/ScrollVine';
 import { TOAST } from '@/lib/constants';
+import { createPageMetadata } from '@/lib/seo';
+
+export const metadata: Metadata = createPageMetadata({
+  title: 'Gift Cards | Manna Bakery',
+  description:
+    'Give the gift of Manna Bakery with a digital gift card for handcrafted food, warm hospitality, and time together.',
+  path: '/gift-cards',
+});
 
 export default function GiftCardsPage() {
   return (

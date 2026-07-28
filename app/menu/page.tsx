@@ -2,12 +2,14 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
 import { TOAST } from '@/lib/constants';
+import { createPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: 'Menu Coming Soon | Manna Bakery',
   description:
     'Manna Bakery is preparing a fresh online menu. Online ordering remains available through Toast.',
-};
+  path: '/menu',
+});
 
 export default function MenuPage() {
   return (
