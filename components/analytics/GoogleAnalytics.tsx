@@ -116,8 +116,11 @@ function initializeGoogleAnalytics(gaMeasurementId: string) {
   window.dataLayer = window.dataLayer ?? [];
   window.gtag =
     window.gtag ??
-    function gtag(...args: unknown[]) {
-      window.dataLayer?.push(args);
+    function gtag() {
+      // Google Tag expects its command queue entries to be `arguments`
+      // objects. Plain arrays load gtag.js but are not dispatched as hits.
+      // eslint-disable-next-line prefer-rest-params
+      window.dataLayer?.push(arguments);
     };
 
   if (window.__mannaGaConfigured) {
