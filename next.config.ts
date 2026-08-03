@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: '/menu/:path*',
+        source: '/menu/:path+',
         destination: 'https://mannabread.com/menu',
         permanent: true,
       },
