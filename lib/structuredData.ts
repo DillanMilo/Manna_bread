@@ -1,8 +1,12 @@
-import { BRAND, CONTACT, SOCIAL } from '@/lib/constants';
+import { BRAND, CONTACT, SOCIAL, TOAST } from '@/lib/constants';
 import { SHARE_IMAGE_PATH, SITE_URL, absoluteUrl } from '@/lib/seo';
 
 const bakeryId = `${SITE_URL}/#bakery`;
 const websiteId = `${SITE_URL}/#website`;
+const mannaCoordinates = {
+  latitude: 30.0972,
+  longitude: -95.6161,
+} as const;
 
 export const siteStructuredData = {
   '@context': 'https://schema.org',
@@ -24,6 +28,9 @@ export const siteStructuredData = {
         'Manna Bakery is a handcrafted bakery, cafe, and gathering place in Tomball, Texas.',
       telephone: CONTACT.phone,
       email: CONTACT.email,
+      priceRange: '$$',
+      servesCuisine: ['Bakery', 'Breakfast', 'Lunch', 'Coffee'],
+      menu: TOAST.menu,
       address: {
         '@type': 'PostalAddress',
         streetAddress: CONTACT.address.street,
@@ -31,6 +38,11 @@ export const siteStructuredData = {
         addressRegion: CONTACT.address.state,
         postalCode: CONTACT.address.zip,
         addressCountry: 'US',
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: mannaCoordinates.latitude,
+        longitude: mannaCoordinates.longitude,
       },
       openingHoursSpecification: [
         {
