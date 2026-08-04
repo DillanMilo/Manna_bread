@@ -17,7 +17,7 @@ export const CONTACT = {
   email: 'support@mannabread.com',
   hours: {
     weekdays: '6:00 AM – 4:00 PM',
-    saturday: '6:00 AM – 4:00 PM',
+    saturday: '7:00 AM – 4:00 PM',
     sunday: 'Closed',
   },
 };

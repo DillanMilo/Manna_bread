@@ -300,7 +300,10 @@ export default function RentalsPage() {
               <FadeIn delay={0.25}>
                 <div className="space-y-2 mb-6">
                   <DetailItem label="Availability" value="Monday - Saturday" />
-                  <DetailItem label="Hours" value="6am - 4pm" />
+                  <DetailItem
+                    label="Hours"
+                    value="Monday - Friday, 6am - 4pm; Saturday, 7am - 4pm"
+                  />
                   <DetailItem label="Capacity" value="Up to 14 guests" />
                 </div>
               </FadeIn>
@@ -402,7 +405,7 @@ export default function RentalsPage() {
                 <div className="space-y-2 mb-6">
                   <DetailItem
                     label="Availability"
-                    value="Monday - Saturday, beginning at 4pm"
+                    value="Monday - Saturday, beginning at 2pm"
                   />
                   <DetailItem
                     label="Cleaning fee"
@@ -427,7 +430,7 @@ export default function RentalsPage() {
                   $195
                 </p>
                 <p className="font-body text-sm text-white/70 mb-4">
-                  per hour, at or after 4pm
+                  per hour, at or after 2pm
                 </p>
                 <p className="font-body text-sm text-white/60 leading-relaxed">
                   A quieter weeknight rate for showers, dinners, and gatherings
@@ -445,7 +448,7 @@ export default function RentalsPage() {
                   $295
                 </p>
                 <p className="font-body text-sm text-white/70 mb-4">
-                  per hour, at or after 4pm
+                  per hour, at or after 2pm
                 </p>
                 <p className="font-body text-sm text-white/60 leading-relaxed">
                   Manna&apos;s weekend evening rate &mdash; the most-requested window for
@@ -454,6 +457,14 @@ export default function RentalsPage() {
               </div>
             </StaggerItem>
           </StaggerContainer>
+
+          <FadeIn delay={0.35}>
+            <div className="mx-auto mt-6 max-w-4xl rounded-2xl border border-brand-gold/30 bg-brand-gold/10 px-5 py-4 text-center">
+              <p className="font-body text-sm leading-relaxed text-white/85">
+                3-hour minimum for up to 20 attendees · 4-hour minimum for 20+ attendees
+              </p>
+            </div>
+          </FadeIn>
 
           <FadeIn delay={0.4}>
             <div className="text-center mt-10">

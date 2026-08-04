@@ -60,7 +60,7 @@ export const siteStructuredData = {
         {
           '@type': 'OpeningHoursSpecification',
           dayOfWeek: 'https://schema.org/Saturday',
-          opens: '06:00',
+          opens: '07:00',
           closes: '16:00',
         },
       ],

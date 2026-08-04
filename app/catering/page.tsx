@@ -96,23 +96,25 @@ const SANDWICH_PLATTERS: CateringCategory = {
   items: [],
   subsections: [
     {
-      label: 'Grilled Paninis',
+      label: 'Grilled Paninis / Cold Sandwiches',
       items: [
         { name: 'Ham & Honey Mustard' },
         { name: 'Turkey Pesto Panini' },
         { name: 'Grilled Cheese' },
+        { name: 'Ham & Swiss Club' },
+        { name: 'Turkey & Provolone' },
+        { name: 'Chicken Salad Sandwich', note: 'Available on a croissant or sourdough.' },
       ],
-    },
-    {
-      label: 'Chicken Salad Sandwich',
-      description: 'Available on a croissant or sourdough.',
-      items: [],
     },
   ],
 };
 
 const COFFEE_DRINKS: DrinkItem[] = [
-  { name: 'Espresso Drinks (Open Tab)', price: '$5 small · $6 large', note: 'Per cup' },
+  {
+    name: 'Espresso Drinks',
+    price: '$5 small · $6 large',
+    note: '(Hostess open tab or per person self-pay)',
+  },
   { name: 'Hot Chocolate', price: '$5' },
   { name: 'House Drip', price: '$3 per person', note: 'Refills Included' },
   { name: 'Iced Tea', price: '$3 per person', note: 'Refills Included' },
@@ -352,12 +354,22 @@ function PricingCards({ sizes }: { sizes: TraySize[] }) {
 
 /* ─── item grid ─── */
 
-function ItemGrid({ items }: { items: CateringItem[] }) {
+function ItemGrid({
+  items,
+  bordered = false,
+}: {
+  items: CateringItem[];
+  bordered?: boolean;
+}) {
   return (
     <StaggerContainer className="grid grid-cols-2 md:grid-cols-3 gap-x-4 sm:gap-x-6 gap-y-2 sm:gap-y-3">
       {items.map((item) => (
         <StaggerItem key={item.name}>
-          <div className="py-1.5 sm:py-2">
+          <div
+            className={bordered
+              ? 'h-full rounded-xl border border-brand-gold/25 bg-brand-forest-mid/35 px-3 py-3 sm:px-4 sm:py-4'
+              : 'py-1.5 sm:py-2'}
+          >
             <p className="font-body text-sm sm:text-[15px] font-medium text-white/85 leading-snug">
               {item.name}
             </p>
@@ -411,7 +423,7 @@ export default function CateringPage() {
             <p className="font-body text-lg md:text-xl text-white/70 leading-relaxed max-w-2xl mx-auto">
               Select from Manna&apos;s catering trays of pastries, sandwiches,
               soup, salads, and more&mdash;all prepared for gatherings around
-              the bakery table.
+              the table.
             </p>
           </FadeIn>
 
@@ -551,7 +563,7 @@ export default function CateringPage() {
               </FadeIn>
               {sub.items.length > 0 && (
                 <FadeIn delay={0.1}>
-                  <ItemGrid items={sub.items} />
+                  <ItemGrid items={sub.items} bordered />
                 </FadeIn>
               )}
             </div>
