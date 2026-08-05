@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { NAV_LINKS, TOAST } from '@/lib/constants';
+import { FEATURES, NAV_LINKS, TOAST } from '@/lib/constants';
 import { Button } from '@/components/ui/Button';
 
 export function Navigation() {
@@ -73,12 +73,13 @@ export function Navigation() {
             ))}
           </div>
 
-          <motion.div
-            className="hidden lg:flex items-center gap-3"
-            initial={{ opacity: 0, filter: 'blur(4px)' }}
-            animate={{ opacity: 1, filter: 'blur(0px)' }}
-            transition={{ delay: 0.75, duration: 0.55, ease: [0.25, 0.4, 0.25, 1] }}
-          >
+          {FEATURES.onlineOrdering && (
+            <motion.div
+              className="hidden lg:flex items-center gap-3"
+              initial={{ opacity: 0, filter: 'blur(4px)' }}
+              animate={{ opacity: 1, filter: 'blur(0px)' }}
+              transition={{ delay: 0.75, duration: 0.55, ease: [0.25, 0.4, 0.25, 1] }}
+            >
             <a
               href={TOAST.signIn}
               target="_blank"
@@ -106,7 +107,8 @@ export function Navigation() {
             <Button href={TOAST.orderOnline} external variant="primary" size="sm" className="shadow-[0_0_16px_rgba(196,149,106,0.4)]">
               Order Online
             </Button>
-          </motion.div>
+            </motion.div>
+          )}
 
           <button
             className="lg:hidden flex items-center justify-center w-11 h-11 text-white touch-manipulation"
@@ -154,12 +156,13 @@ export function Navigation() {
                       </Link>
                     </motion.div>
                   ))}
-                  <motion.div
-                    className="pt-4 flex flex-col gap-3"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3, duration: 0.3 }}
-                  >
+                  {FEATURES.onlineOrdering && (
+                    <motion.div
+                      className="pt-4 flex flex-col gap-3"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3, duration: 0.3 }}
+                    >
                     <div className="flex gap-3">
                       <a
                         href={TOAST.signIn}
@@ -189,7 +192,8 @@ export function Navigation() {
                     <Button href={TOAST.orderOnline} external variant="accent" className="w-full bg-brand-gold text-brand-forest hover:bg-brand-gold/90">
                       Order Online
                     </Button>
-                  </motion.div>
+                    </motion.div>
+                  )}
                 </div>
               </div>
             </motion.div>

@@ -148,7 +148,7 @@ export function FeaturedMenu() {
         <FadeIn delay={0.3}>
           <div className="mt-12 text-center sm:mt-14">
             <Button href="/menu" variant="primary" className="w-full sm:w-auto">
-              Menu Coming Soon
+              View Menu
             </Button>
           </div>
         </FadeIn>

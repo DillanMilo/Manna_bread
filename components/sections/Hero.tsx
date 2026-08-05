@@ -4,7 +4,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion
 import { useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
-import { BRAND, TOAST } from '@/lib/constants';
+import { BRAND, FEATURES, TOAST } from '@/lib/constants';
 import { useMobilePerformanceMode } from '@/components/ui/useMobilePerformanceMode';
 
 export function Hero() {
@@ -136,11 +136,13 @@ export function Hero() {
           animate={{ opacity: 1 }}
           transition={{ duration: 1.0, delay: 2.0, ease: [0.25, 0.4, 0.25, 1] }}
         >
-          <Button href={TOAST.orderOnline} external variant="accent" size="lg" className="w-full sm:w-auto">
-            Order Online
-          </Button>
+          {FEATURES.onlineOrdering && (
+            <Button href={TOAST.orderOnline} external variant="accent" size="lg" className="w-full sm:w-auto">
+              Order Online
+            </Button>
+          )}
           <Button href="/menu" variant="ghost" size="lg" className="w-full sm:w-auto">
-            Menu Coming Soon
+            View Menu
           </Button>
         </motion.div>
       </motion.div>

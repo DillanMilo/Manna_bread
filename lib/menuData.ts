@@ -1,4 +1,4 @@
-// Static fallback menu used when Toast API credentials are unavailable.
+// Current in-store menu transcribed from Manna Bakery's printed menu boards.
 
 export type Price = {
   display: string;
@@ -8,11 +8,13 @@ export type MenuItem = {
   name: string;
   description?: string;
   price: Price;
+  labels?: string[];
   isOutOfStock?: boolean;
 };
 
 export type MenuSection = {
   title: string;
+  description?: string;
   items: MenuItem[];
 };
 
@@ -23,296 +25,245 @@ export type MenuCategory = {
 
 export const menuData: MenuCategory[] = [
   {
-    title: 'Bev',
+    title: 'Drinks',
     sections: [
       {
-        title: 'Coffee',
+        title: 'Coffee & Espresso',
+        description: 'Standard espresso drinks are $6 small or $7 large.',
         items: [
-          { name: 'Latte', description: 'creamy, smooth espresso mixed with steamed milk.', price: { display: '$6.00' } },
-          { name: 'Cappuccino', description: 'bold espresso topped with equal parts steamed milk and foam.', price: { display: '$6.00' } },
-          { name: 'House Drip', description: 'our classic brewed coffee.', price: { display: '$3.50' } },
-          { name: 'Mocha', description: 'rich chocolate blended with espresso and steamed milk.', price: { display: '$6.00' } },
-          { name: 'Flavored Macchiato', description: 'espresso layered with steamed milk and your choice of flavor.', price: { display: '$6.00' } },
-          { name: 'Italian Macchiato', description: 'a traditional macchiato with espresso marked by a dash of milk foam.', price: { display: '$4.00' } },
-          { name: 'Espresso', description: 'a bold double shot of pure espresso.', price: { display: '$4.00' } },
-          { name: 'Americano', description: 'a smooth blend of espresso and hot water.', price: { display: '$4.00' } },
-          { name: 'Cortado', description: 'a balanced blend of espresso with a touch of steamed milk.', price: { display: '$4.00' } },
-          { name: 'Flat White', price: { display: '$6.00' } },
-          { name: 'Cold Brew', price: { display: '$3.00' } },
-          { name: 'Hot Chocolate - Simple', description: 'velvety steamed milk with rich chocolate.', price: { display: '$4.00' } },
-          { name: 'Hot Chocolate - European', price: { display: '$6.00' } },
+          { name: 'House Drip', price: { display: '$3.50 / $4.50' } },
+          { name: 'Decaf Drip', price: { display: '' } },
+          { name: 'Espresso', price: { display: '$4' } },
+          { name: 'Americano', price: { display: '$4' } },
+          { name: 'Cortado', price: { display: '$4' } },
+          { name: 'Cold Brew', price: { display: '$3 / $4' } },
+          { name: 'Latte', price: { display: '$6 / $7' } },
+          { name: 'Cappuccino', price: { display: '$6 / $7' } },
+          { name: 'Italian Macchiato', price: { display: '$6 / $7' } },
+          { name: 'Flavored Macchiato', price: { display: '$6 / $7' } },
+          { name: 'Flat White', price: { display: '$6 / $7' } },
+          { name: 'Mocha', price: { display: '$6 / $7' } },
         ],
       },
       {
-        title: 'Tea & Lemonade',
+        title: 'Tea & Chocolate',
         items: [
-          { name: 'Iced Tea', description: 'refreshing brewed tea served chilled.', price: { display: '$3.00' } },
-          { name: 'Chai Tea', description: 'house made spiced black tea blended with milk for a warm, aromatic drink.', price: { display: '$5.75' } },
-          { name: 'Matcha', price: { display: '$5.75' } },
-          { name: 'London Fog', price: { display: '$5.75' } },
-          { name: 'English Breakfast', description: 'robust and traditional black tea.', price: { display: '$3.00' } },
-          { name: 'Earl Grey', description: 'fragrant black tea with a hint of bergamot.', price: { display: '$3.00' } },
-          { name: 'Green', description: 'a calming green tea with a refreshing mint finish.', price: { display: '$3.00' } },
-          { name: 'Mint Tea', description: 'pure and refreshing mint tea.', price: { display: '$3.00' } },
-          { name: 'Decaf Black', description: 'classic black tea without the caffeine.', price: { display: '$3.00' } },
-          { name: 'Jasmine Green', price: { display: '$3.00' } },
+          { name: 'European Hot Chocolate', price: { display: '$6 / $7' } },
+          { name: 'Simple Hot Chocolate', price: { display: '$4 / $5' } },
+          { name: 'Matcha Latte', price: { display: '$6 / $7' } },
+          { name: 'Chai Tea Latte', price: { display: '$6 / $7' } },
+          { name: 'London Fog', price: { display: '$6 / $7' } },
+          { name: 'Iced Tea', price: { display: '$3 / $4' } },
+          {
+            name: 'Brewed Tea',
+            description: 'English Breakfast, Earl Grey, Mint Tea, or Decaf Black.',
+            price: { display: '$3 / $4' },
+          },
+        ],
+      },
+      {
+        title: 'Milk',
+        items: [
+          { name: 'Skim Milk', price: { display: '' } },
+          { name: 'Whole Milk', price: { display: '' } },
+          { name: '2% Milk', price: { display: '' } },
+          { name: 'Heavy Cream', price: { display: '' } },
+          { name: 'Almond Milk', price: { display: '+$0.75' } },
+          { name: 'Oat Milk', price: { display: '+$0.75' } },
+        ],
+      },
+      {
+        title: 'Syrups',
+        description: '$0.75 each. Sugar-free options are marked below.',
+        items: [
+          { name: 'Peppermint', price: { display: '+$0.75' } },
+          { name: 'Butterscotch', price: { display: '+$0.75' } },
+          { name: 'Lavender', price: { display: '+$0.75' } },
+          { name: 'Toffee Nut', price: { display: '+$0.75' } },
+          { name: 'Vanilla', price: { display: '+$0.75' }, labels: ['Sugar-free available'] },
+          { name: 'Strawberry', price: { display: '+$0.75' } },
+          { name: 'Hazelnut', price: { display: '+$0.75' }, labels: ['Sugar-free available'] },
+          { name: 'Cinnamon Bun', price: { display: '+$0.75' } },
+          { name: 'Chocolate', price: { display: '+$0.75' } },
+          { name: 'Cookie Butter', price: { display: '+$0.75' } },
+          { name: 'Caramel', price: { display: '+$0.75' }, labels: ['Sugar-free available'] },
+          { name: 'Spiced Brown Sugar', price: { display: '+$0.75' } },
         ],
       },
     ],
   },
-
   {
     title: 'Breakfast',
     sections: [
       {
-        title: 'Sandwiches',
+        title: 'Breakfast',
         items: [
-          { name: 'Sausage, Egg & Cheese', description: 'sausage, egg & cheese served on a croissant or sourdough', price: { display: '$12.00' } },
-          { name: 'Sausage & Cheese', description: 'sausage & cheese served on a croissant or sourdough', price: { display: '$12.00' } },
-          { name: 'Sausage & Egg', description: 'sausage & egg served on a croissant or sourdough', price: { display: '$12.00' } },
-          { name: 'Ham, Egg & Cheese', description: 'ham, egg & cheese served on a croissant or sourdough', price: { display: '$12.00' } },
-          { name: 'Ham & Cheese', description: 'ham & cheese served on a croissant or sourdough', price: { display: '$12.00' } },
-          { name: 'Ham & Egg', description: 'ham & egg served on a croissant or sourdough', price: { display: '$12.00' } },
-          { name: 'Egg & Cheese', description: 'egg & cheese served on a croissant or sourdough', price: { display: '$12.00' } },
+          {
+            name: 'Breakfast Taco',
+            description: 'Warm flour tortilla stuffed with fluffy scrambled eggs, melted cheese, and your choice of bacon or sausage.',
+            price: { display: '$3' },
+          },
+          {
+            name: 'Kolache',
+            description: 'Soft, slightly sweet dough filled with savory sausage and melted cheese, available with or without jalapeño.',
+            price: { display: '$6' },
+          },
+          {
+            name: 'Biscuits & Gravy',
+            description: 'Fluffy house biscuits topped with creamy house sausage gravy seasoned with sage and pepper.',
+            price: { display: '$10 / $12' },
+          },
+          {
+            name: 'Liège Waffle',
+            description: 'A rich yeasted waffle with a caramelized sugar crust, paired with berries and whipped cream.',
+            price: { display: '$8 / $12 · GF $13' },
+            labels: ['Gluten-free option', 'Kids friendly'],
+          },
+          {
+            name: 'Breakfast Sandwich',
+            description: 'Egg and cheese with sausage or ham on sourdough bread, a croissant, or a biscuit.',
+            price: { display: '$12' },
+            labels: ['Gluten-free option'],
+          },
+          {
+            name: 'Quiche',
+            description: 'A house favorite creamy egg custard. Available with bacon, sausage, veggies, meat lovers, or a seasonal flavor.',
+            price: { display: '$12 · GF $13' },
+            labels: ['Gluten-free option'],
+          },
+          {
+            name: 'Stuffed French Toast',
+            description: 'Vanilla-battered house bread stuffed with sweet cream cheese, topped with strawberries and whipped cream. Syrup on the side. The gluten-free version is also eggless.',
+            price: { display: '$12 · GF $13' },
+            labels: ['Gluten-free option'],
+          },
+          {
+            name: 'Avocado Toast',
+            description: 'Two slices of toasted artisan bread layered with fresh smashed avocado over a bed of arugula, finished with sliced tomato and everything seasoning.',
+            price: { display: '$12' },
+            labels: ['Gluten-free option'],
+          },
         ],
       },
       {
-        title: 'Quiche & More',
-        items: [
-          { name: 'Sausage Quiche', description: 'a house favorite', price: { display: '$12.00' }, isOutOfStock: true },
-          { name: 'Bacon Quiche', description: 'a house favorite', price: { display: '$12.00' } },
-          { name: 'Veggie Quiche', price: { display: '$12.00' } },
-          { name: 'Meat Lovers Quiche', price: { display: '$12.00' } },
-          { name: 'Ham & Rosemary Quiche', price: { display: '$12.00' } },
-          { name: 'Sausage & Veggie Quiche', price: { display: '$12.00' } },
-          { name: 'Gluten Free Sausage Quiche', description: 'the gluten free version of our house favorite', price: { display: '$13.00' } },
-          { name: 'Gluten Free Bacon Quiche', description: 'the gluten free version of our house favorite', price: { display: '$13.00' } },
-          { name: 'Gluten Free Veggie Quiche', price: { display: '$13.00' } },
-          { name: 'Gluten Free Meat Lovers Quiche', price: { display: '$13.00' }, isOutOfStock: true },
-          { name: 'Gluten Free Ham & Rosemary Quiche', price: { display: '$13.00' }, isOutOfStock: true },
-          { name: 'Gluten Free Sausage & Tomato Quiche', price: { display: '$13.00' }, isOutOfStock: true },
-          { name: 'Biscuits & Gravy', description: 'delicious flaky biscuits topped with scratch made sausage gravy', price: { display: '$10.00' } },
-        ],
+        title: 'Scratch Pastries',
+        description: 'Our scratch pastries are self-serve from the bakery case.',
+        items: [],
       },
-      // "Waffles & French Toast" section awaiting full data from client.
     ],
   },
-
   {
     title: 'Lunch',
     sections: [
       {
-        title: 'Sandwiches & Paninis',
+        title: 'Sandwiches & House Favorites',
         items: [
-          { name: 'Handwhich', description: 'fresh pepperoni, salami, ham, and provolone rolled with lettuce, pepperoncinis, red onion, red vinegar, olive oil, mayo, oregano and completely wrapped in our fresh scratch bread.', price: { display: '$16.00' } },
-          { name: 'Sandwich', description: 'fresh turkey and provolone rolled with lettuce, tomato, red onion, mayo and completely wrapped in our fresh scratch bread.', price: { display: '$14.00' } },
-          { name: 'BBQ Brisket Sandwich', description: 'savory pulled brisket served on a homemade pretzel bun with a side of sweet and tangy barbecue sauce', price: { display: '$14.00' }, isOutOfStock: true },
-          { name: 'Turkey Pesto Panini', description: 'turkey, provolone, and basil pesto sandwiched between two slices of our from scratch buttered sourdough and toasted until golden', price: { display: '$16.00' } },
-          { name: 'Ham & Honey Mustard Panini', description: 'ham, swiss cheese, and honey mustard sandwiched between two slices of our from scratch buttered sourdough and toasted until golden', price: { display: '$16.00' } },
-          { name: 'Grilled Cheese Panini', description: 'cheddar and provolone cheese sandwiched between two slices of our from scratch buttered sourdough and toasted until golden', price: { display: '$12.00' } },
-          { name: 'Chicken Salad Sandwich', description: 'made with white chicken, mayo, celery, pecans, craisins, pineapple, and poppy seeds. Served on a croissant or sourdough', price: { display: '$14.00' } },
+          {
+            name: 'The Italian',
+            description: 'Fresh pepperoni, salami, ham, and provolone rolled with lettuce, pepperoncinis, red onion, red vinegar, olive oil, mayo, and oregano. Wrapped in our fresh scratch bread.',
+            price: { display: 'Sandwich $14 · Handwich $16' },
+            labels: ['Gluten-free option'],
+          },
+          {
+            name: 'Turkey or Ham',
+            description: 'Fresh turkey or ham and provolone rolled with lettuce, tomato, red onion, and mayo. Wrapped in our fresh scratch bread.',
+            price: { display: 'Sandwich $14 · Handwich $16' },
+            labels: ['Gluten-free option'],
+          },
+          {
+            name: 'Ham & Honey Mustard Panini',
+            description: 'Ham, Swiss cheese, and honey mustard sandwiched between two slices of our scratch buttered sourdough. Toasted until golden.',
+            price: { display: '$16' },
+            labels: ['Gluten-free option'],
+          },
+          {
+            name: 'Turkey Pesto Panini',
+            description: 'Turkey, provolone, and basil pesto sandwiched between two slices of our scratch buttered sourdough and toasted until golden.',
+            price: { display: '$17' },
+            labels: ['Gluten-free option'],
+          },
+          {
+            name: 'Grilled Cheese Panini',
+            description: 'Cheddar and provolone sandwiched between two slices of our from-scratch buttered sourdough and toasted until golden.',
+            price: { display: '$12' },
+            labels: ['Gluten-free option', 'Kids friendly'],
+          },
+          {
+            name: 'Chicken Salad Sandwich',
+            description: 'Made with white chicken, mayo, celery, pecans, craisins, pineapple, and poppy seeds. Served on a croissant or sourdough.',
+            price: { display: '$14' },
+            labels: ['Gluten-free option'],
+          },
+          {
+            name: 'Cuban Sandwich',
+            description: 'Seasoned carnitas pork and house ham layered with Swiss cheese, Cuban mustard, and pickles on our house-baked bread.',
+            price: { display: '$16' },
+            labels: ['Gluten-free option'],
+          },
+          {
+            name: 'Navajo Tacos',
+            description: 'A plate-sized, flat, golden frybread topped with seasoned beef, beans, greens, tomato, cheese, and sour cream—a hearty, handcrafted Southwestern classic.',
+            price: { display: '$15' },
+          },
+          {
+            name: 'House 3-Meat Chili',
+            description: 'Rough-cut steak tips, smoky bacon, and seasoned ground beef slow-simmered into a bold, hearty chili. Served with a slice of our silky-sweet house cornbread.',
+            price: { display: '$15' },
+          },
         ],
       },
       {
-        title: 'Soup',
+        title: 'Salads',
         items: [
-          { name: 'Chicken Tortilla', description: 'savory chicken in a zesty broth, topped with crispy tortilla strips, cheese, and a touch of cilantro for a little Southwest flair', price: { display: '$6.00' } },
-          { name: 'Chophouse Potato', description: 'hearty chunks of potato in a creamy, velvety base with hints of smoked bacon and chives, reminiscent of a classic baked potato', price: { display: '$6.00' } },
-          { name: 'Poblano Pepper', description: 'a creamy, roasted poblano pepper soup with a touch of spice, balanced by mild cheeses and a smoky finish.', price: { display: '$6.00' }, isOutOfStock: true },
-          { name: 'Tomato Basil', description: 'a rich blend of ripe tomatoes and fresh basil, simmered to creamy perfection and finished with a hint of garlic', price: { display: '$6.00' } },
-          { name: 'Zuppa Toscana', description: 'a creamy, comforting soup made with Italian sausage, tender potatoes, and fresh kale', price: { display: '$6.00' }, isOutOfStock: true },
-        ],
-      },
-      {
-        title: 'Salad',
-        items: [
-          { name: 'Caesar Salad', description: 'chopped romaine hearts, shredded parmesan, herb croutons, and creamy caesar dressing', price: { display: '$6.00' } },
-          { name: 'Mandarin Crunch Salad', description: 'spring mix, mandarin oranges, almonds, sesame seeds, red onion, and sesame ginger dressing', price: { display: '$6.00' } },
-          { name: 'Strawberry Fields Salad', description: 'spinach & spring mix, strawberries, candied pecans, feta, and raspberry vinaigrette', price: { display: '$6.00' } },
-          { name: 'House Salad', description: 'chopped kale, dried cranberries, shredded cabbage, almonds, and honey mustard dressing', price: { display: '$6.00' } },
-        ],
-      },
-    ],
-  },
-
-  {
-    title: 'Dinner',
-    sections: [
-      {
-        title: 'Winter Season',
-        items: [
-          { name: 'Hawaiian Haystacks', price: { display: '$16.00' } },
-          { name: "Shepherd's Pie (\u201cCottage Pie\u201d)", price: { display: '$15.00' } },
-          { name: 'Navajo Tacos', price: { display: '$15.00' } },
-          { name: 'House 3-Meat Chili', price: { display: '$15.00' } },
-          { name: 'Steak-tips and Eggs', price: { display: '$15.00' } },
-          { name: 'Beef Wellington Pockets', price: { display: '$16.00' } },
-        ],
-      },
-    ],
-  },
-
-  {
-    title: 'Pastries',
-    sections: [
-      {
-        title: 'Pastries',
-        items: [
-          { name: 'Biscuit', price: { display: '$3.00' } },
-          { name: 'Brownie', price: { display: '$6.00' } },
-          { name: 'Butter Croissant', price: { display: '$6.00' } },
-          { name: 'Cake Pop', price: { display: '$3.00' } },
-          { name: 'Cheesecake Bars', price: { display: '$6.50' }, isOutOfStock: true },
-          { name: 'Chocolate Croissant', price: { display: '$6.00' } },
-          { name: 'Christmas Tree Croissant', price: { display: '$8.00' }, isOutOfStock: true },
-          { name: 'Cinnamon Roll', price: { display: '$7.00' } },
-          { name: 'Cream Puff', price: { display: '$4.00' } },
-          { name: 'Cretzel', price: { display: '$5.00' }, isOutOfStock: true },
-          { name: 'Cupcake', price: { display: '$2.50' }, isOutOfStock: true },
-          { name: 'Danish', price: { display: '$4.00' } },
-          { name: 'Kouign-Amann', price: { display: '$6.00' }, isOutOfStock: true },
-          { name: 'Lemon Bar', price: { display: '$5.00' } },
-          { name: 'Muffin', price: { display: '$4.00' } },
-          { name: 'Petite Four', price: { display: '$2.00' }, isOutOfStock: true },
-          { name: 'Pizelle', price: { display: '$2.00' }, isOutOfStock: true },
-          { name: 'Pizzelle set of 6', price: { display: '$6.00' } },
-          { name: 'Scone', price: { display: '$6.00' } },
-          { name: 'Scotch-a-roo', price: { display: '$5.00' }, isOutOfStock: true },
-          { name: 'Sticky Bun', price: { display: '$7.00' } },
-          { name: 'Stroop Waffle', price: { display: '$4.00' } },
-          { name: 'Almond Biscotti Pack', price: { display: '$6.00' }, isOutOfStock: true },
-          { name: 'Lemon Poppy Seeds Sliced', price: { display: '$2.00' } },
-          { name: 'Tres Leches Cheese Cake', price: { display: '$5.00' }, isOutOfStock: true },
-        ],
-      },
-      {
-        title: 'Kolaches',
-        items: [
-          { name: 'Cheddar Kolache', price: { display: '$6.00' }, isOutOfStock: true },
-          { name: 'Jalapeno Kolache', price: { display: '$6.00' }, isOutOfStock: true },
-        ],
-      },
-      {
-        title: 'Cookies',
-        items: [
-          { name: 'Chocolate Chip', price: { display: '$4.00' } },
-          { name: 'Lemon Snap', price: { display: '$3.00' } },
-          { name: 'Peanut Butter', price: { display: '$4.00' }, isOutOfStock: true },
-          { name: 'Red Velvet', price: { display: '$3.00' } },
-          { name: 'Snickerdoodle', price: { display: '$4.00' } },
-        ],
-      },
-      {
-        title: 'Gluten Free',
-        items: [
-          { name: 'GF Muffin', price: { display: '$5.00' } },
-          { name: 'GF Scotcharoo', price: { display: '$5.00' } },
-          { name: 'GF Choc Chip Cookie', price: { display: '$4.00' } },
-          { name: 'GF PB Cookie', price: { display: '$4.00' }, isOutOfStock: true },
-          { name: 'GF Snickerdoodle', price: { display: '$4.00' }, isOutOfStock: true },
-          { name: 'GF Lemon Snap', price: { display: '$3.00' } },
-          { name: 'GF Cream Puff', price: { display: '$5.00' } },
-          { name: 'GF Scone', price: { display: '$7.00' } },
-          { name: 'GF Cake Pop', price: { display: '$4.00' } },
-          { name: 'GF Macaron', price: { display: '$3.00' }, isOutOfStock: true },
-          { name: 'GF Cinnamon Roll', price: { display: '$8.00' } },
-          { name: 'GF Brownie', price: { display: '$7.00' } },
-          { name: 'GF Banana Bread', price: { display: '$10.00' }, isOutOfStock: true },
-        ],
-      },
-    ],
-  },
-
-  {
-    title: 'Retail',
-    sections: [
-      {
-        title: 'Grab n Go',
-        items: [
-          { name: 'Parfait & Oats', price: { display: '$5.00' } },
-          { name: 'Tiramisu', price: { display: '$8.00' } },
-          { name: 'Tres Leches', price: { display: '$8.00' } },
-          { name: 'Chai Tea Mix Gift Set', price: { display: '$27.00' } },
-        ],
-      },
-      {
-        title: 'Armani',
-        items: [
-          { name: 'Cookies', price: { display: '$6.00' } },
-        ],
-      },
-      {
-        title: 'Coffee',
-        items: [
-          { name: 'Bojo Coffee Beans', price: { display: '$17.50' } },
-        ],
-      },
-      {
-        title: 'Jam',
-        items: [
-          { name: 'Little Diamonds', price: { display: '$12.00' } },
-        ],
-      },
-    ],
-  },
-
-  {
-    title: 'Catering',
-    sections: [
-      {
-        title: 'Pastry Trays',
-        items: [
-          { name: 'Mini Pastry Tray', price: { display: '$30.00' } },
-          { name: 'Medium Pastry Tray', price: { display: '$40.00' } },
-          { name: 'Full-Size Pastry Tray', price: { display: '$60.00' } },
-        ],
-      },
-      {
-        title: 'Sandwich Platters',
-        items: [
-          { name: 'Mini Sandwich Platter', price: { display: '$30.00' } },
-          { name: 'Medium Sandwich Platter', price: { display: '$40.00' } },
-          { name: 'Full-Size Sandwich Platter', price: { display: '$60.00' } },
-        ],
-      },
-      {
-        title: 'Fruit & Vegetable Trays',
-        items: [
-          { name: 'Small Tray', price: { display: '$45.00' } },
-          { name: 'Medium Tray', price: { display: '$65.00' } },
-          { name: 'Large Tray', price: { display: '$85.00' } },
-        ],
-      },
-      {
-        title: 'Salad Bowls',
-        items: [
-          { name: 'Small Salad Bowl', price: { display: '$45.00' } },
-          { name: 'Medium Salad Bowl', price: { display: '$65.00' } },
-          { name: 'Large Salad Bowl', price: { display: '$85.00' } },
-        ],
-      },
-      {
-        title: 'Drinks',
-        items: [
-          { name: 'Tea Pitcher', price: { display: '$25.00' } },
-          { name: 'Lemonade Pitcher', price: { display: '$25.00' } },
-        ],
-      },
-      {
-        title: 'Whole Quiche',
-        items: [
-          { name: 'Bacon', price: { display: '$60.00' } },
-          { name: 'Sausage', price: { display: '$60.00' } },
-          { name: 'Veggie', price: { display: '$60.00' } },
+          {
+            name: 'Caesar Salad',
+            description: 'Chopped romaine hearts, shredded parmesan, herb croutons, and creamy Caesar dressing.',
+            price: { display: '$6 / $14' },
+          },
+          {
+            name: 'Mandarin Crunch',
+            description: 'Spring mix, mandarin oranges, almonds, sesame seeds, red onion, and sesame ginger dressing.',
+            price: { display: '$6 / $14' },
+          },
+          {
+            name: 'Strawberry Fields',
+            description: 'Spinach and spring mix, strawberries, candied pecans, feta, and raspberry vinaigrette.',
+            price: { display: '$6 / $14' },
+          },
+          {
+            name: 'House Salad',
+            description: 'Chopped romaine lettuce, tomato, red onion, croutons, shredded cheddar, and ranch dressing.',
+            price: { display: '$6 / $14' },
+          },
         ],
       },
       {
         title: 'Soups',
+        description: 'Two to three varieties are served daily. Available by the cup or bowl.',
         items: [
-          { name: 'Tomato Basil', price: { display: '$40.00' } },
-          { name: 'Chophouse Potato', price: { display: '$40.00' } },
-          { name: 'Chicken Tortilla (GF)', price: { display: '$40.00' } },
-          { name: 'Zuppa Toscana', price: { display: '$40.00' } },
+          {
+            name: 'Chicken Tortilla',
+            description: 'Chicken in a zesty broth, topped with cheese and a touch of cilantro for a little Southwest flair.',
+            price: { display: 'Cup $6 · Bowl $12' },
+            labels: ['Gluten-free'],
+          },
+          {
+            name: 'Zuppa Toscana',
+            description: 'A creamy, comforting soup made with Italian sausage, tender potatoes, and fresh spinach.',
+            price: { display: 'Cup $6 · Bowl $12' },
+            labels: ['Gluten-free'],
+          },
+          {
+            name: 'Chophouse Potato',
+            description: 'Hearty chunks of potato in a creamy base with smoked bacon and chives.',
+            price: { display: 'Cup $6 · Bowl $12' },
+            labels: ['Gluten-free'],
+          },
+          {
+            name: 'Tomato Basil',
+            description: 'A rich blend of ripe tomatoes and fresh basil simmered to creamy perfection.',
+            price: { display: 'Cup $6 · Bowl $12' },
+          },
         ],
       },
     ],

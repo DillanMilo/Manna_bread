@@ -5,6 +5,11 @@ export const BRAND = {
   founder: 'Christin',
 };
 
+export const FEATURES = {
+  // Re-enable when Manna is ready to accept live online orders again.
+  onlineOrdering: false,
+} as const;
+
 export const CONTACT = {
   address: {
     street: '306 Commerce St',
@@ -17,7 +22,7 @@ export const CONTACT = {
   email: 'support@mannabread.com',
   hours: {
     weekdays: '6:00 AM – 4:00 PM',
-    saturday: '6:00 AM – 4:00 PM',
+    saturday: '7:00 AM – 4:00 PM',
     sunday: 'Closed',
   },
 };
@@ -39,7 +44,7 @@ export const TOAST = {
 };
 
 export const NAV_LINKS = [
-  { label: 'Menu (Coming Soon)', href: '/menu' },
+  { label: 'Menu', href: '/menu' },
   { label: 'Story', href: '/our-story' },
   { label: 'Catering', href: '/catering' },
   { label: 'Gift Cards', href: '/gift-cards' },
