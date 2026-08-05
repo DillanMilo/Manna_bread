@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { BRAND, CONTACT, SOCIAL, NAV_LINKS, TOAST } from '@/lib/constants';
+import { BRAND, CONTACT, FEATURES, SOCIAL, NAV_LINKS, TOAST } from '@/lib/constants';
 
 function InstagramIcon() {
   return (
@@ -67,9 +67,11 @@ export function Footer() {
               Quick Links
             </h5>
             <div className="flex flex-col gap-1 sm:gap-3">
-              <a href={TOAST.orderOnline} target="_blank" rel="noopener noreferrer" className="font-body text-sm text-white/80 hover:text-white transition-colors py-1 inline-block sm:py-1.5">
-                Order Online
-              </a>
+              {FEATURES.onlineOrdering && (
+                <a href={TOAST.orderOnline} target="_blank" rel="noopener noreferrer" className="font-body text-sm text-white/80 hover:text-white transition-colors py-1 inline-block sm:py-1.5">
+                  Order Online
+                </a>
+              )}
               <a href={TOAST.giftCards} target="_blank" rel="noopener noreferrer" className="font-body text-sm text-white/80 hover:text-white transition-colors py-1 inline-block sm:py-1.5">
                 Gift Cards
               </a>

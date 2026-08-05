@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence, useScroll } from 'framer-motion';
 import type { MenuCategory, MenuItem } from '@/lib/menuData';
@@ -8,10 +9,56 @@ import { SectionHeader } from '@/components/ui/SectionHeader';
 import { Button } from '@/components/ui/Button';
 import { FadeIn } from '@/components/ui/Motion';
 import { PageVine } from '@/components/ui/ScrollVine';
-import { TOAST } from '@/lib/constants';
+import { useMediaParallax } from '@/components/ui/useMediaParallax';
+import { FEATURES, TOAST } from '@/lib/constants';
 import { formatDisplayPrice } from '@/lib/pricing';
 
 const EASE: [number, number, number, number] = [0.25, 0.4, 0.25, 1];
+
+type MenuPhoto = {
+  src: string;
+  alt: string;
+  objectPosition?: string;
+};
+
+const MENU_PHOTOS: Record<string, [MenuPhoto, MenuPhoto]> = {
+  Drinks: [
+    {
+      src: '/images/manna-latte-art.webp',
+      alt: 'Leaf-shaped latte art in a freshly poured Manna drink',
+      objectPosition: 'center 62%',
+    },
+    {
+      src: '/images/manna-espresso-pour.webp',
+      alt: 'A Manna barista steaming milk at the espresso machine',
+      objectPosition: 'center 56%',
+    },
+  ],
+  Breakfast: [
+    {
+      src: '/images/manna-strawberry-waffle.webp',
+      alt: 'Manna Liège waffle topped with strawberries and whipped cream',
+      objectPosition: 'center 70%',
+    },
+    {
+      src: '/images/manna-quiche-fruit.webp',
+      alt: 'A slice of Manna quiche served with fresh fruit',
+      objectPosition: 'center 72%',
+    },
+  ],
+  Lunch: [
+    {
+      src: '/images/manna-turkey-panini.webp',
+      alt: 'A toasted Manna turkey panini served with house chips',
+      objectPosition: 'center 66%',
+    },
+    {
+      src: '/images/manna-chophouse-soup.webp',
+      alt: 'Manna chophouse potato soup served with fresh bread',
+      objectPosition: 'center 70%',
+    },
+  ],
+};
 
 type MenuExperienceProps = {
   menuData: MenuCategory[];
@@ -43,11 +90,74 @@ function MenuItemRow({ item }: { item: MenuItem }) {
           {item.description}
         </p>
       )}
+      {item.labels && item.labels.length > 0 && (
+        <div className="mt-2 flex flex-wrap gap-1.5">
+          {item.labels.map((label) => (
+            <span
+              key={label}
+              className="rounded-full border border-brand-gold/25 bg-brand-gold/10 px-2 py-1 font-body text-[10px] font-semibold uppercase tracking-[0.1em] text-brand-gold"
+            >
+              {label}
+            </span>
+          ))}
+        </div>
+      )}
       {item.isOutOfStock && (
         <span className="mt-1.5 inline-block text-[10px] font-body font-semibold tracking-[0.15em] uppercase text-white/40">
           Currently Unavailable
         </span>
       )}
+    </div>
+  );
+}
+
+function MenuPhotoCard({ photo, index }: { photo: MenuPhoto; index: number }) {
+  const frameRef = useRef<HTMLElement>(null);
+  const imageY = useMediaParallax(frameRef, index === 0 ? 18 : 14);
+
+  return (
+    <motion.figure
+      ref={frameRef}
+      initial={{ opacity: 0, y: 20, rotate: index === 0 ? -1.5 : 1.5 }}
+      whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{ duration: 0.65, delay: index * 0.12, ease: EASE }}
+      className={`group relative overflow-hidden border border-brand-gold/30 bg-brand-forest-mid shadow-[0_18px_45px_rgba(18,31,25,0.35)] ${
+        index === 0
+          ? 'h-36 rounded-[2rem_0.75rem_2rem_0.75rem] sm:h-48 md:h-52'
+          : 'mt-7 h-28 rounded-[0.75rem_2rem_0.75rem_2rem] sm:mt-10 sm:h-36 md:h-40'
+      }`}
+    >
+      <motion.div
+        style={{ y: imageY }}
+        className="absolute inset-x-0 -inset-y-[12%] will-change-transform"
+      >
+          <Image
+            src={photo.src}
+            alt={photo.alt}
+            fill
+            sizes={index === 0
+              ? '(min-width: 768px) 430px, 58vw'
+              : '(min-width: 768px) 290px, 36vw'}
+            className="object-cover transition-transform duration-700 group-hover:scale-[1.025]"
+            style={{ objectPosition: photo.objectPosition }}
+          />
+      </motion.div>
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-forest/15 to-transparent" />
+    </motion.figure>
+  );
+}
+
+function MenuPhotoBreak({ categoryTitle }: { categoryTitle: string }) {
+  const photos = MENU_PHOTOS[categoryTitle];
+
+  if (!photos) return null;
+
+  return (
+    <div className="mx-auto mt-9 grid w-full max-w-3xl grid-cols-[1.15fr_0.85fr] items-start gap-3 sm:mt-11 sm:gap-5">
+      {photos.map((photo, index) => (
+        <MenuPhotoCard key={photo.src} photo={photo} index={index} />
+      ))}
     </div>
   );
 }
@@ -83,7 +193,7 @@ export function MenuExperience({ menuData, source, lastSyncedAt }: MenuExperienc
               <SectionHeader
                 label="Our Menu"
                 title="Baked Fresh Daily"
-                description="From artisan breads to handcrafted pastries, every item is made with care, from scratch, daily."
+                description="Breakfast, lunch, and drinks made with care in the heart of Manna."
                 light
               />
             </FadeIn>
@@ -147,6 +257,12 @@ export function MenuExperience({ menuData, source, lastSyncedAt }: MenuExperienc
                     <div className="h-px flex-1 bg-white/10" />
                   </div>
 
+                  {section.description && (
+                    <p className="mb-3 max-w-2xl font-body text-sm leading-relaxed text-white/60">
+                      {section.description}
+                    </p>
+                  )}
+
                   <div className="grid gap-x-8 md:gap-x-12 grid-cols-1 md:grid-cols-2">
                     {section.items.map((item) => (
                       <MenuItemRow
@@ -155,31 +271,37 @@ export function MenuExperience({ menuData, source, lastSyncedAt }: MenuExperienc
                       />
                     ))}
                   </div>
+
+                  {section === category.sections[0] && (
+                    <MenuPhotoBreak categoryTitle={category.title} />
+                  )}
                 </div>
               ))}
             </motion.div>
           </AnimatePresence>
         </div>
 
-        <FadeIn>
-          <div className="bg-brand-forest-mid">
-            <div className="max-w-2xl mx-auto text-center px-5 sm:px-6 py-12 sm:py-16 md:py-20">
-              <p className="font-body text-[11px] font-semibold tracking-[0.2em] uppercase text-brand-gold mb-3">
-                Ready to Order?
-              </p>
-              <h3 className="font-display text-2xl md:text-3xl text-white mb-4">
-                Place Your Order
-              </h3>
-              <p className="font-body text-white/70 mb-8 leading-relaxed">
-                Order online for pickup through our ordering system.<br className="hidden sm:block" />
-                Fresh, made from scratch, waiting for you.
-              </p>
-              <Button href={TOAST.orderOnline} external variant="accent" className="w-full sm:w-auto">
-                Order Online
-              </Button>
+        {FEATURES.onlineOrdering && (
+          <FadeIn>
+            <div className="bg-brand-forest-mid">
+              <div className="max-w-2xl mx-auto text-center px-5 sm:px-6 py-12 sm:py-16 md:py-20">
+                <p className="font-body text-[11px] font-semibold tracking-[0.2em] uppercase text-brand-gold mb-3">
+                  Ready to Order?
+                </p>
+                <h3 className="font-display text-2xl md:text-3xl text-white mb-4">
+                  Place Your Order
+                </h3>
+                <p className="font-body text-white/70 mb-8 leading-relaxed">
+                  Order online for pickup through our ordering system.<br className="hidden sm:block" />
+                  Fresh, made from scratch, waiting for you.
+                </p>
+                <Button href={TOAST.orderOnline} external variant="accent" className="w-full sm:w-auto">
+                  Order Online
+                </Button>
+              </div>
             </div>
-          </div>
-        </FadeIn>
+          </FadeIn>
+        )}
       </div>
     </main>
   );
