@@ -1,7 +1,11 @@
 import type { Metadata } from 'next';
 import { MenuExperience } from '@/components/sections/MenuExperience';
+import { StructuredData } from '@/components/seo/StructuredData';
 import { menuData } from '@/lib/menuData';
 import { createPageMetadata } from '@/lib/seo';
+import { createMenuStructuredData } from '@/lib/structuredData';
+
+const menuStructuredData = createMenuStructuredData(menuData);
 
 export const metadata: Metadata = createPageMetadata({
   title: 'Menu | Manna Bakery',
@@ -11,5 +15,10 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 export default function MenuPage() {
-  return <MenuExperience menuData={menuData} source="static" />;
+  return (
+    <>
+      <StructuredData data={menuStructuredData} />
+      <MenuExperience menuData={menuData} source="static" />
+    </>
+  );
 }

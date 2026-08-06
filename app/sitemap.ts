@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: absoluteUrl('/menu'),
+      lastModified: '2026-08-06',
       changeFrequency: 'monthly',
       priority: 0.8,
     },

@@ -1,4 +1,5 @@
-import { BRAND, CONTACT, SOCIAL, TOAST } from '@/lib/constants';
+import { BRAND, CONTACT, SOCIAL } from '@/lib/constants';
+import type { MenuCategory } from '@/lib/menuData';
 import { SHARE_IMAGE_PATH, SITE_URL, absoluteUrl } from '@/lib/seo';
 
 const bakeryId = `${SITE_URL}/#bakery`;
@@ -30,7 +31,9 @@ export const siteStructuredData = {
       email: CONTACT.email,
       priceRange: '$$',
       servesCuisine: ['Bakery', 'Breakfast', 'Lunch', 'Coffee'],
-      menu: TOAST.menu,
+      hasMenu: {
+        '@id': `${SITE_URL}/menu#menu`,
+      },
       address: {
         '@type': 'PostalAddress',
         streetAddress: CONTACT.address.street,
@@ -86,3 +89,36 @@ export const siteStructuredData = {
     },
   ],
 };
+
+export function createMenuStructuredData(menuData: MenuCategory[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Menu',
+    '@id': `${SITE_URL}/menu#menu`,
+    name: `${BRAND.name} Menu`,
+    description:
+      'The current breakfast, lunch, coffee, tea, and house-made favorites served at Manna Bakery in Tomball, Texas.',
+    url: absoluteUrl('/menu'),
+    inLanguage: 'en-US',
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': absoluteUrl('/menu'),
+    },
+    hasMenuSection: menuData.flatMap((category) =>
+      category.sections.map((section) => ({
+        '@type': 'MenuSection',
+        name: `${category.title}: ${section.title}`,
+        ...(section.description ? { description: section.description } : {}),
+        ...(section.items.length > 0
+          ? {
+              hasMenuItem: section.items.map((item) => ({
+                '@type': 'MenuItem',
+                name: item.name,
+                ...(item.description ? { description: item.description } : {}),
+              })),
+            }
+          : {}),
+      })),
+    ),
+  };
+}

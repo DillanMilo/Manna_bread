@@ -162,6 +162,48 @@ function MenuPhotoBreak({ categoryTitle }: { categoryTitle: string }) {
   );
 }
 
+function MenuCategoryContent({
+  category,
+  showPhoto = true,
+}: {
+  category: MenuCategory;
+  showPhoto?: boolean;
+}) {
+  return (
+    <>
+      {category.sections.map((section) => (
+        <div key={section.title}>
+          <div className="flex items-center gap-4 mb-2">
+            <h3 className="font-display text-xl md:text-2xl text-white shrink-0">
+              {section.title}
+            </h3>
+            <div className="h-px flex-1 bg-white/10" />
+          </div>
+
+          {section.description && (
+            <p className="mb-3 max-w-2xl font-body text-sm leading-relaxed text-white/60">
+              {section.description}
+            </p>
+          )}
+
+          <div className="grid gap-x-8 md:gap-x-12 grid-cols-1 md:grid-cols-2">
+            {section.items.map((item) => (
+              <MenuItemRow
+                key={`${section.title}-${item.name}`}
+                item={item}
+              />
+            ))}
+          </div>
+
+          {showPhoto && section === category.sections[0] && (
+            <MenuPhotoBreak categoryTitle={category.title} />
+          )}
+        </div>
+      ))}
+    </>
+  );
+}
+
 export function MenuExperience({ menuData, source, lastSyncedAt }: MenuExperienceProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const pageRef = useRef<HTMLElement>(null);
@@ -194,6 +236,7 @@ export function MenuExperience({ menuData, source, lastSyncedAt }: MenuExperienc
                 label="Our Menu"
                 title="Baked Fresh Daily"
                 description="Breakfast, lunch, and drinks made with care in the heart of Manna."
+                headingLevel="h1"
                 light
               />
             </FadeIn>
@@ -211,12 +254,19 @@ export function MenuExperience({ menuData, source, lastSyncedAt }: MenuExperienc
         >
           <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
             <nav
+              aria-label="Menu categories"
+              role="tablist"
               className="flex gap-0 overflow-x-auto -mb-px"
               style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' } as React.CSSProperties}
             >
               {menuData.map((cat, i) => (
                 <button
                   key={cat.title}
+                  id={`menu-tab-${i}`}
+                  type="button"
+                  role="tab"
+                  aria-selected={activeIndex === i}
+                  aria-controls={`menu-panel-${i}`}
                   onClick={() => switchCategory(i)}
                   className={`relative px-3 sm:px-5 py-4 text-[13px] sm:text-sm font-body font-medium whitespace-nowrap transition-colors duration-200 min-h-[44px] ${
                     activeIndex === i
@@ -241,44 +291,33 @@ export function MenuExperience({ menuData, source, lastSyncedAt }: MenuExperienc
         <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-10 md:py-14 min-h-[50vh]">
           <AnimatePresence mode="wait">
             <motion.div
+              id={`menu-panel-${activeIndex}`}
               key={category.title}
+              role="tabpanel"
+              aria-labelledby={`menu-tab-${activeIndex}`}
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3, ease: EASE }}
               className="space-y-12"
             >
-              {category.sections.map((section) => (
-                <div key={section.title}>
-                  <div className="flex items-center gap-4 mb-2">
-                    <h3 className="font-display text-xl md:text-2xl text-white shrink-0">
-                      {section.title}
-                    </h3>
-                    <div className="h-px flex-1 bg-white/10" />
-                  </div>
-
-                  {section.description && (
-                    <p className="mb-3 max-w-2xl font-body text-sm leading-relaxed text-white/60">
-                      {section.description}
-                    </p>
-                  )}
-
-                  <div className="grid gap-x-8 md:gap-x-12 grid-cols-1 md:grid-cols-2">
-                    {section.items.map((item) => (
-                      <MenuItemRow
-                        key={`${section.title}-${item.name}`}
-                        item={item}
-                      />
-                    ))}
-                  </div>
-
-                  {section === category.sections[0] && (
-                    <MenuPhotoBreak categoryTitle={category.title} />
-                  )}
-                </div>
-              ))}
+              <MenuCategoryContent category={category} />
             </motion.div>
           </AnimatePresence>
+
+          {menuData.map((indexedCategory, index) => (
+            index !== activeIndex ? (
+              <div
+                id={`menu-panel-${index}`}
+                key={`indexed-${indexedCategory.title}`}
+                role="tabpanel"
+                aria-labelledby={`menu-tab-${index}`}
+                hidden
+              >
+                <MenuCategoryContent category={indexedCategory} showPhoto={false} />
+              </div>
+            ) : null
+          ))}
         </div>
 
         {FEATURES.onlineOrdering && (
