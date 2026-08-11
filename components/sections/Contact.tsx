@@ -6,7 +6,13 @@ import { InquiryForm } from "@/components/ui/InquiryForm";
 import { MannaMap, MapInfoCard } from "@/components/ui/MannaMap";
 import { VineAccent } from "@/components/ui/ScrollVine";
 
-export function Contact() {
+interface ContactProps {
+  headingLevel?: 'h1' | 'h2';
+}
+
+export function Contact({ headingLevel = 'h2' }: ContactProps) {
+  const Heading = headingLevel;
+
   return (
     <section className="relative isolate py-12 sm:py-16 md:py-20 lg:py-28 bg-[#18231d] overflow-hidden">
       <VineAccent variant="left" className="z-0 opacity-55" />
@@ -16,9 +22,9 @@ export function Contact() {
           {/* Contact Info */}
           <div className="lg:col-span-4">
             <FadeIn>
-              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-medium text-white mb-6 sm:mb-8">
+              <Heading className="font-display text-2xl sm:text-3xl md:text-4xl font-medium text-white mb-6 sm:mb-8">
                 Visit Us
-              </h2>
+              </Heading>
             </FadeIn>
 
             <StaggerContainer
