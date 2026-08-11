@@ -41,7 +41,7 @@ export function Footer() {
             <p className="font-accent text-base sm:text-lg italic opacity-80 mb-3 sm:mb-5">{BRAND.tagline}</p>
             <p className="font-accent text-xs sm:text-sm italic opacity-60 leading-relaxed border-l-2 border-brand-cognac pl-3 sm:pl-4 max-w-sm">
               &ldquo;Give us this day our daily bread.&rdquo;
-              <span className="block mt-1 not-italic text-xs opacity-50">— Matthew 6:11</span>
+              <span className="block mt-1 not-italic text-xs opacity-100">— Matthew 6:11</span>
             </p>
           </div>
 
@@ -80,6 +80,9 @@ export function Footer() {
               </a>
               <Link href="/contact" className="font-body text-sm text-white/80 hover:text-white transition-colors py-1 inline-block sm:py-1.5">
                 Contact
+              </Link>
+              <Link href="/careers" className="font-body text-sm text-white/80 hover:text-white transition-colors py-1 inline-block sm:py-1.5">
+                Join Our Team
               </Link>
             </div>
           </div>

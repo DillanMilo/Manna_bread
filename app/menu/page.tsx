@@ -1,6 +1,9 @@
 import { MenuExperience } from '@/components/sections/MenuExperience';
 import { menuData } from '@/lib/menuData';
 import { createPageMetadata } from '@/lib/seo';
+import { createMenuStructuredData, serializeStructuredData } from '@/lib/structuredData';
+
+const menuStructuredData = createMenuStructuredData(menuData);
 
 export const metadata = createPageMetadata(
   'Menu',
@@ -9,5 +12,14 @@ export const metadata = createPageMetadata(
 );
 
 export default function MenuPage() {
-  return <MenuExperience menuData={menuData} source="static" />;
+  return (
+    <>
+      <script
+        id="manna-menu-structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeStructuredData(menuStructuredData) }}
+      />
+      <MenuExperience menuData={menuData} source="static" />
+    </>
+  );
 }

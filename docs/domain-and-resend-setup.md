@@ -1,12 +1,13 @@
 # Manna Domain, Resend, and Launch DNS Notes
 
-Last updated: 2026-06-30
+Last updated: 2026-07-27
 
 ## Current Decision
 
 - Correct Namecheap domain: `mannabread.com`
 - Older placeholder domain found in the code and Resend: `mannabakery.com`
-- Current live site DNS must not be changed until launch approval.
+- Launch approved and completed on 2026-07-27.
+- Canonical production URL: `https://mannabread.com`
 - Resend setup should use `mannabread.com`, not `mannabakery.com`.
 
 ## Current Namecheap State
@@ -22,10 +23,11 @@ Current host records for `mannabread.com`:
 
 | Type | Host | Value | TTL | Notes |
 | --- | --- | --- | --- | --- |
-| A | `@` | `162.120.94.90` | 60 min | Current live apex routing. Do not change before launch. |
+| A | `@` | `216.150.1.1` | 60 min | Vercel production routing. |
+| A | `@` | `216.150.16.1` | Automatic | Vercel production routing. |
 | CNAME | `_acme-challenge` | `mannabread.com.cec5188867cef154.dcv.cloudflare.com.` | 60 min | Existing certificate validation. Leave in place. |
 | CNAME | `_acme-challenge.www` | `www.mannabread.com.cec5188867cef154.dcv.cloudflare.com.` | 60 min | Existing certificate validation. Leave in place. |
-| CNAME | `www` | `sites.toasttab.com.` | 60 min | Current live www routing. Do not change before launch. |
+| CNAME | `www` | `709cf7bb7625b5f8.vercel-dns-017.com.` | 60 min | Vercel production routing; the app redirects `www` to the apex domain. |
 | TXT | `@` | `google-site-verification=br-H6gmtjBX8FaRCk0t4ZA5yVd5owBrSlwThuKT22PM` | Automatic | Existing Google verification. Leave in place. |
 | TXT | `@` | `v=spf1 include:spf.privateemail.com ~all` | Automatic | Existing Private Email SPF. Leave in place. |
 | TXT | `default._domainkey` | `v=DKIM1;k=rsa;p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvshrI00ptL3OTRutKW/xUOQgdqd01vaQCdGy1n7+it7f3NcyzUd/4UpU1VZSc9jylOHKdHqOpXgokkAPvAkdMR35n1KTPmxuH1KJarWDRY+NonYDvTeGKWP6qrQvD60eSTNE0oMTKdYDoZHUA8CIbF2/tpR6nLZpBn5bvS5Nz936wahjZyTcl+EMoRcsDRZ5q0UBgnult5TgbtypP3n+hFrCzvGie4ti/GPRD8mRJGzZLYEiub+fTYv27Q7SFWYQFjVFuDYvh/K36foQyPXsCwmOzzJ+/dz5SyIqg713vuFaPxIEzmVpZ1HN/NsEChXNjWPs+sawY0iEhW4A2fQu8QIDAQAB` | 30 min | Existing Private Email DKIM. Leave in place. |
@@ -119,6 +121,7 @@ Vercel environment status as of 2026-06-30:
 | `RESEND_API_KEY` | Preview, Production |
 | `RESEND_FROM_EMAIL` | Preview, Production |
 | `INQUIRY_TO_EMAIL` | Preview, Production |
+| `NEXT_PUBLIC_SITE_URL` | Preview, Production |
 
 Current form protections:
 
@@ -140,21 +143,17 @@ Current code items to revisit before launch:
 - Confirm whether Christin wants inquiries to continue going to `hello@mannabread.com` or move to a more specific operations inbox.
 - Add Google reCAPTCHA v3 keys to Vercel if Christin wants CAPTCHA enforcement before launch.
 
-## Future Launch DNS Checklist
+## Launch DNS Checklist
 
-Do not perform these steps until Christin approves going live.
+Completed on 2026-07-27:
 
-1. Add `mannabread.com` and likely `www.mannabread.com` to the correct Vercel project.
-2. Verify the exact DNS instructions in Vercel for the project before editing Namecheap.
-3. Only after launch approval, replace the current website-routing records:
-   - apex/root host `@`
-   - `www`
-4. Keep unrelated DNS records in place unless Vercel or Namecheap explicitly flags a conflict.
-5. After DNS changes, confirm:
-   - `https://mannabread.com` loads the custom site.
-   - `https://www.mannabread.com` loads or redirects correctly.
-   - the inquiry forms send successfully.
-   - Toast ordering, gift cards, rewards, and menu links still work.
+1. Added `mannabread.com` and `www.mannabread.com` to the `manna-bread` Vercel project.
+2. Replaced only the legacy apex and `www` website-routing records in Namecheap.
+3. Preserved all Private Email, Resend, Google verification, and certificate challenge records.
+4. Verified both domains as correctly configured in Vercel.
+5. Verified HTTPS on both Vercel apex edges and both `www` edges.
+6. Configured `www` to permanently redirect to `https://mannabread.com`.
+7. Verified Toast ordering loads the live Manna menu in Chrome.
 
 Local Vercel linkage found in `.vercel/project.json`:
 
@@ -163,11 +162,10 @@ Local Vercel linkage found in `.vercel/project.json`:
 
 Vercel CLI access confirmed on 2026-06-30 for environment variable management. The launch-day DNS target should still be verified directly inside the Vercel project before editing Namecheap routing records.
 
-## What Not To Touch Right Now
+## DNS Guardrails
 
 - Do not change Namecheap nameservers.
-- Do not change the `@` A record.
-- Do not change the `www` CNAME.
+- Do not change the Vercel `@` A records or project-specific `www` CNAME without coordinating a hosting change.
 - Do not change the existing root `@` MX records.
 - Do not upgrade Resend billing without explicit owner approval.
 - Do not create or expose a Resend API key without explicit approval.

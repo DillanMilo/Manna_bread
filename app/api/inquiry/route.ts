@@ -14,6 +14,11 @@ type InquiryPayload = {
   rentalWindow?: string;
   cateringNeeds?: string;
   helpTopic?: string;
+  roleInterest?: string;
+  availability?: string;
+  weeklyHours?: string;
+  startDate?: string;
+  experience?: string;
   preferredContact?: string;
   message?: string;
   source?: string;
@@ -22,7 +27,7 @@ type InquiryPayload = {
   recaptchaToken?: string;
 };
 
-type InquiryType = 'catering' | 'rentals' | 'general';
+type InquiryType = 'catering' | 'rentals' | 'general' | 'employment';
 type RateLimitRule = {
   key: string;
   maxRequests: number;
@@ -72,6 +77,11 @@ const inquiryConfig: Record<InquiryType, { label: string; subject: string; previ
     subject: 'New Website Message',
     preview: 'A general message came in from the website.',
   },
+  employment: {
+    label: 'Employment',
+    subject: 'New Employment Application',
+    preview: 'A prospective team member applied through the website.',
+  },
 };
 
 const valueLabels: Record<string, string> = {
@@ -90,6 +100,17 @@ const valueLabels: Record<string, string> = {
   catering: 'Catering',
   rentals: 'Private rental',
   'gift-cards-rewards': 'Gift cards or rewards',
+  'front-of-house': 'Front of house',
+  barista: 'Barista',
+  'bakery-pastry': 'Bakery or pastry',
+  kitchen: 'Kitchen',
+  leadership: 'Leadership',
+  'where-needed': 'Wherever I am needed',
+  'under-15': 'Fewer than 15',
+  '15-25': '15–25',
+  '25-35': '25–35',
+  '35-plus': '35 or more',
+  flexible: 'Flexible',
 };
 
 const rateLimitStore = new Map<string, RateLimitEntry>();
@@ -294,18 +315,22 @@ function buildHtmlEmail(payload: InquiryPayload, inquiryType: InquiryType) {
 }
 
 function buildConfirmationSubject(inquiryType: InquiryType) {
-  const config = inquiryConfig[inquiryType];
-  return `We received your ${config.label.toLowerCase()} inquiry`;
+  return inquiryType === 'employment'
+    ? 'We received your application'
+    : `We received your ${inquiryConfig[inquiryType].label.toLowerCase()} inquiry`;
 }
 
 function buildConfirmationTextEmail(payload: InquiryPayload, inquiryType: InquiryType) {
   const config = inquiryConfig[inquiryType];
+  const submissionName = inquiryType === 'employment'
+    ? 'application'
+    : `${config.label.toLowerCase()} inquiry`;
   const rows = buildRows(payload, inquiryType).filter(([label]) => label !== 'Source');
 
   return [
     `Hi ${clean(payload.name)},`,
     '',
-    `Thank you for reaching out to Manna Bakery. We received your ${config.label.toLowerCase()} inquiry and will follow up as soon as we can.`,
+    `Thank you for reaching out to Manna Bakery. We received your ${submissionName} and will follow up if there is a fitting next step.`,
     '',
     'Here is what you sent us:',
     '',
@@ -322,6 +347,15 @@ function buildConfirmationTextEmail(payload: InquiryPayload, inquiryType: Inquir
 
 function buildConfirmationHtmlEmail(payload: InquiryPayload, inquiryType: InquiryType) {
   const config = inquiryConfig[inquiryType];
+  const submissionName = inquiryType === 'employment'
+    ? 'application'
+    : `${config.label.toLowerCase()} inquiry`;
+  const confirmationHeading = inquiryType === 'employment'
+    ? 'We received your application'
+    : 'We received your inquiry';
+  const confirmationIntro = inquiryType === 'employment'
+    ? 'Thank you for introducing yourself. We will follow up if there is a fitting next step.'
+    : 'Thank you for reaching out. We will follow up as soon as we can.';
   const rows = buildRows(payload, inquiryType).filter(([label]) => label !== 'Source');
 
   return `
@@ -331,15 +365,15 @@ function buildConfirmationHtmlEmail(payload: InquiryPayload, inquiryType: Inquir
           <p style="margin:0 0 8px;font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#c9a84c">
             Manna Bakery
           </p>
-          <h1 style="margin:0;font-size:28px;font-weight:500;line-height:1.2">We received your inquiry</h1>
+          <h1 style="margin:0;font-size:28px;font-weight:500;line-height:1.2">${escapeHtml(confirmationHeading)}</h1>
           <p style="margin:12px 0 0;font-family:Arial,sans-serif;font-size:14px;color:#f5f2ed">
-            Thank you for reaching out. We will follow up as soon as we can.
+            ${escapeHtml(confirmationIntro)}
           </p>
         </div>
 
         <div style="padding:28px 30px">
           <p style="margin:0 0 16px;font-family:Arial,sans-serif;font-size:15px;color:#2d2a26">
-            Hi ${escapeHtml(clean(payload.name))}, we received your ${escapeHtml(config.label.toLowerCase())} inquiry. Here is a copy of what you sent us.
+            Hi ${escapeHtml(clean(payload.name))}, we received your ${escapeHtml(submissionName)}. Here is a copy of what you sent us.
           </p>
 
           <table style="border-collapse:collapse;width:100%">
@@ -396,6 +430,13 @@ function buildRows(payload: InquiryPayload, inquiryType: InquiryType): Array<[st
     general: [
       ['Topic', displayLabel(payload.helpTopic)],
     ],
+    employment: [
+      ['Area of interest', displayLabel(payload.roleInterest)],
+      ['Availability', display(payload.availability)],
+      ['Hours each week', displayLabel(payload.weeklyHours)],
+      ['Available to start', display(payload.startDate)],
+      ['Relevant experience', display(payload.experience)],
+    ],
   };
 
   return [
@@ -407,7 +448,9 @@ function buildRows(payload: InquiryPayload, inquiryType: InquiryType): Array<[st
 
 function getInquiryType(value: unknown): InquiryType {
   const type = clean(value);
-  return type === 'catering' || type === 'rentals' ? type : 'general';
+  return type === 'catering' || type === 'rentals' || type === 'employment'
+    ? type
+    : 'general';
 }
 
 function display(value: unknown, fallback = 'Not provided') {

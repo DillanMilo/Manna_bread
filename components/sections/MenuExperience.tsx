@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useState, useRef } from 'react';
-import { motion, AnimatePresence, useScroll } from 'framer-motion';
+import { motion, useScroll } from 'framer-motion';
 import type { MenuCategory, MenuItem } from '@/lib/menuData';
 import type { MenuDataSource } from '@/lib/toastMenu';
 import { SectionHeader } from '@/components/ui/SectionHeader';
@@ -171,8 +171,6 @@ export function MenuExperience({ menuData, source, lastSyncedAt }: MenuExperienc
     offset: ['start start', 'end end'],
   });
 
-  const category = menuData[activeIndex] ?? menuData[0];
-
   const switchCategory = (index: number) => {
     if (index === activeIndex) return;
     setActiveIndex(index);
@@ -194,6 +192,7 @@ export function MenuExperience({ menuData, source, lastSyncedAt }: MenuExperienc
                 label="Our Menu"
                 title="Baked Fresh Daily"
                 description="Breakfast, lunch, and drinks made with care in the heart of Manna."
+                headingLevel="h1"
                 light
               />
             </FadeIn>
@@ -211,12 +210,19 @@ export function MenuExperience({ menuData, source, lastSyncedAt }: MenuExperienc
         >
           <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
             <nav
+              aria-label="Menu categories"
+              role="tablist"
               className="flex gap-0 overflow-x-auto -mb-px"
               style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' } as React.CSSProperties}
             >
               {menuData.map((cat, i) => (
                 <button
                   key={cat.title}
+                  id={`menu-tab-${i}`}
+                  type="button"
+                  role="tab"
+                  aria-selected={activeIndex === i}
+                  aria-controls={`menu-panel-${i}`}
                   onClick={() => switchCategory(i)}
                   className={`relative px-3 sm:px-5 py-4 text-[13px] sm:text-sm font-body font-medium whitespace-nowrap transition-colors duration-200 min-h-[44px] ${
                     activeIndex === i
@@ -239,46 +245,53 @@ export function MenuExperience({ menuData, source, lastSyncedAt }: MenuExperienc
         </div>
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-10 md:py-14 min-h-[50vh]">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={category.title}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3, ease: EASE }}
-              className="space-y-12"
-            >
-              {category.sections.map((section) => (
-                <div key={section.title}>
-                  <div className="flex items-center gap-4 mb-2">
-                    <h3 className="font-display text-xl md:text-2xl text-white shrink-0">
-                      {section.title}
-                    </h3>
-                    <div className="h-px flex-1 bg-white/10" />
+          {menuData.map((category, categoryIndex) => {
+            const isActive = activeIndex === categoryIndex;
+
+            return (
+              <motion.div
+                id={`menu-panel-${categoryIndex}`}
+                key={category.title}
+                role="tabpanel"
+                aria-labelledby={`menu-tab-${categoryIndex}`}
+                hidden={!isActive}
+                initial={categoryIndex === 0 ? { opacity: 0, y: 16 } : false}
+                animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+                transition={{ duration: 0.3, ease: EASE }}
+                className="space-y-12"
+              >
+                {category.sections.map((section, sectionIndex) => (
+                  <div key={section.title}>
+                    <div className="flex items-center gap-4 mb-2">
+                      <h3 className="font-display text-xl md:text-2xl text-white shrink-0">
+                        {section.title}
+                      </h3>
+                      <div className="h-px flex-1 bg-white/10" />
+                    </div>
+
+                    {section.description && (
+                      <p className="mb-3 max-w-2xl font-body text-sm leading-relaxed text-white/60">
+                        {section.description}
+                      </p>
+                    )}
+
+                    <div className="grid gap-x-8 md:gap-x-12 grid-cols-1 md:grid-cols-2">
+                      {section.items.map((item) => (
+                        <MenuItemRow
+                          key={`${section.title}-${item.name}`}
+                          item={item}
+                        />
+                      ))}
+                    </div>
+
+                    {sectionIndex === 0 && isActive && (
+                      <MenuPhotoBreak categoryTitle={category.title} />
+                    )}
                   </div>
-
-                  {section.description && (
-                    <p className="mb-3 max-w-2xl font-body text-sm leading-relaxed text-white/60">
-                      {section.description}
-                    </p>
-                  )}
-
-                  <div className="grid gap-x-8 md:gap-x-12 grid-cols-1 md:grid-cols-2">
-                    {section.items.map((item) => (
-                      <MenuItemRow
-                        key={`${section.title}-${item.name}`}
-                        item={item}
-                      />
-                    ))}
-                  </div>
-
-                  {section === category.sections[0] && (
-                    <MenuPhotoBreak categoryTitle={category.title} />
-                  )}
-                </div>
-              ))}
-            </motion.div>
-          </AnimatePresence>
+                ))}
+              </motion.div>
+            );
+          })}
         </div>
 
         {FEATURES.onlineOrdering && (

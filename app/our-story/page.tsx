@@ -644,7 +644,7 @@ export default function OurStoryPage() {
           <FadeIn>
             <p className="font-accent text-2xl md:text-3xl lg:text-[34px] italic text-white leading-relaxed">
               &ldquo;One day at a time we can just trust God with what we need for today
-              and not worry about tomorrow because he&apos;s enough for us day by day by day.
+              and not worry about tomorrow because He&apos;s enough for us day by day by day.
               <span className="text-brand-gold"> Just trust me today. I&apos;m enough. I&apos;m enough for today. I&apos;m enough for you.</span>&rdquo;
             </p>
           </FadeIn>
@@ -851,9 +851,9 @@ export default function OurStoryPage() {
 
           <FadeIn delay={0.5}>
             <p className="font-accent text-xl md:text-2xl italic text-brand-cognac-light leading-relaxed">
-              &ldquo;It&apos;s been really humbling as I realize how much he&apos;s gone out of his way&mdash;just
-              for me to know him and to know his love. The whole point is just Jesus.
-              And him reaching me, rather than me having to strive for him&mdash;that was what the gospel is all about. So simple.&rdquo;
+              &ldquo;It&apos;s been really humbling as I realize how much He&apos;s gone out of His way&mdash;just
+              for me to know Him and to know His love. The whole point is just Jesus.
+              And Him reaching me, rather than me having to strive for Him&mdash;that was what the gospel is all about. So simple.&rdquo;
             </p>
           </FadeIn>
         </div>
@@ -882,7 +882,7 @@ export default function OurStoryPage() {
                   Christin built the first chapters of Manna with faith, grit, and
                   the conviction that bread could become a language for love. Then
                   Chad entered the story, and a dream carried by one determined woman
-                  became a partnership. In 2026, Christin and Chad married, and the
+                  became a partnership. In 2025, Christin and Chad married, and the
                   partnership at the heart of Manna became part of their shared life.
                 </p>
               </FadeIn>

@@ -2,7 +2,11 @@ import type { Metadata, Viewport } from 'next';
 import { Playfair_Display, Lora, Libre_Franklin } from 'next/font/google';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
+import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics';
 import { BRAND } from '@/lib/constants';
+import { SOCIAL_SHARE_IMAGE, SOCIAL_SHARE_IMAGE_URL } from '@/lib/seo';
+import { getSiteUrl } from '@/lib/siteUrl';
+import { createSiteStructuredData, serializeStructuredData } from '@/lib/structuredData';
 import './globals.css';
 
 const playfair = Playfair_Display({
@@ -26,18 +30,9 @@ const libreFranklin = Libre_Franklin({
   display: 'swap',
 });
 
-function getSiteUrl() {
-  const siteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ??
-    process.env.VERCEL_PROJECT_PRODUCTION_URL ??
-    process.env.VERCEL_URL ??
-    'manna-bread.vercel.app';
-
-  return siteUrl.startsWith('http') ? siteUrl : `https://${siteUrl}`;
-}
-
 const siteUrl = getSiteUrl();
-const shareImage = '/images/manna-logo-share.png';
+const siteStructuredData = createSiteStructuredData();
+const googleSiteVerification = process.env.GOOGLE_SITE_VERIFICATION?.trim();
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -55,22 +50,19 @@ export const metadata: Metadata = {
     description: BRAND.description,
     url: siteUrl,
     siteName: BRAND.name,
-    images: [
-      {
-        url: shareImage,
-        width: 1050,
-        height: 600,
-        type: 'image/png',
-        alt: 'Manna — Cafe and Bakery, Bread from Heaven',
-      },
-    ],
+    images: [SOCIAL_SHARE_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
     title: `${BRAND.name} | ${BRAND.tagline}`,
     description: BRAND.description,
-    images: [shareImage],
+    images: [SOCIAL_SHARE_IMAGE_URL],
   },
+  verification: googleSiteVerification
+    ? {
+        google: googleSiteVerification,
+      }
+    : undefined,
 };
 
 export default function RootLayout({
@@ -81,9 +73,15 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${playfair.variable} ${lora.variable} ${libreFranklin.variable}`}>
       <body className="font-body bg-brand-forest text-brand-warm-white antialiased">
+        <script
+          id="manna-site-structured-data"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: serializeStructuredData(siteStructuredData) }}
+        />
         <Navigation />
         {children}
         <Footer />
+        <GoogleAnalytics />
       </body>
     </html>
   );
