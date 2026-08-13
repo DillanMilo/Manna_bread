@@ -42,9 +42,13 @@ type InquiryFormProps = {
 };
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
-type Grecaptcha = {
+type GrecaptchaEnterprise = {
   ready: (callback: () => void) => void;
   execute: (siteKey: string, options: { action: string }) => Promise<string>;
+};
+
+type Grecaptcha = {
+  enterprise?: GrecaptchaEnterprise;
 };
 
 declare global {
@@ -626,13 +630,13 @@ export async function getRecaptchaToken() {
 
   await loadRecaptchaScript(recaptchaSiteKey);
 
-  if (!window.grecaptcha) {
+  if (!window.grecaptcha?.enterprise) {
     throw new Error('The verification service did not load. Please try again.');
   }
 
   return new Promise<string>((resolve, reject) => {
-    window.grecaptcha?.ready(() => {
-      window.grecaptcha
+    window.grecaptcha?.enterprise?.ready(() => {
+      window.grecaptcha?.enterprise
         ?.execute(recaptchaSiteKey, { action: recaptchaAction })
         .then(resolve)
         .catch(() => reject(new Error('The verification service did not complete. Please try again.')));
@@ -645,7 +649,7 @@ function loadRecaptchaScript(siteKey: string) {
     return Promise.resolve();
   }
 
-  if (window.grecaptcha) {
+  if (window.grecaptcha?.enterprise) {
     return Promise.resolve();
   }
 
@@ -663,7 +667,7 @@ function loadRecaptchaScript(siteKey: string) {
     }
 
     const script = document.createElement('script');
-    script.src = `https://www.google.com/recaptcha/api.js?render=${encodeURIComponent(siteKey)}`;
+    script.src = `https://www.google.com/recaptcha/enterprise.js?render=${encodeURIComponent(siteKey)}`;
     script.async = true;
     script.defer = true;
     script.dataset.mannaRecaptcha = 'true';
