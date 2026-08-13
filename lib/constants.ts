@@ -49,4 +49,5 @@ export const NAV_LINKS = [
   { label: 'Catering', href: '/catering' },
   { label: 'Gift Cards', href: '/gift-cards' },
   { label: 'Rentals', href: '/rentals' },
+  { label: 'Join Our Team', href: '/careers' },
 ];

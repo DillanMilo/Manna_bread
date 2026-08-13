@@ -1,5 +1,11 @@
 import { NextResponse } from 'next/server';
 import { CONTACT } from '@/lib/constants';
+import {
+  employmentApplicationFields,
+  employmentRequiredFields,
+} from '@/lib/employmentApplication';
+
+type EmploymentApplicationValue = string | string[];
 
 type InquiryPayload = {
   name?: string;
@@ -25,6 +31,7 @@ type InquiryPayload = {
   company?: string;
   startedAt?: string;
   recaptchaToken?: string;
+  application?: Record<string, unknown>;
 };
 
 type InquiryType = 'catering' | 'rentals' | 'general' | 'employment';
@@ -130,6 +137,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true });
   }
 
+  const inquiryType = getInquiryType(payload.inquiryType);
+  const application = inquiryType === 'employment'
+    ? cleanEmploymentApplication(payload.application)
+    : {};
   const name = clean(payload.name);
   const email = clean(payload.email);
   const message = clean(payload.message);
@@ -147,6 +158,19 @@ export async function POST(request: Request) {
       { error: 'Please include a valid email address.' },
       { status: 400 },
     );
+  }
+
+  if (inquiryType === 'employment') {
+    const missingApplicationField = employmentRequiredFields.find(
+      (field) => !hasEmploymentValue(application[field.name]),
+    );
+
+    if (missingApplicationField) {
+      return NextResponse.json(
+        { error: `Please complete “${missingApplicationField.label}.”` },
+        { status: 400 },
+      );
+    }
   }
 
   if (!passesSubmissionTiming(payload.startedAt)) {
@@ -173,10 +197,10 @@ export async function POST(request: Request) {
     );
   }
 
-  const resendApiKey = process.env.RESEND_API_KEY;
+  const resendApiKey = process.env.RESEND_API_KEY?.trim();
   const toEmail = process.env.INQUIRY_TO_EMAIL ?? CONTACT.email;
-  const fromEmail = process.env.RESEND_FROM_EMAIL ?? 'Manna Bakery <onboarding@resend.dev>';
-  const inquiryType = getInquiryType(payload.inquiryType);
+  const fromEmail = (process.env.RESEND_FROM_EMAIL ?? 'Manna Bakery <onboarding@resend.dev>').trim();
+  payload.application = application;
   const config = inquiryConfig[inquiryType];
   const subject = `${config.subject} from ${name}`;
   const replyToEmail = splitEmails(toEmail)[0] ?? CONTACT.email;
@@ -431,11 +455,7 @@ function buildRows(payload: InquiryPayload, inquiryType: InquiryType): Array<[st
       ['Topic', displayLabel(payload.helpTopic)],
     ],
     employment: [
-      ['Area of interest', displayLabel(payload.roleInterest)],
-      ['Availability', display(payload.availability)],
-      ['Hours each week', displayLabel(payload.weeklyHours)],
-      ['Available to start', display(payload.startDate)],
-      ['Relevant experience', display(payload.experience)],
+      ...buildEmploymentRows(payload.application),
     ],
   };
 
@@ -444,6 +464,45 @@ function buildRows(payload: InquiryPayload, inquiryType: InquiryType): Array<[st
     ...contextRows[inquiryType],
     ['Source', display(payload.source, 'website')],
   ];
+}
+
+function cleanEmploymentApplication(value: unknown): Record<string, EmploymentApplicationValue> {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return {};
+
+  const submitted = value as Record<string, unknown>;
+  const cleaned: Record<string, EmploymentApplicationValue> = {};
+
+  for (const field of employmentApplicationFields) {
+    const fieldValue = submitted[field.name];
+
+    if (field.type === 'checkbox') {
+      cleaned[field.name] = Array.isArray(fieldValue)
+        ? fieldValue.map(clean).filter(Boolean).slice(0, field.options?.length ?? 20)
+        : [];
+      continue;
+    }
+
+    cleaned[field.name] = clean(fieldValue);
+  }
+
+  return cleaned;
+}
+
+function buildEmploymentRows(value: unknown): Array<[string, string]> {
+  const application = cleanEmploymentApplication(value);
+
+  return employmentApplicationFields.map((field) => {
+    const fieldValue = application[field.name];
+    const displayed = Array.isArray(fieldValue)
+      ? fieldValue.join(', ') || 'Not provided'
+      : display(fieldValue);
+
+    return [field.emailLabel ?? field.label, displayed];
+  });
+}
+
+function hasEmploymentValue(value: EmploymentApplicationValue | undefined) {
+  return Array.isArray(value) ? value.length > 0 : Boolean(value?.trim());
 }
 
 function getInquiryType(value: unknown): InquiryType {

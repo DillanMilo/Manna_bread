@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { InquiryForm } from '@/components/ui/InquiryForm';
+import { EmploymentApplicationForm } from '@/components/ui/EmploymentApplicationForm';
 import { FadeIn, LineDraw, StaggerContainer, StaggerItem } from '@/components/ui/Motion';
 import { createPageMetadata } from '@/lib/seo';
 
@@ -134,7 +134,7 @@ export default function CareersPage() {
 
           <FadeIn delay={0.16}>
             <div className="rounded-2xl border border-white/10 bg-brand-forest-mid/65 p-5 shadow-2xl shadow-black/15 sm:p-8">
-              <InquiryForm defaultType="employment" source="careers-page" />
+              <EmploymentApplicationForm />
             </div>
           </FadeIn>
         </div>

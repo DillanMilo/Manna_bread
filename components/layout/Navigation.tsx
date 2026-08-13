@@ -31,15 +31,12 @@ export function Navigation() {
   }, [mobileMenuOpen]);
 
   return (
-    <motion.nav
+    <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
           ? 'bg-brand-forest/95 sm:backdrop-blur-md shadow-sm border-b border-white/10'
           : 'bg-brand-forest border-b border-white/10'
       }`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
         <div className="flex items-center justify-between h-16 lg:h-20">
@@ -55,12 +52,9 @@ export function Navigation() {
           </Link>
 
           <div className="hidden lg:flex items-center gap-5 xl:gap-7">
-            {NAV_LINKS.map((link, i) => (
-              <motion.div
+            {NAV_LINKS.map((link) => (
+              <div
                 key={link.href}
-                initial={{ opacity: 0, filter: 'blur(4px)' }}
-                animate={{ opacity: 1, filter: 'blur(0px)' }}
-                transition={{ delay: i * 0.07 + 0.35, duration: 0.55, ease: [0.25, 0.4, 0.25, 1] }}
               >
                 <Link
                   href={link.href}
@@ -69,16 +63,13 @@ export function Navigation() {
                   {link.label}
                   <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-brand-gold transition-all duration-300 group-hover:w-full" />
                 </Link>
-              </motion.div>
+              </div>
             ))}
           </div>
 
           {FEATURES.onlineOrdering && (
-            <motion.div
+            <div
               className="hidden lg:flex items-center gap-3"
-              initial={{ opacity: 0, filter: 'blur(4px)' }}
-              animate={{ opacity: 1, filter: 'blur(0px)' }}
-              transition={{ delay: 0.75, duration: 0.55, ease: [0.25, 0.4, 0.25, 1] }}
             >
             <a
               href={TOAST.signIn}
@@ -107,7 +98,7 @@ export function Navigation() {
             <Button href={TOAST.orderOnline} external variant="primary" size="sm" className="shadow-[0_0_16px_rgba(196,149,106,0.4)]">
               Order Online
             </Button>
-            </motion.div>
+            </div>
           )}
 
           <button
@@ -200,6 +191,6 @@ export function Navigation() {
           )}
         </AnimatePresence>
       </div>
-    </motion.nav>
+    </nav>
   );
 }

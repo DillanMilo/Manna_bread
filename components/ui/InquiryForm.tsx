@@ -619,7 +619,7 @@ function formatDisplayDate(date: Date) {
   });
 }
 
-async function getRecaptchaToken() {
+export async function getRecaptchaToken() {
   if (!recaptchaSiteKey || typeof window === 'undefined') {
     return '';
   }
