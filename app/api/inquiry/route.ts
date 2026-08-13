@@ -50,6 +50,17 @@ type RecaptchaResponse = {
   action?: string;
   'error-codes'?: string[];
 };
+type RecaptchaAssessmentResponse = {
+  tokenProperties?: {
+    valid?: boolean;
+    invalidReason?: string;
+    action?: string;
+  };
+  riskAnalysis?: {
+    score?: number;
+    reasons?: string[];
+  };
+};
 type RecaptchaResult = {
   ok: boolean;
   error?: string;
@@ -592,9 +603,11 @@ function pruneRateLimitStore(now: number) {
 }
 
 async function verifyRecaptcha(token: unknown, request: Request): Promise<RecaptchaResult> {
+  const enterpriseApiKey = process.env.RECAPTCHA_ENTERPRISE_API_KEY?.trim();
+  const projectId = process.env.RECAPTCHA_PROJECT_ID?.trim();
   const secretKey = process.env.RECAPTCHA_SECRET_KEY?.trim();
 
-  if (!secretKey) {
+  if (!enterpriseApiKey && !secretKey) {
     return { ok: true };
   }
 
@@ -605,6 +618,18 @@ async function verifyRecaptcha(token: unknown, request: Request): Promise<Recapt
       ok: false,
       error: 'Please verify the form and try again.',
       reason: 'missing-token',
+    };
+  }
+
+  if (enterpriseApiKey && projectId) {
+    return verifyRecaptchaAssessment(recaptchaToken, request, enterpriseApiKey, projectId);
+  }
+
+  if (!secretKey) {
+    return {
+      ok: false,
+      error: 'Please verify the form and try again.',
+      reason: 'verification-not-configured',
     };
   }
 
@@ -653,6 +678,105 @@ async function verifyRecaptcha(token: unknown, request: Request): Promise<Recapt
         error: 'Please verify the form and try again.',
         reason: 'score-below-threshold',
         score: result.score,
+        minimumScore,
+      };
+    }
+
+    return { ok: true };
+  } catch {
+    return {
+      ok: false,
+      error: 'Please verify the form and try again.',
+      reason: 'verification-request-failed',
+    };
+  }
+}
+
+async function verifyRecaptchaAssessment(
+  recaptchaToken: string,
+  request: Request,
+  apiKey: string,
+  projectId: string,
+): Promise<RecaptchaResult> {
+  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY?.trim();
+
+  if (!siteKey) {
+    return {
+      ok: false,
+      error: 'Please verify the form and try again.',
+      reason: 'verification-not-configured',
+    };
+  }
+
+  const clientIp = getClientIp(request);
+  const userAgent = request.headers.get('user-agent')?.trim();
+  const event: Record<string, string> = {
+    token: recaptchaToken,
+    siteKey,
+    expectedAction: recaptchaAction,
+  };
+
+  if (clientIp !== 'unknown') event.userIpAddress = clientIp;
+  if (userAgent) event.userAgent = userAgent;
+
+  try {
+    const response = await fetch(
+      `https://recaptchaenterprise.googleapis.com/v1/projects/${encodeURIComponent(projectId)}/assessments?key=${encodeURIComponent(apiKey)}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ event }),
+      },
+    );
+
+    if (!response.ok) {
+      return {
+        ok: false,
+        error: 'Please verify the form and try again.',
+        reason: 'verification-request-failed',
+        errors: [`http-${response.status}`],
+      };
+    }
+
+    const result = (await response.json()) as RecaptchaAssessmentResponse;
+    const minimumScore = Number(process.env.RECAPTCHA_MIN_SCORE?.trim() || '0.5');
+    const score = result.riskAnalysis?.score;
+    const action = result.tokenProperties?.action;
+
+    if (!result.tokenProperties?.valid) {
+      return {
+        ok: false,
+        error: 'Please verify the form and try again.',
+        reason: 'google-failed',
+        errors: result.tokenProperties?.invalidReason
+          ? [result.tokenProperties.invalidReason]
+          : result.riskAnalysis?.reasons,
+      };
+    }
+
+    if (action !== recaptchaAction) {
+      return {
+        ok: false,
+        error: 'Please verify the form and try again.',
+        reason: 'action-mismatch',
+        action,
+      };
+    }
+
+    if (typeof score !== 'number') {
+      return {
+        ok: false,
+        error: 'Please verify the form and try again.',
+        reason: 'missing-score',
+      };
+    }
+
+    if (score < minimumScore) {
+      return {
+        ok: false,
+        error: 'Please verify the form and try again.',
+        reason: 'score-below-threshold',
+        score,
         minimumScore,
       };
     }
