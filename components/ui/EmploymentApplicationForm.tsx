@@ -258,7 +258,10 @@ export function EmploymentApplicationForm() {
         ) : (
           <button
             type="button"
-            onClick={goForward}
+            onClick={(event) => {
+              event.preventDefault();
+              goForward();
+            }}
             className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-lg bg-brand-gold px-7 py-3 font-body text-sm font-semibold text-brand-forest transition-colors hover:bg-brand-cognac-light"
           >
             Continue
