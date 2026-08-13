@@ -592,7 +592,7 @@ function pruneRateLimitStore(now: number) {
 }
 
 async function verifyRecaptcha(token: unknown, request: Request): Promise<RecaptchaResult> {
-  const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+  const secretKey = process.env.RECAPTCHA_SECRET_KEY?.trim();
 
   if (!secretKey) {
     return { ok: true };
@@ -627,7 +627,7 @@ async function verifyRecaptcha(token: unknown, request: Request): Promise<Recapt
       body,
     });
     const result = (await response.json()) as RecaptchaResponse;
-    const minimumScore = Number(process.env.RECAPTCHA_MIN_SCORE ?? '0.5');
+    const minimumScore = Number(process.env.RECAPTCHA_MIN_SCORE?.trim() || '0.5');
 
     if (!result.success) {
       return {
@@ -668,7 +668,7 @@ async function verifyRecaptcha(token: unknown, request: Request): Promise<Recapt
 }
 
 function isRecaptchaMonitorMode() {
-  const mode = process.env.RECAPTCHA_MODE?.toLowerCase();
+  const mode = process.env.RECAPTCHA_MODE?.trim().toLowerCase();
 
   return mode === 'monitor' || mode === 'off' || mode === 'false';
 }
