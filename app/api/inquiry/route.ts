@@ -536,6 +536,10 @@ function clean(value: unknown) {
   return typeof value === 'string' ? value.trim().slice(0, 2000) : '';
 }
 
+function cleanRecaptchaToken(value: unknown) {
+  return typeof value === 'string' ? value.trim().slice(0, 10000) : '';
+}
+
 function splitEmails(value: string) {
   return value
     .split(',')
@@ -611,7 +615,7 @@ async function verifyRecaptcha(token: unknown, request: Request): Promise<Recapt
     return { ok: true };
   }
 
-  const recaptchaToken = clean(token);
+  const recaptchaToken = cleanRecaptchaToken(token);
 
   if (!recaptchaToken) {
     return {
