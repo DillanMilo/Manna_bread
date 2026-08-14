@@ -107,12 +107,14 @@ const referenceFields = (number: 1 | 2): EmploymentApplicationContent[] => [
     label: `Name of Reference #${number}`,
     emailLabel: `Reference #${number} — name`,
     type: 'text',
+    required: true,
   },
   {
     name: `reference${number}Contact`,
     label: 'Phone Number or Email address',
     emailLabel: `Reference #${number} — phone or email`,
     type: 'text',
+    required: true,
   },
 ];
 

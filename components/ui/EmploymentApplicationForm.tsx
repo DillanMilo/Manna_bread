@@ -18,6 +18,8 @@ const inputClass =
   'w-full rounded-lg border border-white/12 bg-brand-forest/70 px-4 py-3 font-body text-sm text-white placeholder:text-white/40 outline-none transition-colors focus:border-brand-gold/70';
 const labelClass =
   'mb-2 block font-body text-[11px] font-semibold uppercase tracking-[1.5px] text-brand-gold/85';
+const longLabelClass =
+  'mb-2 block font-body text-[13px] font-semibold leading-relaxed tracking-[0.3px] text-brand-gold/85';
 
 export function EmploymentApplicationForm() {
   const [step, setStep] = useState(0);
@@ -274,11 +276,12 @@ export function EmploymentApplicationForm() {
 
 function ApplicationField({ field }: { field: EmploymentApplicationField }) {
   const isWide = field.type === 'textarea' || field.type === 'radio' || field.type === 'checkbox';
+  const fieldLabelClass = field.label.length > 65 ? longLabelClass : labelClass;
 
   if (field.type === 'textarea') {
     return (
       <label className="block sm:col-span-2">
-        <span className={labelClass}>{field.label}{field.required ? ' *' : ''}</span>
+        <span className={fieldLabelClass}>{field.label}{field.required ? ' *' : ''}</span>
         {field.helpText ? <span className="mb-2 block font-body text-xs leading-relaxed text-white/55">{field.helpText}</span> : null}
         <textarea name={field.name} required={field.required} rows={4} className={`${inputClass} resize-y leading-relaxed`} placeholder={field.placeholder} />
       </label>
@@ -288,7 +291,7 @@ function ApplicationField({ field }: { field: EmploymentApplicationField }) {
   if (field.type === 'radio' || field.type === 'checkbox') {
     return (
       <div className={isWide ? 'sm:col-span-2' : ''}>
-        <p className={labelClass}>{field.label}{field.required ? ' *' : ''}</p>
+        <p className={fieldLabelClass}>{field.label}{field.required ? ' *' : ''}</p>
         {field.helpText ? <p className="mb-2 font-body text-xs leading-relaxed text-white/55">{field.helpText}</p> : null}
         <div className="grid gap-2 sm:grid-cols-2">
           {field.options?.map((option) => (
@@ -311,7 +314,7 @@ function ApplicationField({ field }: { field: EmploymentApplicationField }) {
   if (field.type === 'select') {
     return (
       <label className="block">
-        <span className={labelClass}>{field.label}</span>
+        <span className={fieldLabelClass}>{field.label}</span>
         {field.helpText ? <span className="mb-2 block font-body text-xs leading-relaxed text-white/55">{field.helpText}</span> : null}
         <select name={field.name} defaultValue="" className={inputClass}>
           <option value="">Not available</option>
@@ -323,7 +326,7 @@ function ApplicationField({ field }: { field: EmploymentApplicationField }) {
 
   return (
     <label className="block">
-      <span className={labelClass}>{field.label}{field.required ? ' *' : ''}</span>
+      <span className={fieldLabelClass}>{field.label}{field.required ? ' *' : ''}</span>
       {field.helpText ? <span className="mb-2 block font-body text-xs leading-relaxed text-white/55">{field.helpText}</span> : null}
       <input
         name={field.name}
