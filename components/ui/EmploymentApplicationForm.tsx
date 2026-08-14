@@ -104,14 +104,13 @@ export function EmploymentApplicationForm() {
       }
     }
 
-    const firstName = String(formData.get('firstName') ?? '').trim();
-    const lastName = String(formData.get('lastName') ?? '').trim();
+    const fullName = String(formData.get('fullName') ?? '').trim();
     const payload: Record<string, unknown> = {
       inquiryType: 'employment',
       source: 'careers-page',
       startedAt,
       company: formData.get('company'),
-      name: `${firstName} ${lastName}`.trim(),
+      name: fullName,
       email: formData.get('email'),
       phone: formData.get('primaryPhone'),
       message: formData.get('whyManna') || 'Employment application submitted.',
@@ -197,7 +196,7 @@ export function EmploymentApplicationForm() {
       <div>
         <p className="font-display text-2xl font-medium text-white sm:text-3xl">{section.title}</p>
         {section.description ? (
-          <p className="mt-3 max-w-2xl font-body text-sm leading-relaxed text-white/65">{section.description}</p>
+          <p className="mt-3 max-w-2xl whitespace-pre-line font-body text-sm leading-relaxed text-white/65">{section.description}</p>
         ) : null}
       </div>
 
@@ -219,7 +218,7 @@ export function EmploymentApplicationForm() {
 
             if (content.type === 'note') {
               return (
-                <p key={`${content.label}-${index}`} className="rounded-xl border border-brand-gold/20 bg-brand-gold/[0.06] p-4 font-body text-sm leading-relaxed text-white/70 sm:col-span-2">
+                <p key={`${content.label}-${index}`} className="whitespace-pre-line rounded-xl border border-brand-gold/20 bg-brand-gold/[0.06] p-4 font-body text-sm leading-relaxed text-white/70 sm:col-span-2">
                   {content.label}
                 </p>
               );
@@ -280,6 +279,7 @@ function ApplicationField({ field }: { field: EmploymentApplicationField }) {
     return (
       <label className="block sm:col-span-2">
         <span className={labelClass}>{field.label}{field.required ? ' *' : ''}</span>
+        {field.helpText ? <span className="mb-2 block font-body text-xs leading-relaxed text-white/55">{field.helpText}</span> : null}
         <textarea name={field.name} required={field.required} rows={4} className={`${inputClass} resize-y leading-relaxed`} placeholder={field.placeholder} />
       </label>
     );
@@ -289,6 +289,7 @@ function ApplicationField({ field }: { field: EmploymentApplicationField }) {
     return (
       <div className={isWide ? 'sm:col-span-2' : ''}>
         <p className={labelClass}>{field.label}{field.required ? ' *' : ''}</p>
+        {field.helpText ? <p className="mb-2 font-body text-xs leading-relaxed text-white/55">{field.helpText}</p> : null}
         <div className="grid gap-2 sm:grid-cols-2">
           {field.options?.map((option) => (
             <label key={option} className="flex min-h-[44px] cursor-pointer items-center gap-3 rounded-lg border border-white/12 bg-brand-forest/50 px-4 py-3 font-body text-sm text-white/80 transition-colors hover:border-brand-gold/35">
@@ -311,6 +312,7 @@ function ApplicationField({ field }: { field: EmploymentApplicationField }) {
     return (
       <label className="block">
         <span className={labelClass}>{field.label}</span>
+        {field.helpText ? <span className="mb-2 block font-body text-xs leading-relaxed text-white/55">{field.helpText}</span> : null}
         <select name={field.name} defaultValue="" className={inputClass}>
           <option value="">Not available</option>
           {field.options?.map((option) => <option key={option} value={option}>{option}</option>)}
@@ -322,6 +324,7 @@ function ApplicationField({ field }: { field: EmploymentApplicationField }) {
   return (
     <label className="block">
       <span className={labelClass}>{field.label}{field.required ? ' *' : ''}</span>
+      {field.helpText ? <span className="mb-2 block font-body text-xs leading-relaxed text-white/55">{field.helpText}</span> : null}
       <input
         name={field.name}
         required={field.required}
