@@ -35,12 +35,12 @@ export default function CareersPage() {
     <main className="min-h-screen overflow-hidden bg-brand-forest">
       <section className="relative isolate min-h-[78svh] overflow-hidden pt-16 lg:pt-20">
         <Image
-          src="/images/manna-kitchen-team.webp"
-          alt="Manna team members working together in the bakery kitchen"
+          src="/images/IMG_0902.jpg"
+          alt="A lively day inside Manna Bakery with guests and team members throughout the cafe"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[center_34%]"
+          className="object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#111a15]/95 via-[#18231d]/78 to-[#18231d]/25" />
         <div className="absolute inset-0 bg-gradient-to-t from-brand-forest via-transparent to-transparent" />
