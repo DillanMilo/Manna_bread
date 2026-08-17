@@ -89,9 +89,9 @@ const SANDWICH_PLATTERS: CateringCategory = {
   title: 'Sandwich Platters',
   description: 'Platters include one dozen sandwiches. Up to two selections per tray.',
   sizes: [
-    { name: 'Mini', detail: 'Cut into quarters', price: '$35' },
-    { name: 'Medium', detail: 'Cut in half', price: '$55' },
-    { name: 'Full Size', detail: 'Full sandwiches', price: '$85' },
+    { name: 'Mini', detail: '12 quarter-size sandwiches', price: '$35' },
+    { name: 'Medium', detail: '12 half-size sandwiches', price: '$55' },
+    { name: 'Full Size', detail: '12 full-size sandwiches', price: '$85' },
   ],
   items: [],
   subsections: [
