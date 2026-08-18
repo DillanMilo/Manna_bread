@@ -4,7 +4,7 @@ import { FadeIn, LineDraw, StaggerContainer, StaggerItem } from '@/components/ui
 import { createPageMetadata } from '@/lib/seo';
 
 export const metadata = createPageMetadata(
-  'Join Our Team',
+  'Bakery Jobs in Tomball',
   'Explore working at Manna Bakery in Tomball and introduce yourself to the team.',
   '/careers',
 );

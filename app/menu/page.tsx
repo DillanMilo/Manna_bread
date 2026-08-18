@@ -6,7 +6,7 @@ import { createMenuStructuredData, serializeStructuredData } from '@/lib/structu
 const menuStructuredData = createMenuStructuredData(menuData);
 
 export const metadata = createPageMetadata(
-  'Menu',
+  'Bakery & Cafe Menu in Tomball',
   'Explore Manna Bakery’s current breakfast, lunch, coffee, tea, and house-made favorites.',
   '/menu',
 );

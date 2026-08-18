@@ -4,7 +4,7 @@ import { TOAST } from '@/lib/constants';
 import { createPageMetadata } from '@/lib/seo';
 
 export const metadata = createPageMetadata(
-  'Gift Cards',
+  'Bakery Gift Cards',
   'Give the gift of Manna Bakery with a digital gift card for handcrafted food, warm hospitality, and time together.',
   '/gift-cards',
 );

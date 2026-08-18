@@ -2,7 +2,7 @@ import { Contact } from '@/components/sections/Contact';
 import { createPageMetadata } from '@/lib/seo';
 
 export const metadata = createPageMetadata(
-  'Contact',
+  'Visit Manna Bakery in Tomball',
   'Plan a visit or get in touch with Manna Bakery at 306 Commerce Street in Tomball, Texas.',
   '/contact',
 );
