@@ -36,7 +36,7 @@ The wording uses only verified facts: Manna Bakery is in Tomball and offers a ba
 
 ## Next priority
 
-Reconcile access to the GA4 property receiving `G-TM9DZFLC2P`. Once the matching GA4 property is visible and Dillan approves the exact release, deploy the metadata-only update, verify the six titles in production, and request recrawling for `/menu`, `/catering`, `/rentals`, and `/contact`.
+The approved metadata-only release is live and verified. Monitor local-query and landing-page performance, then request recrawling for `/menu`, `/catering`, `/rentals`, and `/contact` when Dillan approves the Search Console action.
 
 ## Constraints
 

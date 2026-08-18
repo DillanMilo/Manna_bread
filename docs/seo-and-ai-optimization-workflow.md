@@ -56,6 +56,6 @@ Durable project-specific guidance for recurring SEO, AEO, GEO, local discovery, 
 
 ## Update log
 
-- **2026-08-18, analytics verification:** Production emits GA4 measurement ID `G-TM9DZFLC2P`, the exact `https://mannabread.com/` Search Console property is accessible, and the production sitemap returns HTTP 200. The matching Manna GA4 property was not visible in the signed-in GA4 universal picker during this check, so dashboard access/linkage must be reconciled before calling the release fully verified.
+- **2026-08-18, production verification:** GA4 Favorites exposes `Manna Bread` and is receiving data (visible last-seven-day cards: 699 active users, 25 key events, and 5.6K events). Production emits measurement ID `G-TM9DZFLC2P`; the exact `https://mannabread.com/` Search Console property is accessible; the sitemap returns HTTP 200. Commit `1a97a13` was pushed to `main`, its ready Vercel deployment was promoted, `mannabread.com` and `www.mannabread.com` were assigned to that exact deployment, and the live menu metadata updated while visible page content remained unchanged.
 - **2026-08-18, v2.1 audit:** Reconfirmed healthy public crawl, sitemap, canonical, H1, and structured-data foundations. Updated priority metadata titles to express verified Tomball/local intent for menu, catering, rentals, contact, careers, and bakery gift cards. Visible page copy and conversion flows remain unchanged.
 - **2026-08-18:** Baseline file created under the updated Optimization Workflow. No new audit finding or production change is implied by file creation.
