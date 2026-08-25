@@ -11,6 +11,7 @@
 - [Gift Cards](https://mannabread.com/gift-cards): The official path to purchase a Manna Bakery gift card.
 - [Private Rentals](https://mannabread.com/rentals): Spaces, capacity, policies, pricing, and the rental inquiry form.
 - [Contact and Visit](https://mannabread.com/contact): Address, hours, phone, email, directions, and the general inquiry form.
+- [Careers](https://mannabread.com/careers): Manna Bakery's current team introduction and employment application page.
 
 ## Verified business details
 
@@ -21,4 +22,3 @@
 - Email: support@mannabread.com
 - Hours: Monday through Friday, 6:00 AM–4:00 PM; Saturday, 7:00 AM–4:00 PM; closed Sunday.
 - The website currently presents the in-store menu for reference; live online ordering is not enabled.
-
