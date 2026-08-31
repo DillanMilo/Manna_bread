@@ -23,6 +23,7 @@ export function createPageMetadata(
       canonical: path,
     },
     openGraph: {
+      type: 'website',
       title: `${title} | ${BRAND.name}`,
       description,
       url: path,

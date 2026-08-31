@@ -68,6 +68,12 @@ export function createSiteStructuredData(): StructuredData {
             opens: '07:00',
             closes: '16:00',
           },
+          {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: 'https://schema.org/Sunday',
+            opens: '00:00',
+            closes: '00:00',
+          },
         ],
         founder: {
           '@type': 'Person',

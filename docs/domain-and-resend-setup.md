@@ -136,10 +136,10 @@ Current email behavior:
 - The visitor receives a confirmation email at the email address they entered after the internal notification succeeds.
 - If the visitor confirmation email fails, the inquiry still succeeds and the failure is logged in Vercel.
 
-Current code items to revisit before launch:
+Current code notes (checked locally 2026-08-31; no production settings changed):
 
-- `lib/constants.ts` now uses `hello@mannabread.com` as the public fallback contact email.
-- `app/layout.tsx` uses `NEXT_PUBLIC_SITE_URL` when set, then Vercel's production/deployment URL, then `https://manna-bread.vercel.app` as the local fallback for metadata.
+- `lib/constants.ts` uses `support@mannabread.com` as the public contact email. This does not establish the current private inquiry destination.
+- `lib/siteUrl.ts` normalizes an explicit `NEXT_PUBLIC_SITE_URL` to an HTTP(S) origin and otherwise defaults to `https://mannabread.com`, including for blank or invalid values. Vercel deployment hostnames are not canonical fallbacks. Metadata, robots.txt, sitemap.xml, and JSON-LD share this helper. The user subsequently authorized its release on 2026-08-31; the earlier audit describes the pre-release state.
 - Confirm whether Christin wants inquiries to continue going to `hello@mannabread.com` or move to a more specific operations inbox.
 - Add Google reCAPTCHA v3 keys to Vercel if Christin wants CAPTCHA enforcement before launch.
 
