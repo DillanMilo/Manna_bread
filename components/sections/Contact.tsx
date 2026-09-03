@@ -52,9 +52,7 @@ export function Contact({ headingLevel = 'h2' }: ContactProps) {
                     Hours
                   </p>
                   <p className="font-body text-base text-white/85 leading-relaxed">
-                    Monday – Friday: {CONTACT.hours.weekdays}
-                    <br />
-                    Saturday: {CONTACT.hours.saturday}
+                    Monday – Saturday: {CONTACT.hours.mondayThroughSaturday}
                     <br />
                     Sunday: {CONTACT.hours.sunday}
                   </p>

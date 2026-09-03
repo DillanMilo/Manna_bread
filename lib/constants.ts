@@ -21,8 +21,7 @@ export const CONTACT = {
   phone: '(832) 843-3999',
   email: 'support@mannabread.com',
   hours: {
-    weekdays: '6:00 AM – 4:00 PM',
-    saturday: '7:00 AM – 4:00 PM',
+    mondayThroughSaturday: '7:00 AM – 4:00 PM',
     sunday: 'Closed',
   },
 };

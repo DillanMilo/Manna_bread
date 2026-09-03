@@ -14,6 +14,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { InquirySection } from '@/components/sections/InquirySection';
 import { FloatingInquiryButton } from '@/components/ui/FloatingInquiryButton';
+import { CONTACT } from '@/lib/constants';
 import { formatDisplayPrice } from '@/lib/pricing';
 
 /* ─── rental images ─── */
@@ -302,7 +303,7 @@ export default function RentalsPage() {
                   <DetailItem label="Availability" value="Monday - Saturday" />
                   <DetailItem
                     label="Hours"
-                    value="Monday - Friday, 6am - 4pm; Saturday, 7am - 4pm"
+                    value={`Monday - Saturday, ${CONTACT.hours.mondayThroughSaturday}`}
                   />
                   <DetailItem label="Capacity" value="Up to 14 guests" />
                 </div>
