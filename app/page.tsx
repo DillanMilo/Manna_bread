@@ -1,6 +1,6 @@
 import { createPageMetadata } from '@/lib/seo';
 import { Hero } from '@/components/sections/Hero';
-import { LaborDayBanner } from '@/components/sections/LaborDayBanner';
+import { AnnouncementBanner } from '@/components/sections/AnnouncementBanner';
 import { Story } from '@/components/sections/Story';
 import { WelcomeInterlude } from '@/components/sections/WelcomeInterlude';
 import { FeaturedMenu } from '@/components/sections/FeaturedMenu';
@@ -12,6 +12,8 @@ import { FounderInterlude } from '@/components/sections/FounderInterlude';
 import { Services } from '@/components/sections/Services';
 import { Contact } from '@/components/sections/Contact';
 
+const LABOR_DAY_BANNER_ENDS_AT = '2026-09-08T00:01:00-05:00';
+
 export const metadata = createPageMetadata(
   'Bread from Heaven',
   'Manna Bakery is a handcrafted bakery, café, and gathering place in Tomball, Texas—made for good food, unhurried moments, and community.',
@@ -21,7 +23,12 @@ export const metadata = createPageMetadata(
 export default function HomePage() {
   return (
     <main>
-      <LaborDayBanner />
+      <AnnouncementBanner
+        eyebrow="A holiday pause"
+        heading="Manna will be closed for Labor Day"
+        message="Monday, September 7 · We look forward to gathering with you again Tuesday."
+        endsAt={LABOR_DAY_BANNER_ENDS_AT}
+      />
       <Hero />
       <Story />
       <WelcomeInterlude />

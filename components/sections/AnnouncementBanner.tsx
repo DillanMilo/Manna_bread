@@ -1,6 +1,16 @@
 'use client';
 
+import { useId } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
+import { TimedVisibility } from '@/components/ui/TimedVisibility';
+
+interface AnnouncementBannerProps {
+  eyebrow: string;
+  heading: string;
+  message: string;
+  startsAt?: string;
+  endsAt?: string;
+}
 
 interface BotanicalSprigProps {
   mirrored?: boolean;
@@ -54,16 +64,26 @@ function BotanicalSprig({ mirrored = false, reduceMotion = false }: BotanicalSpr
   );
 }
 
-export function LaborDayBanner() {
+export function AnnouncementBanner({
+  eyebrow,
+  heading,
+  message,
+  startsAt,
+  endsAt,
+}: AnnouncementBannerProps) {
   const prefersReducedMotion = useReducedMotion();
+  const headingId = useId();
 
   return (
-    <section
-      aria-labelledby="labor-day-heading"
-      className="relative z-40 bg-brand-forest pt-16 lg:pt-20"
-    >
+    <TimedVisibility startsAt={startsAt} endsAt={endsAt}>
+      <section
+        aria-labelledby={headingId}
+        className="relative z-40 bg-brand-forest pt-16 lg:pt-20"
+      >
       <motion.div
-        data-labor-day-banner
+        data-announcement-banner
+        data-visible-from={startsAt}
+        data-visible-until={endsAt}
         className="relative isolate overflow-hidden border-y border-brand-gold/30 bg-[linear-gradient(105deg,#25352C_0%,#1E2A23_48%,#2F3E36_100%)] px-5 py-5 sm:px-8 sm:py-6"
         initial={
           prefersReducedMotion
@@ -179,10 +199,10 @@ export function LaborDayBanner() {
               animate={{ opacity: 1, letterSpacing: '0.26em' }}
               transition={{ duration: 0.85, delay: 0.72, ease: 'easeOut' }}
             >
-              A holiday pause
+              {eyebrow}
             </motion.p>
             <h2
-              id="labor-day-heading"
+              id={headingId}
               className="overflow-hidden font-display text-xl font-medium leading-tight text-brand-warm-white sm:text-2xl"
             >
               <motion.span
@@ -191,7 +211,7 @@ export function LaborDayBanner() {
                 animate={{ opacity: 1, y: '0%' }}
                 transition={{ duration: 0.85, delay: 0.82, ease: [0.22, 0.76, 0.24, 1] }}
               >
-                Manna will be closed for Labor Day
+                {heading}
               </motion.span>
             </h2>
             <motion.p
@@ -200,7 +220,7 @@ export function LaborDayBanner() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.75, delay: 1.18, ease: 'easeOut' }}
             >
-              Monday, September 7 · We look forward to gathering with you again Tuesday.
+              {message}
             </motion.p>
           </div>
 
@@ -213,7 +233,8 @@ export function LaborDayBanner() {
             aria-hidden="true"
           />
         </div>
-      </motion.div>
-    </section>
+        </motion.div>
+      </section>
+    </TimedVisibility>
   );
 }
