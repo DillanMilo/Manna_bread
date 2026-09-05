@@ -12,7 +12,7 @@ import { FounderInterlude } from '@/components/sections/FounderInterlude';
 import { Services } from '@/components/sections/Services';
 import { Contact } from '@/components/sections/Contact';
 
-const LABOR_DAY_BANNER_ENDS_AT_UTC = '2026-09-08T00:01:00Z';
+const LABOR_DAY_BANNER_ENDS_AT_CENTRAL = '2026-09-08T00:01:00-05:00';
 
 export const metadata = createPageMetadata(
   'Bread from Heaven',
@@ -27,7 +27,7 @@ export default function HomePage() {
         eyebrow="A holiday pause"
         heading="Manna will be closed for Labor Day"
         message="Monday, September 7 · We look forward to gathering with you again Tuesday."
-        endsAt={LABOR_DAY_BANNER_ENDS_AT_UTC}
+        endsAt={LABOR_DAY_BANNER_ENDS_AT_CENTRAL}
       />
       <Hero />
       <Story />
