@@ -82,8 +82,6 @@ export function AnnouncementBanner({
       >
       <motion.div
         data-announcement-banner
-        data-visible-from={startsAt}
-        data-visible-until={endsAt}
         className="relative isolate overflow-hidden border-y border-brand-gold/30 bg-[linear-gradient(105deg,#25352C_0%,#1E2A23_48%,#2F3E36_100%)] px-5 py-5 sm:px-8 sm:py-6"
         initial={
           prefersReducedMotion
