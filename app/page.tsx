@@ -1,5 +1,6 @@
 import { createPageMetadata } from '@/lib/seo';
 import { Hero } from '@/components/sections/Hero';
+import { LaborDayBanner } from '@/components/sections/LaborDayBanner';
 import { Story } from '@/components/sections/Story';
 import { WelcomeInterlude } from '@/components/sections/WelcomeInterlude';
 import { FeaturedMenu } from '@/components/sections/FeaturedMenu';
@@ -20,6 +21,7 @@ export const metadata = createPageMetadata(
 export default function HomePage() {
   return (
     <main>
+      <LaborDayBanner />
       <Hero />
       <Story />
       <WelcomeInterlude />
