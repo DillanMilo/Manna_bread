@@ -1,0 +1,2128 @@
+{
+  "checked_at": "2026-09-08",
+  "requests": [
+    {
+      "key": "home",
+      "url": "https://mannabread.com/",
+      "status": "200",
+      "error": "",
+      "headers": "HTTP/2 200 \naccept-ranges: bytes\naccess-control-allow-origin: *\nage: 272427\ncache-control: public, max-age=0, must-revalidate\ncontent-disposition: inline\ncontent-type: text/html; charset=utf-8\ndate: Tue, 08 Sep 2026 18:24:37 GMT\netag: \"25e02e8a92e7bcd721935d76e2f0a1e7\"\npermissions-policy: camera=(), microphone=(), geolocation=()\nreferrer-policy: strict-origin-when-cross-origin\nserver: Vercel\nstrict-transport-security: max-age=63072000; includeSubDomains\nvary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch\nx-content-type-options: nosniff\nx-matched-path: /\nx-nextjs-prerender: 1\nx-nextjs-stale-time: 300\nx-vercel-cache: HIT\nx-vercel-id: cle1::2xd7f-1788891877399-630380b31f34\ncontent-length: 122303\n\n",
+      "title": "Bread from Heaven | Manna Bakery",
+      "description": "Manna Bakery is a handcrafted bakery, caf\u00e9, and gathering place in Tomball, Texas\u2014made for good food, unhurried moments, and community.",
+      "canonical": [
+        "https://mannabread.com"
+      ],
+      "robots": null,
+      "og_type": "website",
+      "og_image": "https://mannabread.com/images/manna-logo-share.png?v=20260727",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "links": [
+        "/",
+        "/careers",
+        "/catering",
+        "/contact",
+        "/gift-cards",
+        "/menu",
+        "/our-story",
+        "/rentals",
+        "https://order.toasttab.com/egiftcards/manna-bread-from-heaven-306-commerce-st",
+        "https://www.dillanmilo.com/",
+        "https://www.facebook.com/share/18HD2Sg3WV/?mibextid=wwXIfr",
+        "https://www.google.com/maps/dir/?api=1&destination=Manna+Bread+from+Heaven,+306+Commerce+St,+Tomball,+TX+77375",
+        "https://www.instagram.com/manna_bakeries?igsh=am00OTF5cDB4aXAw",
+        "https://www.toasttab.com/manna-bread-from-heaven-306-commerce-st/rewardsLookup",
+        "mailto:support@mannabread.com",
+        "tel:8328433999"
+      ],
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Bakery",
+              "@id": "https://mannabread.com/#bakery",
+              "name": "Manna Bakery",
+              "alternateName": "Manna Bread From Heaven",
+              "url": "https://mannabread.com",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://mannabread.com/images/manna-logo-share.png",
+                "width": 1050,
+                "height": 600
+              },
+              "image": "https://mannabread.com/images/manna-storefront-exterior.webp",
+              "description": "Manna Bakery is a handcrafted bakery, cafe, and gathering place in Tomball, Texas.",
+              "telephone": "(832) 843-3999",
+              "email": "support@mannabread.com",
+              "priceRange": "$$",
+              "servesCuisine": [
+                "Bakery",
+                "Breakfast",
+                "Lunch",
+                "Coffee"
+              ],
+              "hasMenu": {
+                "@id": "https://mannabread.com/menu#menu"
+              },
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "306 Commerce St",
+                "addressLocality": "Tomball",
+                "addressRegion": "TX",
+                "postalCode": "77375",
+                "addressCountry": "US"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 30.0972,
+                "longitude": -95.6161
+              },
+              "openingHoursSpecification": [
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": [
+                    "https://schema.org/Monday",
+                    "https://schema.org/Tuesday",
+                    "https://schema.org/Wednesday",
+                    "https://schema.org/Thursday",
+                    "https://schema.org/Friday",
+                    "https://schema.org/Saturday"
+                  ],
+                  "opens": "07:00",
+                  "closes": "16:00"
+                },
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": "https://schema.org/Sunday",
+                  "opens": "00:00",
+                  "closes": "00:00"
+                }
+              ],
+              "founder": {
+                "@type": "Person",
+                "name": "Christin"
+              },
+              "hasMap": "https://www.google.com/maps/search/?api=1&query=Manna+Bread+from+Heaven,+306+Commerce+St,+Tomball,+TX+77375",
+              "sameAs": [
+                "https://www.instagram.com/manna_bakeries?igsh=am00OTF5cDB4aXAw",
+                "https://www.facebook.com/share/18HD2Sg3WV/?mibextid=wwXIfr"
+              ]
+            },
+            {
+              "@type": "WebSite",
+              "@id": "https://mannabread.com/#website",
+              "url": "https://mannabread.com",
+              "name": "Manna Bakery",
+              "alternateName": "Bread from Heaven",
+              "description": "The official website for Manna Bakery in Tomball, Texas.",
+              "inLanguage": "en-US",
+              "publisher": {
+                "@id": "https://mannabread.com/#bakery"
+              }
+            }
+          ]
+        }
+      ],
+      "expired_labor_day_in_initial_html": true
+    },
+    {
+      "key": "menu",
+      "url": "https://mannabread.com/menu",
+      "status": "200",
+      "error": "",
+      "headers": "HTTP/2 200 \naccept-ranges: bytes\naccess-control-allow-origin: *\nage: 271579\ncache-control: public, max-age=0, must-revalidate\ncontent-disposition: inline\ncontent-type: text/html; charset=utf-8\ndate: Tue, 08 Sep 2026 18:24:37 GMT\netag: \"55e36988f52064f1e832e402d0bd49d9\"\npermissions-policy: camera=(), microphone=(), geolocation=()\nreferrer-policy: strict-origin-when-cross-origin\nserver: Vercel\nstrict-transport-security: max-age=63072000; includeSubDomains\nvary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch\nx-content-type-options: nosniff\nx-matched-path: /menu\nx-nextjs-prerender: 1\nx-nextjs-stale-time: 300\nx-vercel-cache: HIT\nx-vercel-id: cle1::zbwn4-1788891877399-f19bd12d1902\ncontent-length: 121960\n\n",
+      "title": "Bakery & Cafe Menu in Tomball | Manna Bakery",
+      "description": "Explore Manna Bakery\u2019s current breakfast, lunch, coffee, tea, and house-made favorites.",
+      "canonical": [
+        "https://mannabread.com/menu"
+      ],
+      "robots": null,
+      "og_type": "website",
+      "og_image": "https://mannabread.com/images/manna-logo-share.png?v=20260727",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "links": [
+        "/",
+        "/careers",
+        "/catering",
+        "/contact",
+        "/gift-cards",
+        "/menu",
+        "/our-story",
+        "/rentals",
+        "https://order.toasttab.com/egiftcards/manna-bread-from-heaven-306-commerce-st",
+        "https://www.dillanmilo.com/",
+        "https://www.facebook.com/share/18HD2Sg3WV/?mibextid=wwXIfr",
+        "https://www.instagram.com/manna_bakeries?igsh=am00OTF5cDB4aXAw",
+        "https://www.toasttab.com/manna-bread-from-heaven-306-commerce-st/rewardsLookup"
+      ],
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Bakery",
+              "@id": "https://mannabread.com/#bakery",
+              "name": "Manna Bakery",
+              "alternateName": "Manna Bread From Heaven",
+              "url": "https://mannabread.com",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://mannabread.com/images/manna-logo-share.png",
+                "width": 1050,
+                "height": 600
+              },
+              "image": "https://mannabread.com/images/manna-storefront-exterior.webp",
+              "description": "Manna Bakery is a handcrafted bakery, cafe, and gathering place in Tomball, Texas.",
+              "telephone": "(832) 843-3999",
+              "email": "support@mannabread.com",
+              "priceRange": "$$",
+              "servesCuisine": [
+                "Bakery",
+                "Breakfast",
+                "Lunch",
+                "Coffee"
+              ],
+              "hasMenu": {
+                "@id": "https://mannabread.com/menu#menu"
+              },
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "306 Commerce St",
+                "addressLocality": "Tomball",
+                "addressRegion": "TX",
+                "postalCode": "77375",
+                "addressCountry": "US"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 30.0972,
+                "longitude": -95.6161
+              },
+              "openingHoursSpecification": [
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": [
+                    "https://schema.org/Monday",
+                    "https://schema.org/Tuesday",
+                    "https://schema.org/Wednesday",
+                    "https://schema.org/Thursday",
+                    "https://schema.org/Friday",
+                    "https://schema.org/Saturday"
+                  ],
+                  "opens": "07:00",
+                  "closes": "16:00"
+                },
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": "https://schema.org/Sunday",
+                  "opens": "00:00",
+                  "closes": "00:00"
+                }
+              ],
+              "founder": {
+                "@type": "Person",
+                "name": "Christin"
+              },
+              "hasMap": "https://www.google.com/maps/search/?api=1&query=Manna+Bread+from+Heaven,+306+Commerce+St,+Tomball,+TX+77375",
+              "sameAs": [
+                "https://www.instagram.com/manna_bakeries?igsh=am00OTF5cDB4aXAw",
+                "https://www.facebook.com/share/18HD2Sg3WV/?mibextid=wwXIfr"
+              ]
+            },
+            {
+              "@type": "WebSite",
+              "@id": "https://mannabread.com/#website",
+              "url": "https://mannabread.com",
+              "name": "Manna Bakery",
+              "alternateName": "Bread from Heaven",
+              "description": "The official website for Manna Bakery in Tomball, Texas.",
+              "inLanguage": "en-US",
+              "publisher": {
+                "@id": "https://mannabread.com/#bakery"
+              }
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Menu",
+          "@id": "https://mannabread.com/menu#menu",
+          "name": "Manna Bakery Menu",
+          "description": "The current breakfast, lunch, coffee, tea, and house-made favorites served at Manna Bakery in Tomball, Texas.",
+          "url": "https://mannabread.com/menu",
+          "inLanguage": "en-US",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://mannabread.com/menu"
+          },
+          "hasMenuSection": [
+            {
+              "@type": "MenuSection",
+              "name": "Drinks: Coffee & Espresso",
+              "description": "Standard espresso drinks are $6 small or $7 large.",
+              "hasMenuItem": [
+                {
+                  "@type": "MenuItem",
+                  "name": "House Drip"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Decaf Drip"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Espresso"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Americano"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Cortado"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Cold Brew"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Latte"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Cappuccino"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Italian Macchiato"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Flavored Macchiato"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Flat White"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Mocha"
+                }
+              ]
+            },
+            {
+              "@type": "MenuSection",
+              "name": "Drinks: Tea & Chocolate",
+              "hasMenuItem": [
+                {
+                  "@type": "MenuItem",
+                  "name": "European Hot Chocolate"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Simple Hot Chocolate"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Matcha Latte"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Chai Tea Latte"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "London Fog"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Iced Tea"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Brewed Tea",
+                  "description": "English Breakfast, Earl Grey, Mint Tea, or Decaf Black."
+                }
+              ]
+            },
+            {
+              "@type": "MenuSection",
+              "name": "Drinks: Milk",
+              "hasMenuItem": [
+                {
+                  "@type": "MenuItem",
+                  "name": "Skim Milk"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Whole Milk"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "2% Milk"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Heavy Cream"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Almond Milk"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Oat Milk"
+                }
+              ]
+            },
+            {
+              "@type": "MenuSection",
+              "name": "Drinks: Syrups",
+              "description": "$0.75 each. Sugar-free options are marked below.",
+              "hasMenuItem": [
+                {
+                  "@type": "MenuItem",
+                  "name": "Peppermint"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Butterscotch"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Lavender"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Toffee Nut"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Vanilla"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Strawberry"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Hazelnut"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Cinnamon Bun"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Chocolate"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Cookie Butter"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Caramel"
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Spiced Brown Sugar"
+                }
+              ]
+            },
+            {
+              "@type": "MenuSection",
+              "name": "Breakfast: Breakfast",
+              "hasMenuItem": [
+                {
+                  "@type": "MenuItem",
+                  "name": "Breakfast Taco",
+                  "description": "Warm flour tortilla stuffed with fluffy scrambled eggs, melted cheese, and your choice of bacon or sausage."
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Kolache",
+                  "description": "Soft, slightly sweet dough filled with savory sausage and melted cheese, available with or without jalape\u00f1o."
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Biscuits & Gravy",
+                  "description": "Fluffy house biscuits topped with creamy house sausage gravy seasoned with sage and pepper."
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Li\u00e8ge Waffle",
+                  "description": "A rich yeasted waffle with a caramelized sugar crust, paired with berries and whipped cream."
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Breakfast Sandwich",
+                  "description": "Egg and cheese with sausage or ham on sourdough bread, a croissant, or a biscuit."
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Quiche",
+                  "description": "A house favorite creamy egg custard. Available with bacon, sausage, veggies, meat lovers, or a seasonal flavor."
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Stuffed French Toast",
+                  "description": "Vanilla-battered house bread stuffed with sweet cream cheese, topped with strawberries and whipped cream. Syrup on the side. The gluten-free version is also eggless."
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Avocado Toast",
+                  "description": "Two slices of toasted artisan bread layered with fresh smashed avocado over a bed of arugula, finished with sliced tomato and everything seasoning."
+                }
+              ]
+            },
+            {
+              "@type": "MenuSection",
+              "name": "Breakfast: Scratch Pastries",
+              "description": "Our scratch pastries are self-serve from the bakery case."
+            },
+            {
+              "@type": "MenuSection",
+              "name": "Lunch: Sandwiches & House Favorites",
+              "hasMenuItem": [
+                {
+                  "@type": "MenuItem",
+                  "name": "The Italian",
+                  "description": "Fresh pepperoni, salami, ham, and provolone rolled with lettuce, pepperoncinis, red onion, red vinegar, olive oil, mayo, and oregano. Wrapped in our fresh scratch bread."
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Turkey or Ham",
+                  "description": "Fresh turkey or ham and provolone rolled with lettuce, tomato, red onion, and mayo. Wrapped in our fresh scratch bread."
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Ham & Honey Mustard Panini",
+                  "description": "Ham, Swiss cheese, and honey mustard sandwiched between two slices of our scratch buttered sourdough. Toasted until golden."
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Turkey Pesto Panini",
+                  "description": "Turkey, provolone, and basil pesto sandwiched between two slices of our scratch buttered sourdough and toasted until golden."
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Grilled Cheese Panini",
+                  "description": "Cheddar and provolone sandwiched between two slices of our from-scratch buttered sourdough and toasted until golden."
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Chicken Salad Sandwich",
+                  "description": "Made with white chicken, mayo, celery, pecans, craisins, pineapple, and poppy seeds. Served on a croissant or sourdough."
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Cuban Sandwich",
+                  "description": "Seasoned carnitas pork and house ham layered with Swiss cheese, Cuban mustard, and pickles on our house-baked bread."
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Navajo Tacos",
+                  "description": "A plate-sized, flat, golden frybread topped with seasoned beef, beans, greens, tomato, cheese, and sour cream\u2014a hearty, handcrafted Southwestern classic."
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "House 3-Meat Chili",
+                  "description": "Rough-cut steak tips, smoky bacon, and seasoned ground beef slow-simmered into a bold, hearty chili. Served with a slice of our silky-sweet house cornbread."
+                }
+              ]
+            },
+            {
+              "@type": "MenuSection",
+              "name": "Lunch: Salads",
+              "hasMenuItem": [
+                {
+                  "@type": "MenuItem",
+                  "name": "Caesar Salad",
+                  "description": "Chopped romaine hearts, shredded parmesan, herb croutons, and creamy Caesar dressing."
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Mandarin Crunch",
+                  "description": "Spring mix, mandarin oranges, almonds, sesame seeds, red onion, and sesame ginger dressing."
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Strawberry Fields",
+                  "description": "Spinach and spring mix, strawberries, candied pecans, feta, and raspberry vinaigrette."
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "House Salad",
+                  "description": "Chopped romaine lettuce, tomato, red onion, croutons, shredded cheddar, and ranch dressing."
+                }
+              ]
+            },
+            {
+              "@type": "MenuSection",
+              "name": "Lunch: Soups",
+              "description": "Two to three varieties are served daily. Available by the cup or bowl.",
+              "hasMenuItem": [
+                {
+                  "@type": "MenuItem",
+                  "name": "Chicken Tortilla",
+                  "description": "Chicken in a zesty broth, topped with cheese and a touch of cilantro for a little Southwest flair."
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Zuppa Toscana",
+                  "description": "A creamy, comforting soup made with Italian sausage, tender potatoes, and fresh spinach."
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Chophouse Potato",
+                  "description": "Hearty chunks of potato in a creamy base with smoked bacon and chives."
+                },
+                {
+                  "@type": "MenuItem",
+                  "name": "Tomato Basil",
+                  "description": "A rich blend of ripe tomatoes and fresh basil simmered to creamy perfection."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expired_labor_day_in_initial_html": false
+    },
+    {
+      "key": "our-story",
+      "url": "https://mannabread.com/our-story",
+      "status": "200",
+      "error": "",
+      "headers": "HTTP/2 200 \naccept-ranges: bytes\naccess-control-allow-origin: *\nage: 263650\ncache-control: public, max-age=0, must-revalidate\ncontent-disposition: inline\ncontent-type: text/html; charset=utf-8\ndate: Tue, 08 Sep 2026 18:24:37 GMT\netag: \"b803d77e334e7cf2213b66243f92fa36\"\npermissions-policy: camera=(), microphone=(), geolocation=()\nreferrer-policy: strict-origin-when-cross-origin\nserver: Vercel\nstrict-transport-security: max-age=63072000; includeSubDomains\nvary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch\nx-content-type-options: nosniff\nx-matched-path: /our-story\nx-nextjs-prerender: 1\nx-nextjs-stale-time: 300\nx-vercel-cache: HIT\nx-vercel-id: cle1::2k87x-1788891877398-006b43f9ebf5\ncontent-length: 110782\n\n",
+      "title": "Our Story | Manna Bakery",
+      "description": "The story of Christin, the family and faith behind Manna Bakery, and the daily grace that shaped a gathering place in Tomball.",
+      "canonical": [
+        "https://mannabread.com/our-story"
+      ],
+      "robots": null,
+      "og_type": "website",
+      "og_image": "https://mannabread.com/images/manna-logo-share.png?v=20260727",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "links": [
+        "/",
+        "/careers",
+        "/catering",
+        "/contact",
+        "/gift-cards",
+        "/menu",
+        "/our-story",
+        "/rentals",
+        "https://order.toasttab.com/egiftcards/manna-bread-from-heaven-306-commerce-st",
+        "https://www.dillanmilo.com/",
+        "https://www.facebook.com/share/18HD2Sg3WV/?mibextid=wwXIfr",
+        "https://www.instagram.com/manna_bakeries?igsh=am00OTF5cDB4aXAw",
+        "https://www.toasttab.com/manna-bread-from-heaven-306-commerce-st/rewardsLookup"
+      ],
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Bakery",
+              "@id": "https://mannabread.com/#bakery",
+              "name": "Manna Bakery",
+              "alternateName": "Manna Bread From Heaven",
+              "url": "https://mannabread.com",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://mannabread.com/images/manna-logo-share.png",
+                "width": 1050,
+                "height": 600
+              },
+              "image": "https://mannabread.com/images/manna-storefront-exterior.webp",
+              "description": "Manna Bakery is a handcrafted bakery, cafe, and gathering place in Tomball, Texas.",
+              "telephone": "(832) 843-3999",
+              "email": "support@mannabread.com",
+              "priceRange": "$$",
+              "servesCuisine": [
+                "Bakery",
+                "Breakfast",
+                "Lunch",
+                "Coffee"
+              ],
+              "hasMenu": {
+                "@id": "https://mannabread.com/menu#menu"
+              },
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "306 Commerce St",
+                "addressLocality": "Tomball",
+                "addressRegion": "TX",
+                "postalCode": "77375",
+                "addressCountry": "US"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 30.0972,
+                "longitude": -95.6161
+              },
+              "openingHoursSpecification": [
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": [
+                    "https://schema.org/Monday",
+                    "https://schema.org/Tuesday",
+                    "https://schema.org/Wednesday",
+                    "https://schema.org/Thursday",
+                    "https://schema.org/Friday",
+                    "https://schema.org/Saturday"
+                  ],
+                  "opens": "07:00",
+                  "closes": "16:00"
+                },
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": "https://schema.org/Sunday",
+                  "opens": "00:00",
+                  "closes": "00:00"
+                }
+              ],
+              "founder": {
+                "@type": "Person",
+                "name": "Christin"
+              },
+              "hasMap": "https://www.google.com/maps/search/?api=1&query=Manna+Bread+from+Heaven,+306+Commerce+St,+Tomball,+TX+77375",
+              "sameAs": [
+                "https://www.instagram.com/manna_bakeries?igsh=am00OTF5cDB4aXAw",
+                "https://www.facebook.com/share/18HD2Sg3WV/?mibextid=wwXIfr"
+              ]
+            },
+            {
+              "@type": "WebSite",
+              "@id": "https://mannabread.com/#website",
+              "url": "https://mannabread.com",
+              "name": "Manna Bakery",
+              "alternateName": "Bread from Heaven",
+              "description": "The official website for Manna Bakery in Tomball, Texas.",
+              "inLanguage": "en-US",
+              "publisher": {
+                "@id": "https://mannabread.com/#bakery"
+              }
+            }
+          ]
+        }
+      ],
+      "expired_labor_day_in_initial_html": false
+    },
+    {
+      "key": "catering",
+      "url": "https://mannabread.com/catering",
+      "status": "200",
+      "error": "",
+      "headers": "HTTP/2 200 \naccept-ranges: bytes\naccess-control-allow-origin: *\nage: 263649\ncache-control: public, max-age=0, must-revalidate\ncontent-disposition: inline\ncontent-type: text/html; charset=utf-8\ndate: Tue, 08 Sep 2026 18:24:37 GMT\netag: \"dbc9f3556d7d3eb30668d8a639429a53\"\npermissions-policy: camera=(), microphone=(), geolocation=()\nreferrer-policy: strict-origin-when-cross-origin\nserver: Vercel\nstrict-transport-security: max-age=63072000; includeSubDomains\nvary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch\nx-content-type-options: nosniff\nx-matched-path: /catering\nx-nextjs-prerender: 1\nx-nextjs-stale-time: 300\nx-vercel-cache: HIT\nx-vercel-id: cle1::l2dc9-1788891877400-e6fd5d590b89\ncontent-length: 111714\n\n",
+      "title": "Catering in Tomball | Manna Bakery",
+      "description": "Bring Manna Bakery to your next gathering with handcrafted pastries, breakfast, lunch, drinks, and thoughtful catering in Tomball.",
+      "canonical": [
+        "https://mannabread.com/catering"
+      ],
+      "robots": null,
+      "og_type": "website",
+      "og_image": "https://mannabread.com/images/manna-logo-share.png?v=20260727",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "links": [
+        "/",
+        "/careers",
+        "/catering",
+        "/contact",
+        "/gift-cards",
+        "/menu",
+        "/our-story",
+        "/rentals",
+        "https://order.toasttab.com/egiftcards/manna-bread-from-heaven-306-commerce-st",
+        "https://www.dillanmilo.com/",
+        "https://www.facebook.com/share/18HD2Sg3WV/?mibextid=wwXIfr",
+        "https://www.instagram.com/manna_bakeries?igsh=am00OTF5cDB4aXAw",
+        "https://www.toasttab.com/manna-bread-from-heaven-306-commerce-st/rewardsLookup",
+        "mailto:support@mannabread.com",
+        "tel:8328433999"
+      ],
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Bakery",
+              "@id": "https://mannabread.com/#bakery",
+              "name": "Manna Bakery",
+              "alternateName": "Manna Bread From Heaven",
+              "url": "https://mannabread.com",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://mannabread.com/images/manna-logo-share.png",
+                "width": 1050,
+                "height": 600
+              },
+              "image": "https://mannabread.com/images/manna-storefront-exterior.webp",
+              "description": "Manna Bakery is a handcrafted bakery, cafe, and gathering place in Tomball, Texas.",
+              "telephone": "(832) 843-3999",
+              "email": "support@mannabread.com",
+              "priceRange": "$$",
+              "servesCuisine": [
+                "Bakery",
+                "Breakfast",
+                "Lunch",
+                "Coffee"
+              ],
+              "hasMenu": {
+                "@id": "https://mannabread.com/menu#menu"
+              },
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "306 Commerce St",
+                "addressLocality": "Tomball",
+                "addressRegion": "TX",
+                "postalCode": "77375",
+                "addressCountry": "US"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 30.0972,
+                "longitude": -95.6161
+              },
+              "openingHoursSpecification": [
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": [
+                    "https://schema.org/Monday",
+                    "https://schema.org/Tuesday",
+                    "https://schema.org/Wednesday",
+                    "https://schema.org/Thursday",
+                    "https://schema.org/Friday",
+                    "https://schema.org/Saturday"
+                  ],
+                  "opens": "07:00",
+                  "closes": "16:00"
+                },
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": "https://schema.org/Sunday",
+                  "opens": "00:00",
+                  "closes": "00:00"
+                }
+              ],
+              "founder": {
+                "@type": "Person",
+                "name": "Christin"
+              },
+              "hasMap": "https://www.google.com/maps/search/?api=1&query=Manna+Bread+from+Heaven,+306+Commerce+St,+Tomball,+TX+77375",
+              "sameAs": [
+                "https://www.instagram.com/manna_bakeries?igsh=am00OTF5cDB4aXAw",
+                "https://www.facebook.com/share/18HD2Sg3WV/?mibextid=wwXIfr"
+              ]
+            },
+            {
+              "@type": "WebSite",
+              "@id": "https://mannabread.com/#website",
+              "url": "https://mannabread.com",
+              "name": "Manna Bakery",
+              "alternateName": "Bread from Heaven",
+              "description": "The official website for Manna Bakery in Tomball, Texas.",
+              "inLanguage": "en-US",
+              "publisher": {
+                "@id": "https://mannabread.com/#bakery"
+              }
+            }
+          ]
+        }
+      ],
+      "expired_labor_day_in_initial_html": false
+    },
+    {
+      "key": "gift-cards",
+      "url": "https://mannabread.com/gift-cards",
+      "status": "200",
+      "error": "",
+      "headers": "HTTP/2 200 \naccept-ranges: bytes\naccess-control-allow-origin: *\nage: 263649\ncache-control: public, max-age=0, must-revalidate\ncontent-disposition: inline\ncontent-type: text/html; charset=utf-8\ndate: Tue, 08 Sep 2026 18:24:37 GMT\netag: \"be157e0d5bbdcd35c234ebb830731b5c\"\npermissions-policy: camera=(), microphone=(), geolocation=()\nreferrer-policy: strict-origin-when-cross-origin\nserver: Vercel\nstrict-transport-security: max-age=63072000; includeSubDomains\nvary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch\nx-content-type-options: nosniff\nx-matched-path: /gift-cards\nx-nextjs-prerender: 1\nx-nextjs-stale-time: 300\nx-vercel-cache: HIT\nx-vercel-id: cle1::2cmhl-1788891877456-33d25c00a775\ncontent-length: 44963\n\n",
+      "title": "Bakery Gift Cards | Manna Bakery",
+      "description": "Give the gift of Manna Bakery with a digital gift card for handcrafted food, warm hospitality, and time together.",
+      "canonical": [
+        "https://mannabread.com/gift-cards"
+      ],
+      "robots": null,
+      "og_type": "website",
+      "og_image": "https://mannabread.com/images/manna-logo-share.png?v=20260727",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "links": [
+        "/",
+        "/careers",
+        "/catering",
+        "/contact",
+        "/gift-cards",
+        "/menu",
+        "/our-story",
+        "/rentals",
+        "https://order.toasttab.com/egiftcards/manna-bread-from-heaven-306-commerce-st",
+        "https://www.dillanmilo.com/",
+        "https://www.facebook.com/share/18HD2Sg3WV/?mibextid=wwXIfr",
+        "https://www.instagram.com/manna_bakeries?igsh=am00OTF5cDB4aXAw",
+        "https://www.toasttab.com/manna-bread-from-heaven-306-commerce-st/rewardsLookup"
+      ],
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Bakery",
+              "@id": "https://mannabread.com/#bakery",
+              "name": "Manna Bakery",
+              "alternateName": "Manna Bread From Heaven",
+              "url": "https://mannabread.com",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://mannabread.com/images/manna-logo-share.png",
+                "width": 1050,
+                "height": 600
+              },
+              "image": "https://mannabread.com/images/manna-storefront-exterior.webp",
+              "description": "Manna Bakery is a handcrafted bakery, cafe, and gathering place in Tomball, Texas.",
+              "telephone": "(832) 843-3999",
+              "email": "support@mannabread.com",
+              "priceRange": "$$",
+              "servesCuisine": [
+                "Bakery",
+                "Breakfast",
+                "Lunch",
+                "Coffee"
+              ],
+              "hasMenu": {
+                "@id": "https://mannabread.com/menu#menu"
+              },
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "306 Commerce St",
+                "addressLocality": "Tomball",
+                "addressRegion": "TX",
+                "postalCode": "77375",
+                "addressCountry": "US"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 30.0972,
+                "longitude": -95.6161
+              },
+              "openingHoursSpecification": [
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": [
+                    "https://schema.org/Monday",
+                    "https://schema.org/Tuesday",
+                    "https://schema.org/Wednesday",
+                    "https://schema.org/Thursday",
+                    "https://schema.org/Friday",
+                    "https://schema.org/Saturday"
+                  ],
+                  "opens": "07:00",
+                  "closes": "16:00"
+                },
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": "https://schema.org/Sunday",
+                  "opens": "00:00",
+                  "closes": "00:00"
+                }
+              ],
+              "founder": {
+                "@type": "Person",
+                "name": "Christin"
+              },
+              "hasMap": "https://www.google.com/maps/search/?api=1&query=Manna+Bread+from+Heaven,+306+Commerce+St,+Tomball,+TX+77375",
+              "sameAs": [
+                "https://www.instagram.com/manna_bakeries?igsh=am00OTF5cDB4aXAw",
+                "https://www.facebook.com/share/18HD2Sg3WV/?mibextid=wwXIfr"
+              ]
+            },
+            {
+              "@type": "WebSite",
+              "@id": "https://mannabread.com/#website",
+              "url": "https://mannabread.com",
+              "name": "Manna Bakery",
+              "alternateName": "Bread from Heaven",
+              "description": "The official website for Manna Bakery in Tomball, Texas.",
+              "inLanguage": "en-US",
+              "publisher": {
+                "@id": "https://mannabread.com/#bakery"
+              }
+            }
+          ]
+        }
+      ],
+      "expired_labor_day_in_initial_html": false
+    },
+    {
+      "key": "rentals",
+      "url": "https://mannabread.com/rentals",
+      "status": "200",
+      "error": "",
+      "headers": "HTTP/2 200 \naccept-ranges: bytes\naccess-control-allow-origin: *\nage: 271640\ncache-control: public, max-age=0, must-revalidate\ncontent-disposition: inline\ncontent-type: text/html; charset=utf-8\ndate: Tue, 08 Sep 2026 18:24:37 GMT\netag: \"337a013791e2bbeefd3df4d2d754c76b\"\npermissions-policy: camera=(), microphone=(), geolocation=()\nreferrer-policy: strict-origin-when-cross-origin\nserver: Vercel\nstrict-transport-security: max-age=63072000; includeSubDomains\nvary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch\nx-content-type-options: nosniff\nx-matched-path: /rentals\nx-nextjs-prerender: 1\nx-nextjs-stale-time: 300\nx-vercel-cache: HIT\nx-vercel-id: cle1::h857x-1788891877751-02aa9cf19a82\ncontent-length: 118890\n\n",
+      "title": "Private Event Space in Tomball | Manna Bakery",
+      "description": "Gather in Manna Bakery\u2019s warm, Jerusalem-inspired spaces for private dinners, showers, workshops, celebrations, and community events.",
+      "canonical": [
+        "https://mannabread.com/rentals"
+      ],
+      "robots": null,
+      "og_type": "website",
+      "og_image": "https://mannabread.com/images/manna-logo-share.png?v=20260727",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "links": [
+        "#rental-inquiry",
+        "/",
+        "/careers",
+        "/catering",
+        "/contact",
+        "/gift-cards",
+        "/menu",
+        "/our-story",
+        "/rentals",
+        "https://order.toasttab.com/egiftcards/manna-bread-from-heaven-306-commerce-st",
+        "https://www.dillanmilo.com/",
+        "https://www.facebook.com/share/18HD2Sg3WV/?mibextid=wwXIfr",
+        "https://www.instagram.com/manna_bakeries?igsh=am00OTF5cDB4aXAw",
+        "https://www.toasttab.com/manna-bread-from-heaven-306-commerce-st/rewardsLookup",
+        "mailto:support@mannabread.com",
+        "tel:8328433999"
+      ],
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Bakery",
+              "@id": "https://mannabread.com/#bakery",
+              "name": "Manna Bakery",
+              "alternateName": "Manna Bread From Heaven",
+              "url": "https://mannabread.com",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://mannabread.com/images/manna-logo-share.png",
+                "width": 1050,
+                "height": 600
+              },
+              "image": "https://mannabread.com/images/manna-storefront-exterior.webp",
+              "description": "Manna Bakery is a handcrafted bakery, cafe, and gathering place in Tomball, Texas.",
+              "telephone": "(832) 843-3999",
+              "email": "support@mannabread.com",
+              "priceRange": "$$",
+              "servesCuisine": [
+                "Bakery",
+                "Breakfast",
+                "Lunch",
+                "Coffee"
+              ],
+              "hasMenu": {
+                "@id": "https://mannabread.com/menu#menu"
+              },
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "306 Commerce St",
+                "addressLocality": "Tomball",
+                "addressRegion": "TX",
+                "postalCode": "77375",
+                "addressCountry": "US"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 30.0972,
+                "longitude": -95.6161
+              },
+              "openingHoursSpecification": [
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": [
+                    "https://schema.org/Monday",
+                    "https://schema.org/Tuesday",
+                    "https://schema.org/Wednesday",
+                    "https://schema.org/Thursday",
+                    "https://schema.org/Friday",
+                    "https://schema.org/Saturday"
+                  ],
+                  "opens": "07:00",
+                  "closes": "16:00"
+                },
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": "https://schema.org/Sunday",
+                  "opens": "00:00",
+                  "closes": "00:00"
+                }
+              ],
+              "founder": {
+                "@type": "Person",
+                "name": "Christin"
+              },
+              "hasMap": "https://www.google.com/maps/search/?api=1&query=Manna+Bread+from+Heaven,+306+Commerce+St,+Tomball,+TX+77375",
+              "sameAs": [
+                "https://www.instagram.com/manna_bakeries?igsh=am00OTF5cDB4aXAw",
+                "https://www.facebook.com/share/18HD2Sg3WV/?mibextid=wwXIfr"
+              ]
+            },
+            {
+              "@type": "WebSite",
+              "@id": "https://mannabread.com/#website",
+              "url": "https://mannabread.com",
+              "name": "Manna Bakery",
+              "alternateName": "Bread from Heaven",
+              "description": "The official website for Manna Bakery in Tomball, Texas.",
+              "inLanguage": "en-US",
+              "publisher": {
+                "@id": "https://mannabread.com/#bakery"
+              }
+            }
+          ]
+        }
+      ],
+      "expired_labor_day_in_initial_html": false
+    },
+    {
+      "key": "contact",
+      "url": "https://mannabread.com/contact",
+      "status": "200",
+      "error": "",
+      "headers": "HTTP/2 200 \naccept-ranges: bytes\naccess-control-allow-origin: *\nage: 270628\ncache-control: public, max-age=0, must-revalidate\ncontent-disposition: inline\ncontent-type: text/html; charset=utf-8\ndate: Tue, 08 Sep 2026 18:24:37 GMT\netag: \"014297456ec2751a6e7f481eaf0ca2bb\"\npermissions-policy: camera=(), microphone=(), geolocation=()\nreferrer-policy: strict-origin-when-cross-origin\nserver: Vercel\nstrict-transport-security: max-age=63072000; includeSubDomains\nvary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch\nx-content-type-options: nosniff\nx-matched-path: /contact\nx-nextjs-prerender: 1\nx-nextjs-stale-time: 300\nx-vercel-cache: HIT\nx-vercel-id: cle1::wrktp-1788891877787-a4ff2fb644e7\ncontent-length: 49563\n\n",
+      "title": "Visit Manna Bakery in Tomball | Manna Bakery",
+      "description": "Plan a visit or get in touch with Manna Bakery at 306 Commerce Street in Tomball, Texas.",
+      "canonical": [
+        "https://mannabread.com/contact"
+      ],
+      "robots": null,
+      "og_type": "website",
+      "og_image": "https://mannabread.com/images/manna-logo-share.png?v=20260727",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "links": [
+        "/",
+        "/careers",
+        "/catering",
+        "/contact",
+        "/gift-cards",
+        "/menu",
+        "/our-story",
+        "/rentals",
+        "https://order.toasttab.com/egiftcards/manna-bread-from-heaven-306-commerce-st",
+        "https://www.dillanmilo.com/",
+        "https://www.facebook.com/share/18HD2Sg3WV/?mibextid=wwXIfr",
+        "https://www.google.com/maps/dir/?api=1&destination=Manna+Bread+from+Heaven,+306+Commerce+St,+Tomball,+TX+77375",
+        "https://www.instagram.com/manna_bakeries?igsh=am00OTF5cDB4aXAw",
+        "https://www.toasttab.com/manna-bread-from-heaven-306-commerce-st/rewardsLookup",
+        "mailto:support@mannabread.com",
+        "tel:8328433999"
+      ],
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Bakery",
+              "@id": "https://mannabread.com/#bakery",
+              "name": "Manna Bakery",
+              "alternateName": "Manna Bread From Heaven",
+              "url": "https://mannabread.com",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://mannabread.com/images/manna-logo-share.png",
+                "width": 1050,
+                "height": 600
+              },
+              "image": "https://mannabread.com/images/manna-storefront-exterior.webp",
+              "description": "Manna Bakery is a handcrafted bakery, cafe, and gathering place in Tomball, Texas.",
+              "telephone": "(832) 843-3999",
+              "email": "support@mannabread.com",
+              "priceRange": "$$",
+              "servesCuisine": [
+                "Bakery",
+                "Breakfast",
+                "Lunch",
+                "Coffee"
+              ],
+              "hasMenu": {
+                "@id": "https://mannabread.com/menu#menu"
+              },
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "306 Commerce St",
+                "addressLocality": "Tomball",
+                "addressRegion": "TX",
+                "postalCode": "77375",
+                "addressCountry": "US"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 30.0972,
+                "longitude": -95.6161
+              },
+              "openingHoursSpecification": [
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": [
+                    "https://schema.org/Monday",
+                    "https://schema.org/Tuesday",
+                    "https://schema.org/Wednesday",
+                    "https://schema.org/Thursday",
+                    "https://schema.org/Friday",
+                    "https://schema.org/Saturday"
+                  ],
+                  "opens": "07:00",
+                  "closes": "16:00"
+                },
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": "https://schema.org/Sunday",
+                  "opens": "00:00",
+                  "closes": "00:00"
+                }
+              ],
+              "founder": {
+                "@type": "Person",
+                "name": "Christin"
+              },
+              "hasMap": "https://www.google.com/maps/search/?api=1&query=Manna+Bread+from+Heaven,+306+Commerce+St,+Tomball,+TX+77375",
+              "sameAs": [
+                "https://www.instagram.com/manna_bakeries?igsh=am00OTF5cDB4aXAw",
+                "https://www.facebook.com/share/18HD2Sg3WV/?mibextid=wwXIfr"
+              ]
+            },
+            {
+              "@type": "WebSite",
+              "@id": "https://mannabread.com/#website",
+              "url": "https://mannabread.com",
+              "name": "Manna Bakery",
+              "alternateName": "Bread from Heaven",
+              "description": "The official website for Manna Bakery in Tomball, Texas.",
+              "inLanguage": "en-US",
+              "publisher": {
+                "@id": "https://mannabread.com/#bakery"
+              }
+            }
+          ]
+        }
+      ],
+      "expired_labor_day_in_initial_html": false
+    },
+    {
+      "key": "careers",
+      "url": "https://mannabread.com/careers",
+      "status": "200",
+      "error": "",
+      "headers": "HTTP/2 200 \naccept-ranges: bytes\naccess-control-allow-origin: *\nage: 263649\ncache-control: public, max-age=0, must-revalidate\ncontent-disposition: inline\ncontent-type: text/html; charset=utf-8\ndate: Tue, 08 Sep 2026 18:24:37 GMT\netag: \"ede966d24a009705337004115e99ffda\"\npermissions-policy: camera=(), microphone=(), geolocation=()\nreferrer-policy: strict-origin-when-cross-origin\nserver: Vercel\nstrict-transport-security: max-age=63072000; includeSubDomains\nvary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch\nx-content-type-options: nosniff\nx-matched-path: /careers\nx-nextjs-prerender: 1\nx-nextjs-stale-time: 300\nx-vercel-cache: HIT\nx-vercel-id: cle1::j5bdx-1788891877780-9a71b3250e85\ncontent-length: 106394\n\n",
+      "title": "Bakery Jobs in Tomball | Manna Bakery",
+      "description": "Explore working at Manna Bakery in Tomball and introduce yourself to the team.",
+      "canonical": [
+        "https://mannabread.com/careers"
+      ],
+      "robots": null,
+      "og_type": "website",
+      "og_image": "https://mannabread.com/images/manna-logo-share.png?v=20260727",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "links": [
+        "#apply",
+        "/",
+        "/careers",
+        "/catering",
+        "/contact",
+        "/gift-cards",
+        "/menu",
+        "/our-story",
+        "/rentals",
+        "https://order.toasttab.com/egiftcards/manna-bread-from-heaven-306-commerce-st",
+        "https://www.dillanmilo.com/",
+        "https://www.facebook.com/share/18HD2Sg3WV/?mibextid=wwXIfr",
+        "https://www.instagram.com/manna_bakeries?igsh=am00OTF5cDB4aXAw",
+        "https://www.toasttab.com/manna-bread-from-heaven-306-commerce-st/rewardsLookup"
+      ],
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Bakery",
+              "@id": "https://mannabread.com/#bakery",
+              "name": "Manna Bakery",
+              "alternateName": "Manna Bread From Heaven",
+              "url": "https://mannabread.com",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://mannabread.com/images/manna-logo-share.png",
+                "width": 1050,
+                "height": 600
+              },
+              "image": "https://mannabread.com/images/manna-storefront-exterior.webp",
+              "description": "Manna Bakery is a handcrafted bakery, cafe, and gathering place in Tomball, Texas.",
+              "telephone": "(832) 843-3999",
+              "email": "support@mannabread.com",
+              "priceRange": "$$",
+              "servesCuisine": [
+                "Bakery",
+                "Breakfast",
+                "Lunch",
+                "Coffee"
+              ],
+              "hasMenu": {
+                "@id": "https://mannabread.com/menu#menu"
+              },
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "306 Commerce St",
+                "addressLocality": "Tomball",
+                "addressRegion": "TX",
+                "postalCode": "77375",
+                "addressCountry": "US"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 30.0972,
+                "longitude": -95.6161
+              },
+              "openingHoursSpecification": [
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": [
+                    "https://schema.org/Monday",
+                    "https://schema.org/Tuesday",
+                    "https://schema.org/Wednesday",
+                    "https://schema.org/Thursday",
+                    "https://schema.org/Friday",
+                    "https://schema.org/Saturday"
+                  ],
+                  "opens": "07:00",
+                  "closes": "16:00"
+                },
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": "https://schema.org/Sunday",
+                  "opens": "00:00",
+                  "closes": "00:00"
+                }
+              ],
+              "founder": {
+                "@type": "Person",
+                "name": "Christin"
+              },
+              "hasMap": "https://www.google.com/maps/search/?api=1&query=Manna+Bread+from+Heaven,+306+Commerce+St,+Tomball,+TX+77375",
+              "sameAs": [
+                "https://www.instagram.com/manna_bakeries?igsh=am00OTF5cDB4aXAw",
+                "https://www.facebook.com/share/18HD2Sg3WV/?mibextid=wwXIfr"
+              ]
+            },
+            {
+              "@type": "WebSite",
+              "@id": "https://mannabread.com/#website",
+              "url": "https://mannabread.com",
+              "name": "Manna Bakery",
+              "alternateName": "Bread from Heaven",
+              "description": "The official website for Manna Bakery in Tomball, Texas.",
+              "inLanguage": "en-US",
+              "publisher": {
+                "@id": "https://mannabread.com/#bakery"
+              }
+            }
+          ]
+        }
+      ],
+      "expired_labor_day_in_initial_html": false
+    },
+    {
+      "key": "robots.txt",
+      "url": "https://mannabread.com/robots.txt",
+      "status": "200",
+      "error": "",
+      "headers": "HTTP/2 200 \naccept-ranges: bytes\naccess-control-allow-origin: *\nage: 182786\ncache-control: public, max-age=0, must-revalidate\ncontent-disposition: inline; filename=\"robots.txt\"\ncontent-type: text/plain; charset=utf-8\ndate: Tue, 08 Sep 2026 18:24:37 GMT\netag: \"3fcebeab682b533e0599bc20bf29f650\"\nlast-modified: Sun, 06 Sep 2026 15:38:11 GMT\npermissions-policy: camera=(), microphone=(), geolocation=()\nreferrer-policy: strict-origin-when-cross-origin\nserver: Vercel\nstrict-transport-security: max-age=63072000; includeSubDomains\nx-content-type-options: nosniff\nx-matched-path: /robots.txt\nx-vercel-cache: HIT\nx-vercel-id: cle1::s8hdd-1788891877764-98eb66321be5\ncontent-length: 84\n\n"
+    },
+    {
+      "key": "sitemap.xml",
+      "url": "https://mannabread.com/sitemap.xml",
+      "status": "200",
+      "error": "",
+      "headers": "HTTP/2 200 \naccept-ranges: bytes\naccess-control-allow-origin: *\nage: 3079\ncache-control: public, max-age=0, must-revalidate\ncontent-disposition: inline; filename=\"sitemap.xml\"\ncontent-type: application/xml\ndate: Tue, 08 Sep 2026 18:24:37 GMT\netag: \"97d4311e4ea1dc166db5248a0cd08a49\"\nlast-modified: Tue, 08 Sep 2026 17:33:17 GMT\npermissions-policy: camera=(), microphone=(), geolocation=()\nreferrer-policy: strict-origin-when-cross-origin\nserver: Vercel\nstrict-transport-security: max-age=63072000; includeSubDomains\nx-content-type-options: nosniff\nx-matched-path: /sitemap.xml\nx-vercel-cache: HIT\nx-vercel-id: cle1::l99cf-1788891877780-58ac5fc55252\ncontent-length: 1036\n\n"
+    },
+    {
+      "key": "llms.txt",
+      "url": "https://mannabread.com/llms.txt",
+      "status": "200",
+      "error": "",
+      "headers": "HTTP/2 200 \naccept-ranges: bytes\naccess-control-allow-origin: *\nage: 0\ncache-control: public, max-age=0, must-revalidate\ncontent-disposition: inline; filename=\"llms.txt\"\ncontent-type: text/plain; charset=utf-8\ndate: Tue, 08 Sep 2026 18:24:37 GMT\netag: \"321e553037245e7c60edd5c7e31c890e\"\nlast-modified: Tue, 08 Sep 2026 18:24:37 GMT\npermissions-policy: camera=(), microphone=(), geolocation=()\nreferrer-policy: strict-origin-when-cross-origin\nserver: Vercel\nstrict-transport-security: max-age=63072000; includeSubDomains\nx-content-type-options: nosniff\nx-matched-path: /llms.txt\nx-vercel-cache: MISS\nx-vercel-id: cle1::5dw8q-1788891877926-f526b6949b31\ncontent-length: 1567\n\n"
+    },
+    {
+      "key": "seo-audit-missing-20260908",
+      "url": "https://mannabread.com/seo-audit-missing-20260908",
+      "status": "404",
+      "error": "",
+      "headers": "HTTP/2 404 \naccept-ranges: bytes\naccess-control-allow-origin: *\nage: 105081\ncache-control: public, max-age=0, must-revalidate\ncontent-disposition: inline; filename=\"404\"\ncontent-type: text/html; charset=utf-8\ndate: Tue, 08 Sep 2026 18:24:37 GMT\netag: \"9ed52d1d55a0c65475611947b35bcd78\"\nlast-modified: Mon, 07 Sep 2026 13:13:16 GMT\npermissions-policy: camera=(), microphone=(), geolocation=()\nreferrer-policy: strict-origin-when-cross-origin\nserver: Vercel\nstrict-transport-security: max-age=63072000; includeSubDomains\nx-content-type-options: nosniff\nx-matched-path: /404\nx-vercel-cache: HIT\nx-vercel-id: cle1::zlf52-1788891877992-e90b21ae5715\ncontent-length: 37790\n\n",
+      "title": "404: This page could not be found.Manna Bakery | Bread from Heaven",
+      "description": "Handcrafted breads, pastries with character, and a space that feels like home.",
+      "canonical": [],
+      "robots": "noindex",
+      "og_type": null,
+      "og_image": "https://mannabread.com/images/manna-logo-share.png?v=20260727",
+      "lang": "en",
+      "h1": 1,
+      "main": 0,
+      "links": [
+        "/",
+        "/careers",
+        "/catering",
+        "/contact",
+        "/gift-cards",
+        "/menu",
+        "/our-story",
+        "/rentals",
+        "https://order.toasttab.com/egiftcards/manna-bread-from-heaven-306-commerce-st",
+        "https://www.dillanmilo.com/",
+        "https://www.facebook.com/share/18HD2Sg3WV/?mibextid=wwXIfr",
+        "https://www.instagram.com/manna_bakeries?igsh=am00OTF5cDB4aXAw",
+        "https://www.toasttab.com/manna-bread-from-heaven-306-commerce-st/rewardsLookup"
+      ],
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Bakery",
+              "@id": "https://mannabread.com/#bakery",
+              "name": "Manna Bakery",
+              "alternateName": "Manna Bread From Heaven",
+              "url": "https://mannabread.com",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://mannabread.com/images/manna-logo-share.png",
+                "width": 1050,
+                "height": 600
+              },
+              "image": "https://mannabread.com/images/manna-storefront-exterior.webp",
+              "description": "Manna Bakery is a handcrafted bakery, cafe, and gathering place in Tomball, Texas.",
+              "telephone": "(832) 843-3999",
+              "email": "support@mannabread.com",
+              "priceRange": "$$",
+              "servesCuisine": [
+                "Bakery",
+                "Breakfast",
+                "Lunch",
+                "Coffee"
+              ],
+              "hasMenu": {
+                "@id": "https://mannabread.com/menu#menu"
+              },
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "306 Commerce St",
+                "addressLocality": "Tomball",
+                "addressRegion": "TX",
+                "postalCode": "77375",
+                "addressCountry": "US"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 30.0972,
+                "longitude": -95.6161
+              },
+              "openingHoursSpecification": [
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": [
+                    "https://schema.org/Monday",
+                    "https://schema.org/Tuesday",
+                    "https://schema.org/Wednesday",
+                    "https://schema.org/Thursday",
+                    "https://schema.org/Friday",
+                    "https://schema.org/Saturday"
+                  ],
+                  "opens": "07:00",
+                  "closes": "16:00"
+                },
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": "https://schema.org/Sunday",
+                  "opens": "00:00",
+                  "closes": "00:00"
+                }
+              ],
+              "founder": {
+                "@type": "Person",
+                "name": "Christin"
+              },
+              "hasMap": "https://www.google.com/maps/search/?api=1&query=Manna+Bread+from+Heaven,+306+Commerce+St,+Tomball,+TX+77375",
+              "sameAs": [
+                "https://www.instagram.com/manna_bakeries?igsh=am00OTF5cDB4aXAw",
+                "https://www.facebook.com/share/18HD2Sg3WV/?mibextid=wwXIfr"
+              ]
+            },
+            {
+              "@type": "WebSite",
+              "@id": "https://mannabread.com/#website",
+              "url": "https://mannabread.com",
+              "name": "Manna Bakery",
+              "alternateName": "Bread from Heaven",
+              "description": "The official website for Manna Bakery in Tomball, Texas.",
+              "inLanguage": "en-US",
+              "publisher": {
+                "@id": "https://mannabread.com/#bakery"
+              }
+            }
+          ]
+        }
+      ],
+      "expired_labor_day_in_initial_html": false
+    },
+    {
+      "key": "menu_",
+      "url": "https://mannabread.com/menu/",
+      "status": "308",
+      "error": "",
+      "headers": "HTTP/2 308 \ncache-control: public, max-age=0, must-revalidate\ncontent-type: text/plain\ndate: Tue, 08 Sep 2026 18:24:38 GMT\nlocation: /menu\nrefresh: 0;url=/menu\nserver: Vercel\nstrict-transport-security: max-age=63072000\nx-vercel-id: cle1::lwpxm-1788891877984-70b1437fde29\n\n"
+    },
+    {
+      "key": "catering-2",
+      "url": "https://mannabread.com/catering-2",
+      "status": "308",
+      "error": "",
+      "headers": "HTTP/2 308 \ncache-control: public, max-age=0, must-revalidate\ncontent-type: text/plain\ndate: Tue, 08 Sep 2026 18:24:38 GMT\nlocation: https://mannabread.com/catering\npermissions-policy: camera=(), microphone=(), geolocation=()\nreferrer-policy: strict-origin-when-cross-origin\nrefresh: 0;url=https://mannabread.com/catering\nserver: Vercel\nstrict-transport-security: max-age=63072000; includeSubDomains\nx-content-type-options: nosniff\nx-vercel-id: cle1::th25p-1788891877997-5c7ffc0aaf08\n\n"
+    },
+    {
+      "key": "images_manna-logo-share.png_v=20260727",
+      "url": "https://mannabread.com/images/manna-logo-share.png?v=20260727",
+      "status": "200",
+      "error": "",
+      "headers": "HTTP/2 200 \naccept-ranges: bytes\naccess-control-allow-origin: *\nage: 15914\ncache-control: public, max-age=0, must-revalidate\ncontent-disposition: inline; filename=\"manna-logo-share.png\"\ncontent-type: image/png\ndate: Tue, 08 Sep 2026 18:24:38 GMT\netag: \"fa9297776cca73681a63a19adba08d91\"\nlast-modified: Tue, 08 Sep 2026 13:59:23 GMT\npermissions-policy: camera=(), microphone=(), geolocation=()\nreferrer-policy: strict-origin-when-cross-origin\nserver: Vercel\nstrict-transport-security: max-age=63072000; includeSubDomains\nx-content-type-options: nosniff\nx-matched-path: /images/manna-logo-share.png\nx-vercel-cache: HIT\nx-vercel-id: cle1::82k6b-1788891878162-52101907f7f0\ncontent-length: 338790\n\n"
+    },
+    {
+      "key": "http",
+      "url": "http://mannabread.com/",
+      "status": "308",
+      "error": "",
+      "headers": "HTTP/1.0 308 Permanent Redirect\nContent-Type: text/plain\nLocation: https://mannabread.com/\nRefresh: 0;url=https://mannabread.com/\nserver: Vercel\n\n"
+    },
+    {
+      "key": "www",
+      "url": "https://www.mannabread.com/",
+      "status": "308",
+      "error": "",
+      "headers": "HTTP/2 308 \ncache-control: public, max-age=0, must-revalidate\ncontent-type: text/plain\ndate: Tue, 08 Sep 2026 18:24:38 GMT\nlocation: https://mannabread.com/\npermissions-policy: camera=(), microphone=(), geolocation=()\nreferrer-policy: strict-origin-when-cross-origin\nrefresh: 0;url=https://mannabread.com/\nserver: Vercel\nstrict-transport-security: max-age=63072000; includeSubDomains\nx-content-type-options: nosniff\nx-vercel-id: cle1::wrktp-1788891878334-e39f89d3a000\n\n"
+    },
+    {
+      "key": "bot-Googlebot",
+      "url": "https://mannabread.com/",
+      "status": "200",
+      "error": "",
+      "headers": "HTTP/2 200 \naccept-ranges: bytes\naccess-control-allow-origin: *\nage: 272428\ncache-control: public, max-age=0, must-revalidate\ncontent-disposition: inline\ncontent-type: text/html; charset=utf-8\ndate: Tue, 08 Sep 2026 18:24:38 GMT\netag: \"25e02e8a92e7bcd721935d76e2f0a1e7\"\npermissions-policy: camera=(), microphone=(), geolocation=()\nreferrer-policy: strict-origin-when-cross-origin\nserver: Vercel\nstrict-transport-security: max-age=63072000; includeSubDomains\nvary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch\nx-content-type-options: nosniff\nx-matched-path: /\nx-nextjs-prerender: 1\nx-nextjs-stale-time: 300\nx-vercel-cache: HIT\nx-vercel-id: cle1::gl7jn-1788891878348-85542dc8e77c\ncontent-length: 122303\n\n",
+      "title": "Bread from Heaven | Manna Bakery",
+      "description": "Manna Bakery is a handcrafted bakery, caf\u00e9, and gathering place in Tomball, Texas\u2014made for good food, unhurried moments, and community.",
+      "canonical": [
+        "https://mannabread.com"
+      ],
+      "robots": null,
+      "og_type": "website",
+      "og_image": "https://mannabread.com/images/manna-logo-share.png?v=20260727",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "links": [
+        "/",
+        "/careers",
+        "/catering",
+        "/contact",
+        "/gift-cards",
+        "/menu",
+        "/our-story",
+        "/rentals",
+        "https://order.toasttab.com/egiftcards/manna-bread-from-heaven-306-commerce-st",
+        "https://www.dillanmilo.com/",
+        "https://www.facebook.com/share/18HD2Sg3WV/?mibextid=wwXIfr",
+        "https://www.google.com/maps/dir/?api=1&destination=Manna+Bread+from+Heaven,+306+Commerce+St,+Tomball,+TX+77375",
+        "https://www.instagram.com/manna_bakeries?igsh=am00OTF5cDB4aXAw",
+        "https://www.toasttab.com/manna-bread-from-heaven-306-commerce-st/rewardsLookup",
+        "mailto:support@mannabread.com",
+        "tel:8328433999"
+      ],
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Bakery",
+              "@id": "https://mannabread.com/#bakery",
+              "name": "Manna Bakery",
+              "alternateName": "Manna Bread From Heaven",
+              "url": "https://mannabread.com",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://mannabread.com/images/manna-logo-share.png",
+                "width": 1050,
+                "height": 600
+              },
+              "image": "https://mannabread.com/images/manna-storefront-exterior.webp",
+              "description": "Manna Bakery is a handcrafted bakery, cafe, and gathering place in Tomball, Texas.",
+              "telephone": "(832) 843-3999",
+              "email": "support@mannabread.com",
+              "priceRange": "$$",
+              "servesCuisine": [
+                "Bakery",
+                "Breakfast",
+                "Lunch",
+                "Coffee"
+              ],
+              "hasMenu": {
+                "@id": "https://mannabread.com/menu#menu"
+              },
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "306 Commerce St",
+                "addressLocality": "Tomball",
+                "addressRegion": "TX",
+                "postalCode": "77375",
+                "addressCountry": "US"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 30.0972,
+                "longitude": -95.6161
+              },
+              "openingHoursSpecification": [
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": [
+                    "https://schema.org/Monday",
+                    "https://schema.org/Tuesday",
+                    "https://schema.org/Wednesday",
+                    "https://schema.org/Thursday",
+                    "https://schema.org/Friday",
+                    "https://schema.org/Saturday"
+                  ],
+                  "opens": "07:00",
+                  "closes": "16:00"
+                },
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": "https://schema.org/Sunday",
+                  "opens": "00:00",
+                  "closes": "00:00"
+                }
+              ],
+              "founder": {
+                "@type": "Person",
+                "name": "Christin"
+              },
+              "hasMap": "https://www.google.com/maps/search/?api=1&query=Manna+Bread+from+Heaven,+306+Commerce+St,+Tomball,+TX+77375",
+              "sameAs": [
+                "https://www.instagram.com/manna_bakeries?igsh=am00OTF5cDB4aXAw",
+                "https://www.facebook.com/share/18HD2Sg3WV/?mibextid=wwXIfr"
+              ]
+            },
+            {
+              "@type": "WebSite",
+              "@id": "https://mannabread.com/#website",
+              "url": "https://mannabread.com",
+              "name": "Manna Bakery",
+              "alternateName": "Bread from Heaven",
+              "description": "The official website for Manna Bakery in Tomball, Texas.",
+              "inLanguage": "en-US",
+              "publisher": {
+                "@id": "https://mannabread.com/#bakery"
+              }
+            }
+          ]
+        }
+      ],
+      "expired_labor_day_in_initial_html": true
+    },
+    {
+      "key": "bot-OAI-SearchBot",
+      "url": "https://mannabread.com/",
+      "status": "200",
+      "error": "",
+      "headers": "HTTP/2 200 \naccept-ranges: bytes\naccess-control-allow-origin: *\nage: 272428\ncache-control: public, max-age=0, must-revalidate\ncontent-disposition: inline\ncontent-type: text/html; charset=utf-8\ndate: Tue, 08 Sep 2026 18:24:38 GMT\netag: \"25e02e8a92e7bcd721935d76e2f0a1e7\"\npermissions-policy: camera=(), microphone=(), geolocation=()\nreferrer-policy: strict-origin-when-cross-origin\nserver: Vercel\nstrict-transport-security: max-age=63072000; includeSubDomains\nvary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch\nx-content-type-options: nosniff\nx-matched-path: /\nx-nextjs-prerender: 1\nx-nextjs-stale-time: 300\nx-vercel-cache: HIT\nx-vercel-id: cle1::m8g6p-1788891878294-0920978c9ec9\ncontent-length: 122303\n\n",
+      "title": "Bread from Heaven | Manna Bakery",
+      "description": "Manna Bakery is a handcrafted bakery, caf\u00e9, and gathering place in Tomball, Texas\u2014made for good food, unhurried moments, and community.",
+      "canonical": [
+        "https://mannabread.com"
+      ],
+      "robots": null,
+      "og_type": "website",
+      "og_image": "https://mannabread.com/images/manna-logo-share.png?v=20260727",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "links": [
+        "/",
+        "/careers",
+        "/catering",
+        "/contact",
+        "/gift-cards",
+        "/menu",
+        "/our-story",
+        "/rentals",
+        "https://order.toasttab.com/egiftcards/manna-bread-from-heaven-306-commerce-st",
+        "https://www.dillanmilo.com/",
+        "https://www.facebook.com/share/18HD2Sg3WV/?mibextid=wwXIfr",
+        "https://www.google.com/maps/dir/?api=1&destination=Manna+Bread+from+Heaven,+306+Commerce+St,+Tomball,+TX+77375",
+        "https://www.instagram.com/manna_bakeries?igsh=am00OTF5cDB4aXAw",
+        "https://www.toasttab.com/manna-bread-from-heaven-306-commerce-st/rewardsLookup",
+        "mailto:support@mannabread.com",
+        "tel:8328433999"
+      ],
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Bakery",
+              "@id": "https://mannabread.com/#bakery",
+              "name": "Manna Bakery",
+              "alternateName": "Manna Bread From Heaven",
+              "url": "https://mannabread.com",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://mannabread.com/images/manna-logo-share.png",
+                "width": 1050,
+                "height": 600
+              },
+              "image": "https://mannabread.com/images/manna-storefront-exterior.webp",
+              "description": "Manna Bakery is a handcrafted bakery, cafe, and gathering place in Tomball, Texas.",
+              "telephone": "(832) 843-3999",
+              "email": "support@mannabread.com",
+              "priceRange": "$$",
+              "servesCuisine": [
+                "Bakery",
+                "Breakfast",
+                "Lunch",
+                "Coffee"
+              ],
+              "hasMenu": {
+                "@id": "https://mannabread.com/menu#menu"
+              },
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "306 Commerce St",
+                "addressLocality": "Tomball",
+                "addressRegion": "TX",
+                "postalCode": "77375",
+                "addressCountry": "US"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 30.0972,
+                "longitude": -95.6161
+              },
+              "openingHoursSpecification": [
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": [
+                    "https://schema.org/Monday",
+                    "https://schema.org/Tuesday",
+                    "https://schema.org/Wednesday",
+                    "https://schema.org/Thursday",
+                    "https://schema.org/Friday",
+                    "https://schema.org/Saturday"
+                  ],
+                  "opens": "07:00",
+                  "closes": "16:00"
+                },
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": "https://schema.org/Sunday",
+                  "opens": "00:00",
+                  "closes": "00:00"
+                }
+              ],
+              "founder": {
+                "@type": "Person",
+                "name": "Christin"
+              },
+              "hasMap": "https://www.google.com/maps/search/?api=1&query=Manna+Bread+from+Heaven,+306+Commerce+St,+Tomball,+TX+77375",
+              "sameAs": [
+                "https://www.instagram.com/manna_bakeries?igsh=am00OTF5cDB4aXAw",
+                "https://www.facebook.com/share/18HD2Sg3WV/?mibextid=wwXIfr"
+              ]
+            },
+            {
+              "@type": "WebSite",
+              "@id": "https://mannabread.com/#website",
+              "url": "https://mannabread.com",
+              "name": "Manna Bakery",
+              "alternateName": "Bread from Heaven",
+              "description": "The official website for Manna Bakery in Tomball, Texas.",
+              "inLanguage": "en-US",
+              "publisher": {
+                "@id": "https://mannabread.com/#bakery"
+              }
+            }
+          ]
+        }
+      ],
+      "expired_labor_day_in_initial_html": true
+    },
+    {
+      "key": "bot-GPTBot",
+      "url": "https://mannabread.com/",
+      "status": "200",
+      "error": "",
+      "headers": "HTTP/2 200 \naccept-ranges: bytes\naccess-control-allow-origin: *\nage: 272428\ncache-control: public, max-age=0, must-revalidate\ncontent-disposition: inline\ncontent-type: text/html; charset=utf-8\ndate: Tue, 08 Sep 2026 18:24:38 GMT\netag: \"25e02e8a92e7bcd721935d76e2f0a1e7\"\npermissions-policy: camera=(), microphone=(), geolocation=()\nreferrer-policy: strict-origin-when-cross-origin\nserver: Vercel\nstrict-transport-security: max-age=63072000; includeSubDomains\nvary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch\nx-content-type-options: nosniff\nx-matched-path: /\nx-nextjs-prerender: 1\nx-nextjs-stale-time: 300\nx-vercel-cache: HIT\nx-vercel-id: cle1::h5fbz-1788891878366-910d47a2f314\ncontent-length: 122303\n\n",
+      "title": "Bread from Heaven | Manna Bakery",
+      "description": "Manna Bakery is a handcrafted bakery, caf\u00e9, and gathering place in Tomball, Texas\u2014made for good food, unhurried moments, and community.",
+      "canonical": [
+        "https://mannabread.com"
+      ],
+      "robots": null,
+      "og_type": "website",
+      "og_image": "https://mannabread.com/images/manna-logo-share.png?v=20260727",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "links": [
+        "/",
+        "/careers",
+        "/catering",
+        "/contact",
+        "/gift-cards",
+        "/menu",
+        "/our-story",
+        "/rentals",
+        "https://order.toasttab.com/egiftcards/manna-bread-from-heaven-306-commerce-st",
+        "https://www.dillanmilo.com/",
+        "https://www.facebook.com/share/18HD2Sg3WV/?mibextid=wwXIfr",
+        "https://www.google.com/maps/dir/?api=1&destination=Manna+Bread+from+Heaven,+306+Commerce+St,+Tomball,+TX+77375",
+        "https://www.instagram.com/manna_bakeries?igsh=am00OTF5cDB4aXAw",
+        "https://www.toasttab.com/manna-bread-from-heaven-306-commerce-st/rewardsLookup",
+        "mailto:support@mannabread.com",
+        "tel:8328433999"
+      ],
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Bakery",
+              "@id": "https://mannabread.com/#bakery",
+              "name": "Manna Bakery",
+              "alternateName": "Manna Bread From Heaven",
+              "url": "https://mannabread.com",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://mannabread.com/images/manna-logo-share.png",
+                "width": 1050,
+                "height": 600
+              },
+              "image": "https://mannabread.com/images/manna-storefront-exterior.webp",
+              "description": "Manna Bakery is a handcrafted bakery, cafe, and gathering place in Tomball, Texas.",
+              "telephone": "(832) 843-3999",
+              "email": "support@mannabread.com",
+              "priceRange": "$$",
+              "servesCuisine": [
+                "Bakery",
+                "Breakfast",
+                "Lunch",
+                "Coffee"
+              ],
+              "hasMenu": {
+                "@id": "https://mannabread.com/menu#menu"
+              },
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "306 Commerce St",
+                "addressLocality": "Tomball",
+                "addressRegion": "TX",
+                "postalCode": "77375",
+                "addressCountry": "US"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 30.0972,
+                "longitude": -95.6161
+              },
+              "openingHoursSpecification": [
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": [
+                    "https://schema.org/Monday",
+                    "https://schema.org/Tuesday",
+                    "https://schema.org/Wednesday",
+                    "https://schema.org/Thursday",
+                    "https://schema.org/Friday",
+                    "https://schema.org/Saturday"
+                  ],
+                  "opens": "07:00",
+                  "closes": "16:00"
+                },
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": "https://schema.org/Sunday",
+                  "opens": "00:00",
+                  "closes": "00:00"
+                }
+              ],
+              "founder": {
+                "@type": "Person",
+                "name": "Christin"
+              },
+              "hasMap": "https://www.google.com/maps/search/?api=1&query=Manna+Bread+from+Heaven,+306+Commerce+St,+Tomball,+TX+77375",
+              "sameAs": [
+                "https://www.instagram.com/manna_bakeries?igsh=am00OTF5cDB4aXAw",
+                "https://www.facebook.com/share/18HD2Sg3WV/?mibextid=wwXIfr"
+              ]
+            },
+            {
+              "@type": "WebSite",
+              "@id": "https://mannabread.com/#website",
+              "url": "https://mannabread.com",
+              "name": "Manna Bakery",
+              "alternateName": "Bread from Heaven",
+              "description": "The official website for Manna Bakery in Tomball, Texas.",
+              "inLanguage": "en-US",
+              "publisher": {
+                "@id": "https://mannabread.com/#bakery"
+              }
+            }
+          ]
+        }
+      ],
+      "expired_labor_day_in_initial_html": true
+    },
+    {
+      "key": "bot-PerplexityBot",
+      "url": "https://mannabread.com/",
+      "status": "200",
+      "error": "",
+      "headers": "HTTP/2 200 \naccept-ranges: bytes\naccess-control-allow-origin: *\nage: 272428\ncache-control: public, max-age=0, must-revalidate\ncontent-disposition: inline\ncontent-type: text/html; charset=utf-8\ndate: Tue, 08 Sep 2026 18:24:38 GMT\netag: \"25e02e8a92e7bcd721935d76e2f0a1e7\"\npermissions-policy: camera=(), microphone=(), geolocation=()\nreferrer-policy: strict-origin-when-cross-origin\nserver: Vercel\nstrict-transport-security: max-age=63072000; includeSubDomains\nvary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch\nx-content-type-options: nosniff\nx-matched-path: /\nx-nextjs-prerender: 1\nx-nextjs-stale-time: 300\nx-vercel-cache: HIT\nx-vercel-id: cle1::bvm8h-1788891878498-e3f8dca780b8\ncontent-length: 122303\n\n",
+      "title": "Bread from Heaven | Manna Bakery",
+      "description": "Manna Bakery is a handcrafted bakery, caf\u00e9, and gathering place in Tomball, Texas\u2014made for good food, unhurried moments, and community.",
+      "canonical": [
+        "https://mannabread.com"
+      ],
+      "robots": null,
+      "og_type": "website",
+      "og_image": "https://mannabread.com/images/manna-logo-share.png?v=20260727",
+      "lang": "en",
+      "h1": 1,
+      "main": 1,
+      "links": [
+        "/",
+        "/careers",
+        "/catering",
+        "/contact",
+        "/gift-cards",
+        "/menu",
+        "/our-story",
+        "/rentals",
+        "https://order.toasttab.com/egiftcards/manna-bread-from-heaven-306-commerce-st",
+        "https://www.dillanmilo.com/",
+        "https://www.facebook.com/share/18HD2Sg3WV/?mibextid=wwXIfr",
+        "https://www.google.com/maps/dir/?api=1&destination=Manna+Bread+from+Heaven,+306+Commerce+St,+Tomball,+TX+77375",
+        "https://www.instagram.com/manna_bakeries?igsh=am00OTF5cDB4aXAw",
+        "https://www.toasttab.com/manna-bread-from-heaven-306-commerce-st/rewardsLookup",
+        "mailto:support@mannabread.com",
+        "tel:8328433999"
+      ],
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Bakery",
+              "@id": "https://mannabread.com/#bakery",
+              "name": "Manna Bakery",
+              "alternateName": "Manna Bread From Heaven",
+              "url": "https://mannabread.com",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://mannabread.com/images/manna-logo-share.png",
+                "width": 1050,
+                "height": 600
+              },
+              "image": "https://mannabread.com/images/manna-storefront-exterior.webp",
+              "description": "Manna Bakery is a handcrafted bakery, cafe, and gathering place in Tomball, Texas.",
+              "telephone": "(832) 843-3999",
+              "email": "support@mannabread.com",
+              "priceRange": "$$",
+              "servesCuisine": [
+                "Bakery",
+                "Breakfast",
+                "Lunch",
+                "Coffee"
+              ],
+              "hasMenu": {
+                "@id": "https://mannabread.com/menu#menu"
+              },
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "306 Commerce St",
+                "addressLocality": "Tomball",
+                "addressRegion": "TX",
+                "postalCode": "77375",
+                "addressCountry": "US"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 30.0972,
+                "longitude": -95.6161
+              },
+              "openingHoursSpecification": [
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": [
+                    "https://schema.org/Monday",
+                    "https://schema.org/Tuesday",
+                    "https://schema.org/Wednesday",
+                    "https://schema.org/Thursday",
+                    "https://schema.org/Friday",
+                    "https://schema.org/Saturday"
+                  ],
+                  "opens": "07:00",
+                  "closes": "16:00"
+                },
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": "https://schema.org/Sunday",
+                  "opens": "00:00",
+                  "closes": "00:00"
+                }
+              ],
+              "founder": {
+                "@type": "Person",
+                "name": "Christin"
+              },
+              "hasMap": "https://www.google.com/maps/search/?api=1&query=Manna+Bread+from+Heaven,+306+Commerce+St,+Tomball,+TX+77375",
+              "sameAs": [
+                "https://www.instagram.com/manna_bakeries?igsh=am00OTF5cDB4aXAw",
+                "https://www.facebook.com/share/18HD2Sg3WV/?mibextid=wwXIfr"
+              ]
+            },
+            {
+              "@type": "WebSite",
+              "@id": "https://mannabread.com/#website",
+              "url": "https://mannabread.com",
+              "name": "Manna Bakery",
+              "alternateName": "Bread from Heaven",
+              "description": "The official website for Manna Bakery in Tomball, Texas.",
+              "inLanguage": "en-US",
+              "publisher": {
+                "@id": "https://mannabread.com/#bakery"
+              }
+            }
+          ]
+        }
+      ],
+      "expired_labor_day_in_initial_html": true
+    }
+  ],
+  "reporting": {
+    "method": "Authenticated browser UI read on September 8, 2026; aggregate transcription",
+    "period": [
+      "2026-08-30",
+      "2026-09-05"
+    ],
+    "comparison": [
+      "2026-08-23",
+      "2026-08-29"
+    ],
+    "search_console": {
+      "clicks": [
+        92,
+        65
+      ],
+      "impressions_display": [
+        "2.33K",
+        "2.52K"
+      ],
+      "ctr_percent": [
+        4,
+        2.6
+      ],
+      "average_position": [
+        7.2,
+        8.2
+      ],
+      "indexed_sitemap_pages": 8,
+      "index_report_updated": "2026-09-03",
+      "manual_actions": "No issues detected",
+      "security_issues": "No issues detected",
+      "cwv_report_updated": "2026-09-06",
+      "cwv_mobile": {
+        "good": 8,
+        "needs_improvement": 0,
+        "poor": 0
+      },
+      "cwv_desktop": {
+        "good": 8,
+        "needs_improvement": 0,
+        "poor": 0
+      }
+    },
+    "ga4": {
+      "property": "547450817",
+      "sessions": [
+        828,
+        845
+      ],
+      "organic_sessions": [
+        431,
+        418
+      ],
+      "organic_engagement_rate_percent": [
+        64.04,
+        55.98
+      ],
+      "ai_assistant_sessions": [
+        4,
+        4
+      ],
+      "ai_assistant_key_events": [
+        0,
+        0
+      ],
+      "all_key_events": [
+        18,
+        8
+      ],
+      "generate_lead": [
+        8,
+        5
+      ],
+      "general": [
+        4,
+        0
+      ],
+      "rentals": [
+        2,
+        2
+      ],
+      "catering": [
+        1,
+        0
+      ],
+      "employment": [
+        1,
+        3
+      ],
+      "customer_inquiry_events_excluding_employment": [
+        7,
+        2
+      ]
+    },
+    "limitations": [
+      "Rounded impression and CTR displays",
+      "Customer inquiries are events, not qualified leads or bookings",
+      "Different provider reporting calendars",
+      "AI channel label not independently revalidated against raw sources"
+    ]
+  }
+}

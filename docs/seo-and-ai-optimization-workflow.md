@@ -57,7 +57,20 @@ Durable project-specific guidance for recurring SEO, AEO, GEO, local discovery, 
 5. Run the production build, lint, and rendered route checks for changed files.
 6. Record only verified reusable guidance and material implementation changes in this file’s update log.
 
+### Weekly evidence and comparison rules
+
+- Use a compact delta against the previous audit; only broaden to a full audit when a regression or material release warrants it.
+- Compare equal seven-day periods with matching weekdays and a complete Search Console reporting window. Record exact dates and the freshness of each report. Do not reuse old analytics numbers as current evidence.
+- Check Search Console's sitemap-filtered indexed URL list separately from all-known-URL exclusions. Historical Toast/order URLs must not be counted as missing current site pages.
+- Read authenticated Search Console and GA4 through the available browser when dedicated reporting connectors are absent. Keep this read-only.
+- Report customer inquiries as general + rentals + catering; report employment separately. Key-event totals and link clicks are not booked events, purchases, or qualified customers. Retain AI referral counts even when the sample is too small for a trend conclusion.
+- For temporary announcements, compare raw response HTML with the hydrated page after the expiry time. Client-only hiding can leave expired text available to crawlers even after a rebuild. Treat any component/timer/rendering correction as a separately reviewed presentation change.
+- Check field Core Web Vitals before recommending media changes based only on file sizes. Keep field evidence separate from lab measurements.
+- Save a dated report and bounded machine-readable evidence in `docs/`; keep large raw responses and build logs in temporary storage. Record read-only request samples as samples, not proof of authentic crawler access.
+
 ## Update log
+
+- **2026-09-08, weekly check:** All eight sitemap pages appear in Search Console's indexed list (report updated September 3); field Core Web Vitals reports eight good URLs on each device class (updated September 6). Live hours, Sunday closure, Open Graph type, and the careers discovery entry are verified. The expired Labor Day announcement remains in raw and freshly built HTML but disappears after hydration; no presentation change was made. Added weekly comparison, reporting-access, conversion-separation, and announcement-expiry checks. See `docs/SEO_AI_DISCOVERY_AUDIT_2026-09-08.md` for dated metrics and evidence; these figures are snapshots, not permanent business facts.
 
 - **2026-09-03, business-hours release:** The client confirmed new public hours of 7:00 AM–4:00 PM Monday through Saturday, with Sunday remaining closed. Updated the shared visible hours, rental-page hours, Bakery JSON-LD, and `llms.txt` for exact site-wide and machine-readable parity. The user explicitly authorized committing and pushing this change to `main` for publication.
 - **2026-08-31, subsequent release authorization:** The user explicitly approved adding, committing, pushing, and publishing the reviewed under-the-hood changes. Release scope is canonical-origin normalization, explicit Sunday closure in JSON-LD, the missing Open Graph website type, and the three associated audit/workflow documents. The existing committed careers entry in `llms.txt` will also reach production. All presentation/content recommendations below remain deferred, and unrelated untracked work is excluded. Earlier local-only/no-publication statements record the authorization and production state at the time of those audits, not this subsequent release instruction. Verify the exact released commit and live responses after publication; do not submit URLs or change analytics/crawler policy.
