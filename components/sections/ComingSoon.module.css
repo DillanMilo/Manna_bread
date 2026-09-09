@@ -1,0 +1,52 @@
+
+/* A brief sweep of warm light, followed by a long, quiet pause. */
+.shimmer {
+  background: linear-gradient(110deg, transparent 25%, rgb(201 168 76 / 18%) 48%, transparent 72%);
+  transform: translateX(-130%);
+  animation: manna-invitation-shimmer 6s ease-in-out infinite;
+}
+
+@keyframes manna-invitation-shimmer {
+  0%, 65% { transform: translateX(-130%); }
+  90%, 100% { transform: translateX(130%); }
+}
+
+.invitation:hover .shimmer,
+.invitation:focus-visible .shimmer {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shimmer { animation: none; }
+}
+
+/* Replay once on each opening, then leave the grown plant at rest. */
+.reveal[open] .stem,
+.reveal[open] .branch {
+  stroke-dasharray: 1;
+  animation: grow-stem 1.8s ease-out both;
+}
+
+.reveal[open] .branch { animation-delay: .4s; }
+
+.reveal[open] .leaf {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: unfold-leaf .85s ease-out both;
+}
+
+@keyframes grow-stem {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes unfold-leaf {
+  from { opacity: 0; transform: scale(.25) rotate(-12deg); }
+  to { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal[open] .stem,
+  .reveal[open] .branch,
+  .reveal[open] .leaf { animation: none; }
+}

@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FEATURES, NAV_LINKS, TOAST } from '@/lib/constants';
 import { Button } from '@/components/ui/Button';
+import { ComingSoon } from '@/components/sections/ComingSoon';
 
 export function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -101,6 +102,8 @@ export function Navigation() {
             </div>
           )}
 
+          <div className="flex items-center gap-2 sm:gap-4">
+          <ComingSoon />
           <button
             className="lg:hidden flex items-center justify-center w-11 h-11 text-white touch-manipulation"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -116,6 +119,7 @@ export function Navigation() {
               )}
             </svg>
           </button>
+          </div>
         </div>
 
         {/* Animated Mobile Menu */}
