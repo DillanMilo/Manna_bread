@@ -90,7 +90,7 @@ export function Contact({ headingLevel = 'h2' }: ContactProps) {
                 Send a note
               </p>
               <h3 className="mb-3 font-display text-2xl font-medium text-white">
-                Manna will point you the right way.
+                Manna will point you in the right direction.
               </h3>
               <p className="mb-5 font-body text-sm leading-relaxed text-white/68">
                 For questions about orders, visits, catering, rentals, or anything else that needs a human answer.
