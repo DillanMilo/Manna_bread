@@ -609,7 +609,7 @@ export default function OurStoryPage() {
             <FadeIn delay={0.15}>
               <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-5">
                 Christin&apos;s marriage was tested by the addiction battle faced
-                by her husband (ex)&mdash;a struggle that brought their family to
+                by her former husband&mdash;a struggle that brought their family to
                 the edge of hopelessness. The certainty she had built her life upon
                 began to crack under the weight of reality, and the future she had
                 worked so hard to protect felt impossibly far away.
@@ -716,7 +716,7 @@ export default function OurStoryPage() {
             <FadeIn delay={0.15}>
               <p className="font-body text-base md:text-[17px] text-white/85 leading-[1.8] mb-5">
                 When Christin returned home from Kenya, life didn&apos;t offer a
-                soft landing. Her husband (ex) was arrested and imprisoned due to his
+                soft landing. Her former husband was arrested and imprisoned due to his
                 long-standing battle with addiction. The life she knew crumbled
                 overnight. Divorce, court, and wave after wave of change followed.
                 Christin became a single mom to six children, learning how to take

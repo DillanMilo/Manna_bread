@@ -16,11 +16,18 @@
   --color-brand-fern: #4A7C59;
   --color-brand-olive: #6B705C;
   --color-brand-charcoal: #2D2A26;
+}
 
-  /* Font Families - will be set by next/font CSS variables */
-  --font-family-display: var(--font-display), 'Playfair Display', serif;
-  --font-family-accent: var(--font-accent), 'Lora', serif;
-  --font-family-body: var(--font-body), 'Libre Franklin', sans-serif;
+.font-display {
+  font-family: var(--font-display), 'Playfair Display', serif;
+}
+
+.font-accent {
+  font-family: var(--font-accent), 'Lora', serif;
+}
+
+.font-body {
+  font-family: var(--font-body), 'Libre Franklin', sans-serif;
 }
 
 html {

@@ -190,8 +190,8 @@ export function MenuExperience({ menuData, source, lastSyncedAt }: MenuExperienc
             <FadeIn>
               <SectionHeader
                 label="Our Menu"
-                title="Baked Fresh Daily"
-                description="Breakfast, lunch, and drinks made with care in the heart of Manna."
+                title="Made with care"
+                description="Breakfast, lunch, and drinks in the heart of Manna."
                 headingLevel="h1"
                 light
               />
