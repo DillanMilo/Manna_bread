@@ -1,4 +1,4 @@
-// Current in-store menu transcribed from Manna Bakery's printed menu boards.
+// Approved menu transcribed from IMG_4118–IMG_4121. Launch approved September 11, 2026.
 
 export type Price = {
   display: string;
@@ -29,34 +29,35 @@ export const menuData: MenuCategory[] = [
     sections: [
       {
         title: 'Coffee & Espresso',
-        description: 'Standard espresso drinks are $6 small or $7 large.',
+        description: 'Small / large prices are shown where available.',
         items: [
-          { name: 'House Drip', price: { display: '$3.50 / $4.50' } },
-          { name: 'Decaf Drip', price: { display: '' } },
+          { name: 'House Drip', description: 'Bottomless.', price: { display: '$5' } },
           { name: 'Espresso', price: { display: '$4' } },
-          { name: 'Americano', price: { display: '$4' } },
-          { name: 'Cortado', price: { display: '$4' } },
-          { name: 'Cold Brew', price: { display: '$3 / $4' } },
+          { name: 'Americano', price: { display: '$5' } },
+          { name: 'Cortado', description: '4 oz.', price: { display: '$4' } },
+          { name: 'Cold Brew', price: { display: '$5 / $6' } },
+          { name: 'Pour Over', price: { display: '$7 / $8' } },
+          { name: 'Affogato', price: { display: '$8' } },
           { name: 'Latte', price: { display: '$6 / $7' } },
           { name: 'Cappuccino', price: { display: '$6 / $7' } },
-          { name: 'Italian Macchiato', price: { display: '$6 / $7' } },
+          { name: 'Traditional Macchiato', description: '3 oz.', price: { display: '$5' } },
           { name: 'Flavored Macchiato', price: { display: '$6 / $7' } },
-          { name: 'Flat White', price: { display: '$6 / $7' } },
+          { name: 'Flat White', description: '6 oz.', price: { display: '$5' } },
           { name: 'Mocha', price: { display: '$6 / $7' } },
         ],
       },
       {
-        title: 'Tea & Chocolate',
+        title: 'Tea, Chocolate & Spritzers',
         items: [
+          { name: 'Spritzers', description: 'Seasonal.', price: { display: '$7' } },
           { name: 'European Hot Chocolate', price: { display: '$6 / $7' } },
           { name: 'Simple Hot Chocolate', price: { display: '$4 / $5' } },
           { name: 'Matcha Latte', price: { display: '$6 / $7' } },
           { name: 'Chai Tea Latte', price: { display: '$6 / $7' } },
           { name: 'London Fog', price: { display: '$6 / $7' } },
-          { name: 'Iced Tea', price: { display: '$3 / $4' } },
+          { name: 'Iced Tea', description: 'Bottomless.', price: { display: '$4.50' } },
           {
             name: 'Brewed Tea',
-            description: 'English Breakfast, Earl Grey, Mint Tea, or Decaf Black.',
             price: { display: '$3 / $4' },
           },
         ],
@@ -67,14 +68,16 @@ export const menuData: MenuCategory[] = [
           { name: 'Skim Milk', price: { display: '' } },
           { name: 'Whole Milk', price: { display: '' } },
           { name: '2% Milk', price: { display: '' } },
-          { name: 'Heavy Cream', price: { display: '' } },
+          { name: 'Heavy Cream', price: { display: '+$0.75' } },
           { name: 'Almond Milk', price: { display: '+$0.75' } },
           { name: 'Oat Milk', price: { display: '+$0.75' } },
+          { name: 'Coconut Milk', price: { display: '+$0.75' } },
+          { name: 'Cold Foam', price: { display: '+$1' } },
         ],
       },
       {
         title: 'Syrups',
-        description: '75¢ each. Sugar-free options are marked below.',
+        description: '75¢ each. Sugar-free options are marked below. Ask about our seasonal flavors and proteins for your drink.',
         items: [
           { name: 'Peppermint', price: { display: '' } },
           { name: 'Butterscotch', price: { display: '' } },
@@ -99,19 +102,22 @@ export const menuData: MenuCategory[] = [
         title: 'Breakfast',
         items: [
           {
-            name: 'Breakfast Taco',
-            description: 'Warm flour tortilla stuffed with fluffy scrambled eggs, melted cheese, and your choice of bacon or sausage.',
-            price: { display: '$3' },
+            name: 'Breakfast Burrito',
+            description: 'Warm flour tortilla stuffed with fluffy scrambled eggs, minced chiles, melted cheese, and your choice of bacon, ham, or sausage.',
+            price: { display: '$7' },
+            labels: ['Kids friendly'],
           },
           {
             name: 'Kolache',
-            description: 'Soft, slightly sweet dough filled with savory sausage and melted cheese, available with or without jalapeño.',
+            description: 'Our soft brioche filled with savory sausage and melted cheese, available with or without jalapeño.',
             price: { display: '$6' },
+            labels: ['Kids friendly'],
           },
           {
             name: 'Biscuits & Gravy',
-            description: 'Fluffy house biscuits topped with creamy house sausage gravy seasoned with sage and pepper.',
-            price: { display: '$10 / $12' },
+            description: 'Fluffy scratch biscuits topped with creamy house sausage gravy seasoned with sage, thyme, and pepper.',
+            price: { display: 'Single $10 · Double $12' },
+            labels: ['Kids friendly'],
           },
           {
             name: 'Liège Waffle',
@@ -121,28 +127,39 @@ export const menuData: MenuCategory[] = [
           },
           {
             name: 'Breakfast Sandwich',
-            description: 'Egg and cheese with sausage or ham on sourdough bread, a croissant, or a biscuit.',
+            description: 'Savory egg whites and melted cheese with your choice of sausage or ham, served on sourdough, a croissant, or a biscuit.',
             price: { display: '$12' },
             labels: ['Gluten-free option'],
           },
           {
             name: 'Quiche',
-            description: 'A house favorite creamy egg custard. Available with bacon, sausage, veggies, meat lovers, or a seasonal flavor.',
+            description: 'A house favorite! Creamy egg custard in flaky crust. Available with bacon, sausage, veggies, or meat lovers.',
             price: { display: '$12 · GF $13' },
             labels: ['Gluten-free option'],
           },
           {
             name: 'Stuffed French Toast',
-            description: 'Vanilla-battered house bread stuffed with sweet cream cheese, topped with strawberries and whipped cream. Syrup on the side. The gluten-free version is also eggless.',
-            price: { display: '$12 · GF $13' },
+            description: 'Vanilla-battered house bread stuffed with sweet cream cheese, toasted and topped with strawberries and whipped cream. Syrup on the side. The gluten-free version is also eggless.',
+            price: { display: '$14 · GF $15' },
             labels: ['Gluten-free option'],
           },
           {
             name: 'Avocado Toast',
-            description: 'Two slices of toasted artisan bread layered with fresh smashed avocado over a bed of arugula, finished with sliced tomato and everything seasoning.',
-            price: { display: '$12' },
+            description: 'Two slices of our toasted artisan bread layered with fresh smashed avocado under a bed of arugula, finished with sliced tomato, everything seasoning, and feta cheese.',
+            price: { display: '$14' },
             labels: ['Gluten-free option'],
           },
+        ],
+      },
+      {
+        title: 'Add-ons',
+        items: [
+          { name: 'Egg', price: { display: '+$2' } },
+          { name: 'Cheese', price: { display: '+$2' } },
+          { name: 'Sausage', price: { display: '+$3' } },
+          { name: 'Ham', price: { display: '+$3' } },
+          { name: 'Bacon', price: { display: '+$3' } },
+          { name: 'Guac', price: { display: '+$3' } },
         ],
       },
       {
@@ -197,18 +214,19 @@ export const menuData: MenuCategory[] = [
           {
             name: 'Cuban Sandwich',
             description: 'Seasoned carnitas pork and house ham layered with Swiss cheese, Cuban mustard, and pickles on our house-baked bread.',
-            price: { display: '$16' },
+            price: { display: '$18' },
             labels: ['Gluten-free option'],
           },
           {
-            name: 'Navajo Tacos',
+            name: 'Navajo Taco',
             description: 'A plate-sized, flat, golden frybread topped with seasoned beef, beans, greens, tomato, cheese, and sour cream—a hearty, handcrafted Southwestern classic.',
-            price: { display: '$15' },
+            price: { display: '$18' },
           },
           {
             name: 'House 3-Meat Chili',
             description: 'Rough-cut steak tips, smoky bacon, and seasoned ground beef slow-simmered into a bold, hearty chili. Served with a slice of our silky-sweet house cornbread.',
             price: { display: '$15' },
+            labels: ['Gluten-free option'],
           },
         ],
       },
@@ -218,22 +236,22 @@ export const menuData: MenuCategory[] = [
           {
             name: 'Caesar Salad',
             description: 'Chopped romaine hearts, shredded parmesan, herb croutons, and creamy Caesar dressing.',
-            price: { display: '$6 / $14' },
+            price: { display: 'Cup $6 · Bowl $14' },
           },
           {
             name: 'Mandarin Crunch',
             description: 'Spring mix, mandarin oranges, almonds, sesame seeds, red onion, and sesame ginger dressing.',
-            price: { display: '$6 / $14' },
+            price: { display: 'Cup $6 · Bowl $14' },
           },
           {
             name: 'Strawberry Fields',
             description: 'Spinach and spring mix, strawberries, candied pecans, feta, and raspberry vinaigrette.',
-            price: { display: '$6 / $14' },
+            price: { display: 'Cup $6 · Bowl $14' },
           },
           {
             name: 'House Salad',
-            description: 'Chopped romaine lettuce, tomato, red onion, croutons, shredded cheddar, and ranch dressing.',
-            price: { display: '$6 / $14' },
+            description: 'Chopped romaine lettuce, fresh tomato, red onion, house croutons, cheddar, and ranch dressing.',
+            price: { display: 'Cup $6 · Bowl $14' },
           },
         ],
       },
@@ -243,7 +261,7 @@ export const menuData: MenuCategory[] = [
         items: [
           {
             name: 'Chicken Tortilla',
-            description: 'Chicken in a zesty broth, topped with cheese and a touch of cilantro for a little Southwest flair.',
+            description: 'Tender chicken and a chunky medley of roasted veggies and southwest beans simmered in a mildly spicy broth. Served with tortilla strips and sour cream on the side.',
             price: { display: 'Cup $6 · Bowl $12' },
             labels: ['Gluten-free'],
           },
