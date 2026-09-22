@@ -1,6 +1,7 @@
 import { createPageMetadata } from '@/lib/seo';
 import { Hero } from '@/components/sections/Hero';
-import { AnnouncementBanner } from '@/components/sections/AnnouncementBanner';
+import { TimedVisibility } from '@/components/ui/TimedVisibility';
+import { CoffeeDayBanner } from '@/components/sections/CoffeeDayBanner';
 import { Story } from '@/components/sections/Story';
 import { WelcomeInterlude } from '@/components/sections/WelcomeInterlude';
 import { FeaturedMenu } from '@/components/sections/FeaturedMenu';
@@ -12,7 +13,7 @@ import { FounderInterlude } from '@/components/sections/FounderInterlude';
 import { Services } from '@/components/sections/Services';
 import { Contact } from '@/components/sections/Contact';
 
-const LABOR_DAY_BANNER_ENDS_AT_CENTRAL = '2026-09-08T00:01:00-05:00';
+const COFFEE_DAY_BANNER_ENDS_AT_CENTRAL = '2026-09-30T00:00:00-05:00';
 
 export const metadata = createPageMetadata(
   'Bread from Heaven',
@@ -23,12 +24,9 @@ export const metadata = createPageMetadata(
 export default function HomePage() {
   return (
     <main>
-      <AnnouncementBanner
-        eyebrow="A holiday pause"
-        heading="Manna will be closed for Labor Day"
-        message="Monday, September 7 · We look forward to gathering with you again Tuesday."
-        endsAt={LABOR_DAY_BANNER_ENDS_AT_CENTRAL}
-      />
+      <TimedVisibility endsAt={COFFEE_DAY_BANNER_ENDS_AT_CENTRAL}>
+        <CoffeeDayBanner />
+      </TimedVisibility>
       <Hero />
       <Story />
       <WelcomeInterlude />
