@@ -13,7 +13,7 @@ import { FounderInterlude } from '@/components/sections/FounderInterlude';
 import { Services } from '@/components/sections/Services';
 import { Contact } from '@/components/sections/Contact';
 
-const COFFEE_DAY_BANNER_ENDS_AT_CENTRAL = '2026-09-30T00:00:00-05:00';
+const COFFEE_DAY_BANNER_ENDS_AT_CENTRAL = '2026-09-29T20:00:00-05:00';
 
 export const metadata = createPageMetadata(
   'Bread from Heaven',
