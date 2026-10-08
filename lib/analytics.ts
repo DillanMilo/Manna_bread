@@ -6,6 +6,7 @@ export type AnalyticsEventName =
   | 'gift_card_click'
   | 'get_directions'
   | 'inquiry_error'
+  | 'job_application'
   | 'order_online_click'
   | 'rewards_click'
   | 'social_click'
@@ -36,4 +37,12 @@ export function trackEvent(
   }
 
   window.gtag('event', eventName, parameters);
+}
+
+// Job applications get their own event so they don't count as customer leads in GA4.
+export function trackFormSubmit(leadType: string, formSource: string) {
+  trackEvent(leadType === 'employment' ? 'job_application' : 'generate_lead', {
+    lead_type: leadType,
+    form_source: formSource,
+  });
 }

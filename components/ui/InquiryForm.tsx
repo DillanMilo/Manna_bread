@@ -2,7 +2,7 @@
 
 import { CalendarDays, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
-import { trackEvent } from '@/lib/analytics';
+import { trackEvent, trackFormSubmit } from '@/lib/analytics';
 
 type InquiryType = 'catering' | 'rentals' | 'general' | 'employment';
 type FieldName =
@@ -315,10 +315,7 @@ export function InquiryForm({
 
       setStatus('success');
       form.reset();
-      trackEvent('generate_lead', {
-        lead_type: defaultType,
-        form_source: source,
-      });
+      trackFormSubmit(defaultType, source);
       onSuccess?.();
     } catch (err) {
       setStatus('error');

@@ -9,7 +9,7 @@ import {
   isEmploymentApplicationField,
   type EmploymentApplicationField,
 } from '@/lib/employmentApplication';
-import { trackEvent } from '@/lib/analytics';
+import { trackEvent, trackFormSubmit } from '@/lib/analytics';
 import { getRecaptchaToken } from '@/components/ui/InquiryForm';
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
@@ -136,7 +136,7 @@ export function EmploymentApplicationForm() {
 
       form.reset();
       setStatus('success');
-      trackEvent('generate_lead', { lead_type: 'employment', form_source: 'careers-page' });
+      trackFormSubmit('employment', 'careers-page');
     } catch (submissionError) {
       setStatus('error');
       setError(submissionError instanceof Error ? submissionError.message : 'Something went wrong. Please try again.');
