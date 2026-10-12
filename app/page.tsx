@@ -21,12 +21,22 @@ export const metadata = createPageMetadata(
   '/',
 );
 
+// Skip expired promos at render time so their text never reaches the server HTML.
+// TimedVisibility still handles the live client-side cutoff while a promo is running.
+function hasNotEnded(endsAt: string) {
+  return Date.now() < Date.parse(endsAt);
+}
+
 export default function HomePage() {
+  const showCoffeeDayBanner = hasNotEnded(COFFEE_DAY_BANNER_ENDS_AT_CENTRAL);
+
   return (
     <main>
-      <TimedVisibility endsAt={COFFEE_DAY_BANNER_ENDS_AT_CENTRAL}>
-        <CoffeeDayBanner />
-      </TimedVisibility>
+      {showCoffeeDayBanner && (
+        <TimedVisibility endsAt={COFFEE_DAY_BANNER_ENDS_AT_CENTRAL}>
+          <CoffeeDayBanner />
+        </TimedVisibility>
+      )}
       <Hero />
       <Story />
       <WelcomeInterlude />
