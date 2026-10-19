@@ -1,0 +1,104 @@
+.page {
+  /* Brief's business-card forest, scoped to this preview only. */
+  --color-brand-forest: #3d5247;
+  --color-brand-forest-mid: #4f6b5a;
+  position: relative;
+  overflow: clip;
+  background: #3d5247;
+  color: #faf9f6;
+}
+
+.page :is(a, button, input, summary):focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 5px;
+}
+
+.skipLink {
+  position: fixed;
+  top: 90px;
+  left: 20px;
+  z-index: 60;
+  padding: 16px 22px;
+  transform: translateY(-240px);
+  border-radius: 8px;
+  background: #faf9f6;
+  color: #3e2723;
+}
+
+.skipLink:focus { transform: none; }
+.eyebrow { font-size: 10px; font-weight: 500; letter-spacing: 2.1px; line-height: 1.8; text-transform: uppercase; color: #5d4037; }
+.heroTitle { margin-top: 25px; font-family: var(--font-display), 'Playfair Display', serif; font-size: clamp(3.5rem, 6.4vw, 6rem); font-weight: 400; letter-spacing: -0.045em; line-height: 1.02; }
+.sectionTitle { font-family: var(--font-display), 'Playfair Display', serif; font-size: clamp(2rem, 3.4vw, 2.85rem); font-weight: 400; letter-spacing: -0.025em; line-height: 1.2; color: #3e2723; }
+.primaryButton { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; gap: 18px; padding: 14px 24px; border: 1px solid #d4a574; border-radius: 8px; background: #c4956a; color: #3e2723; font-size: 12px; font-weight: 500; transition: transform .25s ease, background .25s ease; }
+.primaryButton:hover { background: #d4a574; transform: translateY(-3px); }
+.darkButton { border-color: #3e2723; background: #3e2723; color: #faf9f6; }
+.darkButton:hover { background: #5d4037; }
+.imageFrame { position: relative; overflow: hidden; background: #8a9a8e; }
+.arch { border-radius: 9999px 9999px 16px 16px; border: 1px solid #c9a84c66; }
+.archGlow { position: absolute; inset: -8% -15% 8%; z-index: -1; border-radius: 50% 50% 0 0; background: radial-gradient(ellipse, #c9a84c2b, #c9a84c00 72%); filter: blur(26px); }
+.imageNote { position: absolute; right: -16px; bottom: 63px; z-index: 2; padding: 17px 26px; border: 1px solid #c9a84c55; border-radius: 8px; background: #3d5247; color: #faf9f6; box-shadow: 0 10px 30px #1e2a2326; transform: rotate(-3deg); }
+.chapterLink { display: flex; min-height: 68px; align-items: center; gap: 15px; font-size: 11px; padding: 14px 24px; transition: background .25s; }
+.chapterLink:hover { background: #faf9f608; }
+.chapterLink + .chapterLink { border-left: 1px solid #c9a84c40; }
+.introSection { background: #faf9f6; color: #2d2a26; }
+.recipeSection { background: #f5f2ed; color: #2d2a26; border-top: 1px solid #3e272310; }
+.scaleButton { display: flex; min-height: 36px; min-width: 42px; align-items: center; justify-content: center; border-radius: 5px; color: #5d4037; font-size: 12px; transition: background .2s; cursor: pointer; }
+.selectedScale { background: #3d5247; color: #faf9f6; }
+.scaleButton:not(.selectedScale):hover { background: #3d524712; }
+.textButton { display: inline-flex; min-height: 44px; align-items: center; gap: 9px; color: #3e2723; font-size: 11px; text-decoration: underline; text-underline-offset: 5px; text-decoration-color: #c4956a; cursor: pointer; }
+.stepButton { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; gap: 8px; border: 1px solid #3d52474d; border-radius: 8px; padding: 8px 14px; font-size: 12px; color: #3d5247; cursor: pointer; }
+.stepButton:hover { background: #3d524710; }
+.stepButton:disabled { opacity: .4; cursor: default; }
+.filterButton { display: inline-flex; min-height: 44px; align-items: center; border: 1px solid transparent; border-radius: 8px; padding: 10px 15px; font-size: 11px; color: #f5f2ed; transition: background .2s, border-color .2s; cursor: pointer; }
+.selectedFilter { background: #faf9f6; color: #3d5247; }
+.filterButton:not(.selectedFilter):hover { border-color: #c9a84c80; }
+.journalCard { min-width: 0; }
+.entryDetails { margin-top: 14px; border-top: 1px solid #c9a84c40; border-bottom: 1px solid #c9a84c40; }
+.entryDetails summary { list-style: none; }
+.entryDetails summary::-webkit-details-marker { display: none; }
+.entryDetails summary svg { transition: transform .25s; }
+.entryDetails[open] summary svg { transform: rotate(45deg); }
+.quoteSection { background: #2f4238; border-block: 1px solid #c9a84c40; }
+.visitSection { background: #f5f2ed; color: #2d2a26; }
+.vine { position: absolute; inset: 0; z-index: 0; pointer-events: none; color: #c9a84c; opacity: .45; }
+.sway { height: 100%; width: 100%; transform-origin: bottom center; animation: sway 12s ease-in-out infinite alternate; }
+.heroVine { inset: -58px -80px 0; z-index: 1; opacity: .85; }
+.heroVine .sway { animation-duration: 16s; }
+.journalVine { inset: 0 -22%; opacity: .13; }
+.introVine { inset: -50% -32%; opacity: .17; color: #6b705c; }
+.quoteVine { inset: -45% -5%; opacity: .23; }
+
+@keyframes sway { from { transform: rotate(-1deg) translateX(-3px); } to { transform: rotate(1deg) translateX(3px); } }
+
+@media (min-width: 768px) {
+  .journalCard:nth-child(2) { margin-top: 36px; }
+  .journalCard:nth-child(3) { margin-top: 12px; }
+}
+
+@media (max-width: 767px), (pointer: coarse) {
+  .sway { animation: none; }
+  .archGlow { filter: none; }
+  .heroVine { inset: -40px -34px 0; opacity: .65; }
+  .imageNote { right: 5px; bottom: 62px; padding: 12px 20px; }
+  .introVine { inset: 0 -75%; opacity: .1; }
+}
+
+@media (max-width: 639px) {
+  .chapterLink { min-height: 54px; padding-inline: 0; }
+  .chapterLink + .chapterLink { border-left: none; border-top: 1px solid #c9a84c25; }
+  .heroTitle { font-size: clamp(3.5rem, 15vw, 5rem); }
+}
+
+.page[data-motion='static'] .sway { animation: none; }
+.page[data-motion='static'] :is(.reveal, .imageFrame, .imageFrame > div, .vine) { opacity: 1 !important; transform: none !important; clip-path: none !important; }
+.page[data-motion='static'] .vine { opacity: .3 !important; }
+.page[data-motion='static'] :is(.vine path, .vine g) { stroke-dasharray: none !important; stroke-dashoffset: 0 !important; opacity: .7 !important; }
+.page[data-motion='static'] * { transition-duration: 0s !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .page *, .page *::before, .page *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .reveal, .imageFrame, .imageFrame > div, .vine, .journalCard { opacity: 1 !important; transform: none !important; clip-path: none !important; }
+  .vine { opacity: .3 !important; }
+  .vine :is(path, g) { stroke-dasharray: none !important; stroke-dashoffset: 0 !important; opacity: .7 !important; }
+  .primaryButton:hover { transform: none; }
+}

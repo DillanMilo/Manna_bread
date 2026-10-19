@@ -1,4 +1,5 @@
 // Extract the existing logo lettering without generating or typesetting new shapes.
+// eslint-disable-next-line @typescript-eslint/no-require-imports -- This .cjs utility uses CommonJS.
 const sharp = require('sharp');
 
 async function main() {
