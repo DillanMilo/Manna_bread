@@ -27,12 +27,12 @@ export function MomentsJournal() {
           <p className="text-[11px] text-brand-soft-cream/75" role="status" aria-live="polite">{entries.length} {entries.length === 1 ? 'moment' : 'moments'}</p>
         </Reveal>
 
-        <div id="moment-entries" className="mt-10 grid items-start gap-8 md:min-h-[650px] md:grid-cols-3">
+        <div id="moment-entries" className="mt-10 grid min-w-0 grid-cols-1 items-start gap-8 md:min-h-[650px] md:grid-cols-3">
           <AnimatePresence initial={false}>
             {entries.map((entry, index) => (
-              <motion.article key={entry.id} layout={!still && !compact} className={styles.journalCard} initial={still ? false : { opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: still ? 0 : -10 }} transition={{ duration: still ? 0 : 0.4 }}>
+              <motion.article key={entry.id} layout={!still && !compact} className={styles.journalCard} initial={false} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: still ? 0 : -10 }} transition={{ duration: still ? 0 : 0.4 }}>
                 <Reveal delay={index * 0.12}>
-                  <KitchenImage src={entry.image} alt={entry.alt} sizes="(min-width: 768px) 33vw, 90vw" className={`rounded-2xl ${index === 1 ? 'aspect-[4/5]' : 'aspect-[5/4]'}`} />
+                  <KitchenImage src={entry.image} alt={entry.alt} sizes="(min-width: 768px) 33vw, 90vw" className="aspect-[5/4] rounded-2xl" />
                   <div className="mt-5 flex justify-between text-[10px] uppercase tracking-[2px] text-brand-soft-cream"><span>{entry.category}</span><span>No. {entry.number}</span></div>
                   <h3 className="mt-3 font-display text-[1.7rem] leading-[1.25] text-brand-warm-white">{entry.title}</h3>
                   <p className="mt-3 text-sm leading-[1.85] text-brand-soft-cream/80">{entry.summary}</p>
@@ -45,7 +45,7 @@ export function MomentsJournal() {
             ))}
           </AnimatePresence>
         </div>
-        <Reveal className="mt-8 flex items-start gap-3 text-xs leading-[1.8] text-brand-soft-cream/75"><ArrowDownRight size={19} className="shrink-0 text-brand-gold" aria-hidden="true" /><p>A first collection, still taking shape. All journal copy is sample content awaiting Christin’s words. Food still lifes are AI concepts; the cookbook photograph is from Manna’s library.</p></Reveal>
+        <Reveal className="mt-8 flex items-start gap-3 text-xs leading-[1.8] text-brand-soft-cream/75"><ArrowDownRight size={19} className="shrink-0 text-brand-gold" aria-hidden="true" /><p>A first collection, still taking shape. All journal copy is sample content awaiting Christin’s words. The food still lifes and cookbook image are AI concepts.</p></Reveal>
       </div>
     </section>
   );

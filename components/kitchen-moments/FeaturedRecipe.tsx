@@ -31,11 +31,11 @@ export function FeaturedRecipe() {
           <p className="max-w-64 text-sm leading-[1.8] text-brand-olive">A sample recipe to try the experience.<br />Christin’s tested version comes next.</p>
         </Reveal>
 
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+        <div className="grid min-w-0 grid-cols-1 gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
           <Reveal>
             <figure className="relative">
               <KitchenImage src="/images/kitchen-moments/bread-and-linen.webp" alt="AI concept: a rustic round loaf and torn slices of bread on cream linen" sizes="(min-width: 1024px) 490px, 90vw" className="aspect-[5/4] rounded-2xl" />
-              <figcaption className="mt-3 flex justify-between gap-4 text-[10px] uppercase tracking-[1.5px] text-brand-olive"><span>Flour. Water. A little patience.</span><span>AI concept</span></figcaption>
+              <figcaption className="mt-3 flex max-w-full flex-wrap justify-between gap-x-4 gap-y-1 text-[10px] uppercase tracking-[1.5px] text-brand-olive"><span>Flour. Water. A little patience.</span><span>AI concept</span></figcaption>
             </figure>
             <div className="mt-8 flex flex-wrap gap-x-7 gap-y-3 border-y border-brand-walnut/15 py-5 text-xs text-brand-walnut">
               <span className="flex items-center gap-2"><Clock3 size={16} aria-hidden="true" />20 min hands-on</span>
@@ -49,7 +49,7 @@ export function FeaturedRecipe() {
           <Reveal delay={0.15}>
             <div className="flex flex-wrap items-center justify-between gap-4">
               <h3 className="font-display text-2xl text-brand-walnut">What you’ll need</h3>
-              <div role="group" aria-label="Recipe batch size" className="flex rounded-lg border border-brand-walnut/20 p-1">
+              <div role="group" aria-label="Recipe batch size" className="flex max-w-full shrink-0 rounded-lg border border-brand-walnut/20 p-1">
                 {[1, 2, 3].map((amount) => <button key={amount} type="button" aria-pressed={scale === amount} onClick={() => setScale(amount)} className={`${styles.scaleButton} ${scale === amount ? styles.selectedScale : ''}`}>{amount}×</button>)}
               </div>
             </div>
@@ -59,8 +59,8 @@ export function FeaturedRecipe() {
                 <li key={ingredient.name} className="border-b border-brand-walnut/10">
                   <label className="flex min-h-14 cursor-pointer items-center gap-3 py-3">
                     <input type="checkbox" className="size-4 shrink-0 accent-brand-forest" checked={checked.includes(ingredient.name)} onChange={() => setChecked((current) => current.includes(ingredient.name) ? current.filter((name) => name !== ingredient.name) : [...current, ingredient.name])} />
-                    <span className={`flex-1 text-sm text-brand-charcoal ${checked.includes(ingredient.name) ? 'line-through opacity-60' : ''}`}>{ingredient.name}{ingredient.note && <span className="mt-0.5 block text-xs leading-relaxed text-brand-olive">{ingredient.note}</span>}</span>
-                    <span className="whitespace-nowrap font-accent text-lg tabular-nums text-brand-walnut">{ingredient.quantity * scale}<span className="ml-1 font-body text-xs">{ingredient.unit}</span></span>
+                    <span className={`min-w-0 flex-1 text-sm text-brand-charcoal ${checked.includes(ingredient.name) ? 'line-through opacity-60' : ''}`}>{ingredient.name}{ingredient.note && <span className="mt-0.5 block text-xs leading-relaxed text-brand-olive">{ingredient.note}</span>}</span>
+                    <span className="shrink-0 whitespace-nowrap font-accent text-lg tabular-nums text-brand-walnut">{ingredient.quantity * scale}<span className="ml-1 font-body text-xs">{ingredient.unit}</span></span>
                   </label>
                 </li>
               ))}

@@ -20,7 +20,7 @@ export function KitchenMoments() {
 
   return (
     <KitchenMotionContext.Provider value={{ still, compact }}>
-      <main id="kitchen-content" className={`${styles.page} pt-16 lg:pt-20`} data-motion={still ? 'static' : 'full'}>
+      <main id="kitchen-content" className={`${styles.page} w-full max-w-full overflow-x-clip pt-16 lg:pt-20`} data-motion={still ? 'static' : 'full'}>
         <noscript><style>{`.${styles.reveal}, .${styles.imageFrame} { opacity: 1 !important; transform: none !important; clip-path: none !important; }`}</style></noscript>
         <a href="#recipe" className={styles.skipLink}>Skip to the sample recipe</a>
         <div className="border-y border-brand-gold/20 bg-black/5 px-5 py-2.5">
@@ -31,7 +31,7 @@ export function KitchenMoments() {
         </div>
 
         <section aria-labelledby="kitchen-title" className="relative isolate px-5 pb-12 pt-12 sm:px-8 sm:pt-16 lg:px-10 lg:pb-16 lg:pt-20">
-          <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+          <div className="mx-auto grid min-w-0 max-w-6xl grid-cols-1 items-center gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
             <div className="relative z-10">
               <Reveal load><p className={`${styles.eyebrow} flex items-center gap-3 text-brand-soft-cream!`}><span className="h-px w-8 bg-brand-gold/60" />A Manna kitchen journal</p></Reveal>
               <Reveal load delay={0.12}><h1 id="kitchen-title" className={styles.heroTitle}>Kitchen<br />Moments<span className="mt-4 block font-accent text-[0.48em] font-normal italic tracking-normal text-brand-gold">with Christin</span></h1></Reveal>
@@ -51,7 +51,7 @@ export function KitchenMoments() {
               <KitchenVine hero />
               <KitchenImage src="/images/kitchen-moments/hands-and-dough.webp" alt="AI concept: anonymous flour-dusted hands folding bread dough on a walnut counter in soft window light" sizes="(min-width: 1024px) 455px, (min-width: 640px) 430px, 88vw" priority arch className="aspect-[4/5] shadow-2xl" />
               <Reveal load delay={0.8} className={styles.imageNote}><span className="text-[9px] uppercase tracking-[2px]">The first fold</span><span className="mt-1 block font-accent text-xl italic">It begins here.</span></Reveal>
-              <figcaption className="mt-5 flex justify-between gap-3 text-[10px] leading-[1.7] text-brand-soft-cream/75"><span>No. 01 / At the worktable</span><span>AI concept · Visual direction</span></figcaption>
+              <figcaption className="mt-5 flex max-w-full flex-wrap justify-between gap-x-3 gap-y-1 text-[10px] leading-[1.7] text-brand-soft-cream/75"><span>No. 01 / At the worktable</span><span>AI concept · Visual direction</span></figcaption>
             </figure>
           </div>
 
@@ -66,7 +66,7 @@ export function KitchenMoments() {
 
         <section aria-labelledby="christin-title" className={`${styles.introSection} relative isolate overflow-hidden px-5 py-20 sm:px-8 lg:py-24`}>
           <KitchenVine className={styles.introVine} />
-          <div className="relative z-10 mx-auto grid max-w-4xl items-center gap-8 sm:grid-cols-[150px_1fr] sm:gap-14">
+          <div className="relative z-10 mx-auto grid max-w-4xl grid-cols-1 items-center gap-8 sm:grid-cols-[150px_minmax(0,1fr)] sm:gap-14">
             <Reveal className="relative mx-auto h-44 w-36 sm:h-48 sm:w-full"><div className="absolute inset-0 overflow-hidden rounded-t-full rounded-b-2xl border border-brand-walnut/15"><Image src="/images/christin-desert-portrait.jpeg" alt="Christin, founder of Manna Bakery" fill sizes="150px" className="object-cover object-[center_35%]" /></div><Wheat size={30} strokeWidth={1} className="absolute -bottom-3 -right-4 text-brand-walnut" aria-hidden="true" /></Reveal>
             <Reveal delay={0.15}><p className={styles.eyebrow}>A note from Christin / Space reserved</p><h2 id="christin-title" className={`${styles.sectionTitle} mt-4`}>The part before the first bite.</h2><p className="mt-5 text-sm leading-[1.9] text-brand-charcoal">The scrape of a bowl. Dough catching on your fingers. A recipe book held open with a spoon. There’s a whole morning tucked into a loaf of bread.</p><p className="mt-4 text-sm leading-[1.9] text-brand-olive">This is a place for those small parts of the process, with room for Christin to tell them in her own words.</p><p className="mt-4 text-[11px] leading-relaxed text-brand-olive">Sample introduction · Christin’s personal note will replace this text.</p></Reveal>
           </div>
@@ -81,7 +81,7 @@ export function KitchenMoments() {
         </section>
 
         <section aria-labelledby="visit-title" className={`${styles.visitSection} px-5 py-20 sm:px-8 lg:px-10 lg:py-24`}>
-          <div className="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-[1fr_0.9fr] md:gap-20">
+          <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] md:gap-20">
             <Reveal><p className={styles.eyebrow}>A little closer to the kitchen</p><h2 id="visit-title" className={`${styles.sectionTitle} mt-4`}>Come by for a slice.</h2><p className="mt-5 max-w-md text-sm leading-[1.9] text-brand-charcoal">You’ll find Manna on Commerce Street. Come see what’s on the counter today.</p><p className="mt-5 flex items-start gap-2 text-xs leading-[1.9] text-brand-olive"><MapPin size={16} className="mt-0.5 shrink-0" aria-hidden="true" /><span>{CONTACT.address.street}, {CONTACT.address.city}, {CONTACT.address.state}<br />Monday–Saturday, {CONTACT.hours.mondayThroughSaturday}</span></p><div className="mt-7 flex flex-wrap items-center gap-5"><Link href="/contact" className={`${styles.primaryButton} ${styles.darkButton}`}>Visit the bakery <ArrowUpRight size={16} aria-hidden="true" /></Link>{FEATURES.onlineOrdering ? <a href={TOAST.orderOnline} className={styles.textButton}>Order through Toast <ArrowUpRight size={15} aria-hidden="true" /></a> : <Link href="/menu" className={styles.textButton}>See the menu <ArrowRight size={15} aria-hidden="true" /></Link>}</div></Reveal>
             <Reveal delay={0.15}><KitchenImage src="/images/manna-entry-doors.webp" alt="The arched timber entrance to Manna Bakery in Tomball" sizes="(min-width: 768px) 480px, 90vw" arch className="mx-auto aspect-[5/4] max-w-md" /></Reveal>
           </div>

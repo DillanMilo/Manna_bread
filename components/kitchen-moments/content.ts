@@ -53,7 +53,7 @@ export const journalEntries: JournalEntry[] = [
   {
     id: 'books', category: 'Kitchen stories', title: 'The pages we come back to', number: '02',
     summary: 'An open cookbook. A note in the margin. A recipe with a history.',
-    image: '/images/manna-recipe-books.webp', alt: 'Recipe books from Manna Bakery’s existing photography library',
+    image: '/images/kitchen-moments/cookbook-and-linen.webp', alt: 'AI concept: a well-used open cookbook with indistinct handwritten notes on a walnut counter beside cream linen and greenery',
     detail: 'A story direction: ask Christin to open a book she has kept for years and talk about one recipe she returns to. Who shared it? What has she changed? The story will be written from her own recollections.',
   },
   {

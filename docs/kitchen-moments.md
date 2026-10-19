@@ -15,23 +15,26 @@ A kitchen notebook in Manna’s business-card forest (`#3D5247`), warm white, li
 
 ## Motion, accessibility and performance
 
-The page follows the existing `Motion.tsx` and `ScrollVine.tsx` approach: the same organic easing, viewport reveals, SVG path drawing, scroll motion values and restrained drift. `useMediaParallax` and `useMobilePerformanceMode` are reused directly. New motion components live entirely under `components/kitchen-moments/`.
+The page follows the existing `Motion.tsx` and `ScrollVine.tsx` approach: the same organic easing, viewport reveals, SVG path drawing, scroll motion values and restrained drift. `useMediaParallax` and `useMobilePerformanceMode` are reused directly. New motion components live entirely under `components/kitchen-moments/`. After Alfred’s screenshot review, reveals use a finite native animation over visible HTML instead of a persistently hidden Framer initial state. On mount, bounds are checked against the viewport plus 360px; offscreen entries use a 360px observer margin and 0.01 threshold. If JavaScript, the observer or animation API fails, content stays readable. Pause cancels active reveal animations and exposes all sections immediately. Image masks animate inside the stationary arch border so the outline stays aligned.
 
-Gold stems draw around the hero on load; section vines grow with scroll and sway slowly. Every section reveals, cards stagger, and image masks and parallax add depth. A visible Pause motion control makes the page static. System reduced motion overrides all new motion in both CSS and JavaScript, with fully visible content before hydration. Mobile/coarse-pointer mode disables continuous sway, image parallax and animated grid layout, halves vine leaf detail, shortens reveals and removes the glow blur.
+Gold stems draw around the hero on load; section vines grow with scroll and sway slowly. Every section reveals, cards stagger, and image masks and parallax add depth. Background vines use brush gold (`#C9A84C`) or fern (`#4A7C59`), fade at their ends, and sit in narrow margin rails outside journal body text. A visible Pause motion control makes the page static. System reduced motion overrides all new motion in both CSS and JavaScript, with fully visible content before hydration. Mobile/coarse-pointer mode disables continuous sway, image parallax and animated grid layout, halves vine leaf detail, shortens reveals and removes the glow blur. All journal image frames share a 5:4 ratio, with 36px and 12px vertical offsets on the second and third desktop cards.
+
+Mobile width constraints include explicit single-column grids, zero minimum widths on grid children, wrapping captions, a contained overlay card, and a full-width page with horizontal clipping. A page-scoped `:has()` selector constrains the Coming soon invitation in this route’s header without changing shared header components or other pages.
 
 The page includes semantic headings, labeled button groups, pressed states, native ingredient checkboxes and journal disclosures, visible focus rings, a skip link, and live announcements for batch size, guided steps and filter results. Smaller labels use cream on forest for contrast; gold remains on decorative details and large accent text. The hero uses a priority Next Image with an explicit aspect ratio and responsive sizes; all other images load lazily. No new packages, API calls or storage were added.
 
 ## Image provenance
 
-Three original images were generated with the built-in `image_gen` tool, then optimized locally using the repository’s existing Sharp dependency (WebP quality 83, without upscaling). No API keys or CLI generation were used. These are illustrative AI concepts, not photographs of Christin or actual Manna products. Alt text explicitly says **AI concept**. The hero caption and journal note also disclose this visibly.
+Four original images were generated with the built-in `image_gen` tool, then optimized locally using the repository’s existing Sharp dependency (WebP quality 83, without upscaling). The fourth replaces the cool cookbook library image following Alfred’s review. No API keys or CLI generation were used. These are illustrative AI concepts, not photographs of Christin or actual Manna products. Alt text explicitly says **AI concept**. The hero caption and journal note also disclose this visibly.
 
 | Saved file under `public/images/kitchen-moments/` | Dimensions | Bytes | Original generation filename |
 | --- | --- | ---: | --- |
 | `hands-and-dough.webp` | 1024 × 1536 | 206,050 | `exec-43e20bd6-b55b-4e08-950e-addcbd18432a.png` |
 | `cinnamon-rolls.webp` | 1400 × 933 | 227,674 | `exec-b22e7b1a-b431-4d04-a49b-d7fdc34a19e1.png` |
 | `bread-and-linen.webp` | 1400 × 933 | 251,684 | `exec-d6946bde-9d86-433e-bd64-25bc509bc838.png` |
+| `cookbook-and-linen.webp` | 1400 × 1120 | 219,768 | `exec-b5537e5a-9246-451a-98c0-2f9a87899771.png` |
 
-Original outputs remain in `/Users/dillanmilosevich/.codex/generated_images/01a1555a-e0de-7740-9868-d16ab907d02d/`. Final images are all saved in this worktree. The three optimized assets total 685,408 bytes. All were visually inspected: no faces, text or logos.
+Original outputs remain in `/Users/dillanmilosevich/.codex/generated_images/01a1555a-e0de-7740-9868-d16ab907d02d/`. Final images are all saved in this worktree. The four optimized assets total 905,176 bytes. All were visually inspected: no faces, legible text or logos. The cookbook has indistinct decorative handwriting.
 
 ### Final generation prompts
 
@@ -47,7 +50,11 @@ Original outputs remain in `/Users/dillanmilosevich/.codex/generated_images/01a1
 
 > Use case: photorealistic-natural. Asset type: editorial still life photograph for Manna Bakery Kitchen Moments journal. A deeply golden rustic round bread loaf, two torn slices with airy crumb on rumpled natural cream linen on a weathered walnut table. A handmade ceramic dish with butter, olive branches near a softly lit window, forest green shadowy background. Calm late afternoon light with subtle grain, warm cognac crust, cream and muted sage, intimate premium independent bakery journal. Landscape composition, close tactile perspective. No people, text, logos, lettering, watermark.
 
-Existing assets reused without alteration: `christin-desert-portrait.jpeg`, `manna-recipe-books.webp` and `manna-entry-doors.webp`.
+**Cookbook and linen**
+
+> Use case: photorealistic-natural. Asset type: editorial food-journal still life for Manna Bakery Kitchen Moments. An open, well-used cookbook on a timeworn walnut kitchen counter, a small handwritten margin note that is impressionistic and entirely illegible, no readable letters or words anywhere on the pages. Rumpled natural cream linen, a sprig of fresh olive greenery, subtle flour traces, soft honey-colored window light. Warm cream paper, rich walnut, cognac highlights and deep forest green shadows. Tactile, quiet, premium independent bakery journal photography, natural grain. Landscape 5:4 composition with the open book as the main subject; camera slightly above the counter. No people, faces, logos, watermark or legible text.
+
+Existing assets reused without alteration: `christin-desert-portrait.jpeg` and `manna-entry-doors.webp`. The old `manna-recipe-books.webp` file remains untouched but is no longer used on this page.
 
 ## What needs Christin
 
@@ -70,9 +77,10 @@ The server page calls `notFound()` unless `NODE_ENV` is exactly `development`; a
 
 - `npm run lint`: passed. A pre-existing lint failure in `scripts/extract-manna-wordmark.cjs` required one targeted annotation allowing its CommonJS `require`; the utility’s behavior is unchanged.
 - `npm run build`: passed, including TypeScript compilation.
+- `node --test components/kitchen-moments/entrance.test.mjs`: six regression cases passed using local DOM-contract stubs. These cover initial visibility in a 4200px viewport, scroll entry, silent/missing/throwing observers, Pause cleanup, reduced motion, and missing/throwing animation APIs. No browser or network is involved in these tests.
 - Production build output `.next/server/app/kitchen-moments.meta` reports status **404**; its HTML contains the not-found message and `noindex`, and contains no sample recipe content.
 - `git diff --check`: passed.
 - The requested dev command started successfully at port 3012.
-- Browser visual/interaction verification at **1440px and 390px**, with reduced motion on and off, **could not be completed**: the browser origin approval gate denied access to the local preview. No alternate browser or workaround was attempted. Overflow, visual composition, keyboard operation and interactive behavior still need hands-on verification in those four configurations.
+- Alfred’s initial headless screenshots identified hidden reveals, mobile clipping, faint vines and the cool-toned cookbook. Those sources have been revised. Fresh browser visual/interaction verification at **1440px and 390px**, with reduced motion on and off, **could not be completed**: the browser origin approval gate still denies access to the local preview through a saved permission setting. No alternate browser or workaround was attempted. The revised overflow, composition, keyboard operation and interactive behavior still need a fresh screenshot pass in those four configurations.
 
 Suggested manual pass: inspect every section and image crop; check horizontal overflow at 390px; use keyboard focus through controls; test all batch sizes, ingredient checks, the entire guided sequence, every journal filter/disclosure, and Pause/Resume motion. With reduced motion enabled, all content must remain readable with no drawing, reveals, parallax or sway.
