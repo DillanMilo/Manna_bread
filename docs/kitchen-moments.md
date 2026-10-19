@@ -64,7 +64,7 @@ npm run dev -- --hostname 127.0.0.1 --port 3012
 
 Open `http://127.0.0.1:3012/kitchen-moments`.
 
-The server page calls `notFound()` unless `NODE_ENV` is exactly `development`; all production builds, including deployment previews, return 404. Page metadata sets `noindex, nofollow` and clears canonical metadata. There are no nav, footer, homepage, sitemap or discovery-file links to the route. No live services or accounts were accessed, and nothing was pushed or deployed.
+The server page calls `notFound()` unless `NODE_ENV` is exactly `development`; all production builds, including deployment previews, return 404. Page metadata sets `noindex, nofollow` and clears canonical metadata. There are no nav, footer, homepage, sitemap or discovery-file links to the route. No live Manna services or accounts were accessed, and nothing was pushed or deployed.
 
 ## Validation and remaining review
 
