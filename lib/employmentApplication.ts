@@ -128,7 +128,7 @@ export const employmentApplicationSections: readonly EmploymentApplicationSectio
       {
         type: 'note',
         label:
-          'Please note that ALL CANDIDATES MUST BE:\n\n1. At least 18 years old (graduated) and available during our weekday operating hours.\n2. Have a Social Security number and bank account (for paychecks via direct deposit).\n4. Have reliable transportation.',
+          'Please note that ALL CANDIDATES MUST BE:\n\n1. At least 18 years old (graduated) and available during our weekday operating hours.\n2. Have a Social Security number and bank account (for paychecks via direct deposit).\n3. Have reliable transportation.',
       },
       { name: 'fullName', label: 'Full name (first/last)', type: 'text', autoComplete: 'name', required: true },
       {
