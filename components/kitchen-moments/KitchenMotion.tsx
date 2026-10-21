@@ -50,13 +50,16 @@ interface KitchenImageProps {
 
 export function KitchenImage({ src, alt, className = '', sizes, priority = false, arch = false }: KitchenImageProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const { still, compact } = useContext(KitchenMotionContext);
-  const y = useMediaParallax(ref, still || compact ? 0 : 20);
+  const { still } = useContext(KitchenMotionContext);
+  // CSS selects desktop/mobile travel before hydration, keeping the crop
+  // covered at either breakpoint while the same spring smooths scrolling.
+  const travel = useMediaParallax(ref, still ? 0 : 1);
+  const y = useTransform(travel, (value) => `calc(${value} * var(--parallax-distance))`);
   const imageRef = useEntrance(0, priority, true);
   return (
     <div ref={ref} className={`${styles.imageFrame} ${arch ? styles.arch : ''} ${className}`}>
       <div ref={imageRef} className="absolute inset-0">
-        <motion.div className="absolute -inset-y-7 inset-x-0" style={{ y }}>
+        <motion.div className={styles.parallaxImage} style={{ y }}>
           <Image src={src} alt={alt} fill sizes={sizes} priority={priority} className="object-cover" />
         </motion.div>
       </div>
@@ -69,9 +72,13 @@ interface KitchenVineProps {
   className?: string;
 }
 
+// Last value is the leaf's position along the stem, measured from its base.
+// Keep the same positions in compact mode so the remaining leaves open on cue.
 const leaves = [
-  [67, 579, -38], [42, 487, 20], [72, 399, -30], [47, 305, 28],
-  [77, 219, -26], [117, 146, 20], [181, 90, -32], [256, 60, 16],
+  [67, 579, -38, 0.159], [42, 487, 20, 0.295],
+  [72, 399, -30, 0.422], [47, 305, 28, 0.564],
+  [77, 219, -26, 0.682], [117, 146, 20, 0.79],
+  [181, 90, -32, 0.897], [256, 60, 16, 1],
 ] as const;
 
 export function KitchenVine({ hero = false, className = '' }: KitchenVineProps) {
@@ -89,22 +96,37 @@ export function KitchenVine({ hero = false, className = '' }: KitchenVineProps) 
           {[false, true].map((mirror) => (
             <svg key={String(mirror)} viewBox="0 0 300 760" preserveAspectRatio={hero ? 'xMidYMid meet' : 'none'} fill="none" className={hero ? styles.heroVineRail : styles.vineRail} focusable="false">
             <g transform={mirror ? 'translate(300 0) scale(-1 1)' : undefined}>
-              <path d={stem} stroke="currentColor" strokeOpacity="0.35" strokeWidth="1" vectorEffect="non-scaling-stroke" />
-              <motion.path
-                d={stem} stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" vectorEffect="non-scaling-stroke"
-                className={hero ? styles.growingStem : undefined} pathLength={hero ? 1 : undefined}
-                style={hero || still ? undefined : { pathLength: draw }}
-                initial={false}
-                animate={still && !hero ? { pathLength: 1 } : undefined}
-                transition={{ duration: still ? 0 : 2.6, delay: still ? 0 : 0.3, ease: [0.25, 0.4, 0.25, 1] }}
-              />
+              <path d={stem} stroke="currentColor" strokeOpacity="0.35" strokeWidth="1" vectorEffect="non-scaling-stroke" pathLength={hero ? 1 : undefined} className={hero ? styles.growingStem : undefined} />
+              {hero ? (
+                <path d={stem} stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" vectorEffect="non-scaling-stroke" pathLength={1} className={styles.growingStem} />
+              ) : (
+                <motion.path
+                  d={stem} stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" vectorEffect="non-scaling-stroke"
+                  style={still ? undefined : { pathLength: draw }}
+                  initial={false}
+                  animate={still ? { pathLength: 1 } : undefined}
+                  transition={{ duration: still ? 0 : 2.6, delay: still ? 0 : 0.3, ease: [0.25, 0.4, 0.25, 1] }}
+                />
+              )}
               <motion.g style={hero || still ? undefined : { opacity: leafOpacity }} initial={false} animate={hero || still ? { opacity: 0.7 } : undefined} transition={{ duration: still ? 0 : 1.8, delay: still ? 0 : 1 }}>
-                {leaves.filter((_, i) => !compact || i % 2 === 0).map(([x, y, angle], i) => (
-                  <g key={i} transform={`translate(${x} ${y}) rotate(${angle})`}>
-                    <path d="M0 0 C-28 -4 -37 -25 -33 -43 C-10 -38 1 -20 0 0Z M0 0 C21 -12 35 -9 42 7 C24 17 9 10 0 0Z" stroke="currentColor" strokeWidth="1" vectorEffect="non-scaling-stroke" fill="currentColor" fillOpacity="0.12" />
-                    <path d="M0 0 L-27 -34 M0 0 L33 7" stroke="currentColor" strokeWidth="0.6" />
-                  </g>
-                ))}
+                {leaves.filter((_, i) => !compact || i % 2 === 0).map(([x, y, angle, growth]) => {
+                  const leaf = (
+                    <>
+                      <path d="M0 0 C-28 -4 -37 -25 -33 -43 C-10 -38 1 -20 0 0Z M0 0 C21 -12 35 -9 42 7 C24 17 9 10 0 0Z" stroke="currentColor" strokeWidth="1" vectorEffect="non-scaling-stroke" fill="currentColor" fillOpacity="0.12" />
+                      <path d="M0 0 L-27 -34 M0 0 L33 7" stroke="currentColor" strokeWidth="0.6" />
+                    </>
+                  );
+
+                  return (
+                    <g key={y} transform={`translate(${x} ${y}) rotate(${angle})`}>
+                      {hero ? (
+                        <g className={styles.growingLeaf} style={{ animationDelay: `calc(var(--vine-delay) + var(--vine-duration) * ${growth} - 120ms)` }}>
+                          {leaf}
+                        </g>
+                      ) : leaf}
+                    </g>
+                  );
+                })}
               </motion.g>
             </g>
             </svg>

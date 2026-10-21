@@ -2,9 +2,8 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
 import { useReducedMotion } from 'framer-motion';
-import { ArrowDown, ArrowRight, ArrowUpRight, MapPin, Pause, Play, Wheat } from 'lucide-react';
+import { ArrowDown, ArrowRight, ArrowUpRight, MapPin, Wheat } from 'lucide-react';
 import { CONTACT, FEATURES, TOAST } from '@/lib/constants';
 import { useMobilePerformanceMode } from '@/components/ui/useMobilePerformanceMode';
 import { FeaturedRecipe } from './FeaturedRecipe';
@@ -13,10 +12,9 @@ import { KitchenImage, KitchenMotionContext, KitchenVine, Reveal } from './Kitch
 import styles from './KitchenMoments.module.css';
 
 export function KitchenMoments() {
-  const [paused, setPaused] = useState(false);
   const reducedMotion = useReducedMotion();
   const compact = useMobilePerformanceMode();
-  const still = paused || Boolean(reducedMotion);
+  const still = Boolean(reducedMotion);
 
   return (
     <KitchenMotionContext.Provider value={{ still, compact }}>
@@ -24,9 +22,8 @@ export function KitchenMoments() {
         <noscript><style>{`.${styles.reveal}, .${styles.imageFrame} { opacity: 1 !important; transform: none !important; clip-path: none !important; }`}</style></noscript>
         <a href="#recipe" className={styles.skipLink}>Skip to the sample recipe</a>
         <div className="border-y border-brand-gold/20 bg-black/5 px-5 py-2.5">
-          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-5 gap-y-1">
-            <p className="text-[10px] leading-[1.8] tracking-[0.8px] text-brand-soft-cream/85"><span className="font-semibold text-brand-warm-white">LOCAL DESIGN PREVIEW</span><span className="mx-2" aria-hidden="true">/</span>Sample content for Christin’s review</p>
-            <button type="button" onClick={() => setPaused(!paused)} aria-pressed={paused} disabled={Boolean(reducedMotion)} className="flex min-h-9 items-center gap-2 text-[11px] text-brand-soft-cream disabled:opacity-75">{still ? <Play size={12} aria-hidden="true" /> : <Pause size={12} aria-hidden="true" />}{reducedMotion ? 'Reduced motion on' : paused ? 'Resume motion' : 'Pause motion'}</button>
+          <div className="mx-auto max-w-6xl">
+            <p className="text-[10px] leading-[1.8] tracking-[0.8px] text-brand-soft-cream/85"><span className="font-semibold text-brand-warm-white">DESIGN PREVIEW</span><span className="mx-2" aria-hidden="true">/</span>Sample content for Christin’s review</p>
           </div>
         </div>
 
@@ -46,10 +43,14 @@ export function KitchenMoments() {
               </Reveal>
             </div>
 
-            <figure className="relative mx-auto w-full max-w-[455px] lg:ml-auto">
+            <figure id="kitchen-hero-image" className="relative mx-auto w-full max-w-[455px] lg:ml-auto">
               <div aria-hidden="true" className={styles.archGlow} />
               <KitchenVine hero />
-              <KitchenImage src="/images/kitchen-moments/hands-and-dough.webp" alt="AI concept: anonymous flour-dusted hands folding bread dough on a walnut counter in soft window light" sizes="(min-width: 1024px) 455px, (min-width: 640px) 430px, 88vw" priority arch className="aspect-[4/5] shadow-2xl" />
+              <KitchenImage
+                src="/images/kitchen-moments/hands-and-dough-womens-hands-refined.webp"
+                alt="AI concept: an anonymous woman’s flour-dusted hands folding bread dough on a walnut counter in soft window light"
+                sizes="(min-width: 1024px) 455px, (min-width: 640px) 430px, 88vw" priority arch className="aspect-[4/5] shadow-2xl"
+              />
               <Reveal load delay={0.8} className={styles.imageNote}><span className="text-[9px] uppercase tracking-[2px]">The first fold</span><span className="mt-1 block font-accent text-xl italic">It begins here.</span></Reveal>
               <figcaption className="mt-5 flex max-w-full flex-wrap justify-between gap-x-3 gap-y-1 text-[10px] leading-[1.7] text-brand-soft-cream/75"><span>No. 01 / At the worktable</span><span>AI concept · Visual direction</span></figcaption>
             </figure>

@@ -43,6 +43,8 @@
 .darkButton { border-color: #3e2723; background: #3e2723; color: #faf9f6; }
 .darkButton:hover { background: #5d4037; }
 .imageFrame { position: relative; overflow: hidden; background: #8a9a8e; }
+/* 18% overscan safely contains the 12% travel of this taller image layer. */
+.parallaxImage { --parallax-distance: 12%; position: absolute; inset: -18% 0; }
 .arch { border-radius: 9999px 9999px 16px 16px; border: 1px solid #c9a84c66; }
 .archGlow { position: absolute; inset: -8% -15% 8%; z-index: -1; border-radius: 50% 50% 0 0; background: radial-gradient(ellipse, #c9a84c2b, #c9a84c00 72%); filter: blur(26px); }
 .imageNote { position: absolute; right: 12px; bottom: 63px; z-index: 2; max-width: calc(100% - 24px); padding: 17px 26px; border: 1px solid #c9a84c55; border-radius: 8px; background: #3d5247; color: #faf9f6; box-shadow: 0 10px 30px #1e2a2326; transform: rotate(-3deg); }
@@ -73,15 +75,22 @@
 .sway { display: flex; justify-content: space-between; height: 100%; width: 100%; transform-origin: bottom center; animation: sway 12s ease-in-out infinite alternate; }
 .vineRail { width: clamp(14px, calc((100vw - 1152px) / 2 - 20px), 120px); height: 100%; overflow: visible; }
 .heroVineRail { width: 50%; height: 100%; overflow: visible; }
-.heroVine { inset: -58px -80px 0; z-index: 1; opacity: .85; }
+.heroVine { --vine-duration: 4.8s; --vine-delay: .45s; inset: -58px -80px 0; z-index: 1; opacity: .85; }
 .heroVine .sway { animation-duration: 16s; }
-.growingStem { stroke-dasharray: 1; animation: drawStem 2.6s .3s cubic-bezier(.25,.4,.25,1) backwards; }
+.growingStem { stroke-dasharray: 1; animation: drawStem var(--vine-duration) var(--vine-delay) linear backwards; }
+/* The outer SVG group holds the final position; each leaf opens from its stem. */
+.growingLeaf { transform-box: view-box; transform-origin: 0 0; animation: unfurlLeaf .8s cubic-bezier(.22,.61,.36,1) backwards; }
 .journalVine { opacity: .5; }
 .introVine { opacity: .25; color: #4a7c59; }
 .quoteVine { opacity: .4; }
 
 @keyframes sway { from { transform: rotate(-1deg) translateX(-3px); } to { transform: rotate(1deg) translateX(3px); } }
 @keyframes drawStem { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes unfurlLeaf {
+  from { opacity: 0; transform: scale(.02) rotate(-18deg); }
+  45% { opacity: 1; }
+  to { opacity: 1; transform: scale(1) rotate(0deg); }
+}
 
 @media (min-width: 768px) {
   .journalCard:nth-child(2) { margin-top: 36px; }
@@ -90,6 +99,7 @@
 
 @media (max-width: 767px), (pointer: coarse) {
   .sway { animation: none; }
+  .parallaxImage { --parallax-distance: 6%; inset-block: -10%; }
   .archGlow { filter: none; }
   .heroVine { inset: -40px -34px 0; opacity: .65; }
   .imageNote { right: 12px; bottom: 62px; padding: 12px 20px; }
@@ -104,7 +114,7 @@
   :global(body):has(.page) :global(#coming-soon) { min-width: 0; max-width: 45vw; padding-inline: 10px; gap: 6px; }
 }
 
-.page[data-motion='static'] :is(.sway, .growingStem) { animation: none; }
+.page[data-motion='static'] :is(.sway, .growingStem, .growingLeaf) { animation: none; }
 .page[data-motion='static'] :is(.reveal, .imageFrame, .imageFrame div, .journalCard) { opacity: 1 !important; transform: none !important; clip-path: none !important; }
 .page[data-motion='static'] .vine { transform: none !important; }
 .page[data-motion='static'] :is(.vine path, .vine g) { stroke-dasharray: none !important; stroke-dashoffset: 0 !important; opacity: .7 !important; }
