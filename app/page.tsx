@@ -13,9 +13,9 @@ import { Testimonials } from '@/components/sections/Testimonials';
 import { FounderInterlude } from '@/components/sections/FounderInterlude';
 import { Services } from '@/components/sections/Services';
 import { Contact } from '@/components/sections/Contact';
+import { isPumpkinDayPreview, PUMPKIN_DAY_ENDS_AT_CENTRAL } from '@/lib/pumpkinDay';
 
 const COFFEE_DAY_BANNER_ENDS_AT_CENTRAL = '2026-09-29T20:00:00-05:00';
-const PUMPKIN_DAY_BANNER_ENDS_AT_CENTRAL = '2026-10-26T20:00:00-05:00';
 
 export const metadata = createPageMetadata(
   'Bread from Heaven',
@@ -29,16 +29,10 @@ function hasNotEnded(endsAt: string) {
   return Date.now() < Date.parse(endsAt);
 }
 
-// Local review only: `PREVIEW_BANNER=pumpkin npm run dev` shows the banner after it has expired.
-// Ignored outside `next dev`, so it can never affect a production build.
-function isDevPreview(banner: string) {
-  return process.env.NODE_ENV === 'development' && process.env.PREVIEW_BANNER === banner;
-}
-
 export default function HomePage() {
   const showCoffeeDayBanner = hasNotEnded(COFFEE_DAY_BANNER_ENDS_AT_CENTRAL);
-  const previewPumpkinDayBanner = isDevPreview('pumpkin');
-  const showPumpkinDayBanner = previewPumpkinDayBanner || hasNotEnded(PUMPKIN_DAY_BANNER_ENDS_AT_CENTRAL);
+  const previewPumpkinDayBanner = isPumpkinDayPreview();
+  const showPumpkinDayBanner = previewPumpkinDayBanner || hasNotEnded(PUMPKIN_DAY_ENDS_AT_CENTRAL);
 
   return (
     <main>
@@ -49,7 +43,7 @@ export default function HomePage() {
       )}
       {showPumpkinDayBanner && (
         previewPumpkinDayBanner ? <PumpkinDayBanner /> : (
-          <TimedVisibility endsAt={PUMPKIN_DAY_BANNER_ENDS_AT_CENTRAL}>
+          <TimedVisibility endsAt={PUMPKIN_DAY_ENDS_AT_CENTRAL}>
             <PumpkinDayBanner />
           </TimedVisibility>
         )

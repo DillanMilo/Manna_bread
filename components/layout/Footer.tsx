@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { BRAND, CONTACT, FEATURES, SOCIAL, NAV_LINKS, TOAST } from '@/lib/constants';
+import { FooterPumpkins } from '@/components/sections/PumpkinTouches';
 
 function InstagramIcon() {
   return (
@@ -34,7 +35,8 @@ function FacebookIcon() {
 
 export function Footer() {
   return (
-    <footer className="bg-brand-walnut text-white">
+    <footer className="relative bg-brand-walnut text-white">
+      <FooterPumpkins />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-8 sm:py-16 md:py-20">
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-7 sm:gap-8 mb-8 sm:mb-12">
           <div className="col-span-2 md:col-span-1 text-left">

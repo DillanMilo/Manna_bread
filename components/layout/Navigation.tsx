@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FEATURES, NAV_LINKS, TOAST } from '@/lib/constants';
 import { Button } from '@/components/ui/Button';
 import { ComingSoon } from '@/components/sections/ComingSoon';
+import { MenuPumpkinFall } from '@/components/sections/PumpkinTouches';
 
 export function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -127,13 +128,14 @@ export function Navigation() {
           {mobileMenuOpen && (
             <motion.div
               id={mobileMenuId}
-              className="lg:hidden overflow-hidden border-t border-white/10"
+              className="relative lg:hidden overflow-hidden border-t border-white/10"
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.3, ease: [0.25, 0.4, 0.25, 1] }}
             >
-              <div className="py-6">
+              <MenuPumpkinFall />
+              <div className="relative z-10 py-6">
                 <div className="flex flex-col gap-1">
                   {NAV_LINKS.map((link, i) => (
                     <motion.div

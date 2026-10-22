@@ -1,0 +1,56 @@
+.menuScene { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.menuPumpkin {
+  position: absolute; height: auto; opacity: 0;
+  filter: drop-shadow(0 3px 4px #0006);
+  transform-origin: 50% 100%;
+  animation: drop 1.15s cubic-bezier(.45, 0, .55, 1) var(--delay) forwards;
+}
+.menuLeaf {
+  position: absolute; top: -20px; opacity: 0;
+  filter: drop-shadow(1px 2px 2px #0004);
+  animation: flutter 3.4s ease-in var(--delay) forwards;
+}
+.menuPumpkin svg, .menuLeaf svg, .footerPumpkin svg, .flurryLeaf svg { display: block; width: 100%; height: 100%; }
+
+.footerPatch {
+  position: absolute; top: 0; right: clamp(24px, 6vw, 80px);
+  display: none; align-items: flex-end; gap: 2px;
+  transform: translateY(-88%); pointer-events: none;
+}
+.footerPumpkin {
+  display: block; height: auto; opacity: 0;
+  filter: drop-shadow(0 3px 3px #0005);
+  transform-origin: 50% 100%;
+  animation: settle .9s cubic-bezier(.3, 1.4, .5, 1) var(--delay) forwards;
+}
+
+.flurry { position: absolute; inset: 0; pointer-events: none; }
+.flurryLeaf {
+  position: absolute; top: -22px; opacity: 0;
+  filter: drop-shadow(1px 2px 2px #0004);
+  animation: flutter 2.6s ease-in var(--delay) forwards;
+}
+
+@keyframes drop {
+  0% { opacity: 0; transform: translateY(-340px) rotate(-14deg); }
+  12% { opacity: .95; }
+  72% { transform: translateY(0) rotate(4deg) scale(1.06, .9); }
+  86% { transform: translateY(-5px) rotate(-1deg) scale(.98, 1.03); }
+  100% { opacity: .95; transform: none; }
+}
+@keyframes flutter {
+  0% { opacity: 0; transform: translate(0, 0) rotate(-30deg); }
+  10% { opacity: .85; }
+  50% { transform: translate(var(--sway), 120px) rotate(35deg); }
+  85% { opacity: .6; }
+  100% { opacity: 0; transform: translate(0, 240px) rotate(-10deg); }
+}
+@keyframes settle { from { opacity: 0; transform: translateY(-14px) scale(.85, 1.1); } to { opacity: .95; transform: none; } }
+
+@media (min-width: 768px) {
+  .footerPatch { display: flex; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .menuPumpkin, .footerPumpkin { animation: none; opacity: .95; }
+  .menuLeaf, .flurryLeaf { display: none; }
+}

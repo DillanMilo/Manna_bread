@@ -1,44 +1,19 @@
 import type { CSSProperties } from 'react';
+import { LEAF_COLORS, Leaf, SmallPumpkin } from './PumpkinArt';
+import { BannerLeafFlurry } from './PumpkinTouches';
 import styles from './PumpkinDayBanner.module.css';
 
-const LEAF_COLORS = ['#D9822B', '#E3A548', '#B5562B', '#C9A84C'];
-
 // [left %, size px, delay s, duration s, sway px, colour index]
+// Negative delays start some leaves mid-fall, so the banner never opens empty.
 const LEAVES = [
-  [4, 18, 0, 9.5, 26, 0], [11, 14, 3.2, 11, -20, 1], [18, 20, 6.1, 10, 32, 2],
-  [26, 13, 1.4, 12, -24, 3], [33, 17, 7.8, 9, 22, 1], [62, 15, 2.3, 10.5, -28, 0],
-  [69, 21, 5.4, 11.5, 24, 2], [76, 13, 0.8, 9.8, -18, 3], [83, 18, 4.6, 10.8, 30, 1],
-  [90, 15, 7.1, 12.2, -26, 0], [96, 19, 2.9, 9.2, 20, 2], [47, 12, 9.2, 13, -22, 3],
+  [4, 18, -4.2, 9.5, 26, 0], [11, 14, -1, 11, -20, 1], [18, 20, 1.9, 10, 32, 2],
+  [26, 13, -2.8, 12, -24, 3], [33, 17, 3.6, 9, 22, 1], [62, 15, -5.9, 10.5, -28, 0],
+  [69, 21, 1.2, 11.5, 24, 2], [76, 13, -3.4, 9.8, -18, 3], [83, 18, 0.4, 10.8, 30, 1],
+  [90, 15, 2.9, 12.2, -26, 0], [96, 19, -1.3, 9.2, 20, 2], [47, 12, 5, 13, -22, 3],
 ];
 
 // [left %, size px, delay s, hide on mobile]
-const PUMPKINS = [[6, 30, 0.5, 0], [13, 22, 0.75, 1], [86, 26, 0.65, 1], [93, 34, 0.4, 0]];
-
-function Leaf({ color }: { color: string }) {
-  return (
-    <svg viewBox="0 0 32 32" fill="none">
-      <path
-        d="M16 2L18.6 8.4L24 6.2L22.6 11.8L29 12.4L24.6 16.6L28 21L21.6 20.4L20.4 26L16 22.2L11.6 26L10.4 20.4L4 21L7.4 16.6L3 12.4L9.4 11.8L8 6.2L13.4 8.4Z"
-        fill={color}
-        fillOpacity=".9"
-      />
-      <path d="M16 8V30M16 17L11 12.5M16 17L21 12.5M16 21L10.5 19M16 21L21.5 19" stroke="#3E2723" strokeOpacity=".35" strokeWidth=".9" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function SmallPumpkin() {
-  return (
-    <svg viewBox="0 0 48 42" fill="none">
-      <path d="M24 11C24 7 25.5 4.5 28.5 3" stroke="#7A8F5E" strokeWidth="2.4" strokeLinecap="round" />
-      <ellipse cx="14.5" cy="26" rx="11" ry="13" fill="#B85F24" />
-      <ellipse cx="33.5" cy="26" rx="11" ry="13" fill="#B85F24" />
-      <ellipse cx="24" cy="26" rx="11" ry="14.5" fill="#D9822B" />
-      <path d="M24 13C21 19 21 33 24 40M24 13C27 19 27 33 24 40" stroke="#8E4518" strokeOpacity=".55" strokeWidth="1" />
-      <ellipse cx="20" cy="20" rx="3" ry="5" fill="#F2B866" fillOpacity=".35" />
-    </svg>
-  );
-}
+const PUMPKINS = [[6, 30, 0.35, 0], [13, 22, 0.55, 1], [86, 26, 0.45, 1], [93, 34, 0.25, 0]];
 
 export function PumpkinDayBanner() {
   return (
@@ -61,6 +36,7 @@ export function PumpkinDayBanner() {
               <SmallPumpkin />
             </span>
           ))}
+          <BannerLeafFlurry />
         </div>
         <div className={styles.content}>
           <div className={styles.emblem} aria-hidden="true">
