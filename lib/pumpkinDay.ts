@@ -1,4 +1,5 @@
-export const PUMPKIN_DAY_ENDS_AT_CENTRAL = '2026-10-26T20:00:00-05:00';
+// 11:59 PM Central (CDT, UTC-5) on Monday 26 Oct 2026. Every pumpkin touch on the site switches off here.
+export const PUMPKIN_DAY_ENDS_AT_CENTRAL = '2026-10-26T23:59:00-05:00';
 
 // Local review only: `NEXT_PUBLIC_PREVIEW_BANNER=pumpkin npm run dev` keeps every pumpkin touch
 // showing after the cutoff. `PREVIEW_BANNER=pumpkin` still works for the homepage banner alone.
