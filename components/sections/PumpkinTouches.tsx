@@ -80,6 +80,22 @@ export function FooterPumpkins() {
   );
 }
 
+// One small pumpkin that drops in above a page's eyebrow label. It takes no layout space,
+// so the heading never shifts when it appears after hydration.
+export function HeadingPumpkin() {
+  const isLive = usePumpkinDay();
+
+  return (
+    <span className={styles.headingSlot} aria-hidden="true">
+      {isLive && (
+        <span className={styles.headingPumpkin}>
+          <SmallPumpkin />
+        </span>
+      )}
+    </span>
+  );
+}
+
 // [left %, size px, delay s, sway px, colour index]
 const FLURRY = [
   [8, 15, 0, 24, 1], [21, 12, 0.35, -20, 3], [37, 16, 0.15, 18, 0], [52, 13, 0.5, -24, 2],

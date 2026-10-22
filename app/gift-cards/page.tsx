@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/Button';
 import { GiftCardVine } from '@/components/ui/ScrollVine';
+import { HeadingPumpkin } from '@/components/sections/PumpkinTouches';
 import { TOAST } from '@/lib/constants';
 import { createPageMetadata } from '@/lib/seo';
 
@@ -14,6 +15,7 @@ export default function GiftCardsPage() {
     <main className="relative isolate overflow-hidden pt-24 sm:pt-32 md:pt-40 pb-14 sm:pb-20 md:pb-28 bg-brand-forest min-h-screen">
       <GiftCardVine className="z-0 opacity-90" />
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 md:px-8 text-center">
+        <HeadingPumpkin />
         <p className="font-body text-[11px] font-semibold tracking-[2px] uppercase text-brand-gold mb-4">
           Gift Cards
         </p>

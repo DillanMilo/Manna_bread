@@ -14,6 +14,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { InquirySection } from '@/components/sections/InquirySection';
 import { FloatingInquiryButton } from '@/components/ui/FloatingInquiryButton';
+import { HeadingPumpkin } from '@/components/sections/PumpkinTouches';
 import { CONTACT } from '@/lib/constants';
 import { formatDisplayPrice } from '@/lib/pricing';
 
@@ -221,6 +222,7 @@ export default function RentalsPage() {
       {/* ─── HERO ─── */}
       <section className="pt-24 sm:pt-32 md:pt-44 pb-12 sm:pb-16 md:pb-20 px-5 sm:px-6 md:px-10">
         <div className="max-w-4xl mx-auto text-center">
+          <HeadingPumpkin />
           <FadeIn>
             <p className="font-body text-[11px] font-semibold tracking-[3px] uppercase text-brand-gold mb-5">
               Private Rentals

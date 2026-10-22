@@ -7,6 +7,7 @@ import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { InquirySection } from '@/components/sections/InquirySection';
 import { FloatingInquiryButton } from '@/components/ui/FloatingInquiryButton';
+import { HeadingPumpkin } from '@/components/sections/PumpkinTouches';
 import { formatDisplayPrice } from '@/lib/pricing';
 
 /* ─── types ─── */
@@ -405,6 +406,7 @@ export default function CateringPage() {
       {/* ─── HERO ─── */}
       <section className="pt-24 sm:pt-32 md:pt-44 pb-12 sm:pb-16 md:pb-20 px-5 sm:px-6 md:px-10">
         <div className="max-w-4xl mx-auto text-center">
+          <HeadingPumpkin />
           <FadeIn>
             <p className="font-body text-[11px] font-semibold tracking-[3px] uppercase text-brand-gold mb-5">
               Catering

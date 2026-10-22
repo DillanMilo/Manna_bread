@@ -6,6 +6,7 @@ import { motion, useScroll } from 'framer-motion';
 import type { MenuCategory, MenuItem } from '@/lib/menuData';
 import type { MenuDataSource } from '@/lib/toastMenu';
 import { SectionHeader } from '@/components/ui/SectionHeader';
+import { HeadingPumpkin } from '@/components/sections/PumpkinTouches';
 import { Button } from '@/components/ui/Button';
 import { FadeIn } from '@/components/ui/Motion';
 import { PageVine } from '@/components/ui/ScrollVine';
@@ -187,6 +188,7 @@ export function MenuExperience({ menuData, source, lastSyncedAt }: MenuExperienc
       <div className="relative z-10">
         <div className="pt-24 sm:pt-32 md:pt-40 pb-6 md:pb-10">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
+            <HeadingPumpkin />
             <FadeIn>
               <SectionHeader
                 label="Our Menu"
