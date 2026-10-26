@@ -7,7 +7,7 @@ const menuStructuredData = createMenuStructuredData(menuData);
 
 export const metadata = createPageMetadata(
   'Bakery & Cafe Menu in Tomball',
-  'Explore Manna Bakery’s current breakfast, lunch, coffee, tea, and house-made favorites.',
+  'Pull up a chair at Manna Bakery in Tomball for breakfast, lunch and coffee: kolaches, Liège waffles, scratch bread sandwiches, soups and bottomless drip.',
   '/menu',
 );
 

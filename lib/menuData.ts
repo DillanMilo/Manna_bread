@@ -100,7 +100,7 @@ export const menuData: MenuCategory[] = [
     sections: [
       {
         title: 'Breakfast in Tomball',
-        description: 'Breakfast in Old Town Tomball starts with a kolache, a breakfast burrito, or biscuits and gravy alongside a cup of house drip coffee. For a slower morning, try the Liège waffle, stuffed French toast, quiche, or avocado toast.',
+        description: 'Breakfast in Tomball is better with a friend, a kolache or breakfast burrito, and a cup of our bottomless house drip coffee. If you can stay a while, settle in with a Liège waffle or stuffed French toast.',
         items: [
           {
             name: 'Breakfast Burrito',
@@ -174,7 +174,8 @@ export const menuData: MenuCategory[] = [
     title: 'Lunch',
     sections: [
       {
-        title: 'Sandwiches & House Favorites',
+        title: 'Lunch in Tomball',
+        description: 'Lunch here is worth slowing down for, with sandwiches wrapped in our fresh scratch bread and paninis toasted golden on buttered sourdough. On a cool day, pair a Turkey Pesto Panini or a Cuban Sandwich with a bowl of House 3-Meat Chili.',
         items: [
           {
             name: 'The Italian',
