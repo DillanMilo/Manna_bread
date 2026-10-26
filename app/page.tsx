@@ -17,6 +17,9 @@ import { isPumpkinDayPreview, PUMPKIN_DAY_ENDS_AT_CENTRAL } from '@/lib/pumpkinD
 
 const COFFEE_DAY_BANNER_ENDS_AT_CENTRAL = '2026-09-29T20:00:00-05:00';
 
+// Rebuild the static HTML hourly so expired timed banners drop out of the server HTML.
+export const revalidate = 3600;
+
 export const metadata = createPageMetadata(
   'Bread from Heaven',
   'Manna Bakery is a handcrafted bakery, café, and gathering place in Tomball, Texas—made for good food, unhurried moments, and community.',
