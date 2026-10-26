@@ -6,8 +6,8 @@ export const BRAND = {
 };
 
 export const FEATURES = {
-  // Re-enable when Manna is ready to accept live online orders again.
-  onlineOrdering: false,
+  // Show ordering links to Manna's hosted Toast ordering page.
+  onlineOrdering: true,
 } as const;
 
 export const CONTACT = {
