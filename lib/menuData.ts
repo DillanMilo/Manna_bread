@@ -99,7 +99,8 @@ export const menuData: MenuCategory[] = [
     title: 'Breakfast',
     sections: [
       {
-        title: 'Breakfast',
+        title: 'Breakfast in Tomball',
+        description: 'Breakfast in Old Town Tomball starts with a kolache, a breakfast burrito, or biscuits and gravy alongside a cup of house drip coffee. For a slower morning, try the Liège waffle, stuffed French toast, quiche, or avocado toast.',
         items: [
           {
             name: 'Breakfast Burrito',
