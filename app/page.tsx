@@ -21,7 +21,7 @@ const COFFEE_DAY_BANNER_ENDS_AT_CENTRAL = '2026-09-29T20:00:00-05:00';
 export const revalidate = 3600;
 
 export const metadata = createPageMetadata(
-  'Bread from Heaven',
+  'Tomball Bakery, Breakfast & Coffee',
   'Manna Bakery is a handcrafted bakery, café, and gathering place in Tomball, Texas—made for good food, unhurried moments, and community.',
   '/',
 );

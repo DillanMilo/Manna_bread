@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/Button';
 import { GiftCardVine } from '@/components/ui/ScrollVine';
 import { HeadingPumpkin } from '@/components/sections/PumpkinTouches';
-import { TOAST } from '@/lib/constants';
+import { CONTACT, TOAST } from '@/lib/constants';
 import { createPageMetadata } from '@/lib/seo';
 
 export const metadata = createPageMetadata(
@@ -22,6 +22,9 @@ export default function GiftCardsPage() {
         <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-medium text-white leading-tight mb-6 sm:mb-8">
           Give the gift of Manna
         </h1>
+        <p className="font-body text-lg md:text-xl text-white/70 leading-relaxed max-w-2xl mx-auto mb-8 sm:mb-10">
+          A Manna gift card is a digital gift card for handcrafted food, warm hospitality, and time together. It can be used in the bakery at {CONTACT.address.street} in Old Town Tomball, for scratch-made breads and pastries, breakfast, lunch, or a coffee shared with someone you love. It makes an easy gift for anyone who could use an unhurried morning.
+        </p>
 
         <div className="bg-brand-forest-mid/50 border border-white/10 rounded-2xl p-6 sm:p-8 md:p-12 mb-6 sm:mb-8">
           <Button href={TOAST.giftCards} external variant="accent" className="w-full sm:w-auto">

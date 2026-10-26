@@ -1,7 +1,7 @@
 import { createPageMetadata } from '@/lib/seo';
 
 export const metadata = createPageMetadata(
-  'Our Story',
+  'Our Story: A Faith-Rooted Tomball Bakery',
   'The story of Christin, the family and faith behind Manna Bakery, and the daily grace that shaped a gathering place in Tomball.',
   '/our-story',
 );
