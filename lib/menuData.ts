@@ -175,7 +175,7 @@ export const menuData: MenuCategory[] = [
     sections: [
       {
         title: 'Lunch in Tomball',
-        description: 'Lunch here is worth slowing down for, with sandwiches wrapped in our fresh scratch bread and paninis toasted golden on buttered sourdough. On a cool day, pair a Turkey Pesto Panini or a Cuban Sandwich with a bowl of House 3-Meat Chili.',
+        description: "Lunch is a good time to pause, give thanks and share a meal with someone you love. Our Tomball kitchen makes it simple, with a Strawberry Fields salad, a Chicken Salad Sandwich on a croissant or a bowl of today's soup.",
         items: [
           {
             name: 'The Italian',
