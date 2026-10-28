@@ -161,7 +161,7 @@ export const employmentApplicationSections: readonly EmploymentApplicationSectio
         label: 'Position(s) You Are Applying For',
         type: 'checkbox',
         required: true,
-        options: ['Baker', 'Barista', 'Customer Service', 'Cook', 'Manager', 'Looking for anything', 'Other'],
+        options: ['Baker', 'Barista', 'Customer Service', 'Cook', 'Manager', 'Senior Team Lead', 'Looking for anything', 'Other'],
       },
       {
         name: 'baristaLatteArtSkill',
