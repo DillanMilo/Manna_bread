@@ -22,7 +22,7 @@ export const revalidate = 3600;
 
 export const metadata = createPageMetadata(
   'Tomball Bakery, Breakfast & Coffee',
-  'Manna Bakery is a handcrafted bakery, café, and gathering place in Tomball, Texas—made for good food, unhurried moments, and community.',
+  'Manna Bakery is a handcrafted bakery, café, and gathering place in Old Town Tomball, Texas—made for good food, unhurried moments, and community.',
   '/',
 );
 

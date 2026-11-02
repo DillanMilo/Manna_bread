@@ -13,7 +13,7 @@ const routes = [
 ] as const;
 
 const routeLastModified: Partial<Record<(typeof routes)[number], string>> = {
-  '/menu': '2026-09-11',
+  '/menu': '2026-10-27',
 };
 
 export default function sitemap(): MetadataRoute.Sitemap {
