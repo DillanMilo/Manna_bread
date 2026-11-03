@@ -9,16 +9,17 @@ const nextConfig: NextConfig = {
         destination: 'https://mannabread.com/catering',
         permanent: true,
       },
-      {
-        source: '/order',
-        destination: TOAST.orderOnline,
-        permanent: true,
-      },
-      {
-        source: '/order/:path*',
-        destination: TOAST.orderOnline,
-        permanent: true,
-      },
+      // Order Online hidden until Manna is ready; uncomment to restore
+      // {
+      //   source: '/order',
+      //   destination: TOAST.orderOnline,
+      //   permanent: true,
+      // },
+      // {
+      //   source: '/order/:path*',
+      //   destination: TOAST.orderOnline,
+      //   permanent: true,
+      // },
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'www.mannabread.com' }],
