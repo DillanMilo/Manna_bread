@@ -339,7 +339,13 @@ export function AvailabilitySection({ id }: { id?: string }) {
                                 onChange={() => setSelectedTime(time)}
                                 className="peer sr-only"
                               />
-                              <span className="flex min-h-[44px] cursor-pointer items-center justify-center rounded-lg border border-white/15 px-2 font-body text-sm text-white transition-colors hover:border-brand-gold/60 hover:text-brand-gold peer-checked:border-brand-gold peer-checked:bg-brand-gold peer-checked:text-brand-forest peer-focus-visible:ring-2 peer-focus-visible:ring-brand-gold/60">
+                              <span
+                                className={`flex min-h-[44px] cursor-pointer items-center justify-center rounded-lg border px-2 font-body text-sm transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-brand-gold/60 ${
+                                  selectedTime === time
+                                    ? 'border-brand-gold bg-brand-gold text-brand-forest'
+                                    : 'border-white/15 text-white hover:border-brand-gold/60 hover:text-brand-gold'
+                                }`}
+                              >
                                 {formatTime(time)}
                               </span>
                             </label>
