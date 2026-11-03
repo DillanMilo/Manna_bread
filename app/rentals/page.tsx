@@ -13,6 +13,7 @@ import { PageVine } from '@/components/ui/ScrollVine';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { InquirySection } from '@/components/sections/InquirySection';
+import { AvailabilitySection } from '@/components/sections/AvailabilitySection';
 import { FloatingInquiryButton } from '@/components/ui/FloatingInquiryButton';
 import { HeadingPumpkin } from '@/components/sections/PumpkinTouches';
 import { CONTACT } from '@/lib/constants';
@@ -912,6 +913,11 @@ export default function RentalsPage() {
           </FadeIn>
         </div>
       </section>
+
+      {/* ─── CHECK AVAILABILITY ─── */}
+      <AvailabilitySection id="check-availability" />
+
+      <Divider />
 
       <InquirySection id="rental-inquiry" variant="rentals" />
       </div>

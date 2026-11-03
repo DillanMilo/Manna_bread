@@ -18,6 +18,8 @@ type InquiryPayload = {
   occasion?: string;
   serviceStyle?: string;
   rentalWindow?: string;
+  rentalSpace?: string;
+  startTime?: string;
   cateringNeeds?: string;
   helpTopic?: string;
   roleInterest?: string;
@@ -129,6 +131,8 @@ const valueLabels: Record<string, string> = {
   '25-35': '25–35',
   '35-plus': '35 or more',
   flexible: 'Flexible',
+  'full-building': 'Full building',
+  'conference-room': 'Conference room',
 };
 
 const rateLimitStore = new Map<string, RateLimitEntry>();
@@ -154,6 +158,13 @@ export async function POST(request: Request) {
     : {};
   const name = clean(payload.name);
   const email = clean(payload.email);
+  const startTime = inquiryType === 'rentals' ? clean(payload.startTime) : '';
+
+  // The availability calendar treats the message as optional; its date and start time say enough.
+  if (startTime && !clean(payload.message)) {
+    payload.message = 'No message added.';
+  }
+
   const message = clean(payload.message);
   const clientIp = getClientIp(request);
 
@@ -458,7 +469,12 @@ function buildRows(payload: InquiryPayload, inquiryType: InquiryType): Array<[st
     rentals: [
       ['Gathering', display(payload.occasion)],
       ['Preferred date', display(payload.eventDate)],
-      ['Time window', display(payload.rentalWindow)],
+      ...(clean(payload.startTime)
+        ? [['Requested start', `${clean(payload.startTime)} (end time to be discussed)`] as [string, string]]
+        : [['Time window', display(payload.rentalWindow)] as [string, string]]),
+      ...(clean(payload.rentalSpace)
+        ? [['Space', displayLabel(payload.rentalSpace)] as [string, string]]
+        : []),
       ['Guests', display(payload.guestCount)],
       ['Food plans', displayLabel(payload.cateringNeeds)],
     ],
