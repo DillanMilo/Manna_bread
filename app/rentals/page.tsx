@@ -472,7 +472,7 @@ export default function RentalsPage() {
 
           <FadeIn delay={0.4}>
             <div className="text-center mt-10">
-              <Button href="#rental-inquiry" variant="accent" className="w-full sm:w-auto">
+              <Button href="#check-availability" variant="accent" className="w-full sm:w-auto">
                 Inquire About a Date
               </Button>
             </div>

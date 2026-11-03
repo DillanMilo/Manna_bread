@@ -108,6 +108,7 @@ export function FloatingInquiryButton({ variant }: FloatingInquiryButtonProps) {
                   source={`${variant}-floating-inquiry`}
                   compact
                   onSuccess={() => setTimeout(() => setOpen(false), 1400)}
+                  onPickDate={() => setOpen(false)}
                 />
               </div>
             </motion.div>

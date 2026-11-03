@@ -28,7 +28,7 @@ type FieldConfig = {
   name: FieldName;
   label: string;
   placeholder?: string;
-  type?: 'text' | 'email' | 'tel' | 'date';
+  type?: 'text' | 'email' | 'tel' | 'date' | 'availability';
   autoComplete?: string;
   required?: boolean;
   options?: Array<{ value: string; label: string }>;
@@ -39,6 +39,7 @@ type InquiryFormProps = {
   source?: string;
   compact?: boolean;
   onSuccess?: () => void;
+  onPickDate?: () => void;
 };
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
@@ -168,8 +169,7 @@ const formContent: Record<
       {
         name: 'eventDate',
         label: 'Preferred date',
-        type: 'date',
-        required: true,
+        type: 'availability',
       },
       {
         name: 'rentalWindow',
@@ -270,6 +270,7 @@ export function InquiryForm({
   source = 'website',
   compact = false,
   onSuccess,
+  onPickDate,
 }: InquiryFormProps) {
   const [status, setStatus] = useState<FormStatus>('idle');
   const [error, setError] = useState('');
@@ -366,7 +367,7 @@ export function InquiryForm({
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {fields.map((field) => (
-          <FormField key={field.name} field={field} />
+          <FormField key={field.name} field={field} onPickDate={onPickDate} />
         ))}
       </div>
 
@@ -398,9 +399,13 @@ export function InquiryForm({
   );
 }
 
-function FormField({ field }: { field: FieldConfig }) {
+function FormField({ field, onPickDate }: { field: FieldConfig; onPickDate?: () => void }) {
   if (field.type === 'date') {
     return <DateField field={field} />;
+  }
+
+  if (field.type === 'availability') {
+    return <AvailabilityLinkField field={field} onPickDate={onPickDate} />;
   }
 
   if (field.options) {
@@ -430,6 +435,39 @@ function FormField({ field }: { field: FieldConfig }) {
         placeholder={field.placeholder}
       />
     </label>
+  );
+}
+
+// Rentals pick their date and start time in the availability calendar, so this jumps there instead.
+function AvailabilityLinkField({ field, onPickDate }: { field: FieldConfig; onPickDate?: () => void }) {
+  const hintId = useId();
+
+  function handleClick() {
+    onPickDate?.();
+
+    const target = document.getElementById('check-availability');
+    if (!target) return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    target.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
+  }
+
+  return (
+    <div className="block">
+      <span className={labelClass}>{field.label}</span>
+      <button
+        type="button"
+        onClick={handleClick}
+        aria-describedby={hintId}
+        className="flex w-full items-center justify-between gap-3 rounded-lg border border-brand-gold/40 bg-brand-forest/70 px-4 py-3 text-left font-body text-sm font-medium text-brand-gold transition-colors hover:border-brand-gold/70 hover:bg-brand-gold/10 focus:outline-none focus:ring-2 focus:ring-brand-gold/60"
+      >
+        Pick a date
+        <CalendarDays aria-hidden="true" className="h-4.5 w-4.5 shrink-0" strokeWidth={1.8} />
+      </button>
+      <p id={hintId} className="mt-1.5 font-body text-xs text-white/55">
+        See open dates and start times
+      </p>
+    </div>
   );
 }
 
