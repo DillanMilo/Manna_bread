@@ -296,6 +296,7 @@ export function MenuExperience({ menuData, source, lastSyncedAt }: MenuExperienc
           })}
         </div>
 
+        {/* Order Online hidden until Manna is ready; uncomment to restore
         {FEATURES.onlineOrdering && (
           <FadeIn>
             <div className="bg-brand-forest-mid">
@@ -317,6 +318,7 @@ export function MenuExperience({ menuData, source, lastSyncedAt }: MenuExperienc
             </div>
           </FadeIn>
         )}
+        */}
       </div>
     </main>
   );

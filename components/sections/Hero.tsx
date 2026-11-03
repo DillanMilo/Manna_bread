@@ -136,11 +136,13 @@ export function Hero() {
           animate={{ opacity: 1 }}
           transition={{ duration: 1.0, delay: 2.0, ease: [0.25, 0.4, 0.25, 1] }}
         >
+          {/* Order Online hidden until Manna is ready; uncomment to restore
           {FEATURES.onlineOrdering && (
             <Button href={TOAST.orderOnline} external variant="accent" size="lg" className="w-full sm:w-auto">
               Order Online
             </Button>
           )}
+          */}
           <Button href="/menu" variant="ghost" size="lg" className="w-full sm:w-auto">
             View Menu
           </Button>
