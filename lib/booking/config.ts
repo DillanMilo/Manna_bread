@@ -105,7 +105,7 @@ export const AVAILABILITY_CACHE_SECONDS = 300;
 export const TEAMUP_SUBCALENDARS = {
   grey: { purpose: 'General inquiry', ids: [], nameMatches: ['inquiry'], blocks: [] },
   blue: { purpose: 'Catering order', ids: [], nameMatches: ['catering'], blocks: [] },
-  purple: { purpose: 'Conference room rental', ids: [], nameMatches: ['conference'], blocks: ['conference-room'] },
+  purple: { purpose: 'Conference room rental', ids: [], nameMatches: ['conference', 'conf.'], blocks: ['conference-room'] },
   green: { purpose: 'Entire building rental', ids: [], nameMatches: ['building'], blocks: ['conference-room', 'entire-building'] },
 } as const satisfies Record<string, {
   purpose: string;
