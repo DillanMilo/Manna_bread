@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect, useId, useRef, useState } from 'react';
 import { FadeIn } from '@/components/ui/Motion';
 import { getRecaptchaToken } from '@/components/ui/InquiryForm';
-import { RENTAL_POLICY_TEXT, RENTAL_TYPES, type RentalType } from '@/lib/booking/config';
+import { RENTAL_POLICY_TEXT, RENTAL_TYPES, RENTAL_TYPE_RULES, type RentalType } from '@/lib/booking/config';
 import type { AvailabilityResponse, OpenSlot } from '@/lib/booking/availability';
 import { trackEvent, trackFormSubmit } from '@/lib/analytics';
 
@@ -378,7 +378,7 @@ export function AvailabilitySection({ id }: { id?: string }) {
                         <p className="mb-4 font-body text-sm leading-relaxed text-white/65">
                           {rentalType === 'conference-room'
                             ? 'Choose a start time, then how long you need. Saturdays are limited to one two-hour block.'
-                            : 'Private rentals begin at 2 PM or later. We will plan the length of your event when we follow up.'}
+                            : 'Private rentals begin at 2 PM or later, with a 3-hour minimum (4 hours for 26 or more guests). We will plan the length of your event when we follow up.'}
                         </p>
                         <div className="grid grid-cols-3 gap-2">
                           {selectedTimes.map(({ start: time }) => (
@@ -437,6 +437,7 @@ export function AvailabilitySection({ id }: { id?: string }) {
                         date={selectedDate}
                         time={selectedSlot.start}
                         hours={selectedSlot.maxHours ? selectedHours : null}
+                        freeHours={selectedSlot.freeHours}
                         onReset={() => {
                           setSelectedDate('');
                           setSelectedTime('');
@@ -461,10 +462,12 @@ type SlotRequestFormProps = {
   time: string;
   /** Requested length in hours, or null when the end time is agreed later. */
   hours: number | null;
+  /** Hours free from this start (entire building only), for the guest-count minimum. */
+  freeHours?: number;
   onReset: () => void;
 };
 
-function SlotRequestForm({ rentalType, rentalLabel, date, time, hours, onReset }: SlotRequestFormProps) {
+function SlotRequestForm({ rentalType, rentalLabel, date, time, hours, freeHours, onReset }: SlotRequestFormProps) {
   const [status, setStatus] = useState<FormStatus>('idle');
   const [error, setError] = useState('');
   const [startedAt] = useState(() => String(Date.now()));
@@ -478,6 +481,17 @@ function SlotRequestForm({ rentalType, rentalLabel, date, time, hours, onReset }
 
     const form = event.currentTarget;
     const payload: Record<string, FormDataEntryValue | string> = Object.fromEntries(new FormData(form).entries());
+
+    // JAMIE: larger groups need a longer minimum, so check this start leaves enough time free.
+    const minHours = RENTAL_TYPE_RULES[rentalType].minHours;
+    const guests = Number.parseInt(String(payload.guestCount ?? ''), 10);
+    if (minHours && freeHours !== undefined && guests > 25 && freeHours < minHours.over25Guests) {
+      setStatus('error');
+      setError(
+        `Groups of 26 or more need at least ${minHours.over25Guests} hours, and this start time has ${freeHours} hours open. Please choose an earlier time or another date.`,
+      );
+      return;
+    }
     payload.eventDate = formatLongDate(date);
     payload.startTime = formatTime(time);
     payload.rentalSpace = rentalType;

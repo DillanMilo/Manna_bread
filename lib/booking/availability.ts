@@ -28,6 +28,12 @@ export type BusyInterval = {
 export type OpenSlot = {
   start: string;
   maxHours: number | null;
+  /**
+   * Whole hours free from this start before the next booking or the latest
+   * end time. Only set for types with a minimum length (entire building),
+   * so the form can apply the larger minimum for bigger groups.
+   */
+  freeHours?: number;
 };
 
 export type AvailabilitySource = 'mock' | 'teamup';
@@ -84,8 +90,9 @@ export function computeAvailability(
   const beforeMs = rules.bufferBeforeMinutes * MINUTE_MS;
   const afterMs = rules.bufferAfterMinutes * MINUTE_MS;
   const blocking = busy.filter((interval) => (TEAMUP_SUBCALENDARS[interval.colour].blocks as readonly RentalType[]).includes(type));
+  const turnoverMs = (interval: BusyInterval) => (rules.extraBufferAfterMinutes[interval.colour] ?? 0) * MINUTE_MS;
   const isFree = (start: number, end: number) =>
-    !blocking.some((interval) => interval.start - beforeMs < end && start < interval.end + afterMs);
+    !blocking.some((interval) => interval.start - beforeMs < end && start < interval.end + afterMs + turnoverMs(interval));
 
   for (let date = window.startDate; date <= window.endDate; date = addDays(date, 1)) {
     const weekday = weekdayOf(date);
@@ -112,8 +119,26 @@ export function computeAvailability(
       const startsAt = zonedTimeToUtcMs(date, minutes);
 
       if (rules.closingHour === null) {
-        // End time is agreed later, so only the start time has to be clear.
-        if (isFree(startsAt, startsAt + 1)) slots.push({ start: formatMinutes(minutes), maxHours: null });
+        // End time is agreed later, so the start must be clear, plus the minimum length when there is one.
+        if (!isFree(startsAt, startsAt + 1)) continue;
+        if (!rules.minHours) {
+          slots.push({ start: formatMinutes(minutes), maxHours: null });
+          continue;
+        }
+
+        const hoursToLatestEnd = Math.floor((rules.latestEndMinutes - minutes) / 60);
+        let freeHours = 0;
+
+        while (
+          freeHours < hoursToLatestEnd &&
+          isFree(startsAt, zonedTimeToUtcMs(date, minutes + (freeHours + 1) * 60))
+        ) {
+          freeHours += 1;
+        }
+
+        if (freeHours >= rules.minHours.upTo25Guests) {
+          slots.push({ start: formatMinutes(minutes), maxHours: null, freeHours });
+        }
         continue;
       }
 

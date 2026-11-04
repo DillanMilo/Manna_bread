@@ -41,6 +41,15 @@ export type RentalTypeRules = {
   bufferBeforeMinutes: number;
   /** A start time is unavailable within this many minutes AFTER a blocking event (cleanup). */
   bufferAfterMinutes: number;
+  /** Extra turnover after a blocking event of a given colour, on top of bufferAfterMinutes. */
+  extraBufferAfterMinutes: Partial<Record<SubcalendarColour, number>>;
+  /**
+   * Minimum rental length in hours, by guest count, or null for none.
+   * A start time is only offered when at least `upTo25Guests` hours are free.
+   */
+  minHours: { upTo25Guests: number; over25Guests: number } | null;
+  /** Latest the space can be used until, in minutes after midnight. Caps the free time counted. */
+  latestEndMinutes: number;
 };
 
 export const RENTAL_TYPE_RULES: Record<RentalType, RentalTypeRules> = {
@@ -56,10 +65,17 @@ export const RENTAL_TYPE_RULES: Record<RentalType, RentalTypeRules> = {
     oneBookingPerSaturday: true,
     bufferBeforeMinutes: 0,
     bufferAfterMinutes: 0,
+    extraBufferAfterMinutes: {},
+    minHours: null,
+    latestEndMinutes: 16 * 60,
   },
   'entire-building': {
     // JAMIE: private rentals begin at 2:00 PM or later.
+    // JAMIE (5 Nov): a conference room booking blocks the building, plus about 1 hour of
+    // turnover after it ends (exact time to be confirmed with Christin).
+    // JAMIE (5 Nov): minimum 3 hours for up to 25 guests, 4 hours for 26 or more.
     // PLACEHOLDER: last start 6 PM and the 2-hour setup buffer are carried over from round 1.
+    // PLACEHOLDER: latest end 10:30 PM matches an existing event; Christin has not confirmed a cutoff.
     bookingColour: 'green',
     firstStartHour: 14,
     lastStartHour: 18,
@@ -69,6 +85,9 @@ export const RENTAL_TYPE_RULES: Record<RentalType, RentalTypeRules> = {
     oneBookingPerSaturday: false,
     bufferBeforeMinutes: 120,
     bufferAfterMinutes: 0,
+    extraBufferAfterMinutes: { purple: 60 },
+    minHours: { upTo25Guests: 3, over25Guests: 4 },
+    latestEndMinutes: 22 * 60 + 30,
   },
 };
 
@@ -93,7 +112,8 @@ export const AVAILABILITY_CACHE_SECONDS = 300;
 /**
  * JAMIE: Manna's Teamup sub-calendars, by colour. `blocks` lists the rental
  * types an event on that sub-calendar makes unavailable:
- *   Purple (conference room rental) blocks the conference room.
+ *   Purple (conference room rental) blocks the conference room, and the
+ *   whole building during the booking (JAMIE, 5 Nov).
  *   Green (entire building rental) blocks the whole building, so the
  *   conference room too.
  *   Grey (general inquiry) and Blue (catering order) block nothing.
@@ -105,7 +125,7 @@ export const AVAILABILITY_CACHE_SECONDS = 300;
 export const TEAMUP_SUBCALENDARS = {
   grey: { purpose: 'General inquiry', ids: [], nameMatches: ['inquiry'], blocks: [] },
   blue: { purpose: 'Catering order', ids: [], nameMatches: ['catering'], blocks: [] },
-  purple: { purpose: 'Conference room rental', ids: [], nameMatches: ['conference', 'conf.'], blocks: ['conference-room'] },
+  purple: { purpose: 'Conference room rental', ids: [], nameMatches: ['conference', 'conf.'], blocks: ['conference-room', 'entire-building'] },
   green: { purpose: 'Entire building rental', ids: [], nameMatches: ['building'], blocks: ['conference-room', 'entire-building'] },
 } as const satisfies Record<string, {
   purpose: string;
