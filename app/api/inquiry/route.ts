@@ -20,6 +20,7 @@ type InquiryPayload = {
   rentalWindow?: string;
   rentalSpace?: string;
   startTime?: string;
+  requestedHours?: string;
   cateringNeeds?: string;
   helpTopic?: string;
   roleInterest?: string;
@@ -133,6 +134,7 @@ const valueLabels: Record<string, string> = {
   flexible: 'Flexible',
   'full-building': 'Full building',
   'conference-room': 'Conference room',
+  'entire-building': 'Entire building',
 };
 
 const rateLimitStore = new Map<string, RateLimitEntry>();
@@ -470,7 +472,7 @@ function buildRows(payload: InquiryPayload, inquiryType: InquiryType): Array<[st
       ['Gathering', display(payload.occasion)],
       ['Preferred date', display(payload.eventDate)],
       ...(clean(payload.startTime)
-        ? [['Requested start', `${clean(payload.startTime)} (end time to be discussed)`] as [string, string]]
+        ? [['Requested start', describeRequestedTime(payload)] as [string, string]]
         : [['Time window', display(payload.rentalWindow)] as [string, string]]),
       ...(clean(payload.rentalSpace)
         ? [['Space', displayLabel(payload.rentalSpace)] as [string, string]]
@@ -541,6 +543,14 @@ function getInquiryType(value: unknown): InquiryType {
 
 function display(value: unknown, fallback = 'Not provided') {
   return clean(value) || fallback;
+}
+
+function describeRequestedTime(payload: InquiryPayload) {
+  const hours = Number(clean(payload.requestedHours));
+  const length = Number.isInteger(hours) && hours > 0 && hours <= 12
+    ? `for ${hours} hour${hours === 1 ? '' : 's'}`
+    : '(end time to be discussed)';
+  return `${clean(payload.startTime)} ${length}`;
 }
 
 function displayLabel(value: unknown) {

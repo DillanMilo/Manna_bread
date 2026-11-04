@@ -1,19 +1,33 @@
 import {
   BOOKABLE_WEEKDAYS,
   BOOKING_TIMEZONE,
-  BUFFER_AFTER_EVENT_MINUTES,
-  BUFFER_BEFORE_EVENT_MINUTES,
-  FIRST_START_HOUR,
-  LAST_START_HOUR,
   MAX_MONTHS_AHEAD,
   MIN_DAYS_AHEAD,
+  RENTAL_TYPE_RULES,
   SLOT_INTERVAL_MINUTES,
+  TEAMUP_SUBCALENDARS,
+  type RentalType,
+  type SubcalendarColour,
 } from '@/lib/booking/config';
 
-/** A busy stretch of time, as UTC epoch milliseconds. End is exclusive. */
+/**
+ * A busy stretch of time, as UTC epoch milliseconds (end is exclusive),
+ * tagged with the Teamup sub-calendar colour it came from. Stays on the
+ * server; the colour decides which rental types it blocks.
+ */
 export type BusyInterval = {
   start: number;
   end: number;
+  colour: SubcalendarColour;
+};
+
+/**
+ * An open start time ("HH:MM"). `maxHours` is the longest block that fits
+ * from that start, or null when the end time is agreed with Manna later.
+ */
+export type OpenSlot = {
+  start: string;
+  maxHours: number | null;
 };
 
 export type AvailabilitySource = 'mock' | 'teamup';
@@ -25,10 +39,11 @@ export type AvailabilitySource = 'mock' | 'teamup';
  */
 export type AvailabilityResponse = {
   source: AvailabilitySource;
+  type: RentalType;
   timezone: string;
   firstDate: string;
   lastDate: string;
-  days: Record<string, string[]>;
+  days: Record<string, OpenSlot[]>;
 };
 
 export type DateRange = {
@@ -62,24 +77,65 @@ export function computeAvailability(
   busy: BusyInterval[],
   window: DateRange,
   source: AvailabilitySource,
+  type: RentalType,
 ): AvailabilityResponse {
-  const days: Record<string, string[]> = {};
-  const beforeMs = BUFFER_BEFORE_EVENT_MINUTES * MINUTE_MS;
-  const afterMs = BUFFER_AFTER_EVENT_MINUTES * MINUTE_MS;
+  const rules = RENTAL_TYPE_RULES[type];
+  const days: Record<string, OpenSlot[]> = {};
+  const beforeMs = rules.bufferBeforeMinutes * MINUTE_MS;
+  const afterMs = rules.bufferAfterMinutes * MINUTE_MS;
+  const blocking = busy.filter((interval) => (TEAMUP_SUBCALENDARS[interval.colour].blocks as readonly RentalType[]).includes(type));
+  const isFree = (start: number, end: number) =>
+    !blocking.some((interval) => interval.start - beforeMs < end && start < interval.end + afterMs);
 
   for (let date = window.startDate; date <= window.endDate; date = addDays(date, 1)) {
-    if (!BOOKABLE_WEEKDAYS.includes(weekdayOf(date))) continue;
+    const weekday = weekdayOf(date);
+    if (!BOOKABLE_WEEKDAYS.includes(weekday)) continue;
 
-    days[date] = getStartMinutes()
-      .filter((minutes) => {
-        const startsAt = zonedTimeToUtcMs(date, minutes);
-        return !busy.some((interval) => startsAt >= interval.start - beforeMs && startsAt < interval.end + afterMs);
-      })
-      .map(formatMinutes);
+    const isSaturday = weekday === 6;
+    const dayStart = zonedTimeToUtcMs(date, 0);
+    const dayEnd = zonedTimeToUtcMs(addDays(date, 1), 0);
+
+    // One booking per Saturday: any existing booking of this type that day fills it.
+    if (
+      isSaturday &&
+      rules.oneBookingPerSaturday &&
+      busy.some((interval) => interval.colour === rules.bookingColour && interval.start < dayEnd && dayStart < interval.end)
+    ) {
+      days[date] = [];
+      continue;
+    }
+
+    const maxHoursForDay = (isSaturday ? rules.maxHoursSaturday : rules.maxHoursWeekday) ?? Infinity;
+    const slots: OpenSlot[] = [];
+
+    for (const minutes of getStartMinutes(rules.firstStartHour, rules.lastStartHour)) {
+      const startsAt = zonedTimeToUtcMs(date, minutes);
+
+      if (rules.closingHour === null) {
+        // End time is agreed later, so only the start time has to be clear.
+        if (isFree(startsAt, startsAt + 1)) slots.push({ start: formatMinutes(minutes), maxHours: null });
+        continue;
+      }
+
+      const hoursToClose = Math.floor((rules.closingHour * 60 - minutes) / 60);
+      let maxHours = 0;
+
+      while (
+        maxHours < Math.min(hoursToClose, maxHoursForDay) &&
+        isFree(startsAt, zonedTimeToUtcMs(date, minutes + (maxHours + 1) * 60))
+      ) {
+        maxHours += 1;
+      }
+
+      if (maxHours > 0) slots.push({ start: formatMinutes(minutes), maxHours });
+    }
+
+    days[date] = slots;
   }
 
   return {
     source,
+    type,
     timezone: BOOKING_TIMEZONE,
     firstDate: window.startDate,
     lastDate: window.endDate,
@@ -113,10 +169,10 @@ function weekdayOf(date: string): number {
   return new Date(Date.UTC(year, month - 1, day)).getUTCDay();
 }
 
-function getStartMinutes(): number[] {
+function getStartMinutes(firstHour: number, lastHour: number): number[] {
   const minutes: number[] = [];
 
-  for (let value = FIRST_START_HOUR * 60; value <= LAST_START_HOUR * 60; value += SLOT_INTERVAL_MINUTES) {
+  for (let value = firstHour * 60; value <= lastHour * 60; value += SLOT_INTERVAL_MINUTES) {
     minutes.push(value);
   }
 

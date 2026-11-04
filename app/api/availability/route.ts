@@ -1,12 +1,21 @@
 import { NextResponse } from 'next/server';
-import { AVAILABILITY_CACHE_SECONDS } from '@/lib/booking/config';
+import { AVAILABILITY_CACHE_SECONDS, isRentalType } from '@/lib/booking/config';
 import { computeAvailability, getBookingWindow } from '@/lib/booking/availability';
 import { getBusyTimeProvider } from '@/lib/booking/providers';
 
 // "Today" moves, so compute on each request; Teamup fetches are cached in providers.ts.
 export const dynamic = 'force-dynamic';
 
-export async function GET() {
+export async function GET(request: Request) {
+  const type = new URL(request.url).searchParams.get('type');
+
+  if (!isRentalType(type)) {
+    return NextResponse.json(
+      { error: 'Choose a rental type: conference-room or entire-building.' },
+      { status: 400 },
+    );
+  }
+
   const provider = getBusyTimeProvider();
 
   if (!provider) {
@@ -20,7 +29,7 @@ export async function GET() {
     const window = getBookingWindow();
     const busy = await provider.getBusyIntervals(window);
 
-    return NextResponse.json(computeAvailability(busy, window, provider.source), {
+    return NextResponse.json(computeAvailability(busy, window, provider.source, type), {
       headers: {
         'Cache-Control': `public, s-maxage=${AVAILABILITY_CACHE_SECONDS}, stale-while-revalidate=${AVAILABILITY_CACHE_SECONDS}`,
       },

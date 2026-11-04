@@ -5,8 +5,8 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect, useId, useRef, useState } from 'react';
 import { FadeIn } from '@/components/ui/Motion';
 import { getRecaptchaToken } from '@/components/ui/InquiryForm';
-import { RENTAL_SPACES } from '@/lib/booking/config';
-import type { AvailabilityResponse } from '@/lib/booking/availability';
+import { RENTAL_POLICY_TEXT, RENTAL_TYPES, type RentalType } from '@/lib/booking/config';
+import type { AvailabilityResponse, OpenSlot } from '@/lib/booking/availability';
 import { trackEvent, trackFormSubmit } from '@/lib/analytics';
 
 type LoadState = 'loading' | 'ready' | 'error';
@@ -37,12 +37,14 @@ const reveal = {
 };
 
 export function AvailabilitySection({ id }: { id?: string }) {
+  const [rentalType, setRentalType] = useState<RentalType | ''>('');
   const [availability, setAvailability] = useState<AvailabilityResponse | null>(null);
   const [loadState, setLoadState] = useState<LoadState>('loading');
   const [viewMonth, setViewMonth] = useState<MonthKey | null>(null);
   const [focusedDate, setFocusedDate] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
+  const [selectedHours, setSelectedHours] = useState(1);
   const gridRef = useRef<HTMLDivElement>(null);
   const timesRef = useRef<HTMLDivElement>(null);
   const shouldMoveFocus = useRef(false);
@@ -50,9 +52,10 @@ export function AvailabilitySection({ id }: { id?: string }) {
   const headingId = useId();
 
   useEffect(() => {
+    if (!rentalType) return;
     let cancelled = false;
 
-    fetch('/api/availability')
+    fetch(`/api/availability?type=${rentalType}`)
       .then(async (response) => {
         if (!response.ok) throw new Error('Availability request failed');
         return (await response.json()) as AvailabilityResponse;
@@ -72,7 +75,7 @@ export function AvailabilitySection({ id }: { id?: string }) {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [rentalType]);
 
   useEffect(() => {
     if (!shouldMoveFocus.current) return;
@@ -83,6 +86,8 @@ export function AvailabilitySection({ id }: { id?: string }) {
   const minMonth = availability ? monthOf(availability.firstDate) : null;
   const maxMonth = availability ? monthOf(availability.lastDate) : null;
   const selectedTimes = availability && selectedDate ? availability.days[selectedDate] ?? [] : [];
+  const selectedSlot = selectedTimes.find((slot) => slot.start === selectedTime);
+  const rentalLabel = RENTAL_TYPES.find((type) => type.value === rentalType)?.label ?? '';
   // Exactly one day in the visible month takes Tab focus (roving tabindex).
   const tabbableDate = availability && viewMonth && compareMonths(monthOf(focusedDate || availability.firstDate), viewMonth) === 0
     ? focusedDate
@@ -96,6 +101,22 @@ export function AvailabilitySection({ id }: { id?: string }) {
     return times.length > 0 ? 'open' : 'booked';
   }
 
+  function chooseType(type: RentalType) {
+    if (type === rentalType) return;
+
+    setRentalType(type);
+    setAvailability(null);
+    setLoadState('loading');
+    setSelectedDate('');
+    setSelectedTime('');
+    setSelectedHours(1);
+
+    if (!hasTrackedStart.current) {
+      hasTrackedStart.current = true;
+      trackEvent('form_start', { lead_type: 'rentals', form_source: source });
+    }
+  }
+
   function showMonth(next: MonthKey) {
     if (!minMonth || !maxMonth || compareMonths(next, minMonth) < 0 || compareMonths(next, maxMonth) > 0) return;
     setViewMonth(next);
@@ -107,12 +128,8 @@ export function AvailabilitySection({ id }: { id?: string }) {
 
     setSelectedDate(date);
     setSelectedTime('');
+    setSelectedHours(1);
     setFocusedDate(date);
-
-    if (!hasTrackedStart.current) {
-      hasTrackedStart.current = true;
-      trackEvent('form_start', { lead_type: 'rentals', form_source: source });
-    }
 
     if (window.matchMedia('(max-width: 1023px)').matches) {
       requestAnimationFrame(() => timesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
@@ -164,12 +181,38 @@ export function AvailabilitySection({ id }: { id?: string }) {
               Find an open date.
             </h2>
             <p className="mx-auto max-w-2xl font-body text-base leading-[1.8] text-white/72">
-              Choose a day to see the start times still open, then send us a request.
-              Nothing is reserved until the team follows up with you, and we will
-              talk through how long you need together.
+              Choose a space, then a day to see the start times still open, and send
+              us a request. Nothing is reserved until the team confirms with you
+              personally.
             </p>
           </FadeIn>
         </div>
+
+        <FadeIn delay={0.1}>
+          <div role="radiogroup" aria-label="Choose a space" className="mx-auto mb-6 md:mb-8 grid max-w-xl grid-cols-2 gap-2 sm:gap-3">
+            {RENTAL_TYPES.map((type) => (
+              <label key={type.value} className="relative">
+                <input
+                  type="radio"
+                  name="availability-rental-type"
+                  value={type.value}
+                  checked={rentalType === type.value}
+                  onChange={() => chooseType(type.value)}
+                  className="peer sr-only"
+                />
+                <span
+                  className={`flex min-h-[52px] cursor-pointer items-center justify-center rounded-lg border px-3 text-center font-body text-sm font-medium transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-brand-gold/60 sm:text-base ${
+                    rentalType === type.value
+                      ? 'border-brand-gold bg-brand-gold text-brand-forest'
+                      : 'border-white/15 bg-brand-forest-mid/70 text-white hover:border-brand-gold/60 hover:text-brand-gold'
+                  }`}
+                >
+                  {type.label}
+                </span>
+              </label>
+            ))}
+          </div>
+        </FadeIn>
 
         <FadeIn delay={0.15}>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
@@ -181,7 +224,13 @@ export function AvailabilitySection({ id }: { id?: string }) {
                 </p>
               )}
 
-              {loadState === 'loading' && (
+              {!rentalType && (
+                <div className="flex min-h-[320px] items-center justify-center text-center font-body text-sm text-white/60">
+                  Choose the conference room or the entire building to see open dates.
+                </div>
+              )}
+
+              {rentalType && loadState === 'loading' && (
                 <div role="status" className="flex min-h-[320px] items-center justify-center font-body text-sm text-white/60">
                   Loading the calendar…
                 </div>
@@ -303,7 +352,9 @@ export function AvailabilitySection({ id }: { id?: string }) {
                 <div aria-live="polite">
                   {!selectedDate && (
                     <p className="font-body text-sm leading-relaxed text-white/65">
-                      Pick a date on the calendar to see its open start times.
+                      {rentalType
+                        ? 'Pick a date on the calendar to see its open start times.'
+                        : 'Choose a space above to get started.'}
                     </p>
                   )}
 
@@ -325,18 +376,22 @@ export function AvailabilitySection({ id }: { id?: string }) {
                           {formatLongDate(selectedDate)}
                         </legend>
                         <p className="mb-4 font-body text-sm leading-relaxed text-white/65">
-                          Choose a start time. We will plan the length of your event, setup
-                          included, when we follow up.
+                          {rentalType === 'conference-room'
+                            ? 'Choose a start time, then how long you need. Saturdays are limited to one two-hour block.'
+                            : 'Private rentals begin at 2 PM or later. We will plan the length of your event when we follow up.'}
                         </p>
                         <div className="grid grid-cols-3 gap-2">
-                          {selectedTimes.map((time) => (
+                          {selectedTimes.map(({ start: time }) => (
                             <label key={time} className="relative">
                               <input
                                 type="radio"
                                 name="availability-start-time"
                                 value={time}
                                 checked={selectedTime === time}
-                                onChange={() => setSelectedTime(time)}
+                                onChange={() => {
+                                  setSelectedTime(time);
+                                  setSelectedHours(1);
+                                }}
                                 className="peer sr-only"
                               />
                               <span
@@ -352,16 +407,36 @@ export function AvailabilitySection({ id }: { id?: string }) {
                           ))}
                         </div>
                       </fieldset>
+
+                      {selectedSlot?.maxHours && (
+                        <label className="mt-4 block">
+                          <span className={labelClass}>Length</span>
+                          <select
+                            value={selectedHours}
+                            onChange={(event) => setSelectedHours(Number(event.target.value))}
+                            className={inputClass}
+                          >
+                            {hourOptions(selectedSlot).map((hours) => (
+                              <option key={hours} value={hours}>
+                                {hours} hour{hours === 1 ? '' : 's'}, until {formatTime(addHours(selectedSlot.start, hours))}
+                              </option>
+                            ))}
+                          </select>
+                        </label>
+                      )}
                     </motion.div>
                   )}
                 </AnimatePresence>
 
                 <AnimatePresence>
-                  {selectedDate && selectedTime && (
+                  {rentalType && selectedDate && selectedSlot && (
                     <motion.div key="request-form" {...reveal} className="mt-6 border-t border-white/10 pt-6">
                       <SlotRequestForm
+                        rentalType={rentalType}
+                        rentalLabel={rentalLabel}
                         date={selectedDate}
-                        time={selectedTime}
+                        time={selectedSlot.start}
+                        hours={selectedSlot.maxHours ? selectedHours : null}
                         onReset={() => {
                           setSelectedDate('');
                           setSelectedTime('');
@@ -379,11 +454,22 @@ export function AvailabilitySection({ id }: { id?: string }) {
   );
 }
 
-function SlotRequestForm({ date, time, onReset }: { date: string; time: string; onReset: () => void }) {
+type SlotRequestFormProps = {
+  rentalType: RentalType;
+  rentalLabel: string;
+  date: string;
+  time: string;
+  /** Requested length in hours, or null when the end time is agreed later. */
+  hours: number | null;
+  onReset: () => void;
+};
+
+function SlotRequestForm({ rentalType, rentalLabel, date, time, hours, onReset }: SlotRequestFormProps) {
   const [status, setStatus] = useState<FormStatus>('idle');
   const [error, setError] = useState('');
   const [startedAt] = useState(() => String(Date.now()));
-  const slotLabel = `${formatLongDate(date)} at ${formatTime(time)}`;
+  const timeLabel = hours ? `${formatTime(time)} to ${formatTime(addHours(time, hours))}` : formatTime(time);
+  const slotLabel = `${rentalLabel}, ${formatLongDate(date)} at ${timeLabel}`;
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -394,6 +480,8 @@ function SlotRequestForm({ date, time, onReset }: { date: string; time: string; 
     const payload: Record<string, FormDataEntryValue | string> = Object.fromEntries(new FormData(form).entries());
     payload.eventDate = formatLongDate(date);
     payload.startTime = formatTime(time);
+    payload.rentalSpace = rentalType;
+    if (hours) payload.requestedHours = String(hours);
 
     try {
       const recaptchaToken = await getRecaptchaToken();
@@ -471,16 +559,6 @@ function SlotRequestForm({ date, time, onReset }: { date: string; time: string; 
           <span className={labelClass}>Guests</span>
           <input name="guestCount" inputMode="numeric" placeholder="Estimated guest count" className={inputClass} />
         </label>
-        <label className="block sm:col-span-2 lg:col-span-1 xl:col-span-2">
-          <span className={labelClass}>Space</span>
-          <select name="rentalSpace" defaultValue={RENTAL_SPACES[0].value} className={inputClass}>
-            {RENTAL_SPACES.map((space) => (
-              <option key={space.value} value={space.value}>
-                {space.label}
-              </option>
-            ))}
-          </select>
-        </label>
       </div>
 
       <label className="block">
@@ -499,6 +577,11 @@ function SlotRequestForm({ date, time, onReset }: { date: string; time: string; 
         </p>
       )}
 
+      {/* POLICY: Jamie's rental policy wording goes in RENTAL_POLICY_TEXT (lib/booking/config.ts). */}
+      {RENTAL_POLICY_TEXT && (
+        <p className="whitespace-pre-line font-body text-xs leading-relaxed text-white/70">{RENTAL_POLICY_TEXT}</p>
+      )}
+
       <button
         type="submit"
         disabled={status === 'submitting'}
@@ -507,7 +590,7 @@ function SlotRequestForm({ date, time, onReset }: { date: string; time: string; 
         {status === 'submitting' ? 'Sending request...' : 'Send request'}
       </button>
       <p className="font-body text-xs leading-relaxed text-white/55">
-        This sends an inquiry only. Nothing is booked or charged until the Manna team confirms with you.
+        This is a request, not a booking. Nothing is reserved or charged until the Manna team confirms with you personally.
       </p>
     </form>
   );
@@ -600,6 +683,15 @@ function formatLongDate(date: string) {
     year: 'numeric',
     timeZone: 'UTC',
   });
+}
+
+function hourOptions(slot: OpenSlot) {
+  return Array.from({ length: slot.maxHours ?? 0 }, (_, index) => index + 1);
+}
+
+function addHours(time: string, hours: number) {
+  const [h, m] = time.split(':').map(Number);
+  return `${String(h + hours).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
 }
 
 function formatTime(time: string) {
