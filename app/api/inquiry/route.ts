@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { CONTACT } from '@/lib/constants';
+import { addInquiryToTeamup, parseTeamupInquiry } from '@/lib/booking/teamup-inquiry';
 import {
   employmentApplicationFields,
   employmentRequiredFields,
@@ -21,6 +22,8 @@ type InquiryPayload = {
   rentalSpace?: string;
   startTime?: string;
   requestedHours?: string;
+  requestedDate?: string;
+  requestedTime?: string;
   cateringNeeds?: string;
   helpTopic?: string;
   roleInterest?: string;
@@ -253,6 +256,23 @@ export async function POST(request: Request) {
     console.warn('reCAPTCHA verification failed in monitor mode; allowing inquiry submission.', recaptchaLog);
   }
 
+  // Calendar requests also go onto Manna's Teamup calendar (grey inquiry) so staff see them live.
+  // Best effort: it runs alongside the email and never fails the request.
+  const teamupInquiry = startTime
+    ? parseTeamupInquiry({
+      rentalSpace: clean(payload.rentalSpace),
+      requestedDate: clean(payload.requestedDate),
+      requestedTime: clean(payload.requestedTime),
+      requestedHours: clean(payload.requestedHours),
+      name,
+      email,
+      phone: clean(payload.phone),
+      guestCount: clean(payload.guestCount),
+      message,
+    })
+    : null;
+  const teamupWrite = teamupInquiry ? addInquiryToTeamup(teamupInquiry) : Promise.resolve('skipped');
+
   const businessResponse = await sendResendEmail(resendApiKey, {
     from: fromEmail,
     to: splitEmails(toEmail),
@@ -261,6 +281,8 @@ export async function POST(request: Request) {
     text: buildTextEmail(payload, inquiryType),
     html: buildHtmlEmail(payload, inquiryType),
   });
+
+  await teamupWrite;
 
   if (!businessResponse.ok) {
     const error = await businessResponse.text().catch(() => '');

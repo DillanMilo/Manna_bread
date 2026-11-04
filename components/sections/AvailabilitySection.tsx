@@ -481,6 +481,9 @@ function SlotRequestForm({ rentalType, rentalLabel, date, time, hours, onReset }
     payload.eventDate = formatLongDate(date);
     payload.startTime = formatTime(time);
     payload.rentalSpace = rentalType;
+    // Machine-readable copies, so the server can add the request to Manna's Teamup calendar.
+    payload.requestedDate = date;
+    payload.requestedTime = time;
     if (hours) payload.requestedHours = String(hours);
 
     try {
