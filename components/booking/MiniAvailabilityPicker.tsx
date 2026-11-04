@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { MonthGrid } from '@/components/booking/MonthGrid';
+import { BrandSelect } from '@/components/ui/BrandSelect';
 import { addHours, formatLongDate, formatTime, hourOptions } from '@/components/booking/calendar-utils';
 import { RENTAL_TYPES, type RentalType } from '@/lib/booking/config';
 import type { AvailabilityResponse } from '@/lib/booking/availability';
@@ -18,9 +19,6 @@ export type PickedSlot = {
 
 type LoadState = 'idle' | 'loading' | 'ready' | 'error';
 
-const fieldLabelClass = 'mb-1.5 block font-body text-[11px] font-semibold uppercase tracking-[1.5px] text-brand-gold/85';
-const selectClass =
-  'w-full rounded-lg border border-white/12 bg-brand-forest/70 px-4 py-3 font-body text-sm text-white outline-none transition-colors focus:border-brand-gold/70';
 
 /**
  * Compact version of the rentals availability calendar, for the inquiry
@@ -178,16 +176,17 @@ export function MiniAvailabilityPicker({
           )}
 
           {slot?.maxHours && (
-            <label className="mt-3 block">
-              <span className={fieldLabelClass}>Length</span>
-              <select value={hours} onChange={(event) => setHours(Number(event.target.value))} className={selectClass}>
-                {hourOptions(slot).map((value) => (
-                  <option key={value} value={value}>
-                    {value} hour{value === 1 ? '' : 's'}, until {formatTime(addHours(slot.start, value))}
-                  </option>
-                ))}
-              </select>
-            </label>
+            <div className="mt-3">
+              <BrandSelect
+                label="Length"
+                value={String(hours)}
+                onChange={(next) => setHours(Number(next))}
+                options={hourOptions(slot).map((value) => ({
+                  value: String(value),
+                  label: `${value} hour${value === 1 ? '' : 's'}, until ${formatTime(addHours(slot.start, value))}`,
+                }))}
+              />
+            </div>
           )}
         </>
       )}

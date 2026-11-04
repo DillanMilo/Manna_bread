@@ -6,6 +6,7 @@ import { trackEvent, trackFormSubmit } from '@/lib/analytics';
 import { MiniAvailabilityPicker, type PickedSlot } from '@/components/booking/MiniAvailabilityPicker';
 import { addHours, formatLongDate, formatShortDate, formatTime } from '@/components/booking/calendar-utils';
 import { RENTAL_TYPES, RENTAL_TYPE_RULES } from '@/lib/booking/config';
+import { BrandSelect } from '@/components/ui/BrandSelect';
 
 type InquiryType = 'catering' | 'rentals' | 'general' | 'employment';
 type FieldName =
@@ -174,11 +175,6 @@ const formContent: Record<
         type: 'availability',
       },
       {
-        name: 'rentalWindow',
-        label: 'Time window',
-        placeholder: 'Morning, evening, 5-9 PM',
-      },
-      {
         name: 'guestCount',
         label: 'Guests',
         placeholder: 'Estimated guest count',
@@ -280,8 +276,7 @@ export function InquiryForm({
   // Rentals: the date and start time chosen in the mini availability calendar.
   const [slot, setSlot] = useState<PickedSlot | null>(null);
   const content = formContent[defaultType];
-  // With a calendar slot chosen, the free-text time window is no longer needed.
-  const fields = [...sharedFields, ...content.fields].filter((field) => !(slot && field.name === 'rentalWindow'));
+  const fields = [...sharedFields, ...content.fields];
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -437,16 +432,12 @@ function FormField({ field }: { field: FieldConfig }) {
 
   if (field.options) {
     return (
-      <label className="block">
-        <span className={labelClass}>{field.label}</span>
-        <select name={field.name} defaultValue={field.options[0]?.value} className={inputClass}>
-          {field.options.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-      </label>
+      <BrandSelect
+        name={field.name}
+        label={field.label}
+        options={field.options}
+        defaultValue={field.options[0]?.value}
+      />
     );
   }
 

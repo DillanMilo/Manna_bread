@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useId, useRef, useState } from 'react';
 import { FadeIn } from '@/components/ui/Motion';
 import { MonthGrid } from '@/components/booking/MonthGrid';
+import { BrandSelect } from '@/components/ui/BrandSelect';
 import {
   addHours,
   formatLongDate,
@@ -254,20 +255,17 @@ export function AvailabilitySection({ id }: { id?: string }) {
                       </fieldset>
 
                       {selectedSlot?.maxHours && (
-                        <label className="mt-4 block">
-                          <span className={labelClass}>Length</span>
-                          <select
-                            value={selectedHours}
-                            onChange={(event) => setSelectedHours(Number(event.target.value))}
-                            className={inputClass}
-                          >
-                            {hourOptions(selectedSlot).map((hours) => (
-                              <option key={hours} value={hours}>
-                                {hours} hour{hours === 1 ? '' : 's'}, until {formatTime(addHours(selectedSlot.start, hours))}
-                              </option>
-                            ))}
-                          </select>
-                        </label>
+                        <div className="mt-4">
+                          <BrandSelect
+                            label="Length"
+                            value={String(selectedHours)}
+                            onChange={(next) => setSelectedHours(Number(next))}
+                            options={hourOptions(selectedSlot).map((hours) => ({
+                              value: String(hours),
+                              label: `${hours} hour${hours === 1 ? '' : 's'}, until ${formatTime(addHours(selectedSlot.start, hours))}`,
+                            }))}
+                          />
+                        </div>
                       )}
                     </motion.div>
                   )}

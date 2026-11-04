@@ -2,6 +2,12 @@ import { NextResponse } from 'next/server';
 import { CONTACT } from '@/lib/constants';
 import { addInquiryToTeamup, parseTeamupInquiry } from '@/lib/booking/teamup-inquiry';
 import {
+  buildConfirmationHtml,
+  buildConfirmationSubject,
+  buildConfirmationText,
+  type ConfirmationInput,
+} from '@/lib/email/confirmation-email';
+import {
   employmentApplicationFields,
   employmentRequiredFields,
 } from '@/lib/employmentApplication';
@@ -294,13 +300,14 @@ export async function POST(request: Request) {
     );
   }
 
+  const confirmation = buildConfirmationInput(payload, inquiryType);
   const confirmationResponse = await sendResendEmail(resendApiKey, {
     from: fromEmail,
     to: [email],
     replyTo: replyToEmail,
-    subject: buildConfirmationSubject(inquiryType),
-    text: buildConfirmationTextEmail(payload, inquiryType),
-    html: buildConfirmationHtmlEmail(payload, inquiryType),
+    subject: buildConfirmationSubject(confirmation),
+    text: buildConfirmationText(confirmation),
+    html: buildConfirmationHtml(confirmation),
   });
 
   if (!confirmationResponse.ok) {
@@ -384,93 +391,27 @@ function buildHtmlEmail(payload: InquiryPayload, inquiryType: InquiryType) {
   `;
 }
 
-function buildConfirmationSubject(inquiryType: InquiryType) {
-  return inquiryType === 'employment'
-    ? 'We received your application'
-    : `We received your ${inquiryConfig[inquiryType].label.toLowerCase()} inquiry`;
-}
-
-function buildConfirmationTextEmail(payload: InquiryPayload, inquiryType: InquiryType) {
+function buildConfirmationInput(payload: InquiryPayload, inquiryType: InquiryType): ConfirmationInput {
   const config = inquiryConfig[inquiryType];
-  const submissionName = inquiryType === 'employment'
-    ? 'application'
-    : `${config.label.toLowerCase()} inquiry`;
-  const rows = buildRows(payload, inquiryType).filter(([label]) => label !== 'Source');
+  const isCalendarRequest = inquiryType === 'rentals' && Boolean(clean(payload.startTime));
+  // The request card already shows these, so the "what you sent" list skips them.
+  const shownInCard = new Set(['Preferred date', 'Requested start', 'Space', 'Inquiry type', 'Source']);
+  const message = clean(payload.message);
 
-  return [
-    `Hi ${clean(payload.name)},`,
-    '',
-    `Thank you for reaching out to Manna Bakery. We received your ${submissionName} and will follow up if there is a fitting next step.`,
-    '',
-    'Here is what you sent us:',
-    '',
-    ...rows.map(([label, value]) => `${label}: ${value}`),
-    '',
-    'Message:',
-    clean(payload.message),
-    '',
-    `If you need to add anything, reply to this email or contact us at ${CONTACT.email} or ${CONTACT.phone}.`,
-    '',
-    'Manna Bakery',
-  ].join('\n');
-}
-
-function buildConfirmationHtmlEmail(payload: InquiryPayload, inquiryType: InquiryType) {
-  const config = inquiryConfig[inquiryType];
-  const submissionName = inquiryType === 'employment'
-    ? 'application'
-    : `${config.label.toLowerCase()} inquiry`;
-  const confirmationHeading = inquiryType === 'employment'
-    ? 'We received your application'
-    : 'We received your inquiry';
-  const confirmationIntro = inquiryType === 'employment'
-    ? 'Thank you for introducing yourself. We will follow up if there is a fitting next step.'
-    : 'Thank you for reaching out. We will follow up as soon as we can.';
-  const rows = buildRows(payload, inquiryType).filter(([label]) => label !== 'Source');
-
-  return `
-    <div style="margin:0;background:#faf9f6;padding:32px 20px;font-family:Georgia,serif;color:#2d2a26;line-height:1.55">
-      <div style="max-width:640px;margin:0 auto;border:1px solid #e2d8c9;background:#fffdf9">
-        <div style="background:#3d5247;padding:28px 30px;color:#faf9f6">
-          <p style="margin:0 0 8px;font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#c9a84c">
-            Manna Bakery
-          </p>
-          <h1 style="margin:0;font-size:28px;font-weight:500;line-height:1.2">${escapeHtml(confirmationHeading)}</h1>
-          <p style="margin:12px 0 0;font-family:Arial,sans-serif;font-size:14px;color:#f5f2ed">
-            ${escapeHtml(confirmationIntro)}
-          </p>
-        </div>
-
-        <div style="padding:28px 30px">
-          <p style="margin:0 0 16px;font-family:Arial,sans-serif;font-size:15px;color:#2d2a26">
-            Hi ${escapeHtml(clean(payload.name))}, we received your ${escapeHtml(submissionName)}. Here is a copy of what you sent us.
-          </p>
-
-          <table style="border-collapse:collapse;width:100%">
-            ${rows
-              .map(
-                ([label, value]) => `
-                  <tr>
-                    <td style="width:35%;padding:10px 12px;border-bottom:1px solid #ece4d8;font-family:Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#6b705c">${escapeHtml(label)}</td>
-                    <td style="padding:10px 12px;border-bottom:1px solid #ece4d8;font-family:Arial,sans-serif;font-size:14px;color:#2d2a26">${escapeHtml(value)}</td>
-                  </tr>
-                `,
-              )
-              .join('')}
-          </table>
-
-          <div style="margin-top:24px">
-            <p style="margin:0 0 8px;font-family:Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#6b705c">Message</p>
-            <div style="white-space:pre-wrap;border-left:3px solid #c9a84c;background:#f5f2ed;padding:16px 18px;font-family:Arial,sans-serif;font-size:15px;color:#2d2a26">${escapeHtml(clean(payload.message))}</div>
-          </div>
-
-          <p style="margin:24px 0 0;font-family:Arial,sans-serif;font-size:14px;color:#5f5a50">
-            If you need to add anything, reply to this email or contact us at ${escapeHtml(CONTACT.email)} or ${escapeHtml(CONTACT.phone)}.
-          </p>
-        </div>
-      </div>
-    </div>
-  `;
+  return {
+    name: clean(payload.name),
+    submissionName: inquiryType === 'employment' ? 'application' : `${config.label.toLowerCase()} inquiry`,
+    isEmployment: inquiryType === 'employment',
+    request: isCalendarRequest
+      ? {
+        space: displayLabel(payload.rentalSpace),
+        date: display(payload.eventDate),
+        time: describeRequestedRange(payload),
+      }
+      : undefined,
+    rows: buildRows(payload, inquiryType).filter(([label]) => (isCalendarRequest ? !shownInCard.has(label) : label !== 'Source')),
+    message: message === 'No message added.' ? '' : message,
+  };
 }
 
 function buildRows(payload: InquiryPayload, inquiryType: InquiryType): Array<[string, string]> {
@@ -495,7 +436,9 @@ function buildRows(payload: InquiryPayload, inquiryType: InquiryType): Array<[st
       ['Preferred date', display(payload.eventDate)],
       ...(clean(payload.startTime)
         ? [['Requested start', describeRequestedTime(payload)] as [string, string]]
-        : [['Time window', display(payload.rentalWindow)] as [string, string]]),
+        : clean(payload.rentalWindow)
+          ? [['Time window', display(payload.rentalWindow)] as [string, string]]
+          : []),
       ...(clean(payload.rentalSpace)
         ? [['Space', displayLabel(payload.rentalSpace)] as [string, string]]
         : []),
@@ -573,6 +516,22 @@ function describeRequestedTime(payload: InquiryPayload) {
     ? `for ${hours} hour${hours === 1 ? '' : 's'}`
     : '(end time to be discussed)';
   return `${clean(payload.startTime)} ${length}`;
+}
+
+/** "9:00 AM to 11:00 AM", or "From 3:00 PM, length planned together" when the end is agreed later. */
+function describeRequestedRange(payload: InquiryPayload) {
+  const start = clean(payload.startTime);
+  const hours = Number(clean(payload.requestedHours));
+  const match = /^(\d{1,2}):(\d{2}) (AM|PM)$/.exec(start);
+
+  if (!match || !Number.isInteger(hours) || hours <= 0 || hours > 12) {
+    return `From ${start}, length planned together`;
+  }
+
+  const startHour = (Number(match[1]) % 12) + (match[3] === 'PM' ? 12 : 0);
+  const endHour = startHour + hours;
+  const end = `${endHour % 12 || 12}:${match[2]} ${endHour >= 12 && endHour < 24 ? 'PM' : 'AM'}`;
+  return `${start} to ${end}`;
 }
 
 function displayLabel(value: unknown) {
