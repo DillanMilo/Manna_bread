@@ -1,6 +1,6 @@
 import 'server-only';
 
-import { TEAMUP_SUBCALENDARS, isRentalType, type RentalType } from '@/lib/booking/config';
+import { BOOKING_TIMEZONE, TEAMUP_SUBCALENDARS, isRentalType, type RentalType } from '@/lib/booking/config';
 import { zonedTimeToUtcMs } from '@/lib/booking/availability';
 
 /**
@@ -92,7 +92,9 @@ export async function addInquiryToTeamup(inquiry: TeamupInquiry): Promise<Teamup
     });
 
     if (!response.ok) {
-      console.error('Teamup inquiry event failed', { status: response.status });
+      // Teamup's error body explains the problem and holds no secrets.
+      const detail = await response.text().catch(() => '');
+      console.error('Teamup inquiry event failed', { status: response.status, detail: detail.slice(0, 300) });
       return 'failed';
     }
 
@@ -127,14 +129,38 @@ function buildEvent(inquiry: TeamupInquiry) {
 
   return {
     title: `Website request: ${space} (${inquiry.name})`,
-    start_dt: new Date(start).toISOString(),
-    end_dt: new Date(end).toISOString(),
+    start_dt: toTeamupDateTime(start),
+    end_dt: toTeamupDateTime(end),
     all_day: false,
     who: inquiry.name,
     notes: `${notes}<p><em>Request from the website calendar. Not confirmed. Move to the ${
       inquiry.rentalType === 'conference-room' ? 'purple conference room' : 'green building'
     } calendar once booked.</em></p>`,
   };
+}
+
+/**
+ * Teamup only accepts ISO 8601 without milliseconds, e.g. 2027-05-03T14:00:00-05:00,
+ * so this writes the booking-timezone wall time with its UTC offset.
+ */
+function toTeamupDateTime(utcMs: number): string {
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: BOOKING_TIMEZONE,
+    hourCycle: 'h23',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+  }).formatToParts(new Date(utcMs));
+  const get = (type: Intl.DateTimeFormatPartTypes) => parts.find((part) => part.type === type)?.value ?? '00';
+  const wallClock = `${get('year')}-${get('month')}-${get('day')}T${get('hour')}:${get('minute')}:${get('second')}`;
+  const offsetMinutes = Math.round((Date.parse(`${wallClock}Z`) - utcMs) / 60000);
+  const sign = offsetMinutes < 0 ? '-' : '+';
+  const abs = Math.abs(offsetMinutes);
+
+  return `${wallClock}${sign}${String(Math.floor(abs / 60)).padStart(2, '0')}:${String(abs % 60).padStart(2, '0')}`;
 }
 
 /** The grey sub-calendar id from TEAMUP_SUBCALENDARS, or found by name. */

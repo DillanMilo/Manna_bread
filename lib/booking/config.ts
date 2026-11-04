@@ -118,15 +118,18 @@ export const AVAILABILITY_CACHE_SECONDS = 300;
  *   conference room too.
  *   Grey (general inquiry) and Blue (catering order) block nothing.
  *
- * Drop the Teamup sub-calendar ids into `ids` once known. Until then a
+ * Ids are Manna's real Teamup sub-calendars (checked 5 Nov 2026):
+ *   11428046 Inquiry (Not confirmed), 12192782 Conf. Room Reservation,
+ *   11428045 Building Rentals. Holiday Hours is 11428050 (not used yet).
+ * Drop any new sub-calendar ids into `ids`. Until then a
  * sub-calendar is recognised when its name contains one of `nameMatches`
  * (case-insensitive). Ids win over names when both are set.
  */
 export const TEAMUP_SUBCALENDARS = {
-  grey: { purpose: 'General inquiry', ids: [], nameMatches: ['inquiry'], blocks: [] },
+  grey: { purpose: 'General inquiry', ids: [11428046], nameMatches: ['inquiry'], blocks: [] },
   blue: { purpose: 'Catering order', ids: [], nameMatches: ['catering'], blocks: [] },
-  purple: { purpose: 'Conference room rental', ids: [], nameMatches: ['conference', 'conf.'], blocks: ['conference-room', 'entire-building'] },
-  green: { purpose: 'Entire building rental', ids: [], nameMatches: ['building'], blocks: ['conference-room', 'entire-building'] },
+  purple: { purpose: 'Conference room rental', ids: [12192782], nameMatches: ['conference', 'conf.'], blocks: ['conference-room', 'entire-building'] },
+  green: { purpose: 'Entire building rental', ids: [11428045], nameMatches: ['building'], blocks: ['conference-room', 'entire-building'] },
 } as const satisfies Record<string, {
   purpose: string;
   ids: readonly number[];
