@@ -130,11 +130,16 @@ export const TEAMUP_SUBCALENDARS = {
   blue: { purpose: 'Catering order', ids: [], nameMatches: ['catering'], blocks: [] },
   purple: { purpose: 'Conference room rental', ids: [12192782], nameMatches: ['conference', 'conf.'], blocks: ['conference-room', 'entire-building'] },
   green: { purpose: 'Entire building rental', ids: [11428045], nameMatches: ['building'], blocks: ['conference-room', 'entire-building'] },
+  // Holiday Hours: an ALL-DAY event (e.g. "Closed for Thanksgiving") blocks both spaces that day.
+  // Timed events there (special opening hours) are ignored. Decided by Dillan, 5 Nov 2026.
+  black: { purpose: 'Holiday hours', ids: [11428050], nameMatches: ['holiday'], blocks: ['conference-room', 'entire-building'], allDayOnly: true },
 } as const satisfies Record<string, {
   purpose: string;
   ids: readonly number[];
   nameMatches: readonly string[];
   blocks: readonly RentalType[];
+  /** Only all-day events on this sub-calendar block anything. */
+  allDayOnly?: boolean;
 }>;
 
 export type SubcalendarColour = keyof typeof TEAMUP_SUBCALENDARS;

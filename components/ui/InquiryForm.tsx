@@ -3,6 +3,9 @@
 import { CalendarDays, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { trackEvent, trackFormSubmit } from '@/lib/analytics';
+import { MiniAvailabilityPicker, type PickedSlot } from '@/components/booking/MiniAvailabilityPicker';
+import { addHours, formatLongDate, formatShortDate, formatTime } from '@/components/booking/calendar-utils';
+import { RENTAL_TYPES, RENTAL_TYPE_RULES } from '@/lib/booking/config';
 
 type InquiryType = 'catering' | 'rentals' | 'general' | 'employment';
 type FieldName =
@@ -39,7 +42,6 @@ type InquiryFormProps = {
   source?: string;
   compact?: boolean;
   onSuccess?: () => void;
-  onPickDate?: () => void;
 };
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
@@ -270,14 +272,16 @@ export function InquiryForm({
   source = 'website',
   compact = false,
   onSuccess,
-  onPickDate,
 }: InquiryFormProps) {
   const [status, setStatus] = useState<FormStatus>('idle');
   const [error, setError] = useState('');
   const [startedAt] = useState(() => String(Date.now()));
   const hasTrackedStart = useRef(false);
+  // Rentals: the date and start time chosen in the mini availability calendar.
+  const [slot, setSlot] = useState<PickedSlot | null>(null);
   const content = formContent[defaultType];
-  const fields = [...sharedFields, ...content.fields];
+  // With a calendar slot chosen, the free-text time window is no longer needed.
+  const fields = [...sharedFields, ...content.fields].filter((field) => !(slot && field.name === 'rentalWindow'));
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -292,6 +296,17 @@ export function InquiryForm({
     if (missingRequiredField) {
       setStatus('error');
       setError(`Please add ${missingRequiredField.label.toLowerCase()}.`);
+      return;
+    }
+
+    // JAMIE: larger groups need a longer minimum, so check the chosen start leaves enough time free.
+    const minHours = slot ? RENTAL_TYPE_RULES[slot.rentalType].minHours : null;
+    const guests = Number.parseInt(String(payload.guestCount ?? ''), 10);
+    if (slot && minHours && slot.freeHours !== undefined && guests > 25 && slot.freeHours < minHours.over25Guests) {
+      setStatus('error');
+      setError(
+        `Groups of 26 or more need at least ${minHours.over25Guests} hours, and that start time has ${slot.freeHours} hours open. Please pick an earlier time or another date.`,
+      );
       return;
     }
 
@@ -316,6 +331,7 @@ export function InquiryForm({
 
       setStatus('success');
       form.reset();
+      setSlot(null);
       trackFormSubmit(defaultType, source);
       onSuccess?.();
     } catch (err) {
@@ -365,10 +381,25 @@ export function InquiryForm({
       <input type="hidden" name="startedAt" value={startedAt} />
       <input type="text" name="company" className="hidden" tabIndex={-1} autoComplete="off" />
 
+      {slot && (
+        <>
+          <input type="hidden" name="eventDate" value={formatLongDate(slot.date)} />
+          <input type="hidden" name="startTime" value={formatTime(slot.time)} />
+          <input type="hidden" name="rentalSpace" value={slot.rentalType} />
+          <input type="hidden" name="requestedDate" value={slot.date} />
+          <input type="hidden" name="requestedTime" value={slot.time} />
+          {slot.hours && <input type="hidden" name="requestedHours" value={String(slot.hours)} />}
+        </>
+      )}
+
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-        {fields.map((field) => (
-          <FormField key={field.name} field={field} onPickDate={onPickDate} />
-        ))}
+        {fields.map((field) =>
+          field.type === 'availability' ? (
+            <AvailabilityPickerField key={field.name} field={field} slot={slot} onChange={setSlot} />
+          ) : (
+            <FormField key={field.name} field={field} />
+          ),
+        )}
       </div>
 
       <label className="block">
@@ -399,13 +430,9 @@ export function InquiryForm({
   );
 }
 
-function FormField({ field, onPickDate }: { field: FieldConfig; onPickDate?: () => void }) {
+function FormField({ field }: { field: FieldConfig }) {
   if (field.type === 'date') {
     return <DateField field={field} />;
-  }
-
-  if (field.type === 'availability') {
-    return <AvailabilityLinkField field={field} onPickDate={onPickDate} />;
   }
 
   if (field.options) {
@@ -438,35 +465,75 @@ function FormField({ field, onPickDate }: { field: FieldConfig; onPickDate?: () 
   );
 }
 
-// Rentals pick their date and start time in the availability calendar, so this jumps there instead.
-function AvailabilityLinkField({ field, onPickDate }: { field: FieldConfig; onPickDate?: () => void }) {
+// Rentals pick their date and start time from a mini availability calendar that opens in place,
+// so nothing typed into the form is lost.
+function AvailabilityPickerField({
+  field,
+  slot,
+  onChange,
+}: {
+  field: FieldConfig;
+  slot: PickedSlot | null;
+  onChange: (slot: PickedSlot | null) => void;
+}) {
+  const [open, setOpen] = useState(false);
   const hintId = useId();
-
-  function handleClick() {
-    onPickDate?.();
-
-    const target = document.getElementById('check-availability');
-    if (!target) return;
-
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    target.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
-  }
+  const pickerId = useId();
+  const spaceLabel = slot ? RENTAL_TYPES.find((type) => type.value === slot.rentalType)?.label : '';
+  const timeLabel = slot
+    ? slot.hours
+      ? `${formatTime(slot.time)} to ${formatTime(addHours(slot.time, slot.hours))}`
+      : formatTime(slot.time)
+    : '';
 
   return (
-    <div className="block">
+    <div className={open ? 'block sm:col-span-2' : 'block'}>
       <span className={labelClass}>{field.label}</span>
-      <button
-        type="button"
-        onClick={handleClick}
-        aria-describedby={hintId}
-        className="flex w-full items-center justify-between gap-3 rounded-lg border border-brand-gold/40 bg-brand-forest/70 px-4 py-3 text-left font-body text-sm font-medium text-brand-gold transition-colors hover:border-brand-gold/70 hover:bg-brand-gold/10 focus:outline-none focus:ring-2 focus:ring-brand-gold/60"
-      >
-        Pick a date
-        <CalendarDays aria-hidden="true" className="h-4.5 w-4.5 shrink-0" strokeWidth={1.8} />
-      </button>
-      <p id={hintId} className="mt-1.5 font-body text-xs text-white/55">
-        See open dates and start times
-      </p>
+      {!open && (
+        <>
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            aria-expanded={false}
+            aria-controls={pickerId}
+            aria-describedby={hintId}
+            className="flex w-full items-center justify-between gap-3 rounded-lg border border-brand-gold/40 bg-brand-forest/70 px-4 py-3 text-left font-body text-sm font-medium text-brand-gold transition-colors hover:border-brand-gold/70 hover:bg-brand-gold/10 focus:outline-none focus:ring-2 focus:ring-brand-gold/60"
+          >
+            <span className={slot ? 'text-white' : undefined}>
+              {slot ? `${formatShortDate(slot.date)}, ${timeLabel}` : 'Pick a date'}
+            </span>
+            <CalendarDays aria-hidden="true" className="h-4.5 w-4.5 shrink-0" strokeWidth={1.8} />
+          </button>
+          <p id={hintId} className="mt-1.5 font-body text-xs text-white/55">
+            {slot ? (
+              <>
+                {spaceLabel}.{' '}
+                <button type="button" onClick={() => setOpen(true)} className="text-brand-gold underline-offset-2 hover:underline">
+                  Change
+                </button>
+                {' · '}
+                <button type="button" onClick={() => onChange(null)} className="text-brand-gold underline-offset-2 hover:underline">
+                  Clear
+                </button>
+              </>
+            ) : (
+              'See open dates and start times'
+            )}
+          </p>
+        </>
+      )}
+      {open && (
+        <div id={pickerId}>
+          <MiniAvailabilityPicker
+            initial={slot}
+            onCancel={() => setOpen(false)}
+            onConfirm={(picked) => {
+              onChange(picked);
+              setOpen(false);
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 }

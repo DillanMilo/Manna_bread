@@ -82,8 +82,14 @@ class TeamupProvider implements BusyTimeProvider {
       if (!interval) return [];
 
       // An event can sit on several sub-calendars; it blocks for each blocking colour it carries.
-      const colours = new Set((event.subcalendar_ids ?? []).map((id) => colourById.get(id)).filter(Boolean));
-      return [...colours].map((colour) => ({ ...interval, colour: colour as SubcalendarColour }));
+      const colours = new Set(
+        (event.subcalendar_ids ?? [])
+          .map((id) => colourById.get(id))
+          .filter((colour): colour is SubcalendarColour => Boolean(colour))
+          // Holiday Hours only blocks for all-day events (closures), not special opening hours.
+          .filter((colour) => event.all_day || !('allDayOnly' in TEAMUP_SUBCALENDARS[colour])),
+      );
+      return [...colours].map((colour) => ({ ...interval, colour }));
     });
   }
 
@@ -175,6 +181,8 @@ const MOCK_BOOKINGS: MockBooking[] = [
   { daysAhead: 15, startHour: 13, endHour: 15, colour: 'purple' },
   { daysAhead: 20, startHour: 15, endHour: 20, colour: 'green' },
   { daysAhead: 27, startHour: 0, endHour: 24, colour: 'green' },
+  // Holiday closure (all day) blocks both types.
+  { daysAhead: 22, startHour: 0, endHour: 24, colour: 'black' },
 ];
 
 class MockProvider implements BusyTimeProvider {
