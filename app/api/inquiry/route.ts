@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { CONTACT } from '@/lib/constants';
 import { addInquiryToTeamup, parseTeamupInquiry } from '@/lib/booking/teamup-inquiry';
+import { isRentalType, minimumHoursFor, parseGuestCount } from '@/lib/booking/config';
 import {
   buildConfirmationHtml,
   buildConfirmationSubject,
@@ -189,6 +190,14 @@ export async function POST(request: Request) {
   if (!email.includes('@')) {
     return NextResponse.json(
       { error: 'Please include a valid email address.' },
+      { status: 400 },
+    );
+  }
+
+  // JAMIE (5 Nov): every rental request needs an estimated guest count; it sets the minimum length.
+  if (inquiryType === 'rentals' && !parseGuestCount(payload.guestCount)) {
+    return NextResponse.json(
+      { error: 'Please include your estimated guest count.' },
       { status: 400 },
     );
   }
@@ -395,7 +404,7 @@ function buildConfirmationInput(payload: InquiryPayload, inquiryType: InquiryTyp
   const config = inquiryConfig[inquiryType];
   const isCalendarRequest = inquiryType === 'rentals' && Boolean(clean(payload.startTime));
   // The request card already shows these, so the "what you sent" list skips them.
-  const shownInCard = new Set(['Preferred date', 'Requested start', 'Space', 'Inquiry type', 'Source']);
+  const shownInCard = new Set(['Preferred date', 'Requested start', 'Space', 'Minimum length', 'Inquiry type', 'Source']);
   const message = clean(payload.message);
 
   return {
@@ -443,6 +452,9 @@ function buildRows(payload: InquiryPayload, inquiryType: InquiryType): Array<[st
         ? [['Space', displayLabel(payload.rentalSpace)] as [string, string]]
         : []),
       ['Guests', display(payload.guestCount)],
+      ...(rentalMinimum(payload)
+        ? [['Minimum length', `${rentalMinimum(payload)} hours`] as [string, string]]
+        : []),
       ['Food plans', displayLabel(payload.cateringNeeds)],
     ],
     general: [
@@ -510,22 +522,33 @@ function display(value: unknown, fallback = 'Not provided') {
   return clean(value) || fallback;
 }
 
+/** JAMIE (5 Nov): the minimum rental length set by the space and guest count, or null when none applies. */
+function rentalMinimum(payload: InquiryPayload) {
+  const space = clean(payload.rentalSpace);
+  const guests = parseGuestCount(payload.guestCount);
+  return isRentalType(space) && guests ? minimumHoursFor(space, guests) : null;
+}
+
 function describeRequestedTime(payload: InquiryPayload) {
   const hours = Number(clean(payload.requestedHours));
+  const minimum = rentalMinimum(payload);
   const length = Number.isInteger(hours) && hours > 0 && hours <= 12
     ? `for ${hours} hour${hours === 1 ? '' : 's'}`
-    : '(end time to be discussed)';
+    : minimum
+      ? `for at least ${minimum} hours (end time to be discussed)`
+      : '(end time to be discussed)';
   return `${clean(payload.startTime)} ${length}`;
 }
 
-/** "9:00 AM to 11:00 AM", or "From 3:00 PM, length planned together" when the end is agreed later. */
+/** "9:00 AM to 11:00 AM", or "From 3:00 PM, at least 4 hours" when the end is agreed later. */
 function describeRequestedRange(payload: InquiryPayload) {
   const start = clean(payload.startTime);
   const hours = Number(clean(payload.requestedHours));
   const match = /^(\d{1,2}):(\d{2}) (AM|PM)$/.exec(start);
 
   if (!match || !Number.isInteger(hours) || hours <= 0 || hours > 12) {
-    return `From ${start}, length planned together`;
+    const minimum = rentalMinimum(payload);
+    return minimum ? `From ${start}, at least ${minimum} hours` : `From ${start}, length planned together`;
   }
 
   const startHour = (Number(match[1]) % 12) + (match[3] === 'PM' ? 12 : 0);

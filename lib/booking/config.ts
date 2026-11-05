@@ -154,3 +154,21 @@ export function isRentalType(value: unknown): value is RentalType {
  * write policy text on Manna's behalf.
  */
 export const RENTAL_POLICY_TEXT = '';
+
+/** Largest guest count the forms accept; anything bigger is almost certainly a typo. */
+export const MAX_GUEST_COUNT = 500;
+
+/** JAMIE (5 Nov): guest count is required on every rental request. Returns null unless it is a whole number from 1 to MAX_GUEST_COUNT. */
+export function parseGuestCount(value: unknown): number | null {
+  const text = typeof value === 'string' ? value.trim() : '';
+  if (!/^\d{1,4}$/.test(text)) return null;
+  const guests = Number(text);
+  return guests >= 1 && guests <= MAX_GUEST_COUNT ? guests : null;
+}
+
+/** JAMIE (5 Nov): the minimum rental length for this space and group size, or null when the space has none. */
+export function minimumHoursFor(rentalType: RentalType, guests: number): number | null {
+  const minHours = RENTAL_TYPE_RULES[rentalType].minHours;
+  if (!minHours) return null;
+  return guests > 25 ? minHours.over25Guests : minHours.upTo25Guests;
+}

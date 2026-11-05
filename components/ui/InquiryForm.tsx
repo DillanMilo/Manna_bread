@@ -5,7 +5,8 @@ import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { trackEvent, trackFormSubmit } from '@/lib/analytics';
 import { MiniAvailabilityPicker, type PickedSlot } from '@/components/booking/MiniAvailabilityPicker';
 import { addHours, formatLongDate, formatShortDate, formatTime } from '@/components/booking/calendar-utils';
-import { RENTAL_TYPES, RENTAL_TYPE_RULES } from '@/lib/booking/config';
+import { GuestCountField } from '@/components/booking/GuestCountField';
+import { RENTAL_TYPES, minimumHoursFor, parseGuestCount } from '@/lib/booking/config';
 import { BrandSelect } from '@/components/ui/BrandSelect';
 
 type InquiryType = 'catering' | 'rentals' | 'general' | 'employment';
@@ -32,7 +33,7 @@ type FieldConfig = {
   name: FieldName;
   label: string;
   placeholder?: string;
-  type?: 'text' | 'email' | 'tel' | 'date' | 'availability';
+  type?: 'text' | 'email' | 'tel' | 'date' | 'availability' | 'guests';
   autoComplete?: string;
   required?: boolean;
   options?: Array<{ value: string; label: string }>;
@@ -175,9 +176,11 @@ const formContent: Record<
         type: 'availability',
       },
       {
+        // JAMIE (5 Nov): required, and it sets the entire-building minimum.
         name: 'guestCount',
         label: 'Guests',
-        placeholder: 'Estimated guest count',
+        type: 'guests',
+        required: true,
       },
       {
         name: 'cateringNeeds',
@@ -294,15 +297,24 @@ export function InquiryForm({
       return;
     }
 
-    // JAMIE: larger groups need a longer minimum, so check the chosen start leaves enough time free.
-    const minHours = slot ? RENTAL_TYPE_RULES[slot.rentalType].minHours : null;
-    const guests = Number.parseInt(String(payload.guestCount ?? ''), 10);
-    if (slot && minHours && slot.freeHours !== undefined && guests > 25 && slot.freeHours < minHours.over25Guests) {
-      setStatus('error');
-      setError(
-        `Groups of 26 or more need at least ${minHours.over25Guests} hours, and that start time has ${slot.freeHours} hours open. Please pick an earlier time or another date.`,
-      );
-      return;
+    // JAMIE (5 Nov): rentals need a guest count, which sets the minimum length,
+    // so check the chosen start leaves that much time free.
+    if (defaultType === 'rentals') {
+      const guests = parseGuestCount(payload.guestCount);
+      if (!guests) {
+        setStatus('error');
+        setError('Please add your estimated guest count as a number.');
+        return;
+      }
+
+      const minimum = slot ? minimumHoursFor(slot.rentalType, guests) : null;
+      if (slot && minimum && slot.freeHours !== undefined && slot.freeHours < minimum) {
+        setStatus('error');
+        setError(
+          `Groups of ${guests} need at least ${minimum} hours, and that start time has ${slot.freeHours} hours open. Please pick an earlier time or another date.`,
+        );
+        return;
+      }
     }
 
     try {
@@ -391,6 +403,14 @@ export function InquiryForm({
         {fields.map((field) =>
           field.type === 'availability' ? (
             <AvailabilityPickerField key={field.name} field={field} slot={slot} onChange={setSlot} />
+          ) : field.type === 'guests' ? (
+            <GuestCountField
+              key={field.name}
+              rentalType={slot?.rentalType ?? null}
+              freeHours={slot?.freeHours}
+              labelClass={labelClass}
+              inputClass={inputClass}
+            />
           ) : (
             <FormField key={field.name} field={field} />
           ),

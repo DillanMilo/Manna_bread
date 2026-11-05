@@ -1,6 +1,13 @@
 import 'server-only';
 
-import { BOOKING_TIMEZONE, TEAMUP_SUBCALENDARS, isRentalType, type RentalType } from '@/lib/booking/config';
+import {
+  BOOKING_TIMEZONE,
+  TEAMUP_SUBCALENDARS,
+  isRentalType,
+  minimumHoursFor,
+  parseGuestCount,
+  type RentalType,
+} from '@/lib/booking/config';
 import { zonedTimeToUtcMs } from '@/lib/booking/availability';
 
 /**
@@ -108,12 +115,17 @@ export async function addInquiryToTeamup(inquiry: TeamupInquiry): Promise<Teamup
 function buildEvent(inquiry: TeamupInquiry) {
   const [hour, minute] = inquiry.time.split(':').map(Number);
   const start = zonedTimeToUtcMs(inquiry.date, hour * 60 + minute);
-  // Teamup needs an end time. The building's end is agreed with Manna later, so it shows as one hour.
-  const end = start + (inquiry.hours ?? 1) * 60 * 60 * 1000;
+  // Teamup needs an end time. The building's end is agreed with Manna later, so the event
+  // spans the minimum for the guest count (JAMIE, 5 Nov), or one hour if that is unknown.
+  const guests = parseGuestCount(inquiry.guests);
+  const minimum = guests ? minimumHoursFor(inquiry.rentalType, guests) : null;
+  const end = start + (inquiry.hours ?? minimum ?? 1) * 60 * 60 * 1000;
   const space = SPACE_LABELS[inquiry.rentalType];
   const length = inquiry.hours
     ? `${inquiry.hours} hour${inquiry.hours === 1 ? '' : 's'}`
-    : 'End time to be discussed';
+    : minimum
+      ? `At least ${minimum} hours (end time to be discussed)`
+      : 'End time to be discussed';
 
   const notes = [
     ['Space', space],

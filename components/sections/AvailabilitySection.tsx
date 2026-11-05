@@ -13,7 +13,14 @@ import {
   hourOptions,
 } from '@/components/booking/calendar-utils';
 import { getRecaptchaToken } from '@/components/ui/InquiryForm';
-import { RENTAL_POLICY_TEXT, RENTAL_TYPES, RENTAL_TYPE_RULES, type RentalType } from '@/lib/booking/config';
+import { GuestCountField } from '@/components/booking/GuestCountField';
+import {
+  RENTAL_POLICY_TEXT,
+  RENTAL_TYPES,
+  minimumHoursFor,
+  parseGuestCount,
+  type RentalType,
+} from '@/lib/booking/config';
 import type { AvailabilityResponse } from '@/lib/booking/availability';
 import { trackEvent, trackFormSubmit } from '@/lib/analytics';
 
@@ -325,13 +332,19 @@ function SlotRequestForm({ rentalType, rentalLabel, date, time, hours, freeHours
     const form = event.currentTarget;
     const payload: Record<string, FormDataEntryValue | string> = Object.fromEntries(new FormData(form).entries());
 
-    // JAMIE: larger groups need a longer minimum, so check this start leaves enough time free.
-    const minHours = RENTAL_TYPE_RULES[rentalType].minHours;
-    const guests = Number.parseInt(String(payload.guestCount ?? ''), 10);
-    if (minHours && freeHours !== undefined && guests > 25 && freeHours < minHours.over25Guests) {
+    // JAMIE (5 Nov): the guest count is required and sets the minimum length,
+    // so check this start leaves that much time free.
+    const guests = parseGuestCount(payload.guestCount);
+    if (!guests) {
+      setStatus('error');
+      setError('Please add your estimated guest count as a number.');
+      return;
+    }
+    const minimum = minimumHoursFor(rentalType, guests);
+    if (minimum && freeHours !== undefined && freeHours < minimum) {
       setStatus('error');
       setError(
-        `Groups of 26 or more need at least ${minHours.over25Guests} hours, and this start time has ${freeHours} hours open. Please choose an earlier time or another date.`,
+        `Groups of ${guests} need at least ${minimum} hours, and this start time has ${freeHours} hours open. Please choose an earlier time or another date.`,
       );
       return;
     }
@@ -415,10 +428,7 @@ function SlotRequestForm({ rentalType, rentalLabel, date, time, hours, freeHours
           <span className={labelClass}>Phone</span>
           <input name="phone" type="tel" autoComplete="tel" placeholder="Phone number" className={inputClass} />
         </label>
-        <label className="block">
-          <span className={labelClass}>Guests</span>
-          <input name="guestCount" inputMode="numeric" placeholder="Estimated guest count" className={inputClass} />
-        </label>
+        <GuestCountField rentalType={rentalType} freeHours={freeHours} labelClass={labelClass} inputClass={inputClass} />
       </div>
 
       <label className="block">
