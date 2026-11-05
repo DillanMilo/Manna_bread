@@ -97,7 +97,7 @@ export function MonthGrid({ availability, selectedDate, onSelect, compact = fals
     moveFocus(move());
   }
 
-  const gap = compact ? 'gap-1' : 'gap-1 sm:gap-1.5';
+  const gap = compact ? 'gap-0.5 sm:gap-1' : 'gap-1 sm:gap-1.5';
 
   return (
     <>

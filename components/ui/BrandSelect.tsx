@@ -124,7 +124,7 @@ export function BrandSelect({ label, options, name, defaultValue, value, onChang
         aria-activedescendant={open ? `${listId}-${activeIndex}` : undefined}
         onClick={() => (open ? setOpen(false) : openList())}
         onKeyDown={handleKeyDown}
-        className={`flex w-full items-center justify-between gap-3 rounded-lg border bg-brand-forest/70 px-4 py-3 text-left font-body text-sm text-white outline-none transition-colors focus-visible:border-brand-gold/70 ${
+        className={`flex w-full items-center justify-between gap-3 rounded-lg border bg-brand-forest/70 px-4 py-3 text-left font-body text-base text-white outline-none sm:text-sm transition-colors focus-visible:border-brand-gold/70 ${
           open ? 'border-brand-gold/70' : 'border-white/12 hover:border-brand-gold/40'
         }`}
       >
@@ -161,7 +161,7 @@ export function BrandSelect({ label, options, name, defaultValue, value, onChang
                   onPointerEnter={() => setActiveIndex(index)}
                   onPointerDown={(event) => event.preventDefault()}
                   onClick={() => choose(index)}
-                  className={`flex cursor-pointer items-center justify-between gap-3 px-4 py-2.5 font-body text-sm transition-colors ${
+                  className={`flex min-h-[44px] cursor-pointer items-center justify-between gap-3 px-4 py-2.5 font-body text-base sm:min-h-0 sm:text-sm transition-colors ${
                     isActive ? 'bg-brand-gold/15 text-brand-gold' : isSelected ? 'text-brand-gold' : 'text-white/85'
                   }`}
                 >

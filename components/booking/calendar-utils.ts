@@ -27,7 +27,7 @@ export function getDayStatus(availability: AvailabilityResponse | null, date: st
 
 export function dayClass(status: DayStatus, isSelected: boolean, compact = false) {
   const base = compact
-    ? 'flex aspect-square w-full flex-col items-center justify-center rounded-md font-body text-xs sm:text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/70'
+    ? 'flex aspect-square min-h-[36px] w-full flex-col items-center justify-center rounded-md font-body text-xs sm:text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/70'
     : 'flex aspect-square w-full flex-col items-center justify-center rounded-lg font-body text-sm sm:text-base transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/70';
 
   if (isSelected) return `${base} bg-brand-gold text-brand-forest font-semibold`;

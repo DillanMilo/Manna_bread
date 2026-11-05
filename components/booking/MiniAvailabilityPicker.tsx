@@ -78,7 +78,7 @@ export function MiniAvailabilityPicker({
   }
 
   return (
-    <div className="rounded-xl border border-brand-gold/30 bg-brand-forest/60 p-3 sm:p-4">
+    <div className="rounded-xl border border-brand-gold/30 bg-brand-forest/60 p-2.5 sm:p-4">
       <div role="radiogroup" aria-label="Choose a space" className="mb-3 grid grid-cols-2 gap-2">
         {RENTAL_TYPES.map((type) => (
           <label key={type.value} className="relative">

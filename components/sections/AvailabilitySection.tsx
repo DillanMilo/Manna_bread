@@ -29,7 +29,7 @@ type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
 const source = 'rentals-availability-calendar';
 const inputClass =
-  'w-full rounded-lg border border-white/12 bg-brand-forest/70 px-4 py-3 font-body text-sm text-white placeholder:text-white/40 outline-none transition-colors focus:border-brand-gold/70';
+  'w-full rounded-lg border border-white/12 bg-brand-forest/70 px-4 py-3 font-body text-base text-white placeholder:text-white/40 outline-none transition-colors focus:border-brand-gold/70 sm:text-sm';
 const labelClass = 'mb-1.5 block font-body text-[11px] font-semibold uppercase tracking-[1.5px] text-brand-gold/85';
 const reveal = {
   initial: { opacity: 0, y: 16 },

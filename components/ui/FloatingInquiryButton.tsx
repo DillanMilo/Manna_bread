@@ -78,7 +78,7 @@ export function FloatingInquiryButton({ variant }: FloatingInquiryButtonProps) {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 28, scale: 0.98 }}
               transition={{ duration: 0.25, ease: [0.25, 0.4, 0.25, 1] }}
-              className="relative max-h-[88vh] w-full max-w-xl overflow-y-auto rounded-2xl border border-white/10 bg-brand-forest-mid p-5 shadow-2xl shadow-black/30 sm:p-6"
+              className="relative max-h-[88vh] w-full max-w-xl overflow-y-auto rounded-2xl border border-white/10 bg-brand-forest-mid p-4 shadow-2xl shadow-black/30 sm:p-6"
             >
               <ModalVine className="z-0 opacity-80" />
               <button
@@ -98,7 +98,7 @@ export function FloatingInquiryButton({ variant }: FloatingInquiryButtonProps) {
                   {variant === 'catering' ? 'Tell us about the spread.' : 'Tell us about the gathering.'}
                 </h2>
                 <p className="font-body text-sm text-white/65 leading-relaxed mb-5">
-                  Prefer a direct route? Call {CONTACT.phone} or email {CONTACT.email}.
+                  Prefer a direct route? Call <span className="whitespace-nowrap">{CONTACT.phone}</span> or email {CONTACT.email}.
                 </p>
               </div>
 
