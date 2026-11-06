@@ -4,7 +4,6 @@ import {
   MAX_MONTHS_AHEAD,
   MIN_DAYS_AHEAD,
   RENTAL_TYPE_RULES,
-  SLOT_INTERVAL_MINUTES,
   TEAMUP_SUBCALENDARS,
   type RentalType,
   type SubcalendarColour,
@@ -58,6 +57,7 @@ export type DateRange = {
 };
 
 const MINUTE_MS = 60 * 1000;
+const NO_GAP = { before: 0, after: 0 };
 
 /** Today's date (YYYY-MM-DD) in the booking timezone. */
 export function todayInBookingZone(now: Date = new Date()): string {
@@ -87,12 +87,13 @@ export function computeAvailability(
 ): AvailabilityResponse {
   const rules = RENTAL_TYPE_RULES[type];
   const days: Record<string, OpenSlot[]> = {};
-  const beforeMs = rules.bufferBeforeMinutes * MINUTE_MS;
-  const afterMs = rules.bufferAfterMinutes * MINUTE_MS;
   const blocking = busy.filter((interval) => (TEAMUP_SUBCALENDARS[interval.colour].blocks as readonly RentalType[]).includes(type));
-  const turnoverMs = (interval: BusyInterval) => (rules.extraBufferAfterMinutes[interval.colour] ?? 0) * MINUTE_MS;
+  // Free when the block ends `before` minutes ahead of every blocking event and starts `after` minutes past it.
   const isFree = (start: number, end: number) =>
-    !blocking.some((interval) => interval.start - beforeMs < end && start < interval.end + afterMs + turnoverMs(interval));
+    !blocking.some((interval) => {
+      const gap = rules.gaps[interval.colour] ?? NO_GAP;
+      return interval.start - gap.before * MINUTE_MS < end && start < interval.end + gap.after * MINUTE_MS;
+    });
 
   for (let date = window.startDate; date <= window.endDate; date = addDays(date, 1)) {
     const weekday = weekdayOf(date);
@@ -101,11 +102,11 @@ export function computeAvailability(
     const isSaturday = weekday === 6;
     const dayStart = zonedTimeToUtcMs(date, 0);
     const dayEnd = zonedTimeToUtcMs(addDays(date, 1), 0);
+    const oneBookingToday = rules.oneBookingPer === 'day' || (rules.oneBookingPer === 'saturday' && isSaturday);
 
-    // One booking per Saturday: any existing booking of this type that day fills it.
+    // One booking per day (or per Saturday): any existing booking of this type that day fills it.
     if (
-      isSaturday &&
-      rules.oneBookingPerSaturday &&
+      oneBookingToday &&
       busy.some((interval) => interval.colour === rules.bookingColour && interval.start < dayEnd && dayStart < interval.end)
     ) {
       days[date] = [];
@@ -115,7 +116,7 @@ export function computeAvailability(
     const maxHoursForDay = (isSaturday ? rules.maxHoursSaturday : rules.maxHoursWeekday) ?? Infinity;
     const slots: OpenSlot[] = [];
 
-    for (const minutes of getStartMinutes(rules.firstStartHour, rules.lastStartHour)) {
+    for (const minutes of getStartMinutes(rules.firstStartHour, rules.lastStartHour, rules.slotIntervalMinutes)) {
       const startsAt = zonedTimeToUtcMs(date, minutes);
 
       if (rules.closingHour === null) {
@@ -194,10 +195,10 @@ function weekdayOf(date: string): number {
   return new Date(Date.UTC(year, month - 1, day)).getUTCDay();
 }
 
-function getStartMinutes(firstHour: number, lastHour: number): number[] {
+function getStartMinutes(firstHour: number, lastHour: number, intervalMinutes: number): number[] {
   const minutes: number[] = [];
 
-  for (let value = firstHour * 60; value <= lastHour * 60; value += SLOT_INTERVAL_MINUTES) {
+  for (let value = firstHour * 60; value <= lastHour * 60; value += intervalMinutes) {
     minutes.push(value);
   }
 

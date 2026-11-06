@@ -1,6 +1,7 @@
 import { BRAND, CONTACT, SOCIAL } from '@/lib/constants';
 import { getSiteUrl } from '@/lib/siteUrl';
 import type { MenuCategory } from '@/lib/menuData';
+import { rentalFaqAnswerText, type RentalFaq } from '@/lib/rentalFaqs';
 
 export type StructuredData = Record<string, unknown>;
 
@@ -125,6 +126,25 @@ export function createMenuStructuredData(menuData: MenuCategory[]): StructuredDa
           : {}),
       })),
     ),
+  };
+}
+
+export function createRentalFaqStructuredData(faqs: RentalFaq[]): StructuredData {
+  const siteUrl = getSiteUrl();
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    '@id': `${siteUrl}/rentals#rental-faq`,
+    url: `${siteUrl}/rentals`,
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: rentalFaqAnswerText(faq),
+      },
+    })),
   };
 }
 

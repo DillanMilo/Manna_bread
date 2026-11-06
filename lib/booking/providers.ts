@@ -155,34 +155,37 @@ function toInterval(event: TeamupEvent): Omit<BusyInterval, 'colour'> | null {
 /* ─── Mock (local development only) ─── */
 
 type MockBooking = {
-  /** Days from today, or a Saturday at least this many days out when `saturday` is set. */
+  /** Days from today; with `weekday` set, the first such weekday at least this many days out. */
   daysAhead: number;
-  saturday?: boolean;
+  /** 0 = Sunday … 6 = Saturday. */
+  weekday?: number;
   startHour: number;
   endHour: number;
   colour: SubcalendarColour;
 };
 
-/** Sample Teamup events that exercise every rule. */
+/** Sample Teamup events that exercise every rule. Week one runs Saturday to Friday from tomorrow. */
 const MOCK_BOOKINGS: MockBooking[] = [
   // Saturday conference booking: conference room full that Saturday, building still open from 2 PM.
-  { daysAhead: 2, saturday: true, startHour: 10, endHour: 12, colour: 'purple' },
-  // Weekday conference booking: only those hours are taken.
-  { daysAhead: 2, startHour: 9, endHour: 11, colour: 'purple' },
-  // Building evening rental: blocks the building and the conference room from 2 PM.
-  { daysAhead: 5, startHour: 14, endHour: 20, colour: 'green' },
+  { daysAhead: 1, weekday: 6, startHour: 10, endHour: 12, colour: 'purple' },
+  // Weekday conference booking: 30-minute reset either side (conference ends by 8:30 or starts from 11:30).
+  { daysAhead: 1, weekday: 1, startHour: 9, endHour: 11, colour: 'purple' },
+  // Weekday building rental with time free after it: no second building rental that day;
+  // the conference room must end an hour before (by 1 PM).
+  { daysAhead: 1, weekday: 2, startHour: 14, endHour: 18, colour: 'green' },
+  // Building booking in the morning (entered by staff): conference room ends by 8 AM or starts from 1 PM.
+  { daysAhead: 1, weekday: 3, startHour: 9, endHour: 12, colour: 'green' },
+  // Afternoon conference booking: building opens an hour after it ends (5 PM).
+  { daysAhead: 1, weekday: 4, startHour: 15, endHour: 16, colour: 'purple' },
   // Building all-day rental: both types fully booked.
-  { daysAhead: 6, startHour: 0, endHour: 24, colour: 'green' },
+  { daysAhead: 1, weekday: 5, startHour: 0, endHour: 24, colour: 'green' },
+  // Jamie's example: Saturday building rental 2 to 6 PM, so no second building rental that day.
+  { daysAhead: 8, weekday: 6, startHour: 14, endHour: 18, colour: 'green' },
   // Grey (inquiry) and blue (catering) never block anything.
-  { daysAhead: 7, startHour: 0, endHour: 24, colour: 'grey' },
-  { daysAhead: 7, startHour: 10, endHour: 18, colour: 'blue' },
-  // A later Saturday with a building rental; the conference room is open in the morning.
-  { daysAhead: 9, saturday: true, startHour: 14, endHour: 22, colour: 'green' },
-  { daysAhead: 15, startHour: 13, endHour: 15, colour: 'purple' },
-  { daysAhead: 20, startHour: 15, endHour: 20, colour: 'green' },
-  { daysAhead: 27, startHour: 0, endHour: 24, colour: 'green' },
+  { daysAhead: 8, weekday: 1, startHour: 0, endHour: 24, colour: 'grey' },
+  { daysAhead: 8, weekday: 1, startHour: 10, endHour: 18, colour: 'blue' },
   // Holiday closure (all day) blocks both types.
-  { daysAhead: 22, startHour: 0, endHour: 24, colour: 'black' },
+  { daysAhead: 8, weekday: 4, startHour: 0, endHour: 24, colour: 'black' },
 ];
 
 class MockProvider implements BusyTimeProvider {
@@ -191,8 +194,9 @@ class MockProvider implements BusyTimeProvider {
   async getBusyIntervals(): Promise<BusyInterval[]> {
     const today = todayInBookingZone();
 
-    return MOCK_BOOKINGS.map(({ daysAhead, saturday, startHour, endHour, colour }) => {
-      const date = saturday ? nextSaturday(addDays(today, daysAhead)) : addDays(today, daysAhead);
+    return MOCK_BOOKINGS.map(({ daysAhead, weekday, startHour, endHour, colour }) => {
+      const earliest = addDays(today, daysAhead);
+      const date = weekday === undefined ? earliest : nextWeekday(earliest, weekday);
       return {
         start: zonedTimeToUtcMs(date, startHour * 60),
         end: zonedTimeToUtcMs(date, endHour * 60),
@@ -202,8 +206,9 @@ class MockProvider implements BusyTimeProvider {
   }
 }
 
-function nextSaturday(date: string): string {
+/** The first date on or after `date` that falls on `weekday`. */
+function nextWeekday(date: string, weekday: number): string {
   const [year, month, day] = date.split('-').map(Number);
-  const weekday = new Date(Date.UTC(year, month - 1, day)).getUTCDay();
-  return addDays(date, (6 - weekday + 7) % 7);
+  const current = new Date(Date.UTC(year, month - 1, day)).getUTCDay();
+  return addDays(date, (weekday - current + 7) % 7);
 }

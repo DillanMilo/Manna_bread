@@ -1,7 +1,7 @@
 /**
  * Rentals availability calendar settings.
  *
- * Rules marked JAMIE come from Jamie Hawley's email (4 Nov 2026).
+ * Rules marked JAMIE come from Jamie Hawley's emails (4, 5 and 6 Nov 2026).
  * Every value marked PLACEHOLDER still needs Manna's confirmation.
  * Change them here only; the API route and the calendar UI both read
  * from this file.
@@ -18,6 +18,13 @@ export const RENTAL_TYPES = [
 
 export type RentalType = (typeof RENTAL_TYPES)[number]['value'];
 
+/**
+ * Gap kept around an existing booking, in minutes.
+ * `before`: a new block must end at least this long before the booking starts.
+ * `after`: a new block may start no sooner than this long after the booking ends.
+ */
+export type BookingGap = { before: number; after: number };
+
 export type RentalTypeRules = {
   /** The Teamup sub-calendar colour that holds bookings of this type. */
   bookingColour: SubcalendarColour;
@@ -25,6 +32,8 @@ export type RentalTypeRules = {
   firstStartHour: number;
   /** Last start time offered, in 24-hour clock hours. */
   lastStartHour: number;
+  /** Minutes between offered start times (60 = on the hour, 30 = on the hour and half hour). */
+  slotIntervalMinutes: number;
   /**
    * Hour the space must be free by, or null when the end time is agreed
    * with Manna later. When set, the customer also picks a length in
@@ -35,14 +44,13 @@ export type RentalTypeRules = {
   maxHoursWeekday: number | null;
   /** Longest block on Saturday, in hours. */
   maxHoursSaturday: number | null;
-  /** JAMIE: one block per Saturday. An existing booking of this type fills the whole Saturday. */
-  oneBookingPerSaturday: boolean;
-  /** A start time is unavailable within this many minutes BEFORE a blocking event (setup). */
-  bufferBeforeMinutes: number;
-  /** A start time is unavailable within this many minutes AFTER a blocking event (cleanup). */
-  bufferAfterMinutes: number;
-  /** Extra turnover after a blocking event of a given colour, on top of bufferAfterMinutes. */
-  extraBufferAfterMinutes: Partial<Record<SubcalendarColour, number>>;
+  /**
+   * One booking of this type per day. 'saturday' = only on Saturdays, 'day' = every day,
+   * null = no limit. An existing booking of this type then fills the whole day.
+   */
+  oneBookingPer: 'saturday' | 'day' | null;
+  /** Gap kept around existing bookings, by the Teamup colour of the booking. Missing colours get no gap. */
+  gaps: Partial<Record<SubcalendarColour, BookingGap>>;
   /**
    * Minimum rental length in hours, by guest count, or null for none.
    * A start time is only offered when at least `upTo25Guests` hours are free.
@@ -55,44 +63,53 @@ export type RentalTypeRules = {
 export const RENTAL_TYPE_RULES: Record<RentalType, RentalTypeRules> = {
   'conference-room': {
     // JAMIE: one-hour blocks; Saturdays a maximum of one two-hour block.
+    // JAMIE (6 Nov): still one-hour blocks, but starts on the hour and the half hour.
     // PLACEHOLDER: 7 AM to 4 PM matches the posted store hours on the rentals page.
     bookingColour: 'purple',
     firstStartHour: 7,
     lastStartHour: 15,
+    slotIntervalMinutes: 30,
     closingHour: 16,
     maxHoursWeekday: null,
     maxHoursSaturday: 2,
-    oneBookingPerSaturday: true,
-    bufferBeforeMinutes: 0,
-    bufferAfterMinutes: 0,
-    extraBufferAfterMinutes: {},
+    oneBookingPer: 'saturday',
+    gaps: {
+      // JAMIE (6 Nov): 30 minutes between conference room bookings to clean and reset.
+      purple: { before: 30, after: 30 },
+      // JAMIE (6 Nov): one hour between a conference room and an entire-building rental, both ways.
+      green: { before: 60, after: 60 },
+    },
     minHours: null,
     latestEndMinutes: 16 * 60,
   },
   'entire-building': {
     // JAMIE: private rentals begin at 2:00 PM or later.
-    // JAMIE (5 Nov): a conference room booking blocks the building, plus about 1 hour of
-    // turnover after it ends (exact time to be confirmed with Christin).
     // JAMIE (5 Nov): minimum 3 hours for up to 25 guests, 4 hours for 26 or more.
+    // JAMIE (6 Nov): only one entire-building rental per day, even if time is still free.
     // PLACEHOLDER: last start 6 PM and the 2-hour setup buffer are carried over from round 1.
-    // PLACEHOLDER: latest end 10:30 PM matches an existing event; Christin has not confirmed a cutoff.
     bookingColour: 'green',
     firstStartHour: 14,
     lastStartHour: 18,
+    slotIntervalMinutes: 60,
     closingHour: null,
     maxHoursWeekday: null,
     maxHoursSaturday: null,
-    oneBookingPerSaturday: false,
-    bufferBeforeMinutes: 120,
-    bufferAfterMinutes: 0,
-    extraBufferAfterMinutes: { purple: 60 },
+    oneBookingPer: 'day',
+    gaps: {
+      // PLACEHOLDER: 2-hour setup buffer before an existing building booking.
+      green: { before: 120, after: 0 },
+      // JAMIE (6 Nov): one hour between a conference room and an entire-building rental, both ways.
+      // `before` stays at the 2-hour setup placeholder, which already covers Jamie's hour.
+      purple: { before: 120, after: 60 },
+    },
     minHours: { upTo25Guests: 3, over25Guests: 4 },
-    latestEndMinutes: 22 * 60 + 30,
+    // JAMIE (6 Nov): online bookings capped at 10:00 PM, read as the latest END time,
+    // so a start is only offered when the minimum length fits before 10 PM.
+    // Dillan asked Jamie to confirm. If she means the latest START instead, set
+    // lastStartHour to 22 and raise this to the building's real closing time.
+    latestEndMinutes: 22 * 60,
   },
 };
-
-/** Minutes between offered start times. JAMIE: one-hour blocks. */
-export const SLOT_INTERVAL_MINUTES = 60;
 
 /**
  * PLACEHOLDER: days that can be requested (0 = Sunday … 6 = Saturday).
