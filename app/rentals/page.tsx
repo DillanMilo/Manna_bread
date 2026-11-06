@@ -916,9 +916,6 @@ export default function RentalsPage() {
         </div>
       </section>
 
-      {/* ─── RENTAL FAQ ─── */}
-      <RentalFaqSection id="rental-faq" />
-
       <Divider />
 
       {/* ─── CHECK AVAILABILITY ─── */}
@@ -927,6 +924,9 @@ export default function RentalsPage() {
       <Divider />
 
       <InquirySection id="rental-inquiry" variant="rentals" />
+
+      {/* ─── RENTAL FAQ ─── JAMIE (6 Nov, testing): last section on the page. */}
+      <RentalFaqSection id="rental-faq" />
       </div>
     </main>
   );

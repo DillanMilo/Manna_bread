@@ -166,7 +166,7 @@ type MockBooking = {
 
 /** Sample Teamup events that exercise every rule. Week one runs Saturday to Friday from tomorrow. */
 const MOCK_BOOKINGS: MockBooking[] = [
-  // Saturday conference booking: conference room full that Saturday, building still open from 2 PM.
+  // Saturday conference booking 10 to 12: other two-hour blocks still open (7 to 9:30 AM starts, 12:30 PM and later), building still open from 2 PM.
   { daysAhead: 1, weekday: 6, startHour: 10, endHour: 12, colour: 'purple' },
   // Weekday conference booking: 30-minute reset either side (conference ends by 8:30 or starts from 11:30).
   { daysAhead: 1, weekday: 1, startHour: 9, endHour: 11, colour: 'purple' },

@@ -33,6 +33,8 @@ export type OpenSlot = {
    * so the form can apply the larger minimum for bigger groups.
    */
   freeHours?: number;
+  /** Set when `maxHours` is the only length allowed (conference room on Saturdays). */
+  fixedHours?: boolean;
 };
 
 export type AvailabilitySource = 'mock' | 'teamup';
@@ -114,6 +116,7 @@ export function computeAvailability(
     }
 
     const maxHoursForDay = (isSaturday ? rules.maxHoursSaturday : rules.maxHoursWeekday) ?? Infinity;
+    const fixedHours = isSaturday ? rules.fixedHoursSaturday : null;
     const slots: OpenSlot[] = [];
 
     for (const minutes of getStartMinutes(rules.firstStartHour, rules.lastStartHour, rules.slotIntervalMinutes)) {
@@ -139,6 +142,16 @@ export function computeAvailability(
 
         if (freeHours >= rules.minHours.upTo25Guests) {
           slots.push({ start: formatMinutes(minutes), maxHours: null, freeHours });
+        }
+        continue;
+      }
+
+      // JAMIE (6 Nov, testing): Saturday conference blocks are exactly two hours, so offer a
+      // start only when the whole block fits before closing and clears every gap.
+      if (fixedHours !== null) {
+        const endsAt = minutes + fixedHours * 60;
+        if (endsAt <= rules.closingHour * 60 && isFree(startsAt, zonedTimeToUtcMs(date, endsAt))) {
+          slots.push({ start: formatMinutes(minutes), maxHours: fixedHours, fixedHours: true });
         }
         continue;
       }

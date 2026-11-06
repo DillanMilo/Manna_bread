@@ -230,7 +230,9 @@ export function AvailabilitySection({ id }: { id?: string }) {
                         </legend>
                         <p className="mb-4 font-body text-sm leading-relaxed text-white/65">
                           {rentalType === 'conference-room'
-                            ? 'Choose a start time, then how long you need. Saturdays are limited to one two-hour block.'
+                            ? selectedTimes.some((slot) => slot.fixedHours)
+                              ? 'Saturdays are one two-hour block per customer. Choose a start time.'
+                              : 'Choose a start time, then how long you need. Saturdays are one two-hour block per customer.'
                             : 'Private rentals begin at 2 PM or later, with a 3-hour minimum (4 hours for 26 or more guests). We will plan the length of your event when we follow up.'}
                         </p>
                         <div className="grid grid-cols-3 gap-2">
@@ -261,7 +263,13 @@ export function AvailabilitySection({ id }: { id?: string }) {
                         </div>
                       </fieldset>
 
-                      {selectedSlot?.maxHours && (
+                      {selectedSlot?.maxHours && selectedSlot.fixedHours && (
+                        <p className="mt-4 font-body text-sm text-white/80">
+                          Length: {selectedSlot.maxHours} hours, until {formatTime(addHours(selectedSlot.start, selectedSlot.maxHours))}
+                        </p>
+                      )}
+
+                      {selectedSlot?.maxHours && !selectedSlot.fixedHours && (
                         <div className="mt-4">
                           <BrandSelect
                             label="Length"
@@ -286,7 +294,7 @@ export function AvailabilitySection({ id }: { id?: string }) {
                         rentalLabel={rentalLabel}
                         date={selectedDate}
                         time={selectedSlot.start}
-                        hours={selectedSlot.maxHours ? selectedHours : null}
+                        hours={selectedSlot.maxHours ? (selectedSlot.fixedHours ? selectedSlot.maxHours : selectedHours) : null}
                         freeHours={selectedSlot.freeHours}
                         onReset={() => {
                           setSelectedDate('');

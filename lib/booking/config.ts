@@ -45,6 +45,11 @@ export type RentalTypeRules = {
   /** Longest block on Saturday, in hours. */
   maxHoursSaturday: number | null;
   /**
+   * Exact block length on Saturday, in hours, or null for a choice of lengths.
+   * When set, a Saturday start is only offered when this whole block is free.
+   */
+  fixedHoursSaturday: number | null;
+  /**
    * One booking of this type per day. 'saturday' = only on Saturdays, 'day' = every day,
    * null = no limit. An existing booking of this type then fills the whole day.
    */
@@ -64,6 +69,8 @@ export const RENTAL_TYPE_RULES: Record<RentalType, RentalTypeRules> = {
   'conference-room': {
     // JAMIE: one-hour blocks; Saturdays a maximum of one two-hour block.
     // JAMIE (6 Nov): still one-hour blocks, but starts on the hour and the half hour.
+    // JAMIE (6 Nov, testing): Saturdays are exactly one two-hour block per CUSTOMER, not per day.
+    // Other customers can book their own two-hour blocks that day, 30 minutes apart.
     // PLACEHOLDER: 7 AM to 4 PM matches the posted store hours on the rentals page.
     bookingColour: 'purple',
     firstStartHour: 7,
@@ -72,7 +79,8 @@ export const RENTAL_TYPE_RULES: Record<RentalType, RentalTypeRules> = {
     closingHour: 16,
     maxHoursWeekday: null,
     maxHoursSaturday: 2,
-    oneBookingPer: 'saturday',
+    fixedHoursSaturday: 2,
+    oneBookingPer: null,
     gaps: {
       // JAMIE (6 Nov): 30 minutes between conference room bookings to clean and reset.
       purple: { before: 30, after: 30 },
@@ -96,6 +104,7 @@ export const RENTAL_TYPE_RULES: Record<RentalType, RentalTypeRules> = {
     closingHour: null,
     maxHoursWeekday: null,
     maxHoursSaturday: null,
+    fixedHoursSaturday: null,
     oneBookingPer: 'day',
     gaps: {
       // JAMIE (6 Nov): one-hour gap before an existing building booking.

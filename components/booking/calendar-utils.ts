@@ -123,6 +123,7 @@ export function formatShortDate(date: string) {
 }
 
 export function hourOptions(slot: OpenSlot) {
+  if (slot.fixedHours && slot.maxHours) return [slot.maxHours];
   return Array.from({ length: slot.maxHours ?? 0 }, (_, index) => index + 1);
 }
 

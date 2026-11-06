@@ -175,7 +175,13 @@ export function MiniAvailabilityPicker({
             </fieldset>
           )}
 
-          {slot?.maxHours && (
+          {slot?.maxHours && slot.fixedHours && (
+            <p className="mt-3 font-body text-sm text-white/80">
+              Saturdays are one two-hour block per customer: {formatTime(slot.start)} to {formatTime(addHours(slot.start, slot.maxHours))}.
+            </p>
+          )}
+
+          {slot?.maxHours && !slot.fixedHours && (
             <div className="mt-3">
               <BrandSelect
                 label="Length"
@@ -208,7 +214,7 @@ export function MiniAvailabilityPicker({
               rentalType,
               date,
               time: slot.start,
-              hours: slot.maxHours ? hours : null,
+              hours: slot.maxHours ? (slot.fixedHours ? slot.maxHours : hours) : null,
               freeHours: slot.freeHours,
             });
           }}
