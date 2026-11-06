@@ -414,7 +414,7 @@ export default function RentalsPage() {
                   />
                   <DetailItem
                     label="Cleaning fee"
-                    value="$70 flat (self-clean waiver available on request)"
+                    value="$70"
                   />
                 </div>
               </FadeIn>

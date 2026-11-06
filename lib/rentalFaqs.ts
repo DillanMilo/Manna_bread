@@ -147,7 +147,7 @@ export const RENTAL_FAQS: RentalFaq[] = [
         'Unlimited cubed ice',
         'Manna’s regular background music',
       ],
-      'A custom Spotify playlist, created by you, reviewed by Manna, and played through our system, is available for a $15 fee. Additional serviceware and event-service options can be selected on the Event Questionnaire.',
+      'A custom Spotify playlist, created by you, reviewed by Manna, and played through our system, is available for a $15 fee. Additional serviceware and event-service options are available. Mention them in your rental request, or let us know when we follow up.',
     ],
   },
   {
