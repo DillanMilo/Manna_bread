@@ -86,21 +86,22 @@ export const RENTAL_TYPE_RULES: Record<RentalType, RentalTypeRules> = {
     // JAMIE: private rentals begin at 2:00 PM or later.
     // JAMIE (5 Nov): minimum 3 hours for up to 25 guests, 4 hours for 26 or more.
     // JAMIE (6 Nov): only one entire-building rental per day, even if time is still free.
-    // PLACEHOLDER: last start 6 PM and the 2-hour setup buffer are carried over from round 1.
+    // JAMIE (6 Nov): start times depend on rental length, with 10 PM the latest end, so a
+    // 3-hour rental can start at 7 PM. The minimum length and latestEndMinutes below still
+    // hide any start that doesn't fit (a 4-hour rental can start no later than 6 PM).
     bookingColour: 'green',
     firstStartHour: 14,
-    lastStartHour: 18,
+    lastStartHour: 19,
     slotIntervalMinutes: 60,
     closingHour: null,
     maxHoursWeekday: null,
     maxHoursSaturday: null,
     oneBookingPer: 'day',
     gaps: {
-      // PLACEHOLDER: 2-hour setup buffer before an existing building booking.
-      green: { before: 120, after: 0 },
+      // JAMIE (6 Nov): one-hour gap before an existing building booking.
+      green: { before: 60, after: 0 },
       // JAMIE (6 Nov): one hour between a conference room and an entire-building rental, both ways.
-      // `before` stays at the 2-hour setup placeholder, which already covers Jamie's hour.
-      purple: { before: 120, after: 60 },
+      purple: { before: 60, after: 60 },
     },
     minHours: { upTo25Guests: 3, over25Guests: 4 },
     // CONFIRMED by Jamie (6 Nov): 10:00 PM is the latest END time for online bookings,

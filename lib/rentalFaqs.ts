@@ -16,9 +16,6 @@ export type RentalFaq = {
   link?: { href: string; label: string };
 };
 
-export const RENTAL_QUESTIONNAIRE_URL =
-  'https://docs.google.com/forms/d/e/1FAIpQLSfiNGmWmme1PDLKkj1COlNmm0eusT4NQZjHCffaEsP6dOdwfw/viewform?usp=sharing&ouid=113094550252035564176';
-
 export const RENTAL_FAQS: RentalFaq[] = [
   {
     question: 'What does it cost to rent Manna?',
@@ -156,10 +153,10 @@ export const RENTAL_FAQS: RentalFaq[] = [
   {
     question: 'What are the next steps?',
     answer: [
-      'When you’re ready, fill out the Manna Event Questionnaire. It gives us the details we need about your event, including your guest count, timing, food and catering plans, services, and any special requests.',
+      'When you’re ready, check availability and send a rental request using the form right here on this page. Tell us your date, start time, guest count, and anything else we should know about your event.',
       'Once we receive it, we’ll review the details with you and send your rental agreement and invoice. Your signed agreement and 50% deposit secure your reservation.',
     ],
-    link: { href: RENTAL_QUESTIONNAIRE_URL, label: 'Open the Event Questionnaire' },
+    link: { href: '#check-availability', label: 'Check availability and send a request' },
   },
 ];
 
