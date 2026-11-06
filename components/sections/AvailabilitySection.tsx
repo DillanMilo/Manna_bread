@@ -233,7 +233,7 @@ export function AvailabilitySection({ id }: { id?: string }) {
                             ? selectedTimes.some((slot) => slot.fixedHours)
                               ? 'Saturdays are one two-hour block per customer. Choose a start time.'
                               : 'Choose a start time, then how long you need. Saturdays are one two-hour block per customer.'
-                            : 'Private rentals begin at 2 PM or later, with a 3-hour minimum (4 hours for 26 or more guests). We will plan the length of your event when we follow up.'}
+                            : 'Private rentals begin at 2 PM or later and end by 10 PM, with a 3-hour minimum (4 hours for 26 or more guests). We will plan the length of your event when we follow up.'}
                         </p>
                         <div className="grid grid-cols-3 gap-2">
                           {selectedTimes.map(({ start: time }) => (

@@ -622,7 +622,7 @@ export default function RentalsPage() {
             <StaggerItem>
               <IncludedCard
                 title="Ambient Music"
-                description="Manna's house playlist runs during your event. Custom playlists or volume changes are available — just run them by us first."
+                description="Manna's regular background music plays during your event. A custom Spotify playlist, created by you and reviewed by Manna, is available for a $15 fee."
                 icon={
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 9l10.5-3m0 6.553v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 1 1-.99-3.467l2.31-.66a2.25 2.25 0 0 0 1.632-2.163Zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 0 1-.99-3.467l2.31-.66A2.25 2.25 0 0 0 9 15.553Z" />
@@ -686,6 +686,7 @@ export default function RentalsPage() {
                     'All outside food and drink must be pre-approved by Manna.',
                     'A 10% additional rental fee applies if more than 50% of catering is outside.',
                     'Outside dishes must be clearly labeled with the restaurant or origin at the serving area.',
+                    'Items Manna offers, such as coffee, cinnamon rolls, salads, and sandwiches, may not be brought in.',
                     'Tableware is not provided for outside-catered meals.',
                   ]}
                 />
@@ -793,6 +794,7 @@ export default function RentalsPage() {
                     'No loose glitter, confetti, or other small-particle decor.',
                     'No helium balloons.',
                     'Balloons, arches, and similar pieces must be taken with you at the end of the night, or a disposal fee applies.',
+                    'Any markings, residue, holes, or other property damage may result in an additional fee.',
                   ]}
                 />
                 <div className="mt-6 border-l-2 border-brand-gold/50 pl-5">
@@ -818,7 +820,7 @@ export default function RentalsPage() {
                   items={[
                     'Snap a quick photo before you move anything.',
                     'Return each piece to its original spot before you leave.',
-                    "Share your vision and Manna's team can help shape the room.",
+                    'Need a hand? Manna can help load, unload, and arrange tables and chairs for a $20 setup-assistance fee.',
                   ]}
                 />
               </div>

@@ -441,6 +441,12 @@ export function InquiryForm({
       >
         {status === 'submitting' ? content.submittingLabel : content.submitLabel}
       </button>
+      {/* JAMIE (3 Nov): rental requests, not confirmed reservations. Same note as the availability calendar. */}
+      {defaultType === 'rentals' && (
+        <p className="font-body text-xs leading-relaxed text-white/55">
+          This is a request, not a booking. Nothing is reserved or charged until the Manna team confirms with you personally.
+        </p>
+      )}
     </form>
   );
 }
