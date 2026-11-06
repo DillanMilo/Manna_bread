@@ -103,10 +103,8 @@ export const RENTAL_TYPE_RULES: Record<RentalType, RentalTypeRules> = {
       purple: { before: 120, after: 60 },
     },
     minHours: { upTo25Guests: 3, over25Guests: 4 },
-    // JAMIE (6 Nov): online bookings capped at 10:00 PM, read as the latest END time,
+    // CONFIRMED by Jamie (6 Nov): 10:00 PM is the latest END time for online bookings,
     // so a start is only offered when the minimum length fits before 10 PM.
-    // Dillan asked Jamie to confirm. If she means the latest START instead, set
-    // lastStartHour to 22 and raise this to the building's real closing time.
     latestEndMinutes: 22 * 60,
   },
 };

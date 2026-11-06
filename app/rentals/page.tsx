@@ -466,7 +466,7 @@ export default function RentalsPage() {
           <FadeIn delay={0.35}>
             <div className="mx-auto mt-6 max-w-4xl rounded-2xl border border-brand-gold/30 bg-brand-gold/10 px-5 py-4 text-center">
               <p className="font-body text-sm leading-relaxed text-white/85">
-                3-hour minimum for up to 20 attendees · 4-hour minimum for 20+ attendees
+                3-hour minimum for up to 25 guests · 4-hour minimum for 26 or more guests
               </p>
             </div>
           </FadeIn>
@@ -789,8 +789,9 @@ export default function RentalsPage() {
                 </h3>
                 <PolicyList
                   items={[
-                    'Anything hung or mounted cannot leave residue, marks, or holes - an additional fee applies if it does.',
+                    'Nothing may be attached, taped, pinned, or mounted to the walls.',
                     'No loose glitter, confetti, or other small-particle decor.',
+                    'No helium balloons.',
                     'Balloons, arches, and similar pieces must be taken with you at the end of the night, or a disposal fee applies.',
                   ]}
                 />
