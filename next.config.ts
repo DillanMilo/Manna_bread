@@ -20,6 +20,17 @@ const nextConfig: NextConfig = {
       //   destination: TOAST.orderOnline,
       //   permanent: true,
       // },
+      // Online ordering is paused: send the old /order link to the menu (temporary)
+      {
+        source: '/order',
+        destination: '/menu',
+        permanent: false,
+      },
+      {
+        source: '/order/:path*',
+        destination: '/menu',
+        permanent: false,
+      },
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'www.mannabread.com' }],
