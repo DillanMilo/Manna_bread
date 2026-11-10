@@ -156,10 +156,6 @@ const SALAD_ITEMS: SaladItem[] = [
     name: 'Mandarin Sesame Salad',
     description: 'Spring mix, mandarin oranges, sliced almonds, red onion, sesame seeds, and sesame ginger dressing',
   },
-  {
-    name: 'Kale Crunch Salad',
-    description: 'Chopped kale, shredded cabbage, sweet dried cranberries, almonds, and honey mustard dressing',
-  },
 ];
 
 const SOUP_FLAVORS: string[] = [
