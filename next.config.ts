@@ -31,6 +31,14 @@ const nextConfig: NextConfig = {
         destination: '/menu',
         permanent: false,
       },
+      // Old URLs Google still crawls (Search Console 404s, Nov 2026)
+      { source: '/home', destination: '/', permanent: true },
+      { source: '/contact-us', destination: '/contact', permanent: true },
+      {
+        source: '/menu/manna-bread-from-heaven-306-commerce-st',
+        destination: '/menu',
+        permanent: true,
+      },
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'www.mannabread.com' }],
