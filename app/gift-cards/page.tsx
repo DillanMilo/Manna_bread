@@ -24,27 +24,23 @@ interface GiftCardQuestion {
 
 const STEPS: GiftCardStep[] = [
   {
-    title: 'Choose an amount',
-    body: 'Pick $25, $50, $100, or $200 on our secure gift card page, or enter an amount of your own. You can personalize the card before it goes out.',
+    title: 'Pick an amount',
+    body: 'Choose $25, $50, $100 or $200, or type in your own amount. You can add a personal message too.',
   },
   {
-    title: 'Send it their way',
-    body: 'Send it by email or by text, or send it to yourself first so you can hand it over in person.',
+    title: 'Send it',
+    body: 'We can text or email it to them, or send it to you so you can hand it over yourself.',
   },
   {
-    title: 'Come in and enjoy it',
-    body: `Show the gift card on your phone at the counter at ${CONTACT.address.street}, no printing needed. We scan it or enter the card number and apply it to the order.`,
+    title: 'Use it at the bakery',
+    body: `Show it on your phone at the counter at ${CONTACT.address.street}. We'll scan it or type in the card number.`,
   },
 ];
 
 const QUESTIONS: GiftCardQuestion[] = [
   {
-    question: 'How does the gift card arrive?',
-    answer: 'By email or by text, your choice at checkout. You can also send it to yourself first and pass it along in person.',
-  },
-  {
-    question: 'Can I schedule it for a certain day?',
-    answer: 'Yes. Choose Later and pick the date and time it should arrive, so it shows up right on a birthday or Christmas morning. Choose Today and it is sent as soon as you place the order.',
+    question: 'Can I send it on a certain day?',
+    answer: "Yes. Pick Later at checkout and choose the date and time. It's a nice way to have it land on a birthday or on Christmas morning.",
   },
   {
     question: 'How do I check the balance?',
@@ -59,13 +55,13 @@ const QUESTIONS: GiftCardQuestion[] = [
         >
           Check Balance link
         </a>{' '}
-        at the top of our gift card page, or ask us at the counter.
+        at the top of our gift card page, or just ask us at the counter.
       </>
     ),
   },
   {
     question: 'Where can I use it?',
-    answer: `In the bakery at ${CONTACT.address.street} in Old Town Tomball, for breads, pastries, breakfast, lunch, and coffee.`,
+    answer: `Here at the bakery, ${CONTACT.address.street} in Old Town Tomball. It works on anything we sell, from a loaf to your morning coffee.`,
   },
 ];
 
@@ -90,12 +86,12 @@ export default function GiftCardsPage() {
             Purchase Gift Card
           </Button>
           <p className="font-accent italic text-base sm:text-lg text-brand-gold/90 mt-5">
-            For the one who already knows our cinnamon rolls by name.
+            Easy to send, and they get to pick their own treat.
           </p>
         </div>
 
         <section className="mt-16 sm:mt-20 md:mt-24" aria-labelledby="gift-card-steps">
-          <SectionHeader label="How It Works" title="Three small steps" light />
+          <SectionHeader label="Gift Cards" title="How it works" light />
           <ol id="gift-card-steps" className="grid gap-4 sm:gap-6 md:grid-cols-3 text-left">
             {STEPS.map((step, index) => (
               <li
@@ -111,7 +107,7 @@ export default function GiftCardsPage() {
         </section>
 
         <section className="mt-16 sm:mt-20 md:mt-24" aria-labelledby="gift-card-questions">
-          <SectionHeader label="Questions" title="Good to know" light />
+          <SectionHeader label="Questions" title="Common questions" light />
           <dl id="gift-card-questions" className="max-w-2xl mx-auto text-left divide-y divide-white/10 border-y border-white/10">
             {QUESTIONS.map((item) => (
               <div key={item.question} className="py-5 sm:py-6">
