@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { Button } from '@/components/ui/Button';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { GiftCardVine } from '@/components/ui/ScrollVine';
@@ -18,36 +19,49 @@ interface GiftCardStep {
 
 interface GiftCardQuestion {
   question: string;
-  answer: string;
+  answer: ReactNode;
 }
 
 const STEPS: GiftCardStep[] = [
   {
     title: 'Choose an amount',
-    body: 'Pick the amount on our secure gift card page. [CONFIRM WITH CHRISTIN: which amounts are offered, set amounts or any amount you like?]',
+    body: 'Pick $25, $50, $100, or $200 on our secure gift card page, or enter an amount of your own. You can personalize the card before it goes out.',
   },
   {
     title: 'Send it their way',
-    body: '[CONFIRM WITH CHRISTIN: The gift card arrives by email, straight to your recipient or to you so you can pass it along yourself.]',
+    body: 'Send it by email or by text, or send it to yourself first so you can hand it over in person.',
   },
   {
     title: 'Come in and enjoy it',
-    body: `Bring the card to the counter at ${CONTACT.address.street} and we apply it to the order. [CONFIRM WITH CHRISTIN: show the email on a phone or a printed copy, both accepted?]`,
+    body: `Bring the card to the counter at ${CONTACT.address.street} and we apply it to the order. [CONFIRM WITH CHRISTIN: show the card on a phone or a printed copy, both accepted?]`,
   },
 ];
 
 const QUESTIONS: GiftCardQuestion[] = [
   {
     question: 'How does the gift card arrive?',
-    answer: '[CONFIRM WITH CHRISTIN: By email, usually within a few minutes of purchase.]',
+    answer: 'By email or by text, your choice at checkout. You can also send it to yourself first and pass it along in person.',
   },
   {
     question: 'Can I schedule it for a certain day?',
-    answer: '[CONFIRM WITH CHRISTIN: Yes. Choose a delivery date at checkout and it lands in their inbox that morning, right on time for a birthday or Christmas.]',
+    answer: 'Yes. Choose Later and pick the date and time it should arrive, so it shows up right on a birthday or Christmas morning. Choose Today and it is sent as soon as you place the order.',
   },
   {
     question: 'How do I check the balance?',
-    answer: '[CONFIRM WITH CHRISTIN: Ask us at the counter, or use the balance link in the gift card email.]',
+    answer: (
+      <>
+        Use the{' '}
+        <a
+          href={TOAST.giftCards}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-brand-gold underline underline-offset-4 hover:text-brand-cognac-light transition-colors"
+        >
+          Check Balance link
+        </a>{' '}
+        at the top of our gift card page, or ask us at the counter.
+      </>
+    ),
   },
   {
     question: 'Can I add more to a gift card?',
