@@ -33,7 +33,7 @@ const STEPS: GiftCardStep[] = [
   },
   {
     title: 'Come in and enjoy it',
-    body: `Bring the card to the counter at ${CONTACT.address.street} and we apply it to the order. [CONFIRM WITH CHRISTIN: show the card on a phone or a printed copy, both accepted?]`,
+    body: `Show the gift card on your phone at the counter at ${CONTACT.address.street}, no printing needed. We scan it or enter the card number and apply it to the order.`,
   },
 ];
 
@@ -62,10 +62,6 @@ const QUESTIONS: GiftCardQuestion[] = [
         at the top of our gift card page, or ask us at the counter.
       </>
     ),
-  },
-  {
-    question: 'Can I add more to a gift card?',
-    answer: '[CONFIRM WITH CHRISTIN: Can a gift card be reloaded, and if so, online or only in the bakery?]',
   },
   {
     question: 'Where can I use it?',
