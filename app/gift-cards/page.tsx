@@ -32,7 +32,7 @@ const STEPS: GiftCardStep[] = [
     body: 'We can text or email it to them, or send it to you so you can hand it over yourself.',
   },
   {
-    title: 'Use it at the bakery',
+    title: 'Use it at Manna',
     body: `Show it on your phone at the counter at ${CONTACT.address.street}. We'll scan it or type in the card number.`,
   },
 ];
@@ -61,7 +61,7 @@ const QUESTIONS: GiftCardQuestion[] = [
   },
   {
     question: 'Where can I use it?',
-    answer: `Here at the bakery, ${CONTACT.address.street} in Old Town Tomball. It works on anything we sell, from a loaf to your morning coffee.`,
+    answer: `Here at Manna, ${CONTACT.address.street} in Old Town Tomball. It works on anything we sell, from a loaf to your morning coffee.`,
   },
 ];
 
@@ -78,7 +78,7 @@ export default function GiftCardsPage() {
           Give the gift of Manna
         </h1>
         <p className="font-body text-lg md:text-xl text-white/70 leading-relaxed max-w-2xl mx-auto mb-8 sm:mb-10">
-          A Manna gift card is a digital gift card for handcrafted food, warm hospitality, and time together. It can be used in the bakery at {CONTACT.address.street} in Old Town Tomball, for scratch-made breads and pastries, breakfast, lunch, or a coffee shared with someone you love. It makes an easy gift for anyone who could use an unhurried morning.
+          A Manna gift card is a digital gift card for handcrafted food, warm hospitality, and time together. It can be used at Manna at {CONTACT.address.street} in Old Town Tomball, for scratch-made breads and pastries, breakfast, lunch, or a coffee shared with someone you love. It makes an easy gift for anyone who could use an unhurried morning.
         </p>
 
         <div className="bg-brand-forest-mid/50 border border-white/10 rounded-2xl p-6 sm:p-8 md:p-12 mb-6 sm:mb-8">
