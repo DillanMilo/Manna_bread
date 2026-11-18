@@ -14,7 +14,8 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { InquirySection } from '@/components/sections/InquirySection';
 import { AvailabilitySection } from '@/components/sections/AvailabilitySection';
-import { RentalFaqSection } from '@/components/sections/RentalFaqSection';
+// note: hidden until Christin approves the FAQs; uncomment to restore
+// import { RentalFaqSection } from '@/components/sections/RentalFaqSection';
 import { FloatingInquiryButton } from '@/components/ui/FloatingInquiryButton';
 import { HeadingPumpkin } from '@/components/sections/PumpkinTouches';
 import { CONTACT } from '@/lib/constants';
@@ -928,7 +929,8 @@ export default function RentalsPage() {
       <InquirySection id="rental-inquiry" variant="rentals" />
 
       {/* ─── RENTAL FAQ ─── JAMIE (6 Nov, testing): last section on the page. */}
-      <RentalFaqSection id="rental-faq" />
+      {/* note: hidden until Christin approves the FAQs; uncomment to restore */}
+      {/* <RentalFaqSection id="rental-faq" /> */}
       </div>
     </main>
   );

@@ -1,6 +1,8 @@
 import { createPageMetadata } from '@/lib/seo';
-import { RENTAL_FAQS } from '@/lib/rentalFaqs';
-import { createRentalFaqStructuredData, serializeStructuredData } from '@/lib/structuredData';
+// note: hidden until Christin approves the FAQs; uncomment to restore
+// (FAQPage schema must only ship while the FAQ section is visible on the page)
+// import { RENTAL_FAQS } from '@/lib/rentalFaqs';
+// import { createRentalFaqStructuredData, serializeStructuredData } from '@/lib/structuredData';
 
 export const metadata = createPageMetadata(
   'Rentals: Private Event Space in Tomball',
@@ -8,16 +10,18 @@ export const metadata = createPageMetadata(
   '/rentals',
 );
 
-const rentalFaqStructuredData = createRentalFaqStructuredData(RENTAL_FAQS);
+// note: hidden until Christin approves the FAQs; uncomment to restore
+// const rentalFaqStructuredData = createRentalFaqStructuredData(RENTAL_FAQS);
 
 export default function RentalsLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <script
+      {/* note: hidden until Christin approves the FAQs; uncomment to restore */}
+      {/* <script
         id="manna-rental-faq-structured-data"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeStructuredData(rentalFaqStructuredData) }}
-      />
+      /> */}
       {children}
     </>
   );
