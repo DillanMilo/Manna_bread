@@ -163,6 +163,7 @@ const SOUP_FLAVORS: string[] = [
   'Chophouse Potato',
   'Beef & Barley',
   'Zuppa Toscana',
+  'Tomato Basil',
 ];
 
 /* ─── parallax image for quote section ─── */

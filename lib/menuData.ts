@@ -241,7 +241,7 @@ export const menuData: MenuCategory[] = [
             price: { display: 'Cup $6 · Bowl $14' },
           },
           {
-            name: 'Mandarin Crunch',
+            name: 'Mandarin Sesame Salad',
             description: 'Spring mix, mandarin oranges, almonds, sesame seeds, red onion, and sesame ginger dressing.',
             price: { display: 'Cup $6 · Bowl $14' },
           },
