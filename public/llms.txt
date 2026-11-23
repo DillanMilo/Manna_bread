@@ -8,7 +8,7 @@
 - [Menu](https://mannabread.com/menu): Manna Bakery's current drinks, breakfast, lunch, salad, and soup menu. Online ordering is currently paused; order in person at the bakery.
 - [Our Story](https://mannabread.com/our-story): Christin's story and the faith, family, and experiences behind Manna Bakery.
 - [Catering](https://mannabread.com/catering): Catering selections, service details, and the catering inquiry form.
-- [Gift Cards](https://mannabread.com/gift-cards): The official path to purchase a Manna Bakery gift card.
+- [Gift Cards](https://mannabread.com/gift-cards): How Manna's digital gift cards work: amounts from $25 to $200 or custom, delivered by text or email (or scheduled), balance check, and use in person at 306 Commerce St.
 - [Private Rentals](https://mannabread.com/rentals): Spaces, capacity, policies, pricing, and the rental inquiry form.
 - [Contact and Visit](https://mannabread.com/contact): Address, hours, phone, email, directions, and the general inquiry form.
 - [Careers](https://mannabread.com/careers): Manna Bakery's current team introduction and employment application page.

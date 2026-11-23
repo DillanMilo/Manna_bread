@@ -8,7 +8,7 @@ import { createPageMetadata } from '@/lib/seo';
 
 export const metadata = createPageMetadata(
   'Bakery Gift Cards',
-  'Give the gift of Manna Bakery with a digital gift card for handcrafted food, warm hospitality, and time together.',
+  'Send a Manna Bakery digital gift card by text or email, or schedule it for a birthday or Christmas morning. Use it at 306 Commerce St in Old Town Tomball.',
   '/gift-cards',
 );
 
