@@ -3,6 +3,7 @@ import { Hero } from '@/components/sections/Hero';
 import { TimedVisibility } from '@/components/ui/TimedVisibility';
 import { CoffeeDayBanner } from '@/components/sections/CoffeeDayBanner';
 import { PumpkinDayBanner } from '@/components/sections/PumpkinDayBanner';
+import { ThanksgivingBanner } from '@/components/sections/ThanksgivingBanner';
 import { Story } from '@/components/sections/Story';
 import { WelcomeInterlude } from '@/components/sections/WelcomeInterlude';
 import { FeaturedMenu } from '@/components/sections/FeaturedMenu';
@@ -14,6 +15,7 @@ import { FounderInterlude } from '@/components/sections/FounderInterlude';
 import { Services } from '@/components/sections/Services';
 import { Contact } from '@/components/sections/Contact';
 import { isPumpkinDayPreview, PUMPKIN_DAY_ENDS_AT_CENTRAL } from '@/lib/pumpkinDay';
+import { isThanksgivingPreview, THANKSGIVING_ENDS_AT_CENTRAL } from '@/lib/thanksgiving';
 
 const COFFEE_DAY_BANNER_ENDS_AT_CENTRAL = '2026-09-29T20:00:00-05:00';
 
@@ -36,6 +38,8 @@ export default function HomePage() {
   const showCoffeeDayBanner = hasNotEnded(COFFEE_DAY_BANNER_ENDS_AT_CENTRAL);
   const previewPumpkinDayBanner = isPumpkinDayPreview();
   const showPumpkinDayBanner = previewPumpkinDayBanner || hasNotEnded(PUMPKIN_DAY_ENDS_AT_CENTRAL);
+  const previewThanksgivingBanner = isThanksgivingPreview();
+  const showThanksgivingBanner = previewThanksgivingBanner || hasNotEnded(THANKSGIVING_ENDS_AT_CENTRAL);
 
   return (
     <main>
@@ -48,6 +52,13 @@ export default function HomePage() {
         previewPumpkinDayBanner ? <PumpkinDayBanner /> : (
           <TimedVisibility endsAt={PUMPKIN_DAY_ENDS_AT_CENTRAL}>
             <PumpkinDayBanner />
+          </TimedVisibility>
+        )
+      )}
+      {showThanksgivingBanner && (
+        previewThanksgivingBanner ? <ThanksgivingBanner /> : (
+          <TimedVisibility endsAt={THANKSGIVING_ENDS_AT_CENTRAL}>
+            <ThanksgivingBanner />
           </TimedVisibility>
         )
       )}

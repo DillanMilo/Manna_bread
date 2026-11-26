@@ -1,0 +1,96 @@
+.banner {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-block: 1px solid #c9a84c55;
+  background:
+    radial-gradient(ellipse at 50% 120%, #e3a54833, transparent 55%),
+    radial-gradient(ellipse at 14% 110%, #d9822b30, transparent 42%),
+    radial-gradient(ellipse at 88% 112%, #b5552b2b, transparent 40%),
+    radial-gradient(ellipse at 50% -25%, #c9a84c1a, transparent 55%),
+    linear-gradient(115deg, #2c4135, #1f2b24 55%, #3d4a35);
+  animation: arrive .7s cubic-bezier(.2, .7, .2, 1) both;
+}
+.scene { position: absolute; inset: 0; pointer-events: none; z-index: -1; }
+.glow {
+  position: absolute; left: 50%; top: 50%; width: 520px; height: 220px;
+  translate: -50% -50%;
+  background: radial-gradient(ellipse, #e3a54826, #c9a84c10 45%, transparent 70%);
+  animation: breathe 6s ease-in-out 1s infinite;
+}
+.content { max-width: 1080px; margin: auto; padding: 32px 40px 40px; display: flex; align-items: center; justify-content: center; gap: 30px; }
+.emblem {
+  position: relative; color: #e2c27a; flex-shrink: 0; width: 98px; height: 98px; padding: 10px 12px 6px;
+  border: 1px solid #c9a84c59; border-radius: 60px 60px 6px 6px;
+  background: radial-gradient(ellipse at 50% 70%, #e3a54838, #d9822b14 55%, transparent 80%);
+  box-shadow: 0 0 36px #e3a54824, inset 0 0 18px #c9a84c14;
+  animation: rise .8s cubic-bezier(.2, .7, .2, 1) .05s both, halo 5s ease-in-out 1.2s infinite;
+}
+.emblem::before {
+  content: ''; position: absolute; inset: 4px; border-radius: inherit;
+  border: 1px solid #c9a84c26;
+}
+.copy { animation: rise .8s cubic-bezier(.2, .7, .2, 1) .14s both; }
+.rule {
+  display: block; width: 72px; height: 1px; margin: 9px 0 9px;
+  background: linear-gradient(90deg, #c9a84c, #e3a548aa, transparent);
+}
+.mote {
+  position: absolute; border-radius: 50%; opacity: 0;
+  background: #f1d48c; box-shadow: 0 0 8px 2px #e3a54866;
+  animation: float var(--duration) ease-in-out var(--delay) infinite;
+}
+.falling {
+  position: absolute; top: -28px; opacity: 0;
+  filter: drop-shadow(1px 2px 2px #0004);
+  animation: drift var(--duration) linear var(--delay) infinite;
+}
+.falling svg { width: 100%; height: 100%; animation: tumble calc(var(--duration) / 2.5) ease-in-out var(--delay) infinite alternate; }
+.stalk {
+  position: absolute; bottom: 0; width: 18px;
+  filter: drop-shadow(0 2px 3px #0005);
+  transform-origin: 50% 100%;
+  animation: grow 1.2s cubic-bezier(.3, 1.2, .5, 1) var(--delay) both, sway 5.5s ease-in-out calc(var(--delay) + 1.2s) infinite alternate;
+}
+.stalk svg { display: block; width: 100%; height: 100%; opacity: .8; }
+.horizon {
+  position: absolute; bottom: 0; left: 8%; right: 8%; height: 1px;
+  background: linear-gradient(90deg, transparent, #e3a548aa, #dfc777cc, #e3a548aa, transparent);
+  box-shadow: 0 -2px 26px #e3a54845;
+}
+@keyframes drift {
+  0% { transform: translate(0, 0); opacity: 0; }
+  8% { opacity: .85; }
+  50% { transform: translate(var(--sway), 110px); }
+  88% { opacity: .75; }
+  100% { transform: translate(0, 225px); opacity: 0; }
+}
+@keyframes tumble { from { transform: rotate(-35deg); } to { transform: rotate(40deg) scaleX(.8); } }
+@keyframes float {
+  0% { transform: translate(0, 10px); opacity: 0; }
+  30% { opacity: .75; }
+  100% { transform: translate(6px, -34px); opacity: 0; }
+}
+@keyframes arrive { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes grow { from { opacity: 0; transform: rotate(var(--lean)) scaleY(.4); } to { opacity: 1; transform: rotate(var(--lean)); } }
+@keyframes sway { from { transform: rotate(var(--lean)); } to { transform: rotate(calc(var(--lean) * -1 + 2deg)); } }
+@keyframes breathe { 0%, 100% { opacity: .75; } 50% { opacity: 1; } }
+@keyframes halo { 0%, 100% { box-shadow: 0 0 36px #e3a54824, inset 0 0 18px #c9a84c14; } 50% { box-shadow: 0 0 50px #e3a54848, inset 0 0 22px #c9a84c24; } }
+@media (max-width: 639px) {
+  .banner { margin: 8px 12px; border: 1px solid #c9a84c55; border-radius: 12px; }
+  .content { padding: 18px 28px 30px; flex-direction: column; gap: 10px; }
+  .content h2 { font-size: 24px; }
+  .emblem { width: 58px; height: 58px; padding: 6px 7px 3px; }
+  .rule { margin: 8px auto; background: linear-gradient(90deg, transparent, #c9a84c, transparent); }
+  .stalk { width: 12px; }
+  .stalk svg { opacity: .55; }
+  .glow { width: 320px; height: 200px; }
+  .desktopOnly { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .banner, .emblem, .copy, .glow, .falling svg { animation: none; }
+  .stalk { animation: none; transform: rotate(var(--lean)); }
+  .mote { animation: none; opacity: .5; }
+  .falling { animation: none; opacity: .7; transform: translateY(var(--rest)) rotate(18deg); }
+}
